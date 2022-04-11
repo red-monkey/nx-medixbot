@@ -11,7 +11,9 @@ This project was generated using [Nx](https://nx.dev).
 There are 3 projects in this monorepo:
 
 - `web` (the web frontend application with react)
+
 - `mobile` (the react native application)
+
 - `api` (The backend graphQL api)
 
 ## Run an application
