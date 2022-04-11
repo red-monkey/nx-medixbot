@@ -4,7 +4,13 @@
   "license": "MIT",
   "scripts": {
     "start": "nx serve",
+    "start:web": "nx run web:serve",
+    "start:mobile": "nx run mobile:serve",
+    "start:ios": "nx run mobile:run-ios",
+    "start:android": "nx run mobile:run-android",
+    "start:api": "nx run api:serve",
     "build": "nx build",
+    "build:web": "nx run web:build",
     "test": "nx test",
     "lint": "lint-staged",
     "prepare": "husky install"
