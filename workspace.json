@@ -4,6 +4,9 @@
     "api": "apps/api",
     "mobile": "apps/mobile",
     "mobile-e2e": "apps/mobile-e2e",
+    "types-enum": "libs/types/enum",
+    "types-interfaces": "libs/types/interfaces",
+    "utils": "libs/utils",
     "web": "apps/web",
     "web-e2e": "apps/web-e2e"
   }

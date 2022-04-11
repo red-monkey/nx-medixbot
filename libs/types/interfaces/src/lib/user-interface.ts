@@ -1,0 +1,47 @@
+import { EGender, EUserAccountStatus, EUserRole } from '@medixbot/types/enum';
+
+export interface IUserID {
+  id: string;
+}
+interface IFirstname {
+  firstname: string;
+}
+interface ILastname {
+  lastname: string;
+}
+interface ITel {
+  tel: string;
+}
+interface IEmail {
+  email: string;
+}
+interface ICountry {
+  country: string;
+}
+interface IRegion {
+  region: string;
+}
+interface IAddress {
+  address: string;
+}
+interface IAccountStatus {
+  accountStatus: EUserAccountStatus;
+}
+interface IUserRole {
+  userRole: EUserRole;
+}
+interface IGender {
+  gender: EGender;
+}
+
+export interface IUser
+  extends IFirstname,
+    ILastname,
+    ITel,
+    IEmail,
+    ICountry,
+    IRegion,
+    IAddress,
+    IAccountStatus,
+    IUserRole,
+    Partial<IGender> {}

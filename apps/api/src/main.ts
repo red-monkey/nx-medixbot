@@ -3,9 +3,11 @@
  * This is only a minimal backend to get started.
  */
 
-import * as express from 'express';
+// import * as express from 'express';
 
-const app = express();
+import { setupExpress } from '@medixbot/utils';
+
+const app = setupExpress();
 
 app.get('/api', (req, res) => {
   res.send({ message: 'Welcome to api!' });
