@@ -19,11 +19,12 @@ There are 3 projects in this monorepo:
 ## Run an application
 
 To lunch the app run:
-`npm run start:web` for web app
-`npm run start:mobile` for metro bundler
-`npm run start:ios` to run ios
-`npm run start:android` to run android
-`npm run start:api` for the api
+
+- `npm run start:web` for web app
+- `npm run start:mobile` for metro bundler
+- `npm run start:ios` to run ios
+- `npm run start:android` to run android
+- `npm run start:api` for the api
 
 ## Generate a library
 
