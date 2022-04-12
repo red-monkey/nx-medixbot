@@ -11,7 +11,7 @@ export enum EUserRole {
 export enum EUserAccountStatus {
   OPENED = 'opened',
   CLOSED = 'closed',
-  NOT_VERIFIED = 'not verified',
+  UNVERIFIED = 'unverified',
 }
 export enum EGender {
   MALE = 'male',
@@ -26,4 +26,14 @@ export enum ETokenType {
   REFRESH = 'refresh',
   RESET_PASSWORD = 'resetPassword',
   VERIFY_EMAIL = 'verifyEmail',
+}
+export enum EGraphQlErrorCode {
+  GRAPHQL_PARSE_FAILED = 'GRAPHQL_PARSE_FAILED',
+  GRAPHQL_VALIDATION_FAILED = 'GRAPHQL_VALIDATION_FAILED',
+  BAD_USER_INPUT = 'BAD_USER_INPUT',
+  UNAUTHENTICATED = 'UNAUTHENTICATED',
+  FORBIDDEN = 'FORBIDDEN',
+  PERSISTED_QUERY_NOT_FOUND = 'PERSISTED_QUERY_NOT_FOUND',
+  PERSISTED_QUERY_NOT_SUPPORTED = 'PERSISTED_QUERY_NOT_SUPPORTED',
+  INTERNAL_SERVER_ERROR = 'INTERNAL_SERVER_ERROR',
 }

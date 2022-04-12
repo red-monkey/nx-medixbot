@@ -1,0 +1,18 @@
+import * as jwt from 'jsonwebtoken';
+import { ETokenType } from '@medixbot/types/enum';
+
+export interface IPaginateOption<T> {
+  sortBy?: string;
+  populate?: IPaginatePopulate<T>[];
+  limit?: number;
+  page?: number;
+}
+
+interface IPaginatePopulate<T> {
+  path: string;
+  match?: T;
+}
+
+export interface ITokenPayload extends jwt.JwtPayload {
+  type?: ETokenType;
+}

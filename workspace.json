@@ -2,8 +2,10 @@
   "version": 2,
   "projects": {
     "api": "apps/api",
+    "config": "libs/config",
     "mobile": "apps/mobile",
     "mobile-e2e": "apps/mobile-e2e",
+    "models": "libs/models",
     "types-enum": "libs/types/enum",
     "types-interfaces": "libs/types/interfaces",
     "utils": "libs/utils",

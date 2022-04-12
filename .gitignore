@@ -8,6 +8,10 @@
 # dependencies
 node_modules
 
+# env files
+.env*
+!.env*.local
+
 # IDEs and editors
 /.idea
 .project
@@ -90,5 +94,8 @@ buck-out/
 ## CocoaPods
 **/ios/Pods/
 /
+
+#logs
+*.log
 
 apps/mobile-e2e/artifacts

@@ -1,0 +1,14 @@
+{
+  "root": "libs/config",
+  "sourceRoot": "libs/config/src",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/config/**/*.ts"]
+      }
+    }
+  },
+  "tags": []
+}
