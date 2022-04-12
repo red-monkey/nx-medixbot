@@ -1,7 +1,7 @@
 import { UserModel, TokenModel } from '@medixbot/models';
 import { ApolloServer } from 'apollo-server-express';
 import { merge } from 'lodash';
-import { TokenDataSource, UserDataSource } from '../datasources';
+import { TokenDataSource, UserDataSource } from '../dataSources';
 import { context } from '../utils';
 import { authResolver, userResolver } from './resolvers';
 import { AppSchema, AuthSchema, UserSchema } from './schemas';

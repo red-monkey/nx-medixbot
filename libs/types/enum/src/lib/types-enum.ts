@@ -20,6 +20,9 @@ export enum EGender {
 export enum EModelNames {
   USER = 'User',
   TOKEN = 'Token',
+  DOCTOR = 'Doctor',
+  PATIENT = 'Doctor',
+  CLINIC = 'Clinic',
 }
 export enum ETokenType {
   ACCESS = 'access',
@@ -36,4 +39,8 @@ export enum EGraphQlErrorCode {
   PERSISTED_QUERY_NOT_FOUND = 'PERSISTED_QUERY_NOT_FOUND',
   PERSISTED_QUERY_NOT_SUPPORTED = 'PERSISTED_QUERY_NOT_SUPPORTED',
   INTERNAL_SERVER_ERROR = 'INTERNAL_SERVER_ERROR',
+}
+export enum EAvailabilityStatus {
+  AVAILABLE,
+  UNAVAILABLE,
 }

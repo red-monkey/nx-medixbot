@@ -3,10 +3,10 @@ import * as Joi from 'joi';
 import validation from './validation';
 
 const createUser = Joi.object().keys({
-  firstname: Joi.string().required(),
-  lastname: Joi.string().required(),
+  name: Joi.string().required(),
+  surname: Joi.string().required(),
   email: Joi.string().required().email(),
-  role: Joi.string().valid(EUserRole.ADMIN).default(EUserRole.ADMIN),
+  userRole: Joi.string().valid(EUserRole.ADMIN).default(EUserRole.ADMIN),
   gender: Joi.string().valid(EGender.FEMALE, EGender.MALE),
 });
 
@@ -31,8 +31,8 @@ const updateUser = Joi.object().keys({
     .keys({
       email: Joi.string().email(),
       password: Joi.string().custom(validation.password),
-      firstname: Joi.string(),
-      lastname: Joi.string(),
+      name: Joi.string(),
+      surname: Joi.string(),
       gender: Joi.string().valid(EGender.FEMALE, EGender.MALE),
       role: Joi.forbidden(),
     })
