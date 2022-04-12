@@ -11,11 +11,11 @@ import {
 
 const userSchema: Schema<IUserDocument> = new Schema(
   {
-    firstname: {
+    name: {
       type: String,
       trim: true,
     },
-    lastname: {
+    surname: {
       type: String,
       trim: true,
     },
@@ -46,6 +46,29 @@ const userSchema: Schema<IUserDocument> = new Schema(
       enum: EUserAccountStatus,
       default: EUserAccountStatus.UNVERIFIED,
     },
+    registeredWith: {
+      type: String,
+    },
+    languages: {
+      type: [String],
+      trim: true,
+    },
+    country: {
+      type: String,
+      trim: true,
+    },
+    city: {
+      type: String,
+      trim: true,
+    },
+    address: {
+      type: String,
+      trim: true,
+    },
+    dateOfBirth: {
+      type: Date,
+      trim: true,
+    },
   },
   {
     timestamps: true,
@@ -64,6 +87,17 @@ userSchema.statics['isEmailTaken'] = async function (
   excludeUserId: string
 ) {
   const user = await this.findOne({ email, _id: { $ne: excludeUserId } });
+  return !!user;
+};
+
+/**
+ * Check if tel is taken
+ */
+userSchema.statics['isTelTaken'] = async function (
+  tel: string,
+  excludeUserId: string
+) {
+  const user = await this.findOne({ tel, _id: { $ne: excludeUserId } });
   return !!user;
 };
 

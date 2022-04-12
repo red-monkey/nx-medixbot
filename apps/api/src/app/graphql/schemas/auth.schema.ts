@@ -17,11 +17,12 @@ export default gql`
   # Mutations
   extend type Mutation {
     register(
-      firstname: String!
-      lastname: String!
+      name: String!
+      surname: String!
       email: String!
       gender: EGender
       password: String!
+      userRole: EUserRole!
     ): TAuthSuccess!
     login(email: String!, password: String!): TAuthSuccess!
     logout(refreshToken: String!): String!

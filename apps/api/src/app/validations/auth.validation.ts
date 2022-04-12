@@ -1,14 +1,14 @@
-import { EGender } from '@medixbot/types/enum';
+import { EGender, EUserRole } from '@medixbot/types/enum';
 import * as Joi from 'joi';
 import validation from './validation';
 
 const register = Joi.object().keys({
-  firstname: Joi.string().required(),
-  lastname: Joi.string().required(),
+  name: Joi.string().required(),
+  surname: Joi.string().required(),
   email: Joi.string().required().email(),
   password: Joi.string().required().custom(validation.password),
   gender: Joi.string().valid(EGender.FEMALE, EGender.MALE),
-  role: Joi.forbidden(),
+  userRole: Joi.string().valid(EUserRole.PATIENT, EUserRole.DOCTOR).required(),
   accountStatus: Joi.forbidden(),
 });
 

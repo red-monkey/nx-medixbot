@@ -3,8 +3,8 @@ import { gql } from 'apollo-server-express';
 export default gql`
   type TUser {
     id: ID
-    firstname: String
-    lastname: String
+    name: String
+    surname: String
     email: String
     gender: EGender
     role: EUserRole
@@ -18,8 +18,8 @@ export default gql`
     totalResults: Int!
   }
   input IUpdateUser {
-    firstname: String
-    lastname: String
+    name: String
+    surname: String
     email: String
     gender: EGender
     role: EUserRole
@@ -33,8 +33,8 @@ export default gql`
   # Mutations
   type Mutation {
     createUser(
-      firstname: String!
-      lastname: String!
+      name: String!
+      surname: String!
       email: String!
       gender: EGender
       role: EUserRole
