@@ -1,4 +1,6 @@
 import { EGender, EUserAccountStatus, EUserRole } from '@medixbot/types/enum';
+import * as mongoose from 'mongoose';
+import { IPaginateOption } from './app-interface';
 
 export interface IUserID {
   id: string;
@@ -44,4 +46,20 @@ export interface IUser
     IAddress,
     IAccountStatus,
     IUserRole,
-    Partial<IGender> {}
+    Partial<IGender> {
+  password: string;
+}
+
+export interface IUserDocument extends mongoose.Document, IUser {
+  isPasswordMatch?: (password: string) => Promise<boolean>;
+}
+
+export interface IUserModel extends mongoose.Model<IUserDocument> {
+  // statics
+  isEmailTaken?: (email: string, excludeUserId?: string) => Promise<boolean>;
+  isTelTaken?: (tel: string, excludeUserId?: string) => Promise<boolean>;
+  paginate?: (
+    filter: mongoose.FilterQuery<IUserDocument>,
+    options: IPaginateOption<unknown>
+  ) => Promise<[IUserDocument, unknown]>;
+}

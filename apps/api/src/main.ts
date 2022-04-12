@@ -1,20 +1,24 @@
-/**
- * This is not a production server yet!
- * This is only a minimal backend to get started.
- */
+import * as mongoose from 'mongoose';
+import setupExpress from './app';
+import { config, logger } from './app/configs';
 
-// import * as express from 'express';
+setupExpress()
+  .then((app) => {
+    app.get('/api', (req, res) => {
+      res.send({ message: 'Welcome to api!' });
+    });
 
-import { setupExpress } from '@medixbot/utils';
+    const port = config.port;
+    const server = app.listen(port, () => {
+      mongoose.connect(config.mongoose.url).then(async () => {
+        logger.info(
+          `🚀 Server listening to at http://localhost:${config.port}/graphql`
+        );
+      });
+    });
 
-const app = setupExpress();
-
-app.get('/api', (req, res) => {
-  res.send({ message: 'Welcome to api!' });
-});
-
-const port = process.env.port || 3333;
-const server = app.listen(port, () => {
-  console.log(`Listening at http://localhost:${port}/api`);
-});
-server.on('error', console.error);
+    server.on('error', logger.error);
+  })
+  .catch((error) => {
+    logger.error(error);
+  });
