@@ -15,8 +15,10 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@medixbot/components": ["libs/ui/components/src/index.ts"],
       "@medixbot/config": ["libs/config/src/index.ts"],
       "@medixbot/models": ["libs/models/src/index.ts"],
+      "@medixbot/theme": ["libs/ui/theme/src/index.ts"],
       "@medixbot/types": ["libs/types/interfaces/src/index.ts"],
       "@medixbot/types/enum": ["libs/types/enum/src/index.ts"],
       "@medixbot/utils": ["libs/utils/src/index.ts"]

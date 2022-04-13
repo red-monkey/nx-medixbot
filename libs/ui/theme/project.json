@@ -1,0 +1,14 @@
+{
+  "root": "libs/ui/theme",
+  "sourceRoot": "libs/ui/theme/src",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/ui/theme/**/*.ts"]
+      }
+    }
+  },
+  "tags": []
+}

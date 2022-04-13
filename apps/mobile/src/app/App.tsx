@@ -24,6 +24,8 @@ import GitHub from './icons/github.svg';
 import Terminal from './icons/terminal.svg';
 import Heart from './icons/heart.svg';
 
+import { Text as CustomText } from './components';
+
 export const App = () => {
   const [whatsNextYCoord, setWhatsNextYCoord] = useState<number>(0);
   const scrollViewRef = useRef<null | ScrollView>(null);
@@ -41,9 +43,9 @@ export const App = () => {
         >
           <View style={styles.section}>
             <Text style={styles.textLg}>Hello there,</Text>
-            <Text style={[styles.textXL, styles.appTitleText]} testID="heading">
+            <CustomText color="success" variant="heading">
               Welcome Mobile 👋
-            </Text>
+            </CustomText>
           </View>
           <View style={styles.section}>
             <View style={styles.hero}>
