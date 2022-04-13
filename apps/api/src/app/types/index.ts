@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { IUserDocument } from '@medixbot/types';
-import { TokenDataSource, UserDataSource } from '../dataSources';
+import { TokenDataSource, UserDataSource } from '../datasources';
 
 export interface IContext {
   req: Request;
