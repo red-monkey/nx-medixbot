@@ -11,6 +11,9 @@ import {
   EModelNames,
   EUserRole,
   IUpdateDoctor,
+  TDoctor,
+  TDoctorList,
+  TPatient,
 } from '@medixbot/types';
 import { FilterQuery } from 'mongoose';
 import { GraphQlApiError } from '../utils';
@@ -19,6 +22,8 @@ import { IContext } from '../types';
 export class UserDataSource extends MongoDataSource<IUserDocument, IContext> {
   private User: IUserModel;
   private Doctor: TDoctorModel;
+  private Patient: TPatientModel;
+
   constructor(
     UserModel: IUserModel,
     DoctorModel: TDoctorModel,
@@ -27,16 +32,17 @@ export class UserDataSource extends MongoDataSource<IUserDocument, IContext> {
     super(UserModel);
     this.User = UserModel;
     this.Doctor = DoctorModel;
+    this.Doctor = PatientModel;
   }
   getUser(userId: string) {
     return this.findOneById(userId);
   }
 
-  getUsers(
+  async getUsers(
     filter: FilterQuery<IUserDocument>,
     options: IPaginateOption<unknown>
   ) {
-    return this.User.paginate(filter, options);
+    return await this.User.paginate(filter, options);
   }
 
   getUserByField(fields: FilterQuery<IUserDocument>) {
@@ -99,6 +105,11 @@ export class UserDataSource extends MongoDataSource<IUserDocument, IContext> {
     });
   }
 
+  async getPatientField(userRef: string) {
+    return await this.Patient.findOne({
+      userRef,
+    });
+  }
   async createORUpdateDoctor(userRef: string, data: IUpdateDoctor) {
     const doctor = await this.getDoctorField(userRef);
     if (doctor) {
@@ -106,53 +117,62 @@ export class UserDataSource extends MongoDataSource<IUserDocument, IContext> {
       await doctor.save();
       return doctor;
     }
-    return await this.model.create(data);
+    return await this.Doctor.create({ userRef, ...data });
+  }
+
+  async createORUpdatePatient(userRef: string, data: unknown) {
+    const patient = await this.getPatientField(userRef);
+    if (patient) {
+      Object.assign(patient, data);
+      await patient.save();
+      return patient;
+    }
+    return await this.Patient.create({ userRef });
   }
 
   async getDoctor(userRef: string) {
-    const doctor = await this.model.aggregate([
-      { $match: { userRef } },
-      {
-        $lookup: {
-          from: EModelNames.DOCTOR_FIELD,
-          localField: '_id',
-          foreignField: 'userRef',
-          as: 'info',
-        },
-      },
-      {
-        $unwind: '$info',
-      },
-    ]);
-    if (doctor && doctor.length > 0) {
-      return doctor[0];
-    }
-    return false;
-  }
-
-  async getDoctors(options?: IPaginateOption<unknown>) {
-    const doctor = await this.getUsers({ userRole: EUserRole.Doctor }, options);
+    const doctor: TDoctor = await this.Doctor.findOne({ userRef });
+    doctor.info = await this.getUser(userRef);
     return doctor;
   }
 
+  async getDoctors(
+    filter: FilterQuery<IUserDocument>,
+    options: IPaginateOption<unknown>
+  ) {
+    /**
+     * TO DO:
+     * Need To be improved later with aggregate or populate
+     */
+    const users = await this.getUsers(
+      { userRole: EUserRole.Doctor, ...filter },
+      options
+    );
+    const allDoctor = await Promise.all(
+      users.results?.map(async (item) => {
+        const docFields: TDoctor = await this.Doctor.findOne({
+          userRef: item.id,
+        });
+        return {
+          info: item,
+          ...docFields,
+        };
+      })
+    );
+
+    const doctors: TDoctorList = {
+      results: allDoctor,
+      limit: users.limit,
+      page: users.page,
+      totalPages: users.totalPages,
+      totalResults: users.totalResults,
+    };
+    return doctors;
+  }
+
   async getPatient(userRef: string) {
-    const doctor = await this.model.aggregate([
-      { $match: { userRef } },
-      {
-        $lookup: {
-          from: EModelNames.PATIENT_FIELD,
-          localField: '_id',
-          foreignField: 'userRef',
-          as: 'info',
-        },
-      },
-      {
-        $unwind: '$info',
-      },
-    ]);
-    if (doctor && doctor.length > 0) {
-      return doctor[0];
-    }
-    return false;
+    const patient: TPatient = await this.Patient.findOne({ userRef });
+    patient.info = await this.getUser(userRef);
+    return patient;
   }
 }
