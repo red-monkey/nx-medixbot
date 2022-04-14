@@ -15,6 +15,8 @@ const apolloServer = new ApolloServer({
     authResolver,
     userResolver
   ),
+  mocks: true,
+  mockEntireSchema: false,
   context,
   dataSources,
 });
