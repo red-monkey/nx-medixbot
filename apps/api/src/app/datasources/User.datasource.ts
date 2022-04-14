@@ -23,6 +23,7 @@ export class UserDataSource extends MongoDataSource<IUserDocument, IContext> {
   private User: IUserModel;
   private Doctor: TDoctorModel;
   private Patient: TPatientModel;
+
   constructor(
     UserModel: IUserModel,
     DoctorModel: TDoctorModel,
@@ -109,7 +110,6 @@ export class UserDataSource extends MongoDataSource<IUserDocument, IContext> {
       userRef,
     });
   }
-
   async createORUpdateDoctor(userRef: string, data: IUpdateDoctor) {
     const doctor = await this.getDoctorField(userRef);
     if (doctor) {

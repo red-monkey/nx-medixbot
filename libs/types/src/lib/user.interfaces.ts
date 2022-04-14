@@ -1,6 +1,7 @@
 import * as mongoose from 'mongoose';
 import { IPaginateOption } from './app.interfaces';
 import { TDoctor, TPaginatedUsers, TPatient, TUser } from './generated';
+
 export interface IUserDocument extends mongoose.Document, Omit<TUser, 'id'> {
   password: string;
   isPasswordMatch?: (password: string) => Promise<boolean>;
