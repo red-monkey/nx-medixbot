@@ -24,7 +24,7 @@ To lunch the app run:
 - `yarn start:mobile` for metro bundler
 - `yarn start:ios` to run ios
 - `yarn start:android` to run android
-- `yarn start:api` for the api
+- `yarn start:api` or `yarn start` for the api
 
 ## Generate a library
 
