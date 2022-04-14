@@ -1,4 +1,9 @@
-import { EGraphQlErrorCode, EUserRole, TUser } from '@medixbot/types';
+import {
+  EGraphQlErrorCode,
+  EUserRole,
+  IUpdateDoctor,
+  TUser,
+} from '@medixbot/types';
 import { IContext } from '../types';
 import { GraphQlApiError, pick } from '../utils';
 
@@ -50,7 +55,7 @@ async function updateUser(
   // User can't update another user
   if (ctx.user.id != data.userId && ctx.user.userRole !== EUserRole.Admin) {
     throw new GraphQlApiError(
-      "You don't have access to this ressource",
+      "You don't have access to this resource",
       EGraphQlErrorCode.FORBIDDEN
     );
   }
@@ -62,6 +67,23 @@ async function deleteUser(data: { userId: string }, ctx: IContext) {
   return 'Deleted';
 }
 
+async function getDoctor(data: { userId: string }, ctx: IContext) {
+  const result = await ctx.dataSources.users.getDoctor(data.userId);
+  return result;
+}
+async function getDoctors(
+  data: { limit: number; page: number },
+  ctx: IContext
+) {
+  return await ctx.dataSources.users.getDoctors(data);
+}
+async function getPatient(data: { userId: string }, ctx: IContext) {
+  return await ctx.dataSources.users.getPatient(data.userId);
+}
+async function updateDoctor(data: IUpdateDoctor, ctx: IContext) {
+  return await ctx.dataSources.users.createORUpdateDoctor(ctx.user.id, data);
+}
+
 export default {
   getUser,
   getUsers,
@@ -69,4 +91,8 @@ export default {
   updateUser,
   deleteUser,
   getMe,
+  getDoctor,
+  getDoctors,
+  getPatient,
+  updateDoctor,
 };

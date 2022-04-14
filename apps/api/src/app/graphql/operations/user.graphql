@@ -99,8 +99,8 @@ mutation DeleteUser($userId: ID!) {
   deleteUser(userId: $userId)
 }
 
-mutation UpdateUser($userId: ID!, $data: IUpdateUser!) {
-  updateUser(userId: $userId, data: $data) {
+mutation UpdateAccount($data: IUpdateUser!) {
+  updateAccount(data: $data) {
     ...UserFields
   }
 }

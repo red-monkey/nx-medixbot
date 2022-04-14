@@ -5,6 +5,12 @@ import {
   IUserDocument,
   IUserModel,
   EGraphQlErrorCode,
+  TDoctorModel,
+  TPatientModel,
+  TDoctorDocument,
+  EModelNames,
+  EUserRole,
+  IUpdateDoctor,
 } from '@medixbot/types';
 import { FilterQuery } from 'mongoose';
 import { GraphQlApiError } from '../utils';
@@ -12,9 +18,15 @@ import { IContext } from '../types';
 
 export class UserDataSource extends MongoDataSource<IUserDocument, IContext> {
   private User: IUserModel;
-  constructor(UserModel: IUserModel) {
+  private Doctor: TDoctorModel;
+  constructor(
+    UserModel: IUserModel,
+    DoctorModel: TDoctorModel,
+    PatientModel: TPatientModel
+  ) {
     super(UserModel);
     this.User = UserModel;
+    this.Doctor = DoctorModel;
   }
   getUser(userId: string) {
     return this.findOneById(userId);
@@ -79,5 +91,68 @@ export class UserDataSource extends MongoDataSource<IUserDocument, IContext> {
     }
     await user.remove();
     return user;
+  }
+
+  async getDoctorField(userRef: string) {
+    return await this.Doctor.findOne({
+      userRef,
+    });
+  }
+
+  async createORUpdateDoctor(userRef: string, data: IUpdateDoctor) {
+    const doctor = await this.getDoctorField(userRef);
+    if (doctor) {
+      Object.assign(doctor, data);
+      await doctor.save();
+      return doctor;
+    }
+    return await this.model.create(data);
+  }
+
+  async getDoctor(userRef: string) {
+    const doctor = await this.model.aggregate([
+      { $match: { userRef } },
+      {
+        $lookup: {
+          from: EModelNames.DOCTOR_FIELD,
+          localField: '_id',
+          foreignField: 'userRef',
+          as: 'info',
+        },
+      },
+      {
+        $unwind: '$info',
+      },
+    ]);
+    if (doctor && doctor.length > 0) {
+      return doctor[0];
+    }
+    return false;
+  }
+
+  async getDoctors(options?: IPaginateOption<unknown>) {
+    const doctor = await this.getUsers({ userRole: EUserRole.Doctor }, options);
+    return doctor;
+  }
+
+  async getPatient(userRef: string) {
+    const doctor = await this.model.aggregate([
+      { $match: { userRef } },
+      {
+        $lookup: {
+          from: EModelNames.PATIENT_FIELD,
+          localField: '_id',
+          foreignField: 'userRef',
+          as: 'info',
+        },
+      },
+      {
+        $unwind: '$info',
+      },
+    ]);
+    if (doctor && doctor.length > 0) {
+      return doctor[0];
+    }
+    return false;
   }
 }

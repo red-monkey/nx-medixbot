@@ -44,13 +44,41 @@ export enum EUserRole {
   Patient = 'patient'
 }
 
+export type IAvailability = {
+  day?: InputMaybe<Scalars['Int']>;
+  times?: InputMaybe<Array<InputMaybe<ITime>>>;
+};
+
+export type IDocument = {
+  type?: InputMaybe<Scalars['String']>;
+  url?: InputMaybe<Scalars['String']>;
+};
+
+export type ITime = {
+  hour?: InputMaybe<Scalars['Int']>;
+  min?: InputMaybe<Scalars['Int']>;
+  period?: InputMaybe<Scalars['String']>;
+};
+
+export type IUpdateDoctor = {
+  about?: InputMaybe<Scalars['String']>;
+  availability?: InputMaybe<Array<InputMaybe<IAvailability>>>;
+  documents?: InputMaybe<Array<InputMaybe<IDocument>>>;
+  domain?: InputMaybe<Scalars['String']>;
+  unAvailability?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
 export type IUpdateUser = {
+  address?: InputMaybe<Scalars['String']>;
+  city?: InputMaybe<Scalars['String']>;
+  country?: InputMaybe<Scalars['String']>;
+  dateOfBirth?: InputMaybe<Scalars['String']>;
   email?: InputMaybe<Scalars['String']>;
   gender?: InputMaybe<EGender>;
+  languages?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   name?: InputMaybe<Scalars['String']>;
-  password?: InputMaybe<Scalars['String']>;
   surname?: InputMaybe<Scalars['String']>;
-  userRole?: InputMaybe<EUserRole>;
+  tel?: InputMaybe<Scalars['String']>;
 };
 
 export type Mutation = {
@@ -64,7 +92,8 @@ export type Mutation = {
   register: TAuthSuccess;
   resetPassword: Scalars['String'];
   sendVerificationEmail: Scalars['String'];
-  updateUser?: Maybe<TUser>;
+  updateAccount?: Maybe<TUser>;
+  updateDoctorInfo: Scalars['String'];
 };
 
 
@@ -124,14 +153,21 @@ export type MutationResetPasswordArgs = {
 };
 
 
-export type MutationUpdateUserArgs = {
+export type MutationUpdateAccountArgs = {
   data: IUpdateUser;
-  userId: Scalars['ID'];
+};
+
+
+export type MutationUpdateDoctorInfoArgs = {
+  data: IUpdateDoctor;
 };
 
 export type Query = {
   appointment?: Maybe<TAppointment>;
+  doctor?: Maybe<TDoctor>;
+  doctors: TDoctorList;
   me?: Maybe<TUser>;
+  patient?: Maybe<TPatient>;
   user?: Maybe<TUser>;
   users: TPaginatedUsers;
 };
@@ -139,6 +175,22 @@ export type Query = {
 
 export type QueryAppointmentArgs = {
   appointmentId?: InputMaybe<Scalars['ID']>;
+};
+
+
+export type QueryDoctorArgs = {
+  userId: Scalars['ID'];
+};
+
+
+export type QueryDoctorsArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+};
+
+
+export type QueryPatientArgs = {
+  userId: Scalars['ID'];
 };
 
 
@@ -213,6 +265,10 @@ export type TPaginatedUsers = {
   results: Array<Maybe<TUser>>;
   totalPages: Scalars['Int'];
   totalResults: Scalars['Int'];
+};
+
+export type TPatient = {
+  info?: Maybe<TUser>;
 };
 
 export type TTime = {
@@ -310,13 +366,12 @@ export type DeleteUserMutationVariables = Exact<{
 
 export type DeleteUserMutation = { deleteUser: string };
 
-export type UpdateUserMutationVariables = Exact<{
-  userId: Scalars['ID'];
+export type UpdateAccountMutationVariables = Exact<{
   data: IUpdateUser;
 }>;
 
 
-export type UpdateUserMutation = { updateUser?: { id?: string | null, name?: string | null, surname?: string | null, email?: string | null, tel?: string | null, gender?: EGender | null, userRole?: EUserRole | null, accountStatus?: EUserAccountStatus | null, registeredWith?: string | null, dateOfBirth?: string | null, country?: string | null, city?: string | null, address?: string | null, languages?: Array<string | null> | null } | null };
+export type UpdateAccountMutation = { updateAccount?: { id?: string | null, name?: string | null, surname?: string | null, email?: string | null, tel?: string | null, gender?: EGender | null, userRole?: EUserRole | null, accountStatus?: EUserAccountStatus | null, registeredWith?: string | null, dateOfBirth?: string | null, country?: string | null, city?: string | null, address?: string | null, languages?: Array<string | null> | null } | null };
 
 export type LogoutMutationVariables = Exact<{
   refreshToken: Scalars['String'];
@@ -639,40 +694,39 @@ export function useDeleteUserMutation(baseOptions?: Apollo.MutationHookOptions<D
 export type DeleteUserMutationHookResult = ReturnType<typeof useDeleteUserMutation>;
 export type DeleteUserMutationResult = Apollo.MutationResult<DeleteUserMutation>;
 export type DeleteUserMutationOptions = Apollo.BaseMutationOptions<DeleteUserMutation, DeleteUserMutationVariables>;
-export const UpdateUserDocument = gql`
-    mutation UpdateUser($userId: ID!, $data: IUpdateUser!) {
-  updateUser(userId: $userId, data: $data) {
+export const UpdateAccountDocument = gql`
+    mutation UpdateAccount($data: IUpdateUser!) {
+  updateAccount(data: $data) {
     ...UserFields
   }
 }
     ${UserFieldsFragmentDoc}`;
-export type UpdateUserMutationFn = Apollo.MutationFunction<UpdateUserMutation, UpdateUserMutationVariables>;
+export type UpdateAccountMutationFn = Apollo.MutationFunction<UpdateAccountMutation, UpdateAccountMutationVariables>;
 
 /**
- * __useUpdateUserMutation__
+ * __useUpdateAccountMutation__
  *
- * To run a mutation, you first call `useUpdateUserMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useUpdateUserMutation` returns a tuple that includes:
+ * To run a mutation, you first call `useUpdateAccountMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateAccountMutation` returns a tuple that includes:
  * - A mutate function that you can call at any time to execute the mutation
  * - An object with fields that represent the current status of the mutation's execution
  *
  * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
  *
  * @example
- * const [updateUserMutation, { data, loading, error }] = useUpdateUserMutation({
+ * const [updateAccountMutation, { data, loading, error }] = useUpdateAccountMutation({
  *   variables: {
- *      userId: // value for 'userId'
  *      data: // value for 'data'
  *   },
  * });
  */
-export function useUpdateUserMutation(baseOptions?: Apollo.MutationHookOptions<UpdateUserMutation, UpdateUserMutationVariables>) {
+export function useUpdateAccountMutation(baseOptions?: Apollo.MutationHookOptions<UpdateAccountMutation, UpdateAccountMutationVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<UpdateUserMutation, UpdateUserMutationVariables>(UpdateUserDocument, options);
+        return Apollo.useMutation<UpdateAccountMutation, UpdateAccountMutationVariables>(UpdateAccountDocument, options);
       }
-export type UpdateUserMutationHookResult = ReturnType<typeof useUpdateUserMutation>;
-export type UpdateUserMutationResult = Apollo.MutationResult<UpdateUserMutation>;
-export type UpdateUserMutationOptions = Apollo.BaseMutationOptions<UpdateUserMutation, UpdateUserMutationVariables>;
+export type UpdateAccountMutationHookResult = ReturnType<typeof useUpdateAccountMutation>;
+export type UpdateAccountMutationResult = Apollo.MutationResult<UpdateAccountMutation>;
+export type UpdateAccountMutationOptions = Apollo.BaseMutationOptions<UpdateAccountMutation, UpdateAccountMutationVariables>;
 export const LogoutDocument = gql`
     mutation Logout($refreshToken: String!) {
   logout(refreshToken: $refreshToken)
