@@ -99,3 +99,5 @@ buck-out/
 *.log
 
 apps/mobile-e2e/artifacts
+
+.vscode/

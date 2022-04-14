@@ -1,4 +1,4 @@
-import { ScreenSize } from '@medixbot/types/enum';
+import { ScreenSize } from '@medixbot/types';
 
 export const SCREEN_SIZE: Record<ScreenSize, number> = {
   sm: 640,
