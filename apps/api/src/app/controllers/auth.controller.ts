@@ -1,4 +1,6 @@
 import { EGraphQlErrorCode, ETokenType, TUser } from '@medixbot/types';
+import { Request, Response } from 'express';
+import { tokenService } from '../services';
 import { IContext } from '../types';
 import { emailSender, GraphQlApiError } from '../utils';
 
@@ -6,6 +8,10 @@ async function register(data: TUser, ctx: IContext) {
   const registerData = data;
   const user = await ctx.dataSources.users.createUser(registerData);
   const tokens = await ctx.dataSources.tokens.generateAuthTokens(user.id);
+
+  const emailVerificationToken =
+    await ctx.dataSources.tokens.generateVerifyEmailToken(user.id);
+  await emailSender.sendVerificationEmail(user.email, emailVerificationToken);
   return { user, tokens };
 }
 
@@ -66,7 +72,7 @@ async function resetPassword(
   await ctx.dataSources.users.updateUser(tok.user.toString(), {
     password: password,
   });
-  return 'Password reseted';
+  return 'Password renewed';
 }
 async function sendVerificationEmail(data: unknown, ctx: IContext) {
   const emailVerificationToken =
@@ -77,25 +83,18 @@ async function sendVerificationEmail(data: unknown, ctx: IContext) {
   );
   return 'Verification email sent.';
 }
-async function verifyEmail(data: { verifyEmailToken: string }, ctx: IContext) {
-  const { verifyEmailToken } = data;
-  const verifyEmailTokenDoc = await ctx.dataSources.tokens.verifyToken(
-    verifyEmailToken,
-    ETokenType.VERIFY_EMAIL
-  );
-  const user = await ctx.dataSources.users.getUser(
-    verifyEmailTokenDoc.user.toString()
-  );
-  if (!user) {
-    throw new GraphQlApiError(
-      'User not found',
-      EGraphQlErrorCode.PERSISTED_QUERY_NOT_FOUND
-    );
+
+const verifyEmail = async (req: Request, res: Response) => {
+  try {
+    if (!req.params.token) {
+      throw new Error();
+    }
+    await tokenService.verifyEmail(req.params.token);
+    res.send('Email verified.');
+  } catch (error) {
+    res.status(400).send('Bad request.');
   }
-  await ctx.dataSources.tokens.deleteMany(user.id, ETokenType.VERIFY_EMAIL);
-  await ctx.dataSources.users.updateUser(user.id, { isEmailVerified: true });
-  return 'Email verified';
-}
+};
 
 export default {
   register,
