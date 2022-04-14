@@ -44,6 +44,19 @@ export default gql`
     type: String
     url: String
   }
+  input ITime {
+    hour: Int
+    min: Int
+    period: String
+  }
+  input IAvailability {
+    day: Int
+    times: [ITime]
+  }
+  input IDocument {
+    type: String
+    url: String
+  }
   type TDoctor {
     info: TUser
     domain: String
@@ -52,19 +65,36 @@ export default gql`
     availability: [TAvailability]
     unAvailability: [String]
   }
+  type TPatient {
+    info: TUser
+  }
   input IUpdateUser {
     name: String
     surname: String
     email: String
+    tel: String
     gender: EGender
-    userRole: EUserRole
-    password: String
+    dateOfBirth: String
+    country: String
+    city: String
+    address: String
+    languages: [String]
+  }
+  input IUpdateDoctor {
+    domain: String
+    about: String
+    documents: [IDocument]
+    availability: [IAvailability]
+    unAvailability: [String]
   }
   # Queries
   type Query {
     me: TUser
     user(userId: ID!): TUser
     users(userRole: EUserRole, limit: Int, page: Int): TPaginatedUsers!
+    doctor(userId: ID!): TDoctor
+    doctors(limit: Int, page: Int): TDoctorList!
+    patient(userId: ID!): TPatient
   }
   # Mutations
   type Mutation {
@@ -75,7 +105,8 @@ export default gql`
       gender: EGender
       userRole: EUserRole
     ): TUser
-    updateUser(userId: ID!, data: IUpdateUser!): TUser
+    updateAccount(data: IUpdateUser!): TUser
+    updateDoctorInfo(data: IUpdateDoctor!): String!
     deleteUser(userId: ID!): String!
   }
 `;

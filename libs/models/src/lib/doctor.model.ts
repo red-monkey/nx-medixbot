@@ -1,9 +1,9 @@
-import { EModelNames, IDoctorDocument, IDoctorModel } from '@medixbot/types';
+import { EModelNames, TDoctorDocument, TDoctorModel } from '@medixbot/types';
 import { Schema, model, Types } from 'mongoose';
 
-const doctorFieldSchema: Schema<IDoctorDocument, IDoctorModel> = new Schema<
-  IDoctorDocument,
-  IDoctorModel
+const doctorFieldSchema: Schema<TDoctorDocument, TDoctorModel> = new Schema<
+  TDoctorDocument,
+  TDoctorModel
 >({
   userRef: {
     type: Types.ObjectId,
@@ -28,11 +28,6 @@ const doctorFieldSchema: Schema<IDoctorDocument, IDoctorModel> = new Schema<
   unAvailability: {
     type: [String],
   },
-  clinicRef: {
-    type: Types.ObjectId,
-    ref: EModelNames.CLINIC,
-    require: true,
-  },
   domain: {
     type: String,
     trim: true,
@@ -52,10 +47,10 @@ const doctorFieldSchema: Schema<IDoctorDocument, IDoctorModel> = new Schema<
 });
 
 doctorFieldSchema.statics['isDoctorExist'] = async function (userRef: string) {
-  return !!(await this.findOne({ userRef }));
+  return await this.findOne({ userRef });
 };
 
-export const DoctorModel = model<IDoctorDocument, IDoctorModel>(
+export const DoctorModel = model<TDoctorDocument, TDoctorModel>(
   EModelNames.DOCTOR,
   doctorFieldSchema
 );

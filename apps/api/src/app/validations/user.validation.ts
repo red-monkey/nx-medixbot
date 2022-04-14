@@ -47,6 +47,27 @@ const deleteUser = Joi.object().keys({
   userId: Joi.string().custom(validation.objectId),
 });
 
+const getDoctor = Joi.object().keys({
+  userId: Joi.required().custom(validation.objectId),
+});
+
+const getDoctors = Joi.object().keys({
+  limit: Joi.number().integer(),
+  page: Joi.number().integer(),
+});
+
+const getPatient = Joi.object().keys({
+  userId: Joi.required().custom(validation.objectId),
+});
+
+const updateDoctor = Joi.object().keys({
+  about: Joi.any(),
+  availability: Joi.any(),
+  documents: Joi.any(),
+  domain: Joi.any(),
+  unAvailability: Joi.any(),
+});
+
 export default {
   createUser,
   getUsers,
@@ -54,4 +75,8 @@ export default {
   updateUser,
   deleteUser,
   getMe,
+  getDoctor,
+  getDoctors,
+  getPatient,
+  updateDoctor,
 };
