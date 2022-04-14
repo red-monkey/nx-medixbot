@@ -1,5 +1,5 @@
+import { EGraphQlErrorCode } from '@medixbot/types';
 import { ApolloError } from 'apollo-server-errors';
-import { EGraphQlErrorCode } from '@medixbot/types/enum';
 
 export default class GraphQlApiError extends ApolloError {
   constructor(message: string, code?: string) {

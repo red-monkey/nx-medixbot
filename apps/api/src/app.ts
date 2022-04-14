@@ -6,8 +6,7 @@ import * as xss from 'xss-clean';
 import * as mongoSanitize from 'express-mongo-sanitize';
 import * as compression from 'compression';
 import rateLimit from 'express-rate-limit';
-
-import { ENodeEnv } from '@medixbot/types/enum';
+import { ENodeEnv } from '@medixbot/types';
 import { config } from './app/configs';
 import apolloServer from './app/graphql';
 

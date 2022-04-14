@@ -1,11 +1,11 @@
 import { MongoDataSource } from 'apollo-datasource-mongodb';
 import {
   IPaginateOption,
-  IUser,
+  TUser,
   IUserDocument,
   IUserModel,
+  EGraphQlErrorCode,
 } from '@medixbot/types';
-import { EGraphQlErrorCode } from '@medixbot/types/enum';
 import { FilterQuery } from 'mongoose';
 import { GraphQlApiError } from '../utils';
 import { IContext } from '../types';
@@ -31,7 +31,13 @@ export class UserDataSource extends MongoDataSource<IUserDocument, IContext> {
     return this.model.findOne(fields);
   }
 
-  async createUser(user: IUser) {
+  getUserByUsername(username: string) {
+    return this.model.findOne({
+      $or: [{ email: username }, { tel: username }],
+    });
+  }
+
+  async createUser(user: TUser) {
     if (await this.User.isEmailTaken(user.email)) {
       throw new GraphQlApiError(
         'This email is already taken!',

@@ -1,4 +1,4 @@
-import { EUserRole, EGender } from '@medixbot/types/enum';
+import { EGender, EUserRole } from '@medixbot/types';
 import * as Joi from 'joi';
 import validation from './validation';
 
@@ -6,15 +6,15 @@ const createUser = Joi.object().keys({
   name: Joi.string().required(),
   surname: Joi.string().required(),
   email: Joi.string().required().email(),
-  userRole: Joi.string().valid(EUserRole.ADMIN).default(EUserRole.ADMIN),
-  gender: Joi.string().valid(EGender.FEMALE, EGender.MALE),
+  userRole: Joi.string().valid(EUserRole.Admin).default(EUserRole.Admin),
+  gender: Joi.string().valid(EGender.Female, EGender.Female),
 });
 
 const getUsers = Joi.object().keys({
   role: Joi.string().valid(
-    EUserRole.ADMIN,
-    EUserRole.PATIENT,
-    EUserRole.PATIENT
+    EUserRole.Admin,
+    EUserRole.Doctor,
+    EUserRole.Patient
   ),
   sortBy: Joi.string(),
   limit: Joi.number().integer(),
@@ -25,6 +25,10 @@ const getUser = Joi.object().keys({
   userId: Joi.string().required().custom(validation.objectId),
 });
 
+const getMe = Joi.object().keys({
+  userId: Joi.forbidden(),
+});
+
 const updateUser = Joi.object().keys({
   userId: Joi.required().custom(validation.objectId),
   data: Joi.object()
@@ -33,7 +37,7 @@ const updateUser = Joi.object().keys({
       password: Joi.string().custom(validation.password),
       name: Joi.string(),
       surname: Joi.string(),
-      gender: Joi.string().valid(EGender.FEMALE, EGender.MALE),
+      gender: Joi.string().valid(EGender.Female, EGender.Male),
       role: Joi.forbidden(),
     })
     .min(1),
@@ -49,4 +53,5 @@ export default {
   getUser,
   updateUser,
   deleteUser,
+  getMe,
 };

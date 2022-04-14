@@ -1,0 +1,122 @@
+fragment UserFields on TUser {
+  id
+  name
+  surname
+  email
+  tel
+  gender
+  userRole
+  accountStatus
+  registeredWith
+  dateOfBirth
+  country
+  city
+  address
+  languages
+}
+fragment TokenFields on TToken {
+  access {
+    token
+    expires
+  }
+  refresh {
+    token
+    expires
+  }
+}
+
+# useUserQuery hook will be generated
+query User($userId: ID!) {
+  user(userId: $userId) {
+    ...UserFields
+  }
+}
+
+# useMeQuery hook will be generated
+query Me {
+  me {
+    ...UserFields
+  }
+}
+
+# useUsersQuery hook will be generated
+query Users {
+  users {
+    page
+    results {
+      ...UserFields
+    }
+    limit
+    totalPages
+    totalResults
+  }
+}
+
+# useLoginMutation hook will be generated
+mutation Login($username: String!, $password: String!) {
+  login(username: $username, password: $password) {
+    user {
+      ...UserFields
+    }
+    tokens {
+      ...TokenFields
+    }
+  }
+}
+
+mutation Register(
+  $name: String!
+  $surname: String!
+  $email: String!
+  $password: String!
+  $userRole: EUserRole!
+  $gender: EGender
+) {
+  register(
+    name: $name
+    surname: $surname
+    email: $email
+    password: $password
+    userRole: $userRole
+    gender: $gender
+  ) {
+    user {
+      ...UserFields
+    }
+    tokens {
+      ...TokenFields
+    }
+  }
+}
+
+mutation RefreshTokens($refreshToken: String!) {
+  refreshTokens(refreshToken: $refreshToken) {
+    ...TokenFields
+  }
+}
+
+mutation DeleteUser($userId: ID!) {
+  deleteUser(userId: $userId)
+}
+
+mutation UpdateUser($userId: ID!, $data: IUpdateUser!) {
+  updateUser(userId: $userId, data: $data) {
+    ...UserFields
+  }
+}
+
+mutation Logout($refreshToken: String!) {
+  logout(refreshToken: $refreshToken)
+}
+
+mutation ForgotPassword($email: String!) {
+  forgotPassword(email: $email)
+}
+
+mutation ResetPassword($token: String!, $password: String!) {
+  resetPassword(token: $token, password: $password)
+}
+
+mutation Mutation {
+  sendVerificationEmail
+}

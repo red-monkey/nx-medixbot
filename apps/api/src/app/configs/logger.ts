@@ -1,4 +1,4 @@
-import { ENodeEnv } from '@medixbot/types/enum';
+import { ENodeEnv } from '@medixbot/types';
 import * as winston from 'winston';
 import { config } from '.';
 

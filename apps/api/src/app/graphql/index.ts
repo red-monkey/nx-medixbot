@@ -1,7 +1,6 @@
-import { UserModel, TokenModel } from '@medixbot/models';
 import { ApolloServer } from 'apollo-server-express';
 import { merge } from 'lodash';
-import { TokenDataSource, UserDataSource } from '../datasources';
+import { dataSources } from '../datasources';
 import { context } from '../utils';
 import { authResolver, userResolver } from './resolvers';
 import { AppSchema, AuthSchema, UserSchema } from './schemas';
@@ -17,10 +16,7 @@ const apolloServer = new ApolloServer({
     userResolver
   ),
   context,
-  dataSources: () => ({
-    users: new UserDataSource(UserModel),
-    tokens: new TokenDataSource(TokenModel),
-  }),
+  dataSources,
 });
 
 export default apolloServer;
