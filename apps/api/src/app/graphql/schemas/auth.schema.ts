@@ -24,7 +24,7 @@ export default gql`
       password: String!
       userRole: EUserRole!
     ): TAuthSuccess!
-    login(email: String!, password: String!): TAuthSuccess!
+    login(username: String!, password: String!): TAuthSuccess!
     logout(refreshToken: String!): String!
     refreshTokens(refreshToken: String!): TToken!
     forgotPassword(email: String!): String!

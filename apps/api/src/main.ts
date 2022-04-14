@@ -4,8 +4,8 @@ import { config, logger } from './app/configs';
 
 setupExpress()
   .then((app) => {
-    app.get('/api', (req, res) => {
-      res.send({ message: 'Welcome to api!' });
+    app.get('/', (req, res) => {
+      res.send({ message: 'Welcome to medixbot api!' });
     });
 
     const port = config.port;

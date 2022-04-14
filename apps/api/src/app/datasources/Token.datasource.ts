@@ -1,5 +1,9 @@
-import { ITokenDocument, ITokenPayload } from '@medixbot/types';
-import { EGraphQlErrorCode, ETokenType } from '@medixbot/types/enum';
+import {
+  EGraphQlErrorCode,
+  ETokenType,
+  ITokenDocument,
+  ITokenPayload,
+} from '@medixbot/types';
 import { MongoDataSource } from 'apollo-datasource-mongodb';
 import * as jwt from 'jsonwebtoken';
 import * as moment from 'moment';

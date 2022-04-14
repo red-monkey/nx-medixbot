@@ -6,9 +6,16 @@ export default gql`
     name: String
     surname: String
     email: String
+    tel: String
     gender: EGender
-    role: EUserRole
-    accountStatus: Boolean
+    userRole: EUserRole
+    accountStatus: EUserAccountStatus
+    registeredWith: String
+    dateOfBirth: String
+    country: String
+    city: String
+    address: String
+    languages: [String]
   }
   type TPaginatedUsers {
     results: [TUser]!
@@ -17,18 +24,47 @@ export default gql`
     totalPages: Int!
     totalResults: Int!
   }
+  type TDoctorList {
+    results: [TDoctor]!
+    page: Int!
+    limit: Int!
+    totalPages: Int!
+    totalResults: Int!
+  }
+  type TTime {
+    hour: Int
+    min: Int
+    period: String
+  }
+  type TAvailability {
+    day: Int
+    times: [TTime]
+  }
+  type TDocument {
+    type: String
+    url: String
+  }
+  type TDoctor {
+    info: TUser
+    domain: String
+    about: String
+    documents: [TDocument]
+    availability: [TAvailability]
+    unAvailability: [String]
+  }
   input IUpdateUser {
     name: String
     surname: String
     email: String
     gender: EGender
-    role: EUserRole
+    userRole: EUserRole
     password: String
   }
   # Queries
   type Query {
+    me: TUser
     user(userId: ID!): TUser
-    users(role: EUserRole, limit: Int, page: Int): TPaginatedUsers!
+    users(userRole: EUserRole, limit: Int, page: Int): TPaginatedUsers!
   }
   # Mutations
   type Mutation {
@@ -37,7 +73,7 @@ export default gql`
       surname: String!
       email: String!
       gender: EGender
-      role: EUserRole
+      userRole: EUserRole
     ): TUser
     updateUser(userId: ID!, data: IUpdateUser!): TUser
     deleteUser(userId: ID!): String!

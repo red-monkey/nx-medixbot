@@ -1,9 +1,8 @@
-import { IUser } from '@medixbot/types';
-import { EGraphQlErrorCode, ETokenType } from '@medixbot/types/enum';
+import { EGraphQlErrorCode, ETokenType, TUser } from '@medixbot/types';
 import { IContext } from '../types';
 import { emailSender, GraphQlApiError } from '../utils';
 
-async function register(data: IUser, ctx: IContext) {
+async function register(data: TUser, ctx: IContext) {
   const registerData = data;
   const user = await ctx.dataSources.users.createUser(registerData);
   const tokens = await ctx.dataSources.tokens.generateAuthTokens(user.id);
@@ -11,15 +10,15 @@ async function register(data: IUser, ctx: IContext) {
 }
 
 interface ILoginArgs {
-  email: string;
+  username: string;
   password: string;
 }
 async function login(data: ILoginArgs, ctx: IContext) {
-  const { email, password } = data;
-  const user = await ctx.dataSources.users.getUserByField({ email });
+  const { username, password } = data;
+  const user = await ctx.dataSources.users.getUserByUsername(username);
   if (!user || !(await user.isPasswordMatch(password))) {
     throw new GraphQlApiError(
-      'Incorrect email or password',
+      'Incorrect username or password',
       EGraphQlErrorCode.UNAUTHENTICATED
     );
   }
@@ -52,7 +51,7 @@ async function forgotPassword(data: { email: string }, ctx: IContext) {
   const resetPasswordToken =
     await ctx.dataSources.tokens.generateResetPasswordToken(email);
   await emailSender.sendResetPasswordEmail(email, resetPasswordToken);
-  return 'Reset passord email sent to your inbox.';
+  return 'Reset password email sent to your inbox.';
 }
 
 async function resetPassword(

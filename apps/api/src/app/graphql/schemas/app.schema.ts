@@ -15,6 +15,16 @@ export default gql`
     closed
     unverified
   }
+  enum EAvailabilityStatus {
+    available
+    unavailable
+  }
+  enum EAppointmentStatus {
+    Completed
+    Pending
+    Canceled
+    Missed
+  }
   # Queries
   # type Query {}
   # Mutations
