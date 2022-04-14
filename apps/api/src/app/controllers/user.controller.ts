@@ -75,7 +75,7 @@ async function getDoctors(
   data: { limit: number; page: number },
   ctx: IContext
 ) {
-  return await ctx.dataSources.users.getDoctors(data);
+  return await ctx.dataSources.users.getDoctors({}, data);
 }
 async function getPatient(data: { userId: string }, ctx: IContext) {
   return await ctx.dataSources.users.getPatient(data.userId);

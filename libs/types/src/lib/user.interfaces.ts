@@ -1,6 +1,6 @@
 import * as mongoose from 'mongoose';
 import { IPaginateOption } from './app.interfaces';
-import { TDoctor, TPatient, TUser } from './generated';
+import { TDoctor, TPaginatedUsers, TPatient, TUser } from './generated';
 export interface IUserDocument extends mongoose.Document, Omit<TUser, 'id'> {
   password: string;
   isPasswordMatch?: (password: string) => Promise<boolean>;
@@ -13,7 +13,7 @@ export interface IUserModel extends mongoose.Model<IUserDocument> {
   paginate?: (
     filter: mongoose.FilterQuery<IUserDocument>,
     options: IPaginateOption<unknown>
-  ) => Promise<[IUserDocument, unknown]>;
+  ) => Promise<TPaginatedUsers>;
 }
 export interface TDoctorDocument
   extends mongoose.Document,
