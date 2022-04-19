@@ -1,4 +1,21 @@
-import { AppRegistry } from 'react-native';
-import App from './storybook/toggle-storybook';
 
-AppRegistry.registerComponent('main', () => App);
+/**
+ * @format
+ */
+import React from 'react';
+import {AppRegistry} from 'react-native';
+import {ApolloProvider} from '@apollo/client';
+import {client} from './app/apollo/apollo';
+import App from './storybook/toggle-storybook';
+import {name as appName} from '../app.json';
+import configureStore from './app/redux/store/ConfigureStore';
+import {Provider} from 'react-redux';
+const store = configureStore();
+const Root = () => (
+  <ApolloProvider client={client}>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </ApolloProvider>
+);
+AppRegistry.registerComponent(appName, () => Root);
