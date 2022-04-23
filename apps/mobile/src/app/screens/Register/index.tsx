@@ -10,15 +10,12 @@ import {
 import CountryPicker, {CallingCode} from 'react-native-country-picker-modal';
 import Header from '../../components/CommunHeader';
 import registerStyles from '../../styles/RegisterStyle';
-import {GradientRedButton, GradientTextSignUp} from '../../commun/Gradients';
+import  ArrowIcon from '../../icons/ArrowIcon.svg';
 import {
   CalendarIcon,
-  EmailValidationIcon,
-  EmailValidationTickIcon,
   EyeIcon,
   GenderIcon,
   GlobalIcon,
-  GreenArrowIcon,
   LocationIcon,
   LockIcon,
   MailIcon,
@@ -26,6 +23,8 @@ import {
   UserIcon,
   UsernameIcon,
 } from '../../commun/Icons';
+import EmailValidationIcon from '../../icons/EmailValidationIcon.svg';
+import EmailValidationTickIcon from '../../icons/EmailValidationTickIcon.svg';
 import {CountryCode, ForgotPassProps} from '../../utils/types';
 import {useNavigation} from '@react-navigation/native';
 import sharedStyles from '../../styles/SharedStyles';
@@ -42,7 +41,7 @@ import MembershipModal from '../../components/MembershipModal';
 const RegisterScreen = () => {
   const navigation = useNavigation<ForgotPassProps>();
   const image = useAppSelector(state => state.userPictureReducer.selected);
-  var base64Icon = `data:image/jpg;base64,${image?.base64}`;
+  const base64Icon = `data:image/jpg;base64,${image?.base64}`;
   const dispatch = useDispatch<Dispatch>();
   const [hidePassword, setHidePassword] = useState(true);
   const [hideConfirmPassword, setHideConfirmPassword] = useState(true);
@@ -121,6 +120,7 @@ const RegisterScreen = () => {
                   style={[
                     registerStyles.formSelectInputStyle,
                     sharedStyles.dashedBorder,
+                    {backgroundColor: '#fff'}
                   ]}
                   onPress={() => {
                     dispatch(setPictureModal(true));
@@ -215,7 +215,7 @@ const RegisterScreen = () => {
                   <GenderIcon />
                   <Text style={loginStyles.formInputStyle}>Select Gender</Text>
                   <TouchableOpacity>
-                    <GreenArrowIcon />
+                    <ArrowIcon />
                   </TouchableOpacity>
                 </View>
 
@@ -317,23 +317,23 @@ const RegisterScreen = () => {
                   <Text style={registerStyles.termsText}>
                     By tapping “Sign Up”, you accept our
                   </Text>
-                  <GradientTextSignUp text={'Terms'} />
+                  <Text style={[loginStyles.forgotPassword,{textAlign: 'center', marginTop: 0, marginLeft: 5}]}>Terms</Text>
                 </View>
                 <TouchableOpacity
                   style={loginStyles.signInButton}
-                  onPress={handleSubmit}
+                  onPress={()=>handleSubmit()}
                   disabled={!isValid}>
-                  <GradientRedButton text={'Sign Up'} />
+                  <Text style={[loginStyles.forgotPassword,{textAlign: 'center', marginTop: 0, marginLeft: 5, color: '#fff'}]}>Sign Up</Text>
                 </TouchableOpacity>
                 <View style={registerStyles.BottomPart}>
-                  <Text style={registerStyles.termsText}>
+                  <Text style={[registerStyles.termsText,{fontFamily: 'Montserrat-Medium'}]}>
                     Already Have An Account?
                   </Text>
                   <TouchableOpacity
                     onPress={() => {
                       navigation.navigate('Login');
                     }}>
-                    <GradientTextSignUp text={'Sign In'} />
+                    <Text style={[loginStyles.forgotPassword,{textAlign: 'center', marginTop: 0, marginLeft: 5}]}>Sign In</Text>
                   </TouchableOpacity>
                 </View>
               </>

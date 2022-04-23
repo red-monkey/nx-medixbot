@@ -1,8 +1,9 @@
 import {View} from 'react-native';
+import { colors } from '../variables/colors';
 
 export const focusHandler = (reference: React.RefObject<View>) => {
   reference.current?.setNativeProps({
-    borderColor: '#009444',
+    borderColor: colors.MedixBotPrimaryColor,
     borderWidth: 1,
   });
 };

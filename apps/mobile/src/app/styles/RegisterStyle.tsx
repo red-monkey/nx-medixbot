@@ -1,8 +1,9 @@
 import {StyleSheet} from 'react-native';
 import {buttonStyle} from '../utils/types';
+import { colors } from '../variables/colors';
 const registerStyles = StyleSheet.create({
   Container: {
-    backgroundColor: '#E8F4D7',
+    backgroundColor: colors.backgroundColor,
     paddingTop: 20,
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -38,19 +39,19 @@ const registerStyles = StyleSheet.create({
   },
   formInputStyle: {
     color: '#41416E',
+    fontFamily: 'Lora-Regular',
     textAlign: 'left',
     width: '75%',
     paddingLeft: 15,
   },
   selectButton: {
-    color: '#009444',
+    color: colors.MedixBotPrimaryColor,
+    fontFamily: 'Lora-Regular', 
     fontSize: 14,
-    fontWeight: 'bold',
   },
   termsText: {
-    fontFamily: 'Roboto',
+    fontFamily: 'Lora-Regular',
     fontStyle: 'normal',
-    fontWeight: '500',
     fontSize: 14,
     lineHeight: 22,
     color: '#414042',
@@ -76,15 +77,14 @@ const registerStyles = StyleSheet.create({
 
 export const PicturePickerModalStyle = StyleSheet.create({
   modalTitleStyle: {
-    fontFamily: 'Roboto',
+    fontFamily: 'Montserrat-Medium',
     fontSize: 18,
     fontStyle: 'normal',
-    fontWeight: 'bold',
     lineHeight: 18,
     width: '100%',
     letterSpacing: -0.23999999463558197,
     textAlign: 'left',
-    color: '#414042',
+    color: '#fff',
     marginBottom: 10,
     paddingHorizontal: 20,
     paddingBottom: 15,
@@ -92,11 +92,10 @@ export const PicturePickerModalStyle = StyleSheet.create({
   iconsContainer: {
     flexDirection: 'row',
     width: '90%',
-    height: '15%',
+    height: 100,
   },
   button: {
-    borderColor: '#80839361',
-    borderWidth: 1,
+    backgroundColor: '#ffffff6F',
     justifyContent: 'center',
     alignItems: 'center',
     height: 60,
@@ -104,11 +103,10 @@ export const PicturePickerModalStyle = StyleSheet.create({
     borderRadius: 15,
   },
   buttonText: {
-    color: '#414042',
+    color: '#fff',
     textAlign: 'center',
-    marginTop: 5,
-    fontWeight: '600',
-    fontFamily: 'Roboto',
+    marginTop: 10,
+    fontFamily: 'Lora-Medium',
     fontStyle: 'normal',
     fontSize: 14,
     lineHeight: 16,
@@ -117,25 +115,24 @@ export const PicturePickerModalStyle = StyleSheet.create({
 
 export const MembershipModalStyle = StyleSheet.create({
   modalTitleStyle: {
-    fontFamily: 'Roboto',
-    fontSize: 16,
-    fontStyle: 'normal',
-    fontWeight: '700',
+    fontFamily: 'Montserrat-SemiBold',
+    fontSize: 18,
     lineHeight: 21.09,
     width: '100%',
     letterSpacing: -0.23999999463558197,
     textAlign: 'left',
-    color: '#41416E',
+    color: '#fff',
     marginBottom: 10,
-    paddingHorizontal: 30,
+    paddingHorizontal: 40,
     paddingBottom: 15,
   },
   buttonList: {
     flexDirection: 'row',
     height: 32,
     borderRadius: 30,
-    borderColor: '#009444',
+    borderColor: '#fff',
     borderWidth: 1,
+    marginBottom: 10
   },
   button: {
     justifyContent: 'center',
@@ -157,7 +154,9 @@ export const MembershipModalStyle = StyleSheet.create({
   submitButton: {
     width: 145,
     height: 47,
-    backgroundColor: 'transparent',
+    backgroundColor: '#F5007E',
+    borderRadius: 35,
+    justifyContent: 'center',
     marginTop: 35,
     //marginLeft: 20,
   },
@@ -171,7 +170,7 @@ export const MembershipModalStyle = StyleSheet.create({
 export const leftButton: buttonStyle = {
   borderTopLeftRadius: 30,
   borderBottomLeftRadius: 30,
-  borderRightColor: '#009444',
+  borderRightColor: '#fff',
   borderRightWidth: 1,
   paddingLeft: 7,
 };
@@ -182,23 +181,31 @@ export const rightButton: buttonStyle = {
 };
 
 export const middleButton: buttonStyle = {
-  borderRightColor: '#009444',
+  borderRightColor: '#fff',
   borderRightWidth: 1,
 };
 
 export const whiteBackground = {
-  backgroundColor: '#fff',
+  backgroundColor: 'transparent',
 };
 export const greenBackground = {
   backgroundColor: '#009444',
 };
 
 export const greenText = {
-  color: '#009444',
+  color: '#fff',
 };
 
 export const lightText = {
   color: '#fff',
 };
+
+export const greyBackground = {
+ backgroundColor: "#F5F5F5"
+}
+
+export const darkGreyBackground = {
+  backgroundColor: "#E6E6E6"
+ }
 
 export default registerStyles;

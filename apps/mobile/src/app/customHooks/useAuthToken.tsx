@@ -14,18 +14,22 @@ export const useAccessToken = (): [
       } else if (type === 'refreshToken') {
         await AsyncStorage.setItem('refreshToken', tokenJSON);
       }
-    } catch (e) {}
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   const getAuthToken = async (type: TokenType) => {
-    var token;
+    let token;
     try {
       if (type === 'accessToken') {
         token = await AsyncStorage.getItem('accessToken');
       } else if (type === 'refreshToken') {
         token = await AsyncStorage.getItem('refreshToken');
       }
-    } catch (e) {}
+    } catch (e) {
+      console.error(e);
+    }
     return token;
   };
 

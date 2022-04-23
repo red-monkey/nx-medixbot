@@ -104,8 +104,8 @@ const ResetPasswordPage = () => {
               <View style={forgotPassword.bottomPart}>
                 <TouchableOpacity
                   style={loginStyles.signInButton}
-                  onPress={handleSubmit}>
-                  <GradientRedButton text={'Change Password'} />
+                  onPress={()=>handleSubmit}>
+                    <Text style={[loginStyles.resetPassword]}>Change Password</Text>
                 </TouchableOpacity>
               </View>
             </View>

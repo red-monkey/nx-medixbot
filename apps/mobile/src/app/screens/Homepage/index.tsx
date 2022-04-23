@@ -3,18 +3,13 @@ import {SafeAreaView, StatusBar, Image, View} from 'react-native';
 import HomepageHeader from '../../components/HomepageHeader';
 import HomepageScrollView from '../../components/HomepageScrollView';
 import styles from '../../styles/HomepageStyles';
+import { colors } from '../../variables/colors';
 
 const Homepage = () => {
   return (
     <SafeAreaView style={styles.Container}>
-      <StatusBar backgroundColor="#E8F4D7" barStyle="dark-content" />
+      <StatusBar backgroundColor={colors.backgroundColor} barStyle="dark-content" />
       <HomepageHeader />
-      <View style={styles.IllustrationContainer}>
-        <Image
-          source={require('../../../assets/images/illustration.png')}
-          style={styles.Illustration}
-        />
-      </View>
       <HomepageScrollView />
     </SafeAreaView>
   );

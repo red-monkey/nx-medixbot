@@ -5,12 +5,11 @@ import Header from '../../components/CommunHeader';
 import PhoneSelectBtn from '../../components/PhoneSelectBtn';
 import styles from '../../styles/HomepageStyles';
 import loginStyles, {forgotPassword} from '../../styles/LoginPageStyles';
-import {GradientRedButton, GradientTextSignUp} from '../../commun/Gradients';
 import {
-  EmailValidationIcon,
-  EmailValidationTickIcon,
   MailIcon,
 } from '../../commun/Icons';
+import EmailValidationIcon from '../../icons/EmailValidationIcon.svg';
+import EmailValidationTickIcon from '../../icons/EmailValidationTickIcon.svg';
 import {CountryCode, ResetPassProps, VerificationForm} from '../../utils/types';
 import {useAppSelector} from '../../utils/hooks';
 import {useNavigation} from '@react-navigation/native';
@@ -160,9 +159,12 @@ const ForgotPasswordPage = () => {
                 <View style={forgotPassword.bottomPart}>
                   <TouchableOpacity
                     style={loginStyles.signInButton}
-                    onPress={handleSubmit}
+                    onPress={() => handleSubmit()}
                     disabled={!isValid}>
-                    <GradientRedButton text={'Send Code'} />
+                    <Text style={[
+                      loginStyles.forgotPassword,
+                      {textAlign: 'center', marginTop: 0,  color: '#fff'},
+                    ]}>Send Code</Text>
                   </TouchableOpacity>
                 </View>
                 <View style={loginStyles.bottomPart}>
@@ -172,7 +174,7 @@ const ForgotPasswordPage = () => {
                   </Text>
                   <TouchableOpacity
                     onPress={() => navigation.navigate('Register')}>
-                    <GradientTextSignUp text={'Sign Up'} />
+                    <Text style={[loginStyles.forgotPassword,{textAlign: 'center', marginTop: 0, marginLeft: 5}]}>Sign Up</Text>
                   </TouchableOpacity>
                 </View>
               </>

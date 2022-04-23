@@ -5,26 +5,28 @@ import Modal from 'react-native-modal';
 import {useDispatch} from 'react-redux';
 import {Dispatch} from 'redux';
 import {setMembershipModal} from '../redux/actions/modal';
+import  ArrowIcon from '../../icons/ArrowIcon.svg';
 import loginStyles, {modalStyle} from '../styles/LoginPageStyles';
 import * as styles from '../styles/RegisterStyle';
 import {useAppSelector} from '../utils/hooks';
-import {buttonStyle} from '../utils/types';
+import {buttonStyle, membership} from '../utils/types';
 import * as yup from 'yup';
-import {GreenArrowIcon, MoreIcon, ThreeUsersIcon} from '../commun/Icons';
+import { MoreIcon, ThreeUsersIcon} from '../commun/Icons';
 import {focusHandler, pressOutHandler} from '../utils/functions';
-import {GradientRedButton} from '../commun/Gradients';
+import { darkGreyBackground, greyBackground } from '../styles/RegisterStyle';
 
 export default function MembershipModal() {
   const isOpen = useAppSelector(state => state.membershipModalReducer.isOpen);
   const dispatch = useDispatch<Dispatch>();
-  const membershipTypes = ['Referrer', 'Partner', 'Employer', 'Family'];
+  const membershipTypes: Array<membership>= ['Referrer', 'Partner', 'Employer', 'Family'];
+  const [membership,setMembership] = useState<membership>('Referrer');
   const [openTab, setOpenTab] = useState<number>(0);
   const GreenBtn = ({
     text,
     extraStyle,
     tab,
   }: {
-    text: string;
+    text: membership;
     extraStyle?: buttonStyle;
     tab: number;
   }): JSX.Element => {
@@ -37,6 +39,7 @@ export default function MembershipModal() {
         ]}
         onPress={() => {
           setOpenTab(tab);
+          setMembership(text)
         }}>
         <Text
           style={[
@@ -66,7 +69,7 @@ export default function MembershipModal() {
       onBackdropPress={() => dispatch(setMembershipModal(false))}
       isVisible={isOpen}>
       <View style={modalStyle.centeredView}>
-        <View style={modalStyle.modalView}>
+        <View style={[modalStyle.modalView,{height: 480}]}>
           <Text style={styles.MembershipModalStyle.modalTitleStyle}>
             Are you a member of?
           </Text>
@@ -104,49 +107,53 @@ export default function MembershipModal() {
                 touched,
                 isValid,
               }) => (
-                <>
+                <View style={{justifyContent: 'space-between',height: '88%'}}>
+                {
+                  (membership === 'Referrer') ? 
+                  (<>
                   <View
-                    style={styles.default.formInputContainerStyle}
-                    ref={ReferralCodeRef}>
-                    <MoreIcon />
-                    <TextInput
-                      onFocus={() => focusHandler(ReferralCodeRef)}
-                      onEndEditing={() => pressOutHandler(ReferralCodeRef)}
-                      placeholderTextColor={'#41416E80'}
-                      style={styles.default.formInputStyle}
-                      placeholder="Referral Code"
-                      onChangeText={handleChange('ReferralCode')}
-                      onBlur={handleBlur('ReferralCode')}
-                      value={values.ReferralCode}
-                    />
-                  </View>
-                  {errors.ReferralCode && touched.ReferralCode && (
-                    <Text style={loginStyles.errorText}>
-                      {errors.ReferralCode}
-                    </Text>
-                  )}
-
-                  <View style={styles.default.formSelectInputStyle}>
+                      style={[styles.default.formInputContainerStyle, greyBackground]}
+                      ref={ReferralCodeRef}>
+                      <MoreIcon />
+                      <TextInput
+                        onFocus={() => focusHandler(ReferralCodeRef)}
+                        onEndEditing={() => pressOutHandler(ReferralCodeRef)}
+                        placeholderTextColor={'#41416E80'}
+                        style={styles.default.formInputStyle}
+                        placeholder="Referral Code"
+                        onChangeText={handleChange('ReferralCode')}
+                        onBlur={handleBlur('ReferralCode')}
+                        value={values.ReferralCode}
+                      />
+                    </View>
+                    {errors.ReferralCode && touched.ReferralCode && (
+                      <Text style={loginStyles.errorText}>
+                        {errors.ReferralCode}
+                      </Text>
+                    )}
+                  </>) : membership === 'Partner' ? 
+                  (
+                  <View style={[styles.default.formSelectInputStyle,darkGreyBackground]}>
                     <ThreeUsersIcon />
                     <Text style={loginStyles.formInputStyle}>
                       Select Partner
                     </Text>
                     <TouchableOpacity>
-                      <GreenArrowIcon />
+                      <ArrowIcon />
                     </TouchableOpacity>
-                  </View>
-                  <View style={styles.default.formSelectInputStyle}>
+                  </View>): membership === 'Employer' ? (
+                  <View style={[styles.default.formSelectInputStyle,darkGreyBackground]}>
                     <ThreeUsersIcon />
                     <Text style={loginStyles.formInputStyle}>
                       Select Employer
                     </Text>
                     <TouchableOpacity>
-                      <GreenArrowIcon />
+                      <ArrowIcon />
                     </TouchableOpacity>
-                  </View>
-
+                  </View> ) :
+                  (<View>
                   <View
-                    style={styles.default.formInputContainerStyle}
+                     style={[styles.default.formInputContainerStyle, greyBackground]}
                     ref={FamilyCodeRef}>
                     <MoreIcon />
                     <TextInput
@@ -166,7 +173,7 @@ export default function MembershipModal() {
                     </Text>
                   )}
                   <View
-                    style={styles.default.formInputContainerStyle}
+                    style={[styles.default.formInputContainerStyle, greyBackground]}
                     ref={FamilyLastNameRef}>
                     <ThreeUsersIcon />
                     <TextInput
@@ -184,22 +191,22 @@ export default function MembershipModal() {
                     <Text style={loginStyles.errorText}>
                       {errors.FamilyLastName}
                     </Text>
-                  )}
+                  )}</View>)}
                   <View style={styles.MembershipModalStyle.submitButtonGroup}>
                     <TouchableOpacity
                       style={styles.MembershipModalStyle.submitButton}
-                      onPress={handleSubmit}
+                      onPress={()=>handleSubmit}
                       disabled={!isValid}>
-                      <GradientRedButton text={'Save'} />
+                        <Text style={[loginStyles.forgotPassword,{textAlign: 'center', marginTop: 0, color: '#fff'}]}>Save</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                       style={styles.MembershipModalStyle.submitButton}
-                      onPress={handleSubmit}
+                      onPress={()=>handleSubmit}
                       disabled={!isValid}>
-                      <GradientRedButton text={'Create New'} />
+                      <Text style={[loginStyles.forgotPassword,{textAlign: 'center', marginTop: 0, color: '#fff'}]}>Create New</Text>
                     </TouchableOpacity>
                   </View>
-                </>
+               </View>
               )}
             </Formik>
           </View>

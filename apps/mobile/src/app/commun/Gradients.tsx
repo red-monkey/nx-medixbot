@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text} from 'react-native';
+import {Text, View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {LinearTextGradient} from 'react-native-text-gradient';
 import styles from '../styles/HomepageStyles';
@@ -30,8 +30,7 @@ export const GradientRedButton = ({text}: {text: string}) => {
 
 export const GreenDotGradient = () => {
   return (
-    <LinearGradient
-      colors={['rgba(141, 198, 63, 1)', 'rgba(0, 148, 68, 1)']}
+    <View
       style={styles.dotIndicatorGradient}
     />
   );

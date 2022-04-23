@@ -100,7 +100,7 @@ const VerificationCode = () => {
                   style={verificationCode.formInputStyle}
                   placeholderTextColor={'#41416E80'}
                   onChangeText={(text: string) => {
-                    var modifiedCode = code;
+                    const modifiedCode = code;
                     modifiedCode[i] = text;
                     setCode(modifiedCode);
                     checkValidation();
@@ -131,7 +131,10 @@ const VerificationCode = () => {
               style={loginStyles.signInButton}
               disabled={!isValid}
               onPress={() => navigation.navigate('ResetPassword')}>
-              <GradientRedButton text={'Verify'} />
+              <Text style={[
+                      loginStyles.forgotPassword,
+                      {textAlign: 'center', marginTop: 0, marginLeft: 5, color: '#fff'},
+                    ]}>Verify</Text>
             </TouchableOpacity>
           </View>
           <TouchableOpacity

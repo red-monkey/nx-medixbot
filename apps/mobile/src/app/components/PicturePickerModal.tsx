@@ -77,7 +77,7 @@ export function PicturePickerModal() {
       onBackdropPress={() => dispatch(setPictureModal(false))}
       isVisible={isOpen}>
       <View style={modalStyle.centeredView}>
-        <View style={modalStyle.modalView}>
+        <View style={[modalStyle.modalView,{paddingBottom: 10}]}>
           <Text style={PicturePickerModalStyle.modalTitleStyle}>
             Select Image
           </Text>
@@ -90,7 +90,7 @@ export function PicturePickerModal() {
               </TouchableOpacity>
               <Text style={PicturePickerModalStyle.buttonText}>Gallery</Text>
             </View>
-            <View style={sharedStyles.margin_left_20}>
+            <View style={sharedStyles.margin_left_30}>
               <TouchableOpacity
                 style={PicturePickerModalStyle.button}
                 onPress={handleCamera}>

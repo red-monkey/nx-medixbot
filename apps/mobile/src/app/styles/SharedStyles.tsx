@@ -9,6 +9,7 @@ const sharedStyles = StyleSheet.create({
   justifyCenter: {justifyContent: 'center'},
   dashedBorder: {borderWidth: 1, borderStyle: 'dashed', borderColor: '#DEDEE8'},
   margin_left_20: {marginLeft: 20},
+  margin_left_30: {marginLeft: 30},
 });
 
 export default sharedStyles;

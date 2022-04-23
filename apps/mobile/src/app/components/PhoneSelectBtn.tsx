@@ -5,7 +5,9 @@ import {Dispatch} from 'redux';
 import {loginMethod} from '../utils/types';
 import {setLoginMethod} from '../redux/actions/login';
 import {useAppSelector} from '../utils/hooks';
-import {ArrowIcon, BlueEnveloppeIcon, PhoneIcon} from '../commun/Icons';
+import {ArrowIcon} from '../commun/Icons';
+import PhoneIcon from '../icons/PhoneIcon.svg';
+import BlueEnveloppeIcon from '../icons/BlueEnveloppeIcon.svg';
 import {Text, View, TouchableOpacity} from 'react-native';
 import Modal from 'react-native-modal';
 const PhoneSelectBtn = () => {
@@ -46,7 +48,7 @@ const PhoneSelectBtn = () => {
         isVisible={modalVisible}>
         <View style={modalStyle.centeredView}>
           <View style={modalStyle.modalView}>
-            <Text style={modalStyle.modalTitleStyle}>Select method</Text>
+            <Text style={modalStyle.modalTitleStyle}>Select Account Type</Text>
             <TouchableOpacity
               style={modalStyle.optionStyle}
               onPress={() => switchLoginMethod('phone')}>
@@ -55,7 +57,7 @@ const PhoneSelectBtn = () => {
             <TouchableOpacity
               style={modalStyle.optionStyle}
               onPress={() => switchLoginMethod('email')}>
-              <Text style={modalStyle.optionTextStyle}>E-mail Address</Text>
+              <Text style={modalStyle.optionTextStyle}>E-mail</Text>
             </TouchableOpacity>
           </View>
         </View>

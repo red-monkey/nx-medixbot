@@ -11,15 +11,12 @@ import Header from '../../components/CommunHeader';
 import PhoneSelectBtn from '../../components/PhoneSelectBtn';
 import styles from '../../styles/HomepageStyles';
 import loginStyles from '../../styles/LoginPageStyles';
+import EmailValidationIcon from '../../icons/EmailValidationIcon.svg';
+import EmailValidationTickIcon from '../../icons/EmailValidationTickIcon.svg';
 import {
-  GradientRedButton,
-  GradientText,
   GradientTextFaceIdLogin,
-  GradientTextSignUp,
 } from '../../commun/Gradients';
 import {
-  EmailValidationIcon,
-  EmailValidationTickIcon,
   EyeIcon,
   FaceFingerprintIconGroup,
   LockIcon,
@@ -197,13 +194,16 @@ const LoginPage = () => {
                   onPress={() => {
                     navigation.navigate('ForgotPassword');
                   }}>
-                  <GradientText text={'Forgot Password?'} />
+                  <Text style={loginStyles.forgotPassword}>Forgot Password?</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                   style={loginStyles.signInButton}
-                  onPress={handleSubmit}
+                  onPress={()=>handleSubmit()}
                   disabled={!isValid}>
-                  <GradientRedButton text={'Sign In'} />
+                    <Text style={[
+                  loginStyles.forgotPassword,
+                  {textAlign: 'center', marginTop: 0, color: '#fff'},
+                ]}>Sign In</Text>
                 </TouchableOpacity>
               </>
             )}
@@ -214,7 +214,7 @@ const LoginPage = () => {
         <Text
           style={[
             loginStyles.loginPageText,
-            {textAlign: 'center', marginTop: 25},
+            {textAlign: 'center', marginTop: 25, fontFamily: 'Montserrat-Medium'},
           ]}>
           Or Sign Up / Sign In with
         </Text>
@@ -223,14 +223,14 @@ const LoginPage = () => {
           <FacebookButton />
         </View>
         <View style={loginStyles.bottomPart}>
-          <Text style={[loginStyles.loginPageText, {textAlign: 'center'}]}>
+          <Text style={[loginStyles.loginPageText, {textAlign: 'center', fontFamily: 'Montserrat-Medium'}]}>
             Don’t Have An Account?
           </Text>
           <TouchableOpacity
             onPress={() => {
               navigation.navigate('Register');
             }}>
-            <GradientTextSignUp text={'Sign Up'} />
+            <Text style={[loginStyles.forgotPassword,{textAlign: 'center', marginTop: 0, marginLeft: 5}]}>Sign Up</Text>
           </TouchableOpacity>
         </View>
       </View>

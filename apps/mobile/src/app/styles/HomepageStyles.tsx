@@ -1,10 +1,11 @@
 import {Dimensions, StyleSheet} from 'react-native';
+import { colors } from '../variables/colors';
 export const PADDING_HORIZONTAL = 20;
 export const MARGIN_DOT = 5;
 export const DOT_SIZE = 8;
 const styles = StyleSheet.create({
   Container: {
-    backgroundColor: '#E8F4D7',
+    backgroundColor: colors.backgroundColor,
     paddingTop: 20,
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -39,8 +40,11 @@ const styles = StyleSheet.create({
     color: '#414042',
     opacity: 0.5,
   },
+  homepageContainer: {
+    height: '100%',
+  },
   IllustrationContainer: {
-    height: '45%',
+    height: '40%',
     flexDirection: 'row',
     display: 'flex',
     justifyContent: 'center',
@@ -48,17 +52,17 @@ const styles = StyleSheet.create({
   },
   Illustration: {
     resizeMode: 'stretch',
-    width: '90%',
-    height: 200,
+    width: Dimensions.get('screen').width * 0.65,
+    height: 170,
   },
   HeaderLogo: {
     resizeMode: 'contain',
   },
   ScrollView: {
-    height: '50%',
+    height: '100%',
   },
   ScrollViewElement: {
-    flex: 1,
+    flex: 0.9,
     width: Dimensions.get('screen').width,
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -70,7 +74,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 40,
   },
   FlatListTitle: {
-    fontFamily: 'Roboto',
+    fontFamily: 'Montserrat-SemiBold',
     fontSize: 22,
     width: 220,
     fontStyle: 'normal',
@@ -81,8 +85,8 @@ const styles = StyleSheet.create({
     color: '#414042',
   },
   FlatListDesc: {
-    fontFamily: 'Roboto',
-    fontSize: 15,
+    fontFamily: 'Lora-Regular',
+    fontSize: 14,
     width: 300,
     fontStyle: 'normal',
     fontWeight: '300',
@@ -94,15 +98,17 @@ const styles = StyleSheet.create({
   FlatListNextButton: {
     width: 300,
     height: 47,
-    backgroundColor: 'transparent',
+    backgroundColor: colors.MedixBotPrimaryColor,
+    borderRadius: 30,
+    justifyContent: 'center',
   },
   NextButtonText: {
-    fontFamily: 'Roboto',
+    fontFamily: 'Montserrat-SemiBold',
     fontSize: 16,
     fontStyle: 'normal',
     fontWeight: '700',
     lineHeight: 20,
-    letterSpacing: -0.23999999463558197,
+    letterSpacing: 0.23999999463558197,
     textAlign: 'center',
     color: '#fff',
   },
@@ -116,12 +122,13 @@ const styles = StyleSheet.create({
     width: 100,
     height: 30,
     borderRadius: 25,
-    borderColor: '#009444',
+    borderColor: colors.MedixBotPrimaryColor,
     borderWidth: 1,
     justifyContent: 'center',
   },
   ReadMoreButtonText: {
-    color: '#009444',
+    fontFamily: 'Montserrat-SemiBold',
+    color: colors.MedixBotPrimaryColor,
     textAlign: 'center',
   },
   dot: {
@@ -136,13 +143,14 @@ const styles = StyleSheet.create({
     width: 10,
     height: 10,
     borderRadius: 5,
-    backgroundColor: 'transparent',
+    backgroundColor: colors.MedixBotPrimaryColor,
     marginLeft: 5,
   },
   dotIndicatorGradient: {
     width: '100%',
     height: '100%',
     borderRadius: 5,
+    backgroundColor: colors.MedixBotPrimaryColor,
   },
   dotContainer: {flexDirection: 'row', alignItems: 'center'},
   infoPage: {
@@ -156,25 +164,25 @@ const styles = StyleSheet.create({
     paddingVertical: 50,
   },
   infoPageTitle: {
-    fontFamily: 'Roboto',
-    fontSize: 22,
+    fontFamily: 'Montserrat-SemiBold',
+    fontSize: 25,
     fontStyle: 'normal',
     fontWeight: '500',
-    lineHeight: 22,
+    lineHeight: 25,
     letterSpacing: -0.23999999463558197,
     textAlign: 'left',
-    color: 'rgba(0, 148, 68, 1)',
+    color: '#000',
   },
   infoPageDesc: {
-    fontFamily: 'Roboto',
+    fontFamily: 'Lora-Regular',
     fontSize: 15,
     fontStyle: 'normal',
     fontWeight: '500',
     lineHeight: 16,
     letterSpacing: -0.23999999463558197,
     textAlign: 'left',
-    color: '#414042',
-    paddingVertical: 20,
+    color: '#000000C9',
+    paddingVertical: 14,
   },
 });
 export default styles;
