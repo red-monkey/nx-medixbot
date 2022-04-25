@@ -106,7 +106,6 @@ const styles = StyleSheet.create({
     fontFamily: 'Montserrat-SemiBold',
     fontSize: 16,
     fontStyle: 'normal',
-    fontWeight: '700',
     lineHeight: 20,
     letterSpacing: 0.23999999463558197,
     textAlign: 'center',
