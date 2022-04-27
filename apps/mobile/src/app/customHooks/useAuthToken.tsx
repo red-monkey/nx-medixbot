@@ -33,7 +33,10 @@ export const useAccessToken = (): [
     return token;
   };
 
-  const removeAuthToken = () => console.log();
+  const removeAuthToken = async () => {
+      await AsyncStorage.removeItem('accesToken');
+      await AsyncStorage.removeItem('refreshToken');
+  };
 
   return [setAuthToken, getAuthToken, removeAuthToken];
 };

@@ -25,25 +25,28 @@ import {
 } from '../../commun/Icons';
 import EmailValidationIcon from '../../icons/EmailValidationIcon.svg';
 import EmailValidationTickIcon from '../../icons/EmailValidationTickIcon.svg';
-import {CountryCode, ForgotPassProps} from '../../utils/types';
+import {CountryCode, ForgotPassProps, gender} from '../../utils/types';
 import {useNavigation} from '@react-navigation/native';
 import sharedStyles from '../../styles/SharedStyles';
 import {Formik} from 'formik';
 import * as yup from 'yup';
-import loginStyles from '../../styles/LoginPageStyles';
+import loginStyles, { modalStyle } from '../../styles/LoginPageStyles';
 import {focusHandler, pressOutHandler} from '../../utils/functions';
 import {PicturePickerModal} from '../../components/PicturePickerModal';
 import {setMembershipModal, setPictureModal} from '../../redux/actions/modal';
 import {useDispatch} from 'react-redux';
-import {Dispatch} from 'redux';
+import {Dispatch} from 'redux'; 
 import {useAppSelector} from '../../utils/hooks';
 import MembershipModal from '../../components/MembershipModal';
+import CustomModal from '../../components/CustomModal';
 const RegisterScreen = () => {
   const navigation = useNavigation<ForgotPassProps>();
   const image = useAppSelector(state => state.userPictureReducer.selected);
   const base64Icon = `data:image/jpg;base64,${image?.base64}`;
   const dispatch = useDispatch<Dispatch>();
   const [hidePassword, setHidePassword] = useState(true);
+  const [gender, setGender] = useState<gender | null>(null);
+  const [genderModalIsOpen, setGenderModal] = useState<boolean>(false)
   const [hideConfirmPassword, setHideConfirmPassword] = useState(true);
   const [countryCode, setCountryCode] = useState<CountryCode>('US');
   const [countryCallingCode, setCountryCallingCode] =
@@ -72,6 +75,26 @@ const RegisterScreen = () => {
       .oneOf([yup.ref('password'), null], "Passwords don't match")
       .required('Confirm password is required'),
   });
+
+  //Gender modal
+  const content = <><Text style={modalStyle.modalTitleStyle}>Select Gender</Text>
+  <TouchableOpacity
+    style={modalStyle.optionStyle}
+    onPress={() => {setGender('male');setGenderModal(false)}}>
+    <Text style={modalStyle.optionTextStyle}>Male</Text>
+  </TouchableOpacity>
+  <TouchableOpacity
+    style={modalStyle.optionStyle}
+    onPress={() => {setGender('female');setGenderModal(false)}}>
+    <Text style={modalStyle.optionTextStyle}>Female</Text>
+  </TouchableOpacity>
+  <TouchableOpacity
+    style={modalStyle.optionStyle}
+    onPress={() => {setGender('other');setGenderModal(false)}}>
+    <Text style={modalStyle.optionTextStyle}>Other</Text>
+  </TouchableOpacity>
+  </>
+
 
   return (
     <ScrollView contentContainerStyle={registerStyles.Container} scrollEnabled>
@@ -116,6 +139,7 @@ const RegisterScreen = () => {
                 ) : null}
                 <PicturePickerModal />
                 <MembershipModal />
+                <CustomModal onBackdropPress={() => setGenderModal(false)} content={content} visible={genderModalIsOpen}/>
                 <TouchableOpacity
                   style={[
                     registerStyles.formSelectInputStyle,
@@ -213,8 +237,8 @@ const RegisterScreen = () => {
 
                 <View style={registerStyles.formSelectInputStyle}>
                   <GenderIcon />
-                  <Text style={loginStyles.formInputStyle}>Select Gender</Text>
-                  <TouchableOpacity>
+                  <Text style={loginStyles.formInputStyle}>{gender ? gender : 'Select Gender'}</Text>
+                  <TouchableOpacity onPress={()=>setGenderModal(true)}>
                     <ArrowIcon />
                   </TouchableOpacity>
                 </View>

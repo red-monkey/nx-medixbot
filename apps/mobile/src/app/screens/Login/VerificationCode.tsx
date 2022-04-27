@@ -20,7 +20,7 @@ const VerificationCode = () => {
     '',
   );
   const verifMethod = useAppSelector(
-    state => state.loginReducer.communicationMethod,
+    state => state.loginMethodReducer.communicationMethod,
   );
 
   const focusHandlerInput = (reference: React.RefObject<TextInput>) => {

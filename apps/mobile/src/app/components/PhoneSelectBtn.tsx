@@ -10,9 +10,10 @@ import PhoneIcon from '../icons/PhoneIcon.svg';
 import BlueEnveloppeIcon from '../icons/BlueEnveloppeIcon.svg';
 import {Text, View, TouchableOpacity} from 'react-native';
 import Modal from 'react-native-modal';
+import CustomModal from './CustomModal';
 const PhoneSelectBtn = () => {
   const communicationMethod = useAppSelector(
-    state => state.loginReducer.communicationMethod,
+    state => state.loginMethodReducer.communicationMethod,
   );
   const [modalVisible, setModalVisible] = useState(false);
   const dispatch = useDispatch<Dispatch>();
@@ -20,7 +21,17 @@ const PhoneSelectBtn = () => {
     dispatch(setLoginMethod(method));
     setModalVisible(!modalVisible);
   };
-
+  const content = <><Text style={modalStyle.modalTitleStyle}>Select Account Type</Text>
+  <TouchableOpacity
+    style={modalStyle.optionStyle}
+    onPress={() => switchLoginMethod('phone')}>
+    <Text style={modalStyle.optionTextStyle}>Phone Number</Text>
+  </TouchableOpacity>
+  <TouchableOpacity
+    style={modalStyle.optionStyle}
+    onPress={() => switchLoginMethod('email')}>
+    <Text style={modalStyle.optionTextStyle}>E-mail</Text>
+  </TouchableOpacity></>
   return (
     <View>
       <View style={loginStyles.selectBtn}>
@@ -38,30 +49,7 @@ const PhoneSelectBtn = () => {
           <ArrowIcon />
         </TouchableOpacity>
       </View>
-      <Modal
-        hasBackdrop
-        animationIn={'slideInUp'}
-        animationOut={'slideOutDown'}
-        animationOutTiming={10}
-        backdropOpacity={0.5}
-        onBackdropPress={() => setModalVisible(false)}
-        isVisible={modalVisible}>
-        <View style={modalStyle.centeredView}>
-          <View style={modalStyle.modalView}>
-            <Text style={modalStyle.modalTitleStyle}>Select Account Type</Text>
-            <TouchableOpacity
-              style={modalStyle.optionStyle}
-              onPress={() => switchLoginMethod('phone')}>
-              <Text style={modalStyle.optionTextStyle}>Phone Number</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={modalStyle.optionStyle}
-              onPress={() => switchLoginMethod('email')}>
-              <Text style={modalStyle.optionTextStyle}>E-mail</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </Modal>
+      <CustomModal onBackdropPress={() => setModalVisible(false)} content={content} visible={modalVisible}/>
     </View>
   );
 };

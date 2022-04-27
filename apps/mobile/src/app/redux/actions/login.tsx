@@ -12,3 +12,11 @@ export const setLoginMethod = (method: loginMethod) => {
     payload: method,
   };
 };
+
+
+export const setIsLoggedIn = (isLoggedIn: boolean) => {
+  return {
+    type: actionTypes.SET_USER_IS_LOGGED_IN,
+    payload: isLoggedIn,
+  }
+}

@@ -13,6 +13,7 @@ export const LOGIN_WITH_EMAIL_MUTATION = gql`
         }
       }
       user {
+        id
         firstname
         lastname
         email
@@ -25,6 +26,7 @@ export const LOGIN_WITH_PHONE_MUTATION = gql`
   mutation LoginWithTel($tel: String!, $password: String!) {
     loginWithTel(tel: $tel, password: $password) {
       user {
+        id
         firstname
         lastname
         email

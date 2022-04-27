@@ -20,7 +20,7 @@ import {focusHandler, pressOutHandler} from '../../utils/functions';
 
 const ForgotPasswordPage = () => {
   const verifMethod = useAppSelector(
-    state => state.loginReducer.communicationMethod,
+    state => state.loginMethodReducer.communicationMethod,
   );
   const navigation = useNavigation<ResetPassProps>();
   const [countryCode, setCountryCode] = useState<CountryCode>('US');

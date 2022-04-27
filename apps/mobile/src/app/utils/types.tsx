@@ -14,6 +14,7 @@ import {
   OPEN_PICTURE_PICKER_MODAL,
   SET_LOGIN_METHOD_EMAIL,
   SET_LOGIN_METHOD_PHONE_NUMBER,
+  SET_USER_IS_LOGGED_IN,
   SET_USER_PICTURE,
 } from '../redux/actions/actionTypes';
 export type RootStackParamList = {
@@ -24,6 +25,7 @@ export type RootStackParamList = {
   ResetPassword: undefined;
   VerificationCode: undefined;
   Register: undefined;
+  Dashboard: undefined
 };
 
 export type InformationNavProps = NativeStackScreenProps<
@@ -52,7 +54,7 @@ export type RegisterProps = StackNavigationProp<RootStackParamList, 'Register'>;
 export type IndicatorProps = {
   scrollx: Animated.Value;
 };
-
+export type gender = 'male' | 'female' | 'other';
 export type membership = 'Referrer' | 'Partner' | 'Employer' | 'Family';
 export const CountryCodeList = [
   'AF',
@@ -338,6 +340,11 @@ export interface SetMembershipModaldAction {
 export interface SetPictureAction {
   type: typeof SET_USER_PICTURE;
   payload: Asset | null;
+}
+
+export interface SetIsloggedIn {
+  type: typeof SET_USER_IS_LOGGED_IN;
+  payload: boolean;
 }
 
 export type LoginActionTypes = SetLoginMethodAction;

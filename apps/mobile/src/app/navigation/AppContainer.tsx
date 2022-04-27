@@ -9,6 +9,7 @@ import ForgotPasswordPage from '../screens/Login/ForgotPassword';
 import ResetPasswordPage from '../screens/Login/ResetPassword';
 import VerificationCode from '../screens/Login/VerificationCode';
 import Register from '../screens/Register';
+import Dashboard from '../screens/Dashboard';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -54,4 +55,18 @@ export default function AppContainer() {
       </Stack.Navigator>
     </NavigationContainer>
   );
+}
+
+export const LoggedInUserAppContainer = () => {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Dashboard">
+        <Stack.Screen
+          options={{headerShown: false}}
+          name="Dashboard"
+          component={Dashboard}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  )
 }

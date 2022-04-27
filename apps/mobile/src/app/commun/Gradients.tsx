@@ -4,6 +4,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import {LinearTextGradient} from 'react-native-text-gradient';
 import styles from '../styles/HomepageStyles';
 import loginStyles from '../styles/LoginPageStyles';
+import dashboard from '../styles/DashboardStyles'
 
 export const GradientText = ({text}: {text: string}) => {
   return (
@@ -61,5 +62,18 @@ export const GradientTextFaceIdLogin = ({text}: {text: string}) => {
       end={{x: 1, y: 0}}>
       <Text>{text}</Text>
     </LinearTextGradient>
+  );
+};
+
+export const DashboardHeaderGradient = ({content}: {content: any}) => {
+  return (
+    <LinearGradient
+      colors={['#00AEEF', '#CC40B6']}
+      locations={[0.1476,1.2808]}
+      useAngle={true}
+      angle= {303.24}
+      style={dashboard.HeaderGradientBox}>
+      {content}
+    </LinearGradient>
   );
 };

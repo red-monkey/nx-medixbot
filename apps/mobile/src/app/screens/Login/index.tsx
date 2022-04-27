@@ -35,7 +35,7 @@ import {useLoginMutation} from '../../apollo/GraphQL/Actions';
 const LoginPage = () => {
   const navigation = useNavigation<ForgotPassProps>();
   const loginMethod = useAppSelector(
-    state => state.loginReducer.communicationMethod,
+    state => state.loginMethodReducer.communicationMethod,
   );
   const [loginMutation] = useLoginMutation(loginMethod);
   const [hidePassword, setHidePassword] = useState(true);
@@ -90,7 +90,7 @@ const LoginPage = () => {
               loginMutation(values.password, values.email, values.phoneNumber)
             }>
             {({
-              handleChange,
+              handleChange,                
               handleBlur,
               handleSubmit,
               values,
