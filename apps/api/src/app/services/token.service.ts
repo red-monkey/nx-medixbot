@@ -1,6 +1,7 @@
 import { TokenModel, UserModel } from '@medixbot/models';
 import { EUserAccountStatus } from '@medixbot/types';
 import * as jwt from 'jsonwebtoken';
+import { OAuth2Client } from 'google-auth-library';
 import { config } from '../configs';
 
 const verifyToken = async (token: string, type: string) => {
@@ -49,6 +50,16 @@ const verifyEmail = async (verifyEmailToken: string) => {
   }
 };
 
+const verifyGoogleToken = async (token: string) => {
+  const auth = new OAuth2Client(config.google.clientID);
+  const ticket = await auth.verifyIdToken({
+    idToken: token,
+    audience: config.google.clientID,
+  });
+  return ticket.getPayload().email;
+};
+
 export default {
   verifyEmail,
+  verifyGoogleToken,
 };
