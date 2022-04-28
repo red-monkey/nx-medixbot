@@ -1,7 +1,8 @@
 import React from 'react';
-import {StatusBar, Text, TouchableOpacity, View} from 'react-native';
+import { StatusBar, Text, TouchableOpacity, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
+import styles from '../../../styles/DashboardStyles';
 import { useAccessToken } from '../../customHooks/useAuthToken';
 import { useIsUser } from '../../customHooks/useIsUser';
 import { setIsLoggedIn } from '../../redux/actions/login';
@@ -9,22 +10,28 @@ import GreetingBox from './components/GreetingBox';
 import { Header } from './components/Header';
 
 const Dashboard = () => {
-  const [,, removeAuthToken] = useAccessToken();
-  const [,, deleteUserData] = useIsUser();
+  const [, , removeAuthToken] = useAccessToken();
+  const [, , deleteUserData] = useIsUser();
   const dispatch = useDispatch<Dispatch>();
   const logout = () => {
     removeAuthToken();
     deleteUserData();
     dispatch(setIsLoggedIn(false));
-  }
+  };
   return (
-    <View style={{backgroundColor: '#fff'}}>
-      <StatusBar translucent={true}  backgroundColor={'transparent'} barStyle="light-content"  />
+    <View style={styles.root}>
+      <StatusBar
+        translucent={true}
+        backgroundColor={'transparent'}
+        barStyle="dark-content"
+      />
       <Header />
-      <GreetingBox />
-      <TouchableOpacity onPress={logout}>
+      <View style={styles.screenContent}>
+        <GreetingBox />
+      </View>
+      {/* <TouchableOpacity onPress={logout}>
         <Text>Logout</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </View>
   );
 };
