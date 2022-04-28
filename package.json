@@ -10,6 +10,8 @@
     "start:android": "nx run mobile:run-android",
     "start:api": "nx run api:serve",
     "build": "nx build",
+    "build:api": "nx run api:build",
+    "run:api": "node dist/apps/api/main.js",
     "test": "nx test",
     "lint": "lint-staged",
     "codegen": "graphql-codegen --config codegen.yml",
