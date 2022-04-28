@@ -6,6 +6,13 @@ This project was generated using [Nx](https://nx.dev).
 
 🔎 **Smart, Fast and Extensible Build System**
 
+## Important:
+
+We should create a new branch for each small task and then create a Pull request to `dev` branch once the task is done.
+Never push code to the `main` branch since it will be use for production only.
+
+Also do not spend many days without creating a PR for your branch otherwise we may have many merge conflicts to solve in order to merge your branch.
+
 ## Projects
 
 There are 3 projects in this monorepo:
