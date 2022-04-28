@@ -10,7 +10,7 @@
     "start:android": "nx run mobile:run-android",
     "start:api": "nx run api:serve",
     "build": "nx build",
-    "build:api": "nx run api:build",
+    "build:api": "nx run api:build:production",
     "run:api": "node dist/apps/api/main.js",
     "test": "nx test",
     "lint": "lint-staged",
