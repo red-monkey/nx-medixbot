@@ -28,6 +28,6 @@ jobs:
           aws_secret_key: ${{ env.AWS_SECRET_ACCESS_KEY }}
           application_name: ${{ env.APP_NAME }}
           environment_name: ${{ env.ENVIRONMENT_NAME }}
-          version_label: 12345
+          # version_label: 12345
           region: us-east-1
           deployment_package: deploy.zip
