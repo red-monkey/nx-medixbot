@@ -7,6 +7,7 @@ import { useAccessToken } from '../../customHooks/useAuthToken';
 import { useIsUser } from '../../customHooks/useIsUser';
 import { setIsLoggedIn } from '../../redux/actions/login';
 import GreetingBox from './components/GreetingBox';
+import Notifications from './components/Notifications';
 import { Header } from './components/Header';
 
 const Dashboard = () => {
@@ -28,6 +29,7 @@ const Dashboard = () => {
       <Header />
       <View style={styles.screenContent}>
         <GreetingBox />
+        <Notifications />
       </View>
       {/* <TouchableOpacity onPress={logout}>
         <Text>Logout</Text>
