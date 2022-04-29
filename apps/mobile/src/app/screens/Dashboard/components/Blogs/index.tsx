@@ -1,0 +1,58 @@
+import React from 'react';
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import Carousal from './Carousal';
+
+const Blogs = () => {
+  return (
+    <View style={styles.blogsContainer}>
+      <View style={styles.top}>
+        <Text style={styles.title}>newsfeeds</Text>
+        <TouchableOpacity>
+          <Text style={styles.viewAll}>view all</Text>
+        </TouchableOpacity>
+      </View>
+      <View>
+        <Carousal />
+      </View>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  blogsContainer: {
+    height: 240,
+    backgroundColor: '#fff',
+    borderRadius: 15,
+    flexDirection: 'column',
+    paddingHorizontal: 20,
+    paddingVertical: 20,
+    marginBottom: 20,
+    shadowColor: 'rgba(0, 0, 0, 0.8)',
+    shadowOpacity: 0.1,
+    elevation: 3,
+  },
+
+  top: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+
+  title: {
+    color: '#414042',
+    fontSize: 14,
+    fontFamily: 'Montserrat-Medium',
+    textTransform: 'capitalize',
+  },
+
+  viewAll: {
+    color: '#4C5DF4',
+    fontSize: 14,
+    fontFamily: 'Montserrat-Bold',
+    textTransform: 'capitalize',
+  },
+});
+
+export default Blogs;

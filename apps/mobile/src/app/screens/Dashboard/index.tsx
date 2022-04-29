@@ -17,6 +17,7 @@ import GreetingBox from './components/GreetingBox';
 import Notifications from './components/Notifications';
 import { Header } from './components/Header';
 import Categories from './components/Categories';
+import Blogs from './components/Blogs';
 
 const Dashboard = () => {
   const [, , removeAuthToken] = useAccessToken();
@@ -44,6 +45,7 @@ const Dashboard = () => {
               <GreetingBox />
               <Notifications />
               <Categories />
+              <Blogs />
             </View>
             {/* <TouchableOpacity onPress={logout}>
          <Text>Logout</Text>
