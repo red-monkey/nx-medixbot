@@ -1,11 +1,30 @@
-import { EGraphQlErrorCode, ETokenType, TUser } from '@medixbot/types';
+import {
+  EAWSS3BucketName,
+  EGraphQlErrorCode,
+  ETokenType,
+  IRegisterUser,
+} from '@medixbot/types';
 import { Request, Response } from 'express';
-import { tokenService } from '../services';
+import { awsService, tokenService } from '../services';
 import { IContext } from '../types';
 import { emailSender, GraphQlApiError } from '../utils';
 
-async function register(data: TUser, ctx: IContext) {
-  const registerData = data;
+async function register(input: { data: IRegisterUser }, ctx: IContext) {
+  const s3 = new awsService.AWSS3();
+  const registerData = input.data;
+  if (!registerData.email && !registerData.tel) {
+    throw new GraphQlApiError(
+      'You must provide an email or a tel field',
+      EGraphQlErrorCode.BAD_USER_INPUT
+    );
+  }
+  if (input.data.profileImage) {
+    const file = await s3.uploadFile(
+      input.data.profileImage,
+      EAWSS3BucketName.PROFILE_IMAGES
+    );
+    registerData.profileImage = `/rest/images/${file.key}`;
+  }
   const user = await ctx.dataSources.users.createUser(registerData);
   const tokens = await ctx.dataSources.tokens.generateAuthTokens(user.id);
 
@@ -36,7 +55,7 @@ async function logout(data: { refreshToken: string }, ctx: IContext) {
   const { refreshToken } = data;
   await ctx.dataSources.tokens.delete(refreshToken, ETokenType.REFRESH);
   // await refreshTokenDoc.remove();
-  return 'logged out';
+  return { message: 'logged out' };
 }
 
 async function refreshTokens(data: { refreshToken: string }, ctx: IContext) {
@@ -57,7 +76,7 @@ async function forgotPassword(data: { email: string }, ctx: IContext) {
   const resetPasswordToken =
     await ctx.dataSources.tokens.generateResetPasswordToken(email);
   await emailSender.sendResetPasswordEmail(email, resetPasswordToken);
-  return 'Reset password email sent to your inbox.';
+  return { message: 'Reset password email sent to your inbox.' };
 }
 
 async function resetPassword(
@@ -72,7 +91,7 @@ async function resetPassword(
   await ctx.dataSources.users.updateUser(tok.user.toString(), {
     password: password,
   });
-  return 'Password renewed';
+  return { message: 'Password renewed' };
 }
 async function sendVerificationEmail(data: unknown, ctx: IContext) {
   const emailVerificationToken =
@@ -81,7 +100,7 @@ async function sendVerificationEmail(data: unknown, ctx: IContext) {
     ctx.user.email,
     emailVerificationToken
   );
-  return 'Verification email sent.';
+  return { message: 'Verification email sent.' };
 }
 
 const verifyEmail = async (req: Request, res: Response) => {
@@ -92,7 +111,7 @@ const verifyEmail = async (req: Request, res: Response) => {
     await tokenService.verifyEmail(req.params.token);
     res.send('Email verified.');
   } catch (error) {
-    res.status(400).send('Bad request.');
+    res.status(400).send(error.message);
   }
 };
 

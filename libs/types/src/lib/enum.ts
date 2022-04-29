@@ -41,3 +41,7 @@ export enum EGraphQlErrorCode {
   PERSISTED_QUERY_NOT_SUPPORTED = 'PERSISTED_QUERY_NOT_SUPPORTED',
   INTERNAL_SERVER_ERROR = 'INTERNAL_SERVER_ERROR',
 }
+
+export enum EAWSS3BucketName {
+  PROFILE_IMAGES = 'medixbot-profile-images',
+}

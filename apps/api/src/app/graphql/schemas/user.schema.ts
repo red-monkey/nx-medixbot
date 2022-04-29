@@ -3,8 +3,7 @@ import { gql } from 'apollo-server-express';
 export default gql`
   type TUser {
     id: ID
-    name: String
-    surname: String
+    fullName: String
     email: String
     tel: String
     gender: EGender
@@ -14,8 +13,11 @@ export default gql`
     dateOfBirth: String
     country: String
     city: String
-    address: String
+    state: String
+    postCode: String
     languages: [String]
+    membership: EMembership
+    profileImage: String
   }
   type TPaginatedUsers {
     results: [TUser]!
@@ -69,16 +71,18 @@ export default gql`
     info: TUser
   }
   input IUpdateUser {
-    name: String
-    surname: String
+    fullName: String
     email: String
     tel: String
     gender: EGender
     dateOfBirth: String
     country: String
     city: String
-    address: String
+    state: String
+    postCode: String
     languages: [String]
+    membership: EMembership
+    profileImage: Upload
   }
   input IUpdateDoctor {
     domain: String

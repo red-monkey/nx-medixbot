@@ -1,4 +1,5 @@
 import { ApolloServer } from 'apollo-server-express';
+import { GraphQLUpload } from 'graphql-upload';
 import { merge } from 'lodash';
 import { dataSources } from '../datasources';
 import { context } from '../utils';
@@ -11,6 +12,7 @@ const apolloServer = new ApolloServer({
     {
       Query: {},
       Mutation: {},
+      Upload: GraphQLUpload,
     },
     authResolver,
     userResolver

@@ -12,6 +12,7 @@
     "build": "nx build",
     "build:api": "nx run api:build:production",
     "run:api": "node dist/apps/api/main.js",
+    "copy": "cp -R ./apps/api/.env.local apps/api/dist/",
     "test": "nx test",
     "lint": "lint-staged",
     "codegen": "graphql-codegen --config codegen.yml",
@@ -26,14 +27,18 @@
     "@sendgrid/mail": "~7.6.2",
     "apollo-datasource-mongodb": "~0.5.4",
     "apollo-server-express": "~3.6.7",
+    "aws-sdk": "^2.1124.0",
     "bcryptjs": "~2.4.3",
+    "compression": "^1.7.4",
     "core-js": "^3.6.5",
     "cors": "~2.8.5",
+    "dotenv": "^16.0.0",
     "express": "4.17.2",
     "express-mongo-sanitize": "~2.2.0",
     "express-rate-limit": "~6.3.0",
     "google-auth-library": "^7.14.1",
     "graphql": "^16.3.0",
+    "graphql-upload": "^13.0.0",
     "helmet": "~5.0.2",
     "joi": "~17.6.0",
     "jsonwebtoken": "~8.5.1",
@@ -45,6 +50,8 @@
     "react-router-dom": "5.3.0",
     "regenerator-runtime": "0.13.7",
     "tslib": "^2.0.0",
+    "twilio": "^3.76.1",
+    "uuid": "^8.3.2",
     "winston": "~3.7.2",
     "xss-clean": "~0.1.1"
   },
@@ -110,7 +117,7 @@
   },
   "lint-staged": {
     "*.{ts, tsx}": [
-      "eslint --ext .ts --ext .tsx --max-warnings=0",
+      "eslint --ext .ts --ext .tsx --max-warnings=1",
       "prettier --write"
     ]
   }

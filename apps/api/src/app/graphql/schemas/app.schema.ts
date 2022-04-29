@@ -1,6 +1,7 @@
 import { gql } from 'apollo-server-express';
 
 export default gql`
+  scalar Upload
   enum EUserRole {
     admin
     patient
@@ -9,6 +10,7 @@ export default gql`
   enum EGender {
     female
     male
+    others
   }
   enum EUserAccountStatus {
     opened
@@ -25,8 +27,23 @@ export default gql`
     Canceled
     Missed
   }
+  enum EMembership {
+    Referrer
+    Partner
+    Employer
+    Family
+  }
+  type TNormalResponse {
+    message: String!
+  }
+  type TUploadedFileResponse {
+    filename: String!
+    mimetype: String!
+    encoding: String!
+    url: String!
+  }
   # Queries
-  # type Query {}
+  # type Query{}
   # Mutations
   # type Mutation {}
 `;
