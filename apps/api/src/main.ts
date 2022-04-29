@@ -11,8 +11,6 @@ setupExpress()
 
     app.use('/rest', restRoute);
 
-    // app.get('/rest/auth/verify-email/:token', authController.verifyEmail);
-
     const port = config.port;
     const server = app.listen(port, () => {
       mongoose.connect(config.mongoose.url).then(async () => {
