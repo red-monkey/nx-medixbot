@@ -2,6 +2,7 @@ import { Dimensions, StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   root: {
+    flex: 1,
     backgroundColor: '#fff',
   },
   HeaderGradiantBoxContainer: {
@@ -39,7 +40,7 @@ const styles = StyleSheet.create({
   },
 
   GreetingBoxContainer: {
-    height: 300,
+    height: 230,
     backgroundColor: '#fff',
     borderRadius: 15,
     shadowColor: 'rgba(0.5, 0, 0, 0.08)',
@@ -49,6 +50,9 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     paddingHorizontal: 20,
     paddingVertical: 20,
+    shadowColor: '#000',
+    shadowOpacity: 0.1,
+    elevation: 3,
   },
   bot: {
     position: 'absolute',

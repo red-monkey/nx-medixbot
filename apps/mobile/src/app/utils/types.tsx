@@ -1,6 +1,6 @@
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {StackNavigationProp} from '@react-navigation/stack';
-import {Animated} from 'react-native';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { Animated } from 'react-native';
 import {
   Asset,
   ErrorCode,
@@ -15,17 +15,19 @@ import {
   SET_LOGIN_METHOD_EMAIL,
   SET_LOGIN_METHOD_PHONE_NUMBER,
   SET_USER_IS_LOGGED_IN,
+  SET_USER_MOOD,
   SET_USER_PICTURE,
 } from '../redux/actions/actionTypes';
+import { updateMood } from '../redux/actions/challenge';
 export type RootStackParamList = {
   Home: undefined;
-  Information: {title: string};
+  Information: { title: string };
   Login: undefined;
   ForgotPassword: undefined;
   ResetPassword: undefined;
   VerificationCode: undefined;
   Register: undefined;
-  Dashboard: undefined
+  Dashboard: undefined;
 };
 
 export type InformationNavProps = NativeStackScreenProps<
@@ -397,3 +399,11 @@ export type loginmutationParams = {
   password: string;
   method: loginMethod;
 };
+
+export type TMood = null | 'great' | 'good' | 'okay' | 'bad' | 'awful';
+interface UpdateMoodAction {
+  type: typeof SET_USER_MOOD;
+  payload: TMood;
+}
+
+export type ChallengeAction = UpdateMoodAction;

@@ -1,6 +1,7 @@
 import { View, Text, Image } from 'react-native';
-import styles from '../../../styles/DashboardStyles';
+import styles from '../../../../styles/DashboardStyles';
 import React from 'react';
+import ActionBar from './ActionBar';
 
 const GreetingBox = () => {
   return (
@@ -19,6 +20,7 @@ const GreetingBox = () => {
           <Text style={styles.userName}>Ayesha</Text>
         </View>
       </View>
+      <ActionBar />
     </View>
   );
 };
