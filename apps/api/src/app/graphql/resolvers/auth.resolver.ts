@@ -1,31 +1,18 @@
 import { catchReq } from '../../utils';
-import { authValidation } from '../../validations';
 import { authController } from '../../controllers';
 import { auth } from '../../middlewares';
 
 export default {
   Query: {},
   Mutation: {
-    register: catchReq(authValidation.register, authController.register),
-    login: catchReq(authValidation.login, authController.login),
-    logout: auth(catchReq(authValidation.logout, authController.logout)),
-    refreshTokens: catchReq(
-      authValidation.refreshTokens,
-      authController.refreshTokens
-    ),
-    forgotPassword: catchReq(
-      authValidation.forgotPassword,
-      authController.forgotPassword
-    ),
-    resetPassword: catchReq(
-      authValidation.resetPassword,
-      authController.resetPassword
-    ),
+    register: catchReq(authController.register),
+    login: catchReq(authController.login),
+    logout: auth(catchReq(authController.logout)),
+    refreshTokens: catchReq(authController.refreshTokens),
+    forgotPassword: catchReq(authController.forgotPassword),
+    resetPassword: catchReq(authController.resetPassword),
     sendVerificationEmail: auth(
-      catchReq(
-        authValidation.sendVerificationEmail,
-        authController.sendVerificationEmail
-      ),
+      catchReq(authController.sendVerificationEmail),
       []
     ),
   },

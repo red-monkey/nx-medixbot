@@ -1,13 +1,19 @@
 import { TokenModel, UserModel } from '@medixbot/models';
-import { EUserAccountStatus } from '@medixbot/types';
+import { ETokenType, EUserAccountStatus } from '@medixbot/types';
 import * as jwt from 'jsonwebtoken';
 import { OAuth2Client } from 'google-auth-library';
 import { config } from '../configs';
 
-const verifyToken = async (token: string, type: string) => {
+const verifyToken = async (token: string, type: ETokenType) => {
   let tokenDoc;
-  const payload = jwt.verify(token, config.jwt.secret);
-  if (type === global.tokenTypes.ACCESS) {
+  let payload;
+  try {
+    payload = jwt.verify(token, config.jwt.secret);
+  } catch (error) {
+    throw new Error(error.message);
+  }
+
+  if (type === ETokenType.ACCESS) {
     tokenDoc.user = payload.sub;
     tokenDoc.token = token;
     tokenDoc.type = type;
@@ -32,7 +38,7 @@ const verifyEmail = async (verifyEmailToken: string) => {
   try {
     const verifyEmailTokenDoc = await verifyToken(
       verifyEmailToken,
-      global.tokenTypes.VERIFY_EMAIL
+      ETokenType.VERIFY_EMAIL
     );
     const user = await UserModel.findById(verifyEmailTokenDoc.user);
     if (!user) {
@@ -40,13 +46,13 @@ const verifyEmail = async (verifyEmailToken: string) => {
     }
     await TokenModel.deleteMany({
       user: user.id,
-      type: global.tokenTypes.VERIFY_EMAIL,
+      type: ETokenType.VERIFY_EMAIL,
     });
     await UserModel.findByIdAndUpdate(user.id, {
       accountStatus: EUserAccountStatus.Opened,
     });
   } catch (error) {
-    throw new Error('Email verification failed');
+    throw new Error(error);
   }
 };
 

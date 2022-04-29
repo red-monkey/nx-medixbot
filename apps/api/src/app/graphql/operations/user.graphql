@@ -1,7 +1,6 @@
 fragment UserFields on TUser {
   id
-  name
-  surname
+  fullName
   email
   tel
   gender
@@ -11,7 +10,9 @@ fragment UserFields on TUser {
   dateOfBirth
   country
   city
-  address
+  state
+  postCode
+  membership
   languages
 }
 fragment TokenFields on TToken {
@@ -64,22 +65,8 @@ mutation Login($username: String!, $password: String!) {
   }
 }
 
-mutation Register(
-  $name: String!
-  $surname: String!
-  $email: String!
-  $password: String!
-  $userRole: EUserRole!
-  $gender: EGender
-) {
-  register(
-    name: $name
-    surname: $surname
-    email: $email
-    password: $password
-    userRole: $userRole
-    gender: $gender
-  ) {
+mutation Register($data: IRegisterUser!) {
+  register(data: $data) {
     user {
       ...UserFields
     }
@@ -106,17 +93,25 @@ mutation UpdateAccount($data: IUpdateUser!) {
 }
 
 mutation Logout($refreshToken: String!) {
-  logout(refreshToken: $refreshToken)
+  logout(refreshToken: $refreshToken) {
+    message
+  }
 }
 
 mutation ForgotPassword($email: String!) {
-  forgotPassword(email: $email)
+  forgotPassword(email: $email) {
+    message
+  }
 }
 
 mutation ResetPassword($token: String!, $password: String!) {
-  resetPassword(token: $token, password: $password)
+  resetPassword(token: $token, password: $password) {
+    message
+  }
 }
 
-mutation Mutation {
-  sendVerificationEmail
+mutation SendVerificationEmail {
+  sendVerificationEmail {
+    message
+  }
 }

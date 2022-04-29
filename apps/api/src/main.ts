@@ -1,7 +1,7 @@
 import * as mongoose from 'mongoose';
 import setupExpress from './app';
 import { config, logger } from './app/configs';
-import { authController } from './app/controllers';
+import restRoute from './app/routes';
 
 setupExpress()
   .then((app) => {
@@ -9,7 +9,9 @@ setupExpress()
       res.send({ message: 'Welcome to medixbot api!' });
     });
 
-    app.get('/rest/auth/verify-email/:token', authController.verifyEmail);
+    app.use('/rest', restRoute);
+
+    // app.get('/rest/auth/verify-email/:token', authController.verifyEmail);
 
     const port = config.port;
     const server = app.listen(port, () => {

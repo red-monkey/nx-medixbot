@@ -8,15 +8,12 @@ import {
   EUserRole,
   EUserAccountStatus,
   EModelNames,
+  EMembership,
 } from '@medixbot/types';
 
 const userSchema: Schema<IUserDocument> = new Schema(
   {
-    name: {
-      type: String,
-      trim: true,
-    },
-    surname: {
+    fullName: {
       type: String,
       trim: true,
     },
@@ -30,6 +27,7 @@ const userSchema: Schema<IUserDocument> = new Schema(
       type: String,
       enum: EGender,
     },
+    profileImage: String,
     password: {
       type: String,
       trim: true,
@@ -62,13 +60,21 @@ const userSchema: Schema<IUserDocument> = new Schema(
       type: String,
       trim: true,
     },
-    address: {
+    state: {
+      type: String,
+      trim: true,
+    },
+    postCode: {
       type: String,
       trim: true,
     },
     dateOfBirth: {
       type: String,
       trim: true,
+    },
+    membership: {
+      type: String,
+      enum: EMembership,
     },
   },
   {
