@@ -1,19 +1,21 @@
 import {Formik} from 'formik';
 import React, {useRef, useState} from 'react';
-import {Text, View, TouchableOpacity, TextInput} from 'react-native';
+import {Text, View, TouchableOpacity, TextInput, ScrollView} from 'react-native';
 import Modal from 'react-native-modal';
 import {useDispatch} from 'react-redux';
 import {Dispatch} from 'redux';
 import {setMembershipModal} from '../redux/actions/modal';
-import  ArrowIcon from '../../icons/ArrowIcon.svg';
 import loginStyles, {modalStyle} from '../styles/LoginPageStyles';
 import * as styles from '../styles/RegisterStyle';
 import {useAppSelector} from '../utils/hooks';
 import {buttonStyle, membership} from '../utils/types';
 import * as yup from 'yup';
-import { MoreIcon, ThreeUsersIcon} from '../commun/Icons';
+import { MoreIcon} from '../commun/Icons';
+import ThreeUsersIcon from '../icons/ThreeUsersIcon.svg'
+import ThreeUsersIconDark from '../icons/ThreeUsersIconDark.svg'
 import {focusHandler, pressOutHandler} from '../utils/functions';
-import { darkGreyBackground, greyBackground } from '../styles/RegisterStyle';
+import {  greyBackground } from '../styles/RegisterStyle';
+import { employers, partners } from '../utils/constants';
 
 export default function MembershipModal() {
   const isOpen = useAppSelector(state => state.membershipModalReducer.isOpen);
@@ -69,7 +71,7 @@ export default function MembershipModal() {
       onBackdropPress={() => dispatch(setMembershipModal(false))}
       isVisible={isOpen}>
       <View style={modalStyle.centeredView}>
-        <View style={[modalStyle.modalView,{height: 480}]}>
+        <View style={[modalStyle.modalView,{height: 500,paddingBottom: 30}]}>
           <Text style={styles.MembershipModalStyle.modalTitleStyle}>
             Are you a member of?
           </Text>
@@ -133,25 +135,59 @@ export default function MembershipModal() {
                     )}
                   </>) : membership === 'Partner' ? 
                   (
-                  <View style={[styles.default.formSelectInputStyle,darkGreyBackground]}>
-                    <ThreeUsersIcon />
-                    <Text style={loginStyles.formInputStyle}>
-                      Select Partner
-                    </Text>
-                    <TouchableOpacity>
-                      <ArrowIcon />
-                    </TouchableOpacity>
-                  </View>): membership === 'Employer' ? (
-                  <View style={[styles.default.formSelectInputStyle,darkGreyBackground]}>
-                    <ThreeUsersIcon />
-                    <Text style={loginStyles.formInputStyle}>
-                      Select Employer
-                    </Text>
-                    <TouchableOpacity>
-                      <ArrowIcon />
-                    </TouchableOpacity>
-                  </View> ) :
+                    <View>
+                      <View style={styles.MembershipModalStyle.PartnerTitle}>
+                        <ThreeUsersIcon />
+                        <Text style={{marginLeft: 10, color: '#fff'}}>
+                          Select Partner:
+                        </Text>
+                      </View>
+                      <ScrollView style={styles.MembershipModalStyle.PartnersList}>
+                        {partners.map((element,index) => (
+                          <TouchableOpacity key={index}>
+                            <Text>{element}</Text>
+                          </TouchableOpacity>
+                        ))}
+                      </ScrollView>
+                    </View>
+                    ): membership === 'Employer' ? (
+                      <View>
+                    <View style={styles.MembershipModalStyle.PartnerTitle}>
+                      <ThreeUsersIcon />
+                      <Text style={{marginLeft: 10, color: '#fff'}}>
+                        Select Employer:
+                      </Text>
+                      </View>
+                      <ScrollView style={styles.MembershipModalStyle.PartnersList}>
+                        {employers.map((element,index) => (
+                          <TouchableOpacity key={index}>
+                            <Text>{element}</Text>
+                          </TouchableOpacity>
+                        ))}
+                      </ScrollView>
+                      </View>
+                     ) :
                   (<View>
+                  <View
+                    style={[styles.default.formInputContainerStyle, greyBackground]}
+                    ref={FamilyLastNameRef}>
+                    <ThreeUsersIconDark />
+                    <TextInput
+                      onFocus={() => focusHandler(FamilyLastNameRef)}
+                      onEndEditing={() => pressOutHandler(FamilyLastNameRef)}
+                      placeholderTextColor={'#41416E80'}
+                      style={styles.default.formInputStyle}
+                      placeholder="Family Last Name"
+                      onChangeText={handleChange('FamilyLastName')}
+                      onBlur={handleBlur('FamilyLastName')}
+                      value={values.FamilyLastName}
+                    />
+                  </View>
+                  {errors.FamilyLastName && touched.FamilyLastName && (
+                    <Text style={loginStyles.errorText}>
+                      {errors.FamilyLastName}
+                    </Text>
+                  )}
                   <View
                      style={[styles.default.formInputContainerStyle, greyBackground]}
                     ref={FamilyCodeRef}>
@@ -172,39 +208,20 @@ export default function MembershipModal() {
                       {errors.FamilyCode}
                     </Text>
                   )}
-                  <View
-                    style={[styles.default.formInputContainerStyle, greyBackground]}
-                    ref={FamilyLastNameRef}>
-                    <ThreeUsersIcon />
-                    <TextInput
-                      onFocus={() => focusHandler(FamilyLastNameRef)}
-                      onEndEditing={() => pressOutHandler(FamilyLastNameRef)}
-                      placeholderTextColor={'#41416E80'}
-                      style={styles.default.formInputStyle}
-                      placeholder="Family Last Name"
-                      onChangeText={handleChange('FamilyLastName')}
-                      onBlur={handleBlur('FamilyLastName')}
-                      value={values.FamilyLastName}
-                    />
-                  </View>
-                  {errors.FamilyLastName && touched.FamilyLastName && (
-                    <Text style={loginStyles.errorText}>
-                      {errors.FamilyLastName}
-                    </Text>
-                  )}</View>)}
+                  </View>)}
                   <View style={styles.MembershipModalStyle.submitButtonGroup}>
                     <TouchableOpacity
-                      style={styles.MembershipModalStyle.submitButton}
+                      style={membership === 'Family' ? styles.MembershipModalStyle.submitButton : [styles.MembershipModalStyle.submitButton, styles.MembershipModalStyle.extended]}
                       onPress={()=>handleSubmit}
                       disabled={!isValid}>
                         <Text style={[loginStyles.forgotPassword,{textAlign: 'center', marginTop: 0, color: '#fff'}]}>Save</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity
-                      style={styles.MembershipModalStyle.submitButton}
+                    { membership === 'Family' ? <TouchableOpacity
+                      style={[styles.MembershipModalStyle.submitButton,styles.MembershipModalStyle.createNewBtn]}
                       onPress={()=>handleSubmit}
                       disabled={!isValid}>
-                      <Text style={[loginStyles.forgotPassword,{textAlign: 'center', marginTop: 0, color: '#fff'}]}>Create New</Text>
-                    </TouchableOpacity>
+                      <Text style={[loginStyles.forgotPassword,{textAlign: 'center', marginTop: 0, color: '#41416E'}]}>Create New</Text>
+                    </TouchableOpacity> : null }
                   </View>
                </View>
               )}

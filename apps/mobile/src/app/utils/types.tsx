@@ -8,8 +8,13 @@ import {
   PhotoQuality,
 } from 'react-native-image-picker';
 import {
+  ADD_OR_REMOVE_LANGUAGE,
+  CLOSE_LANGUAGE_MODAL,
+  CLOSE_LOCATION_MODAL,
   CLOSE_MEMBERSHIP_MODAL,
   CLOSE_PICTURE_PICKER_MODAL,
+  OPEN_LANGUAGE_MODAL,
+  OPEN_LOCATION_MODAL,
   OPEN_MEMBERSHIP_MODAL,
   OPEN_PICTURE_PICKER_MODAL,
   SET_LOGIN_METHOD_EMAIL,
@@ -28,14 +33,14 @@ export type RootStackParamList = {
   Dashboard: undefined
 };
 
-export type InformationNavProps = NativeStackScreenProps<
-  RootStackParamList,
-  'Information'
->;
-export type InfScreenProp = StackNavigationProp<
-  RootStackParamList,
-  'Information'
->;
+export type InformationProps = {
+  title: string,
+  description: string,
+};
+
+export type InformationScreenHeaderProps = {
+  extended: boolean
+};
 export type HomeNavProps = NativeStackScreenProps<RootStackParamList, 'Home'>;
 export type ForgotPassProps = StackNavigationProp<
   RootStackParamList,
@@ -54,7 +59,7 @@ export type RegisterProps = StackNavigationProp<RootStackParamList, 'Register'>;
 export type IndicatorProps = {
   scrollx: Animated.Value;
 };
-export type gender = 'male' | 'female' | 'other';
+export type gender = 'Male' | 'Female' | 'Other';
 export type membership = 'Referrer' | 'Partner' | 'Employer' | 'Family';
 export const CountryCodeList = [
   'AF',
@@ -330,6 +335,16 @@ export interface SetLoginMethodAction {
 export interface SetModaldAction {
   type: typeof OPEN_PICTURE_PICKER_MODAL | typeof CLOSE_PICTURE_PICKER_MODAL;
   payload: boolean;
+}
+
+export interface SetLocationModaldAction {
+  type: typeof OPEN_LOCATION_MODAL | typeof CLOSE_LOCATION_MODAL;
+  payload: boolean;
+}
+
+export interface SetLanguageModaldAction {
+  type: typeof OPEN_LANGUAGE_MODAL | typeof CLOSE_LANGUAGE_MODAL | typeof ADD_OR_REMOVE_LANGUAGE;
+  payload: boolean | string;
 }
 
 export interface SetMembershipModaldAction {

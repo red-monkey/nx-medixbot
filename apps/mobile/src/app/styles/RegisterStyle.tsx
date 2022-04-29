@@ -126,6 +126,10 @@ export const MembershipModalStyle = StyleSheet.create({
     paddingHorizontal: 40,
     paddingBottom: 15,
   },
+  extended: {
+    width: '85%',
+    marginHorizontal: '7.5%'
+  },
   buttonList: {
     flexDirection: 'row',
     height: 32,
@@ -154,18 +158,77 @@ export const MembershipModalStyle = StyleSheet.create({
   submitButton: {
     width: 145,
     height: 47,
-    backgroundColor: '#F5007E',
+    backgroundColor: '#CC00FF',
     borderRadius: 35,
     justifyContent: 'center',
     marginTop: 35,
     //marginLeft: 20,
+  },
+  createNewBtn: {
+    backgroundColor: '#E5E5E5',
   },
   formContainer: {
     flexDirection: 'column',
     width: '85%',
     paddingTop: 15,
   },
+  PartnerTitle: {
+    flexDirection: 'row',
+    marginLeft: 30,
+    alignItems: 'center'
+  },
+  PartnersList: {
+    height:220,
+    paddingTop: 10,
+    paddingLeft: 60
+  }
 });
+
+
+export const LocationModalStyles = StyleSheet.create({
+  container: {
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+    width: '80%'
+  },
+  inputContainer: {
+    backgroundColor: '#fff',
+    width: '100%',
+    height: 50,
+    marginBottom: 17,
+    borderRadius: 30,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 20
+  },
+  inputTextPlaceholder: {
+    color: '#41404280',
+    fontFamily: 'Lora-Regular'
+  },
+  inputTextButton: {
+    fontFamily: 'Lora-Regular',
+    color: '#4C5DF4'
+  },
+  inputField: {
+    height: '100%',
+    fontFamily: 'Lora-Regular',
+    width: '100%',
+    color: '#414042'
+  }
+})
+
+export const LanguageModalStyles = StyleSheet.create({
+    languagesList: {
+      height:280,
+      paddingLeft: 10
+    },
+    selectedText: {
+      borderColor: 'yellow',
+      borderWidth: 1,
+    }
+})
 
 export const leftButton: buttonStyle = {
   borderTopLeftRadius: 30,

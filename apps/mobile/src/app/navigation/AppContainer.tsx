@@ -2,7 +2,6 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Homepage from '../screens/Homepage';
-import Information from '../screens/Homepage/Information';
 import {RootStackParamList} from '../utils/types';
 import LoginPage from '../screens/Login';
 import ForgotPasswordPage from '../screens/Login/ForgotPassword';
@@ -31,11 +30,6 @@ export default function AppContainer() {
           options={{headerShown: false}}
           name="ForgotPassword"
           component={ForgotPasswordPage}
-        />
-        <Stack.Screen
-          options={{headerShown: false}}
-          name="Information"
-          component={Information}
         />
         <Stack.Screen
           options={{headerShown: false}}

@@ -100,7 +100,7 @@ const loginStyles = StyleSheet.create({
   forgotPassword: {
     color: colors.MedixBotPrimaryColor,
     fontWeight: '500',
-    fontFamily: 'Montserrat-SemiBold',
+    fontFamily: 'Montserrat-Bold',
     fontSize: 15,
     textAlign: 'right',
     marginTop: 10,
@@ -189,29 +189,45 @@ export const modalStyle = StyleSheet.create({
     elevation: 5,
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
-    paddingBottom: 30,
-    paddingTop: 25,
+    paddingBottom: 40,
+    paddingTop: 40,
   },
   modalButton: {height: '100%', justifyContent: 'center', width: 20},
   optionStyle: {
+    height: 35,
+    justifyContent: 'flex-start',
+    width: '83%',
+    paddingHorizontal: 25,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  optionStyleSelected: {
     height: 50,
-    justifyContent: 'center',
-    width: '80%',
-    borderBottomColor: '#ccc',
-    borderBottomWidth: 1,
-    paddingHorizontal: 25
+    backgroundColor: '#fff',
+    borderRadius: 30,
+    alignSelf: 'flex-start',
+    marginStart: '10%',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    width: '50%',
+    paddingHorizontal: 20,
+    flexDirection: 'row'
   },
   optionTextStyle: {
-    fontFamily: 'Montserrat-Medium',
+    fontFamily: 'Lora-Bold',
     fontSize: 15,
     fontStyle: 'normal',
     lineHeight: 16,
     letterSpacing: 0.23999999463558197,
     textAlign: 'left',
     color: '#fff',
+    marginLeft:7
+  },
+  selectedText: {
+    color: '#414042'
   },
   modalTitleStyle: {
-    fontFamily: 'Montserrat-SemiBold',
+    fontFamily: 'Montserrat-Bold',
     fontSize: 18,
     fontStyle: 'normal',
     lineHeight: 18,
@@ -221,8 +237,6 @@ export const modalStyle = StyleSheet.create({
     color: '#fff',
     paddingHorizontal: 8,
     paddingBottom: 15,
-    borderBottomColor: '#ccc',
-    borderBottomWidth: 1,
   },
 });
 

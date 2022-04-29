@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux';
 import {loginReducer,loginMethodReducer} from './loginReducer';
-import modalReducer from './modalReducer';
+import {modalReducer,locationModalReducer, languageModalReducer} from './modalReducer';
 import userPictureReducer from './userPictureReducer';
 import membershipModalReducer from './membershipModalReducer';
 const reducers = combineReducers({
@@ -9,5 +9,7 @@ const reducers = combineReducers({
   modalReducer,
   userPictureReducer,
   membershipModalReducer,
+  locationModalReducer,
+  languageModalReducer
 });
 export default reducers;

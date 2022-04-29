@@ -11,13 +11,9 @@ export default function membershipModalReducer(
 ) {
   switch (action.type) {
     case actionTypes.OPEN_MEMBERSHIP_MODAL:
-      let newState = {...state};
-      newState.isOpen = true;
-      return newState;
+      return {...state,isOpen : true };
     case actionTypes.CLOSE_MEMBERSHIP_MODAL:
-      newState = {...state};
-      newState.isOpen = false;
-      return newState;
+      return {...state,isOpen : false };
     default:
       return state;
   }

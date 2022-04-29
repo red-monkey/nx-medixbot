@@ -6,6 +6,7 @@ import {
   TextInput,
   ScrollView,
   Image,
+  StatusBar,
 } from 'react-native';
 import CountryPicker, {CallingCode} from 'react-native-country-picker-modal';
 import Header from '../../components/CommunHeader';
@@ -23,6 +24,8 @@ import {
   UserIcon,
   UsernameIcon,
 } from '../../commun/Icons';
+import SelectedIcon from '../../icons/SelectedIcon.svg'
+import UnselectedIcon from '../../icons/UnselectedIcon.svg'
 import EmailValidationIcon from '../../icons/EmailValidationIcon.svg';
 import EmailValidationTickIcon from '../../icons/EmailValidationTickIcon.svg';
 import {CountryCode, ForgotPassProps, gender} from '../../utils/types';
@@ -33,12 +36,15 @@ import * as yup from 'yup';
 import loginStyles, { modalStyle } from '../../styles/LoginPageStyles';
 import {focusHandler, pressOutHandler} from '../../utils/functions';
 import {PicturePickerModal} from '../../components/PicturePickerModal';
-import {setMembershipModal, setPictureModal} from '../../redux/actions/modal';
+import {setLanguageModal, setLocationModal, setMembershipModal, setPictureModal} from '../../redux/actions/modal';
 import {useDispatch} from 'react-redux';
 import {Dispatch} from 'redux'; 
 import {useAppSelector} from '../../utils/hooks';
 import MembershipModal from '../../components/MembershipModal';
 import CustomModal from '../../components/CustomModal';
+import { LocationModal } from '../../components/LocationModal';
+import { colors } from '../../variables/colors';
+import { LanguageModal } from '../../components/LanguageModal';
 const RegisterScreen = () => {
   const navigation = useNavigation<ForgotPassProps>();
   const image = useAppSelector(state => state.userPictureReducer.selected);
@@ -79,25 +85,30 @@ const RegisterScreen = () => {
   //Gender modal
   const content = <><Text style={modalStyle.modalTitleStyle}>Select Gender</Text>
   <TouchableOpacity
-    style={modalStyle.optionStyle}
-    onPress={() => {setGender('male');setGenderModal(false)}}>
-    <Text style={modalStyle.optionTextStyle}>Male</Text>
+    style={gender === 'Male' ? modalStyle.optionStyleSelected : modalStyle.optionStyle}
+    onPress={() => {setGender('Male');setGenderModal(false)}}>
+    {gender === 'Male' ? <SelectedIcon /> : <UnselectedIcon /> }
+    <Text style={gender === 'Male' ?[modalStyle.optionTextStyle,modalStyle.selectedText]:modalStyle.optionTextStyle}>Male</Text>
   </TouchableOpacity>
   <TouchableOpacity
-    style={modalStyle.optionStyle}
-    onPress={() => {setGender('female');setGenderModal(false)}}>
-    <Text style={modalStyle.optionTextStyle}>Female</Text>
+    style={gender === 'Female' ? modalStyle.optionStyleSelected : modalStyle.optionStyle}
+    onPress={() => {setGender('Female');setGenderModal(false)}}>
+     {gender === 'Female' ? <SelectedIcon /> : <UnselectedIcon /> }
+    <Text style={gender === 'Female' ?[modalStyle.optionTextStyle,modalStyle.selectedText]:modalStyle.optionTextStyle}>Female</Text>
   </TouchableOpacity>
   <TouchableOpacity
-    style={modalStyle.optionStyle}
-    onPress={() => {setGender('other');setGenderModal(false)}}>
-    <Text style={modalStyle.optionTextStyle}>Other</Text>
+    style={gender === 'Other' ? modalStyle.optionStyleSelected : modalStyle.optionStyle}
+    onPress={() => {setGender('Other');setGenderModal(false)}}>
+    {gender === 'Other' ? <SelectedIcon /> : <UnselectedIcon /> }
+    <Text style={gender === 'Other' ?[modalStyle.optionTextStyle,modalStyle.selectedText]:modalStyle.optionTextStyle}>Other</Text>
   </TouchableOpacity>
+  <View style={sharedStyles.padding_60}/>
   </>
 
 
   return (
     <ScrollView contentContainerStyle={registerStyles.Container} scrollEnabled>
+            <StatusBar  translucent={false} backgroundColor={colors.backgroundColor}  barStyle="dark-content" />
       <Header />
       <View style={registerStyles.registerPage}>
         <View style={loginStyles.topPart}>
@@ -139,6 +150,8 @@ const RegisterScreen = () => {
                 ) : null}
                 <PicturePickerModal />
                 <MembershipModal />
+                <LocationModal />
+                <LanguageModal />
                 <CustomModal onBackdropPress={() => setGenderModal(false)} content={content} visible={genderModalIsOpen}/>
                 <TouchableOpacity
                   style={[
@@ -256,7 +269,9 @@ const RegisterScreen = () => {
                 <View style={registerStyles.formSelectInputStyle}>
                   <GlobalIcon />
                   <Text style={registerStyles.formInputStyle}>Language</Text>
-                  <TouchableOpacity>
+                  <TouchableOpacity onPress={() => {
+                      dispatch(setLanguageModal(true));
+                    }}>
                     <Text style={registerStyles.selectButton}>Select</Text>
                   </TouchableOpacity>
                 </View>
@@ -264,7 +279,9 @@ const RegisterScreen = () => {
                 <View style={registerStyles.formSelectInputStyle}>
                   <LocationIcon />
                   <Text style={registerStyles.formInputStyle}>Location</Text>
-                  <TouchableOpacity>
+                  <TouchableOpacity onPress={() => {
+                      dispatch(setLocationModal(true));
+                    }}>
                     <Text style={registerStyles.selectButton}>Select</Text>
                   </TouchableOpacity>
                 </View>

@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   IllustrationContainer: {
-    height: '40%',
+    height: '45%',
     flexDirection: 'row',
     display: 'flex',
     justifyContent: 'center',
@@ -74,9 +74,9 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 40,
   },
   FlatListTitle: {
-    fontFamily: 'Montserrat-SemiBold',
+    fontFamily: 'Montserrat-Bold',
     fontSize: 22,
-    width: 220,
+    width: 300,
     fontStyle: 'normal',
     fontWeight: '500',
     lineHeight: 31,

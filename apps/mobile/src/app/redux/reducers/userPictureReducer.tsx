@@ -10,9 +10,7 @@ function userPictureReducer(state = initialState, action: SetPictureAction) {
   const {payload} = action;
   switch (action.type) {
     case actionTypes.SET_USER_PICTURE:
-      let newState = {...state};
-      newState.selected = payload;
-      return newState;
+      return {...state,selected : payload };
     default:
       return state;
   }
