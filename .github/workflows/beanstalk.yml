@@ -17,6 +17,12 @@ jobs:
     steps:
       - name: Checkout source code
         uses: actions/checkout@v2
+      - name: Build project
+        uses: actions/setup-node@v2
+        with:
+          node-version: '12'
+      - run: npm run build:api
+      - run: npm run copy
 
       - name: Generate deployment package
         run: zip -r deploy.zip ./apps/api/dist/. -x '*.git*'
