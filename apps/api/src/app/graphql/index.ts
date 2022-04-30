@@ -21,6 +21,7 @@ const apolloServer = new ApolloServer({
   mockEntireSchema: false,
   context,
   dataSources,
+  introspection: true,
 });
 
 export default apolloServer;

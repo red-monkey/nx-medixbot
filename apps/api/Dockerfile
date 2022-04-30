@@ -6,7 +6,7 @@ WORKDIR /usr/src/medixbot-api
 
 COPY dist .
 
-ENV PORT=8081
+ENV PORT=4000
 
 RUN yarn install --pure-lockfile
 RUN yarn add compression

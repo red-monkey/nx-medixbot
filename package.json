@@ -12,7 +12,7 @@
     "build": "nx build",
     "build:api": "nx run api:build:production",
     "run:api": "node dist/apps/api/main.js",
-    "copy": "cp -R ./apps/api/.env.local apps/api/dist/",
+    "copy": "cp -R ./apps/api/.env.local dist/apps/api/",
     "test": "nx test",
     "lint": "lint-staged",
     "codegen": "graphql-codegen --config codegen.yml",
