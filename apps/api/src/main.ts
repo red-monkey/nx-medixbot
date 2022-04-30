@@ -1,12 +1,17 @@
 import * as mongoose from 'mongoose';
 import setupExpress from './app';
 import { config, logger } from './app/configs';
+import restRoute from './app/routes';
 
 setupExpress()
   .then((app) => {
-    app.get('/api', (req, res) => {
-      res.send({ message: 'Welcome to api!' });
+    app.get('/', (req, res) => {
+      res.send({ message: 'Welcome to medixbot api!' });
     });
+
+    console.log(config.appMode);
+
+    app.use('/rest', restRoute);
 
     const port = config.port;
     const server = app.listen(port, () => {

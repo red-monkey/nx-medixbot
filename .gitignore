@@ -2,11 +2,14 @@
 
 # compiled output
 /dist
+**/dist
 /tmp
 /out-tsc
 
 # dependencies
 node_modules
+
+.elasticbeanstalk/
 
 # env files
 .env*
@@ -99,3 +102,5 @@ buck-out/
 *.log
 
 apps/mobile-e2e/artifacts
+
+.vscode/
