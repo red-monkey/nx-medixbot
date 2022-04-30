@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:drawable="@color/white" />
+    <item android:drawable="@mipmap/background"
+        android:gravity="fill_vertical"
+        android:top="50dp"
+        />
+
+    <item android:width="70dp"
+        android:height="70dp"
+        android:drawable="@mipmap/icon"
+        android:gravity="center_horizontal"
+        android:top="135dp"/>
+
+    <item android:width="150dp"
+        android:height="20dp"
+        android:drawable="@mipmap/title"
+        android:gravity="center_horizontal"
+        android:top="220dp"/>
+
+</layer-list>
