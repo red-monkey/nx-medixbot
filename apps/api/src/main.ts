@@ -9,9 +9,9 @@ setupExpress()
       res.send({ message: 'Welcome to medixbot api!' });
     });
 
-    app.use('/rest', restRoute);
+    console.log(config.appMode);
 
-    // app.get('/rest/auth/verify-email/:token', authController.verifyEmail);
+    app.use('/rest', restRoute);
 
     const port = config.port;
     const server = app.listen(port, () => {

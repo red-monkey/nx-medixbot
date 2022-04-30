@@ -12,7 +12,7 @@
     "build": "nx build",
     "build:api": "nx run api:build:production",
     "run:api": "node dist/apps/api/main.js",
-    "copy": "cp -R ./apps/api/.env.local apps/api/dist/",
+    "copy": "cp -R ./apps/api/.env.local dist/apps/api/",
     "test": "nx test",
     "lint": "lint-staged",
     "codegen": "graphql-codegen --config codegen.yml",
@@ -114,6 +114,10 @@
     "react-test-renderer": "18.0.0",
     "ts-jest": "27.0.5",
     "typescript": "~4.6.2"
+  },
+  "engines": {
+    "npm": "^5.5.5",
+    "node": "^17.9.0"
   },
   "lint-staged": {
     "*.{ts, tsx}": [
