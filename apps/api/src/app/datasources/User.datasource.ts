@@ -7,8 +7,6 @@ import {
   EGraphQlErrorCode,
   TDoctorModel,
   TPatientModel,
-  TDoctorDocument,
-  EModelNames,
   EUserRole,
   IUpdateDoctor,
   TDoctor,
