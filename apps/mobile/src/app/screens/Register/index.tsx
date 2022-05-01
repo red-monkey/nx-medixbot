@@ -45,13 +45,16 @@ import CustomModal from '../../components/CustomModal';
 import { LocationModal } from '../../components/LocationModal';
 import { colors } from '../../variables/colors';
 import { LanguageModal } from '../../components/LanguageModal';
+import { EGender, EMembership, IRegisterUser } from '@medixbot/types';
+import { useRegisterMutation } from '../../apollo/GraphQL/Actions/useRegisterMutation';
 const RegisterScreen = () => {
+  const [register] = useRegisterMutation();
   const navigation = useNavigation<ForgotPassProps>();
   const image = useAppSelector(state => state.userPictureReducer.selected);
   const base64Icon = `data:image/jpg;base64,${image?.base64}`;
   const dispatch = useDispatch<Dispatch>();
   const [hidePassword, setHidePassword] = useState(true);
-  const [gender, setGender] = useState<gender | null>(null);
+  const [gender, setGender] = useState<EGender | null>(null);
   const [genderModalIsOpen, setGenderModal] = useState<boolean>(false)
   const [hideConfirmPassword, setHideConfirmPassword] = useState(true);
   const [countryCode, setCountryCode] = useState<CountryCode>('US');
@@ -82,25 +85,38 @@ const RegisterScreen = () => {
       .required('Confirm password is required'),
   });
 
+
+  function setData(values: { email: string; password: string; phoneNumber: string; name: string; passwordRepeat: string; }) {
+    const data: IRegisterUser = {
+      fullName: values.name,
+      email: values.email,
+      password: values.password,
+      tel: values.phoneNumber,
+      gender: gender,
+      membership: EMembership.Referrer
+    }
+    return data;
+  }
+
   //Gender modal
   const content = <><Text style={modalStyle.modalTitleStyle}>Select Gender</Text>
   <TouchableOpacity
-    style={gender === 'Male' ? modalStyle.optionStyleSelected : modalStyle.optionStyle}
-    onPress={() => {setGender('Male');setGenderModal(false)}}>
-    {gender === 'Male' ? <SelectedIcon /> : <UnselectedIcon /> }
-    <Text style={gender === 'Male' ?[modalStyle.optionTextStyle,modalStyle.selectedText]:modalStyle.optionTextStyle}>Male</Text>
+    style={gender === 'male' ? modalStyle.optionStyleSelected : modalStyle.optionStyle}
+    onPress={() => {setGender(EGender.Male);setGenderModal(false)}}>
+    {gender === 'male' ? <SelectedIcon /> : <UnselectedIcon /> }
+    <Text style={gender === 'male' ?[modalStyle.optionTextStyle,modalStyle.selectedText]:modalStyle.optionTextStyle}>Male</Text>
   </TouchableOpacity>
   <TouchableOpacity
-    style={gender === 'Female' ? modalStyle.optionStyleSelected : modalStyle.optionStyle}
-    onPress={() => {setGender('Female');setGenderModal(false)}}>
-     {gender === 'Female' ? <SelectedIcon /> : <UnselectedIcon /> }
-    <Text style={gender === 'Female' ?[modalStyle.optionTextStyle,modalStyle.selectedText]:modalStyle.optionTextStyle}>Female</Text>
+    style={gender === 'female' ? modalStyle.optionStyleSelected : modalStyle.optionStyle}
+    onPress={() => {setGender(EGender.Female);setGenderModal(false)}}>
+     {gender === 'female' ? <SelectedIcon /> : <UnselectedIcon /> }
+    <Text style={gender === 'female' ?[modalStyle.optionTextStyle,modalStyle.selectedText]:modalStyle.optionTextStyle}>Female</Text>
   </TouchableOpacity>
   <TouchableOpacity
-    style={gender === 'Other' ? modalStyle.optionStyleSelected : modalStyle.optionStyle}
-    onPress={() => {setGender('Other');setGenderModal(false)}}>
-    {gender === 'Other' ? <SelectedIcon /> : <UnselectedIcon /> }
-    <Text style={gender === 'Other' ?[modalStyle.optionTextStyle,modalStyle.selectedText]:modalStyle.optionTextStyle}>Other</Text>
+    style={gender === 'others' ? modalStyle.optionStyleSelected : modalStyle.optionStyle}
+    onPress={() => {setGender(EGender.Others);setGenderModal(false)}}>
+    {gender === 'others' ? <SelectedIcon /> : <UnselectedIcon /> }
+    <Text style={gender === 'others' ?[modalStyle.optionTextStyle,modalStyle.selectedText]:modalStyle.optionTextStyle}>Others</Text>
   </TouchableOpacity>
   <View style={sharedStyles.padding_60}/>
   </>
@@ -129,7 +145,9 @@ const RegisterScreen = () => {
               name: '',
               passwordRepeat: '',
             }}
-            onSubmit={values => console.log(values)}>
+            onSubmit={values => {
+              register(setData(values));
+            }}>
             {({
               handleChange,
               handleBlur,
@@ -363,7 +381,7 @@ const RegisterScreen = () => {
                 <TouchableOpacity
                   style={loginStyles.signInButton}
                   onPress={()=>handleSubmit()}
-                  disabled={!isValid}>
+                  >
                   <Text style={[loginStyles.forgotPassword,{textAlign: 'center', marginTop: 0, marginLeft: 5, color: '#fff'}]}>Sign Up</Text>
                 </TouchableOpacity>
                 <View style={registerStyles.BottomPart}>
@@ -388,3 +406,5 @@ const RegisterScreen = () => {
 };
 
 export default RegisterScreen;
+
+

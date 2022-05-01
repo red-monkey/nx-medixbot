@@ -59,7 +59,7 @@ export type RegisterProps = StackNavigationProp<RootStackParamList, 'Register'>;
 export type IndicatorProps = {
   scrollx: Animated.Value;
 };
-export type gender = 'Male' | 'Female' | 'Other';
+export type gender = 'male' | 'female' | 'others';
 export type membership = 'Referrer' | 'Partner' | 'Employer' | 'Family';
 export const CountryCodeList = [
   'AF',

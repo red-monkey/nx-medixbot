@@ -1,5 +1,4 @@
 export const AUTH_TOKEN = 'auth-token';
-export const API_URI = 'https://medixbot.herokuapp.com/api/graphql/';
 export const partners = ['Partner XYZ 1',
     'Partner XYZ 2',
     'Partner XYZ 3',
