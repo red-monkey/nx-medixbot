@@ -64,6 +64,12 @@ export type IAvailability = {
   times?: InputMaybe<Array<InputMaybe<ITime>>>;
 };
 
+export type ICreateBlog = {
+  description?: InputMaybe<Scalars['String']>;
+  image?: InputMaybe<Scalars['Upload']>;
+  name?: InputMaybe<Scalars['String']>;
+};
+
 export type IDocument = {
   type?: InputMaybe<Scalars['String']>;
   url?: InputMaybe<Scalars['String']>;
@@ -91,6 +97,12 @@ export type ITime = {
   period?: InputMaybe<Scalars['String']>;
 };
 
+export type IUpdateBlog = {
+  description?: InputMaybe<Scalars['String']>;
+  image?: InputMaybe<Scalars['Upload']>;
+  name?: InputMaybe<Scalars['String']>;
+};
+
 export type IUpdateDoctor = {
   about?: InputMaybe<Scalars['String']>;
   availability?: InputMaybe<Array<InputMaybe<IAvailability>>>;
@@ -115,7 +127,9 @@ export type IUpdateUser = {
 };
 
 export type Mutation = {
+  createBlog?: Maybe<TBlog>;
   createUser?: Maybe<TUser>;
+  deleteBlog: Scalars['String'];
   deleteUser: Scalars['String'];
   forgotPassword: TNormalResponse;
   login: TAuthSuccess;
@@ -126,7 +140,12 @@ export type Mutation = {
   resetPassword: TNormalResponse;
   sendVerificationEmail: TNormalResponse;
   updateAccount?: Maybe<TUser>;
+  updateBlog?: Maybe<TBlog>;
   updateDoctorInfo: Scalars['String'];
+};
+
+export type MutationCreateBlogArgs = {
+  data: ICreateBlog;
 };
 
 export type MutationCreateUserArgs = {
@@ -135,6 +154,10 @@ export type MutationCreateUserArgs = {
   name: Scalars['String'];
   surname: Scalars['String'];
   userRole?: InputMaybe<EUserRole>;
+};
+
+export type MutationDeleteBlogArgs = {
+  blogId: Scalars['ID'];
 };
 
 export type MutationDeleteUserArgs = {
@@ -175,6 +198,10 @@ export type MutationUpdateAccountArgs = {
   data: IUpdateUser;
 };
 
+export type MutationUpdateBlogArgs = {
+  data: IUpdateBlog;
+};
+
 export type MutationUpdateDoctorInfoArgs = {
   data: IUpdateDoctor;
 };
@@ -183,6 +210,8 @@ export type Query = {
   appointment?: Maybe<TAppointment>;
   doctor?: Maybe<TDoctor>;
   doctors: TDoctorList;
+  getBlog?: Maybe<TBlog>;
+  getBlogs: TPaginatedBlogs;
   me?: Maybe<TUser>;
   patient?: Maybe<TPatient>;
   user?: Maybe<TUser>;
@@ -198,6 +227,15 @@ export type QueryDoctorArgs = {
 };
 
 export type QueryDoctorsArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+};
+
+export type QueryGetBlogArgs = {
+  blogId: Scalars['ID'];
+};
+
+export type QueryGetBlogsArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   page?: InputMaybe<Scalars['Int']>;
 };
@@ -240,6 +278,13 @@ export type TAvailability = {
   times?: Maybe<Array<Maybe<TTime>>>;
 };
 
+export type TBlog = {
+  description?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['ID']>;
+  image?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+};
+
 export type TDoctor = {
   about?: Maybe<Scalars['String']>;
   availability?: Maybe<Array<Maybe<TAvailability>>>;
@@ -270,6 +315,14 @@ export type TPaginatedAppointment = {
   limit: Scalars['Int'];
   page: Scalars['Int'];
   results: Array<Maybe<TAppointment>>;
+  totalPages: Scalars['Int'];
+  totalResults: Scalars['Int'];
+};
+
+export type TPaginatedBlogs = {
+  limit: Scalars['Int'];
+  page: Scalars['Int'];
+  results: Array<Maybe<TBlog>>;
   totalPages: Scalars['Int'];
   totalResults: Scalars['Int'];
 };

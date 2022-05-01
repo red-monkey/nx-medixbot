@@ -5,3 +5,4 @@ export * from './lib/doctor.model';
 export * from './lib/clinic.model';
 export * from './lib/appointment.model';
 export * from './lib/patient.model';
+export * from './lib/blog.model';
