@@ -1,9 +1,31 @@
-import { EGraphQlErrorCode, TBlog } from '@medixbot/types';
+import {
+  EAWSS3BucketName,
+  EGraphQlErrorCode,
+  ICreateBlog,
+  TBlog,
+} from '@medixbot/types';
+import { awsService } from '../services';
 import { IContext } from '../types';
 import { GraphQlApiError, pick } from '../utils';
 
-async function createBlog(data: TBlog, ctx: IContext) {
-  const blog = await ctx.dataSources.blogs.createBlog(data);
+// async function createBlog(data: TBlog, ctx: IContext) {
+//   const blog = await ctx.dataSources.blogs.createBlog(data);
+//   return blog;
+// }
+
+async function createBlog(input: { data: ICreateBlog }, ctx: IContext) {
+  const s3 = new awsService.AWSS3();
+  const createData = input.data;
+
+  if (input.data.image) {
+    const file = await s3.uploadFile(
+      input.data.image,
+      EAWSS3BucketName.PROFILE_IMAGES
+    );
+    createData.image = `/rest/images/${file.key}`;
+  }
+  const blog = await ctx.dataSources.blogs.createBlog(createData);
+
   return blog;
 }
 

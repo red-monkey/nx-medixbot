@@ -7,6 +7,11 @@ export default gql`
     description: String
     image: String
   }
+  input ICreateBlog {
+    name: String
+    description: String
+    image: Upload
+  }
   type TPaginatedBlogs {
     results: [TBlog]!
     page: Int!
@@ -29,7 +34,7 @@ export default gql`
 
   # Mutations
   type Mutation {
-    createBlog(name: String!, description: String!): TBlog
+    createBlog(data: ICreateBlog!): TBlog
     updateBlog(data: IUpdateBlog!): TBlog
     deleteBlog(blogId: ID!): String!
   }

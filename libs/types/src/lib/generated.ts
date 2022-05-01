@@ -64,6 +64,12 @@ export type IAvailability = {
   times?: InputMaybe<Array<InputMaybe<ITime>>>;
 };
 
+export type ICreateBlog = {
+  description?: InputMaybe<Scalars['String']>;
+  image?: InputMaybe<Scalars['Upload']>;
+  name?: InputMaybe<Scalars['String']>;
+};
+
 export type IDocument = {
   type?: InputMaybe<Scalars['String']>;
   url?: InputMaybe<Scalars['String']>;
@@ -139,8 +145,7 @@ export type Mutation = {
 };
 
 export type MutationCreateBlogArgs = {
-  description: Scalars['String'];
-  name: Scalars['String'];
+  data: ICreateBlog;
 };
 
 export type MutationCreateUserArgs = {
@@ -233,7 +238,6 @@ export type QueryGetBlogArgs = {
 export type QueryGetBlogsArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   page?: InputMaybe<Scalars['Int']>;
-  userRole?: InputMaybe<EUserRole>;
 };
 
 export type QueryPatientArgs = {
