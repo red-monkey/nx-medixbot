@@ -4,8 +4,8 @@
     "api": "apps/api",
     "mobile": "apps/mobile",
     "models": "libs/models",
+    "theme": "libs/theme",
     "types": "libs/types",
-    "ui-theme": "libs/ui/theme",
     "web": "apps/web"
   }
 }
