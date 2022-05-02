@@ -23,6 +23,10 @@ const userSchema: Schema<IUserDocument> = new Schema(
       trim: true,
       lowercase: true,
     },
+    tel: {
+      type: String,
+      trim: true,
+    },
     gender: {
       type: String,
       enum: EGender,
