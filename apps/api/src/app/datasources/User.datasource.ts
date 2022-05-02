@@ -47,8 +47,8 @@ export class UserDataSource extends MongoDataSource<IUserDocument, IContext> {
     return this.model.findOne(fields);
   }
 
-  getUserByUsername(username: string) {
-    return this.model.findOne({
+  async getUserByUsername(username: string) {
+    return await this.model.findOne({
       $or: [{ email: username }, { tel: username }],
     });
   }
