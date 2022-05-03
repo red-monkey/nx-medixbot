@@ -25,7 +25,7 @@ const Notifications = () => {
 
 const styles = StyleSheet.create({
   notificationsContainer: {
-    marginVertical: 20,
+    marginBottom: 20,
   },
 });
 

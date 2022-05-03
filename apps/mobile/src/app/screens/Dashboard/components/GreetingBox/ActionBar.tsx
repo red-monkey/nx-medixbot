@@ -6,15 +6,16 @@ import OkayEmoji from '../../../icons/OkayEmoji.svg';
 import BadEmoji from '../../../icons/BadEmoji.svg';
 import AwfulEmoji from '../../../icons/AwfulEmoji.svg';
 import ChallengeIcon from '../../../icons/ChallengeIcon.svg';
-import AwardIcon from '../../../../icons/AwardIcon.svg';
+import BadgeIcon from '../../../../icons/BadgeIcon.svg';
 import GoalIcon from '../../../icons/GoalIcon.svg';
-import TrophyIcon from '../../../icons/TrophyIcon.svg';
+import RewardIcon from '../../../icons/RewardIcon.svg';
+import ScoreIcon from '../../../icons/ScoreIcon.svg';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateMood } from 'apps/mobile/src/app/redux/actions/challenge';
 import { AppState } from '../../../../redux/store/ConfigureStore';
-import { background, style } from 'styled-system';
+import { color, style } from 'styled-system';
 
-const feelings = {
+export const feelings = {
   great: <GreatEmoji />,
   good: <GoodEmoji />,
   okay: <OkayEmoji />,
@@ -23,10 +24,29 @@ const feelings = {
 };
 
 const roadMap = {
-  challenges: <ChallengeIcon />,
-  badges: <AwardIcon />,
-  goals: <GoalIcon />,
-  rewards: <TrophyIcon />,
+  score: {
+    icon: <ScoreIcon />,
+    color: '#3095E2',
+  },
+  challenges: {
+    icon: <ChallengeIcon />,
+    color: '#EF5DA8',
+  },
+
+  badges: {
+    icon: <BadgeIcon />,
+    color: '#922EAC',
+  },
+
+  goals: {
+    icon: <GoalIcon />,
+    color: '#009444',
+  },
+
+  rewards: {
+    icon: <RewardIcon />,
+    color: '#ED1C24',
+  },
 };
 
 const EmojiBar = () => {
@@ -54,18 +74,13 @@ const EmojiBar = () => {
 };
 
 const ChallengeBar: React.FC<{ mood: string }> = ({ mood }) => {
-  const handleChallengePress = (mood: string) => {
-    // dispatch(updateMood(mood));
-  };
+  const challengeState = useSelector(
+    (state: AppState) => state.challengeReducer
+  );
+
+  const handleChallengePress = (mood: string) => {};
   return (
     <View style={styles.feelings}>
-      <TouchableOpacity>
-        <View style={styles.emojiContainer}>
-          <View style={styles.challengeLineOverlay}></View>
-          {feelings[mood]}
-          <Text style={styles.feelingName}>{mood}</Text>
-        </View>
-      </TouchableOpacity>
       {Object.entries(roadMap).map(([stage, emoji]) => {
         return (
           <TouchableOpacity
@@ -73,14 +88,17 @@ const ChallengeBar: React.FC<{ mood: string }> = ({ mood }) => {
             onPress={() => handleChallengePress(stage)}
           >
             <View style={styles.emojiContainer}>
-              <View style={styles.challengeLineOverlay}></View>
-              {emoji}
+              <View style={styles.scoreContainer}>
+                {emoji.icon}
+                <Text style={[styles.score, { color: emoji.color }]}>
+                  {challengeState[stage]}
+                </Text>
+              </View>
               <Text style={styles.feelingName}>{stage}</Text>
             </View>
           </TouchableOpacity>
         );
       })}
-      <View style={styles.challengeLine}></View>
     </View>
   );
 };
@@ -135,32 +153,31 @@ const styles = StyleSheet.create({
   emojiContainer: {
     position: 'relative',
     display: 'flex',
+    height: 60,
     justifyContent: 'center',
     alignItems: 'center',
   },
+
+  scoreContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+
+  score: {
+    fontSize: 18,
+    fontFamily: 'Lora-Bold',
+    marginLeft: 5,
+  },
+
   feelingName: {
+    position: 'relative',
+    fontSize: 11,
     fontFamily: 'Lora-Medium',
     textTransform: 'capitalize',
     marginTop: 5,
-  },
-
-  challengeLine: {
-    position: 'absolute',
-    top: 18,
-    left: 40,
-    zIndex: -1,
-    width: '74%',
-    height: 2,
-    backgroundColor: '#414042',
-    opacity: 0.5,
-  },
-
-  challengeLineOverlay: {
-    position: 'absolute',
-    top: 16,
-    width: 40,
-    height: 5,
-    backgroundColor: '#fff',
+    color: '#41416E',
   },
 });
 

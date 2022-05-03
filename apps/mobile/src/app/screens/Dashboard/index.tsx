@@ -18,6 +18,7 @@ import Notifications from './components/Notifications';
 import { Header } from './components/Header';
 import Categories from './components/Categories';
 import Blogs from './components/Blogs';
+import Appointment from './components/Appointment';
 
 const Dashboard = () => {
   const [, , removeAuthToken] = useAccessToken();
@@ -43,6 +44,7 @@ const Dashboard = () => {
             <Header />
             <View style={styles.screenContent}>
               <GreetingBox />
+              <Appointment />
               <Notifications />
               <Categories />
               <Blogs />

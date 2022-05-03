@@ -14,9 +14,14 @@ import {
   OPEN_PICTURE_PICKER_MODAL,
   SET_LOGIN_METHOD_EMAIL,
   SET_LOGIN_METHOD_PHONE_NUMBER,
+  SET_USER_BADGES,
+  SET_USER_CHALLENGES,
+  SET_USER_GOALS,
   SET_USER_IS_LOGGED_IN,
   SET_USER_MOOD,
   SET_USER_PICTURE,
+  SET_USER_REWARDS,
+  SET_USER_SCORE,
 } from '../redux/actions/actionTypes';
 import { updateMood } from '../redux/actions/challenge';
 export type RootStackParamList = {
@@ -406,4 +411,35 @@ interface UpdateMoodAction {
   payload: TMood;
 }
 
-export type ChallengeAction = UpdateMoodAction;
+interface UpdateScoreAction {
+  type: typeof SET_USER_SCORE;
+  payload: number;
+}
+
+interface UpdateChallengesAtion {
+  type: typeof SET_USER_CHALLENGES;
+  payload: number;
+}
+
+interface UpdateBadgesAction {
+  type: typeof SET_USER_BADGES;
+  payload: number;
+}
+
+interface UpdateGoalsAction {
+  type: typeof SET_USER_GOALS;
+  payload: number;
+}
+
+interface UpdateRewardsAction {
+  type: typeof SET_USER_REWARDS;
+  payload: number;
+}
+
+export type ChallengeAction =
+  | UpdateMoodAction
+  | UpdateScoreAction
+  | UpdateChallengesAtion
+  | UpdateBadgesAction
+  | UpdateGoalsAction
+  | UpdateRewardsAction;

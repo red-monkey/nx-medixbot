@@ -41,9 +41,9 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    color: '#414042',
+    color: '#41416E',
     fontSize: 14,
-    fontFamily: 'Montserrat-Medium',
+    fontFamily: 'Montserrat-Bold',
     textTransform: 'capitalize',
   },
 
