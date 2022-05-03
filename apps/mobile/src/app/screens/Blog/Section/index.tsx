@@ -1,5 +1,6 @@
 import React from 'react';
 import { FlatList, StyleSheet, View, Text } from 'react-native';
+import { LinearTextGradient } from 'react-native-text-gradient';
 import SectionCard from './SectionCard';
 import { IProps as CardProps } from './SectionCard';
 
@@ -7,6 +8,7 @@ interface IProps extends CardProps {
   header?: {
     title: string;
     color: string;
+    color2?: string;
     icon: JSX.Element;
   };
   data: Array<{
@@ -28,11 +30,15 @@ const Section: React.FC<IProps> = ({
       {header && (
         <View style={styles.header}>
           {header.icon}
-          <Text style={[styles.sectionTitle, { color: header.color }]}>
-            {header.title}
-          </Text>
+          <LinearTextGradient
+            style={[styles.sectionTitle, { color: header.color }]}
+            colors={[header.color, header.color2 || header.color]}
+          >
+            <Text>{header.title}</Text>
+          </LinearTextGradient>
         </View>
       )}
+
       <FlatList
         contentContainerStyle={styles.flatList}
         horizontal

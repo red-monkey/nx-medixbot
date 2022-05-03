@@ -12,13 +12,27 @@ import MentalHealth from '../../../icons/MentalHealth.svg';
 import DietHealth from '../../../icons/DietHealth.svg';
 import FitnessHealth from '../../../icons/FitnessHealth.svg';
 import { LinearTextGradient } from 'react-native-text-gradient';
+import LinearGradient from 'react-native-linear-gradient';
 
-export const IconWrapper: React.FC<ViewProps & { backgroundColor: string }> = ({
-  children,
-  backgroundColor,
-}) => {
+export const IconWrapper: React.FC<
+  ViewProps & {
+    backgroundColor: string;
+    backgroundColor2?: string;
+    options?: {
+      locations: Array<number>;
+      useAngle: boolean;
+      angle: number;
+    };
+  }
+> = ({ children, backgroundColor, backgroundColor2, options }) => {
   return (
-    <View style={[styles.categoryIcon, { backgroundColor }]}>{children}</View>
+    <LinearGradient
+      style={[styles.categoryIcon]}
+      colors={[backgroundColor, backgroundColor2 || backgroundColor]}
+      {...options}
+    >
+      {children}
+    </LinearGradient>
   );
 };
 

@@ -73,12 +73,15 @@ const EmojiBar = () => {
   );
 };
 
-const ChallengeBar: React.FC<{ mood: string }> = ({ mood }) => {
+export const ChallengeBar: React.FC<{ mood: string }> = ({ mood }) => {
   const challengeState = useSelector(
     (state: AppState) => state.challengeReducer
   );
 
-  const handleChallengePress = (mood: string) => {};
+  const handleChallengePress = (mood: string) => {
+    /** */
+  };
+
   return (
     <View style={styles.feelings}>
       {Object.entries(roadMap).map(([stage, emoji]) => {
