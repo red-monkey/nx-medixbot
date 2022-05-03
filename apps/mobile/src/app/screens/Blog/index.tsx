@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import SearchBar from './SearchBar';
 import Section from './Section';
-import data from './data.json';
+import data from './json/data.json';
 import { IconWrapper } from '../Dashboard/components/Categories';
 import DietHealth from '../../../icons/DietHealth.svg';
 import MentalHealth from '../../../icons/MentalHealth.svg';

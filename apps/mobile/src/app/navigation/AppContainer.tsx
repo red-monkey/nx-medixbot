@@ -12,6 +12,7 @@ import Register from '../screens/Register';
 import Dashboard from '../screens/Dashboard';
 import Blog from '../screens/Blog';
 import Gamification from '../screens/Gamification';
+import BlogDetails from '../screens/Blog/Details';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -62,7 +63,7 @@ export default function AppContainer() {
 export const LoggedInUserAppContainer = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Gamification">
+      <Stack.Navigator initialRouteName="BlogDetails">
         <Stack.Screen
           options={{ headerShown: false }}
           name="Dashboard"
@@ -72,6 +73,11 @@ export const LoggedInUserAppContainer = () => {
           options={{ headerShown: false }}
           name="Blog"
           component={Blog}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="BlogDetails"
+          component={BlogDetails}
         />
         <Stack.Screen
           options={{ headerShown: false }}

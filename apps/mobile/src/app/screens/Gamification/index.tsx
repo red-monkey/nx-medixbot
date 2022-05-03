@@ -5,7 +5,7 @@ import ScreenSkeleton from '../../commun/ScreenSkeleton';
 import { AppState } from '../../redux/store/ConfigureStore';
 import { ChallengeBar } from '../Dashboard/components/GreetingBox/ActionBar';
 import RightArrowIcon from '../../icons/RightArrowIcon.svg';
-import data from './data.json';
+import data from './json/data.json';
 import Section from '../Blog/Section';
 import { IconWrapper } from '../Dashboard/components/Categories';
 import BadgeIcon from '../../icons/BadgeIcon';
