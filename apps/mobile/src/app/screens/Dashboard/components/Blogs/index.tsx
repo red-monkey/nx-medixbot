@@ -1,13 +1,16 @@
+import { useNavigation } from '@react-navigation/native';
+import { BlogsProps } from 'apps/mobile/src/app/utils/types';
 import React from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import Carousal from './Carousal';
 
 const Blogs = () => {
+  const navigation = useNavigation<BlogsProps>();
   return (
     <View style={styles.blogsContainer}>
       <View style={styles.top}>
         <Text style={styles.title}>newsfeeds</Text>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('Blogs')}>
           <Text style={styles.viewAll}>view all</Text>
         </TouchableOpacity>
       </View>

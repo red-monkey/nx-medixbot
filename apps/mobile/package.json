@@ -35,6 +35,7 @@
     "yup": "*",
     "styled-system": "*",
     "react-moment": "*",
-    "moment": "*"
+    "moment": "*",
+    "react-navigation": "*"
   }
 }

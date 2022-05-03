@@ -29,6 +29,7 @@ const Dashboard = () => {
     deleteUserData();
     dispatch(setIsLoggedIn(false));
   };
+
   return (
     <FlatList
       style={styles.root}
@@ -50,8 +51,8 @@ const Dashboard = () => {
               <Blogs />
             </View>
             {/* <TouchableOpacity onPress={logout}>
-         <Text>Logout</Text>
-       </TouchableOpacity> */}
+           <Text>Logout</Text>
+         </TouchableOpacity> */}
           </View>
         );
       }}

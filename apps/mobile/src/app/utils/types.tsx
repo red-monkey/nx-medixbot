@@ -23,7 +23,7 @@ import {
   SET_USER_REWARDS,
   SET_USER_SCORE,
 } from '../redux/actions/actionTypes';
-import { updateMood } from '../redux/actions/challenge';
+
 export type RootStackParamList = {
   Home: undefined;
   Information: { title: string };
@@ -33,6 +33,9 @@ export type RootStackParamList = {
   VerificationCode: undefined;
   Register: undefined;
   Dashboard: undefined;
+  Blogs: undefined;
+  Gamification: undefined;
+  BlogDetails: undefined;
 };
 
 export type InformationNavProps = NativeStackScreenProps<
@@ -61,6 +64,17 @@ export type RegisterProps = StackNavigationProp<RootStackParamList, 'Register'>;
 export type IndicatorProps = {
   scrollx: Animated.Value;
 };
+
+export type BlogsProps = StackNavigationProp<RootStackParamList, 'Blogs'>;
+export type BlogDetailsProp = StackNavigationProp<
+  RootStackParamList,
+  'BlogDetails'
+>;
+export type GamificationProps = StackNavigationProp<
+  RootStackParamList,
+  'Gamification'
+>;
+
 export type gender = 'male' | 'female' | 'other';
 export type membership = 'Referrer' | 'Partner' | 'Employer' | 'Family';
 export const CountryCodeList = [

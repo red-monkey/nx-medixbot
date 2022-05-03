@@ -14,6 +14,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { updateMood } from 'apps/mobile/src/app/redux/actions/challenge';
 import { AppState } from '../../../../redux/store/ConfigureStore';
 import { color, style } from 'styled-system';
+import { useNavigation } from '@react-navigation/native';
+import { GamificationProps } from 'apps/mobile/src/app/utils/types';
 
 export const feelings = {
   great: <GreatEmoji />,
@@ -74,12 +76,14 @@ const EmojiBar = () => {
 };
 
 export const ChallengeBar: React.FC<{ mood: string }> = ({ mood }) => {
+  const navigation = useNavigation<GamificationProps>();
+
   const challengeState = useSelector(
     (state: AppState) => state.challengeReducer
   );
 
   const handleChallengePress = (mood: string) => {
-    /** */
+    navigation.navigate('Gamification');
   };
 
   return (

@@ -10,7 +10,7 @@ import ResetPasswordPage from '../screens/Login/ResetPassword';
 import VerificationCode from '../screens/Login/VerificationCode';
 import Register from '../screens/Register';
 import Dashboard from '../screens/Dashboard';
-import Blog from '../screens/Blog';
+import Blogs from '../screens/Blog';
 import Gamification from '../screens/Gamification';
 import BlogDetails from '../screens/Blog/Details';
 
@@ -63,7 +63,7 @@ export default function AppContainer() {
 export const LoggedInUserAppContainer = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="BlogDetails">
+      <Stack.Navigator initialRouteName="Home">
         <Stack.Screen
           options={{ headerShown: false }}
           name="Dashboard"
@@ -71,8 +71,8 @@ export const LoggedInUserAppContainer = () => {
         />
         <Stack.Screen
           options={{ headerShown: false }}
-          name="Blog"
-          component={Blog}
+          name="Blogs"
+          component={Blogs}
         />
         <Stack.Screen
           options={{ headerShown: false }}

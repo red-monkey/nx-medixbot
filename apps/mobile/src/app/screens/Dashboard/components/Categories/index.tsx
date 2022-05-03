@@ -13,6 +13,8 @@ import DietHealth from '../../../icons/DietHealth.svg';
 import FitnessHealth from '../../../icons/FitnessHealth.svg';
 import { LinearTextGradient } from 'react-native-text-gradient';
 import LinearGradient from 'react-native-linear-gradient';
+import { useNavigation } from '@react-navigation/native';
+import { BlogDetailsProp } from 'apps/mobile/src/app/utils/types';
 
 export const IconWrapper: React.FC<
   ViewProps & {
@@ -72,6 +74,8 @@ const categories = [
 ];
 
 const Categories = () => {
+  const navigation = useNavigation<BlogDetailsProp>();
+
   return (
     <View style={styles.categoriesContainer}>
       <LinearTextGradient
@@ -90,7 +94,9 @@ const Categories = () => {
           keyExtractor={(item) => item.label}
           renderItem={({ item }) => {
             return (
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => navigation.navigate('BlogDetails')}
+              >
                 <View style={styles.category}>
                   <View>
                     <Text style={styles.categoryLabel}>{item.label}</Text>
