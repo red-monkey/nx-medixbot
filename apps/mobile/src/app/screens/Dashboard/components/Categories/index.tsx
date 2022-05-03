@@ -13,7 +13,7 @@ import DietHealth from '../../../icons/DietHealth.svg';
 import FitnessHealth from '../../../icons/FitnessHealth.svg';
 import { LinearTextGradient } from 'react-native-text-gradient';
 
-const IconWrapper: React.FC<ViewProps & { backgroundColor: string }> = ({
+export const IconWrapper: React.FC<ViewProps & { backgroundColor: string }> = ({
   children,
   backgroundColor,
 }) => {

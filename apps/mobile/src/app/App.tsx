@@ -15,7 +15,7 @@ const App = () => {
   }, []);
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      {/* {isLoggedIn ? <LoggedInUserAppContainer/> : <AppContainer />} */}
+      {/* {isLoggedIn ? <LoggedInUserAppContainer /> : <AppContainer />} */}
       <LoggedInUserAppContainer />
     </SafeAreaView>
   );
