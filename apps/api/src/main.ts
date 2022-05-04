@@ -9,8 +9,6 @@ setupExpress()
       res.send({ message: 'Welcome to medixbot api!' });
     });
 
-    console.log(config.appMode);
-
     app.use('/rest', restRoute);
 
     const port = config.port;
