@@ -1,10 +1,18 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, TextInput, TouchableOpacity } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  TextInput,
+  TouchableOpacity,
+  Text,
+} from 'react-native';
 import SearchIcon from '../../icons/SearchIcon.svg';
 import SearchFilterIcon from '../../icons/SearchFilterIcon.svg';
+import CustomModal from '../../components/CustomModal';
 
 const SearchBar = () => {
   const [keyword, setKeyword] = useState('');
+  const [modal, setModal] = useState(false);
 
   const handleSearchButtonPress = () => {
     if (!keyword) return;
@@ -27,10 +35,21 @@ const SearchBar = () => {
             onEndEditing={handleSearchButtonPress}
           />
         </View>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => setModal((prev) => !prev)}>
           <SearchFilterIcon />
         </TouchableOpacity>
       </View>
+      <CustomModal
+        onBackdropPress={() => setModal((prev) => !prev)}
+        content={
+          <View>
+            <Text style={{ color: '#fff', fontSize: 16 }}>
+              This feature is still under developement
+            </Text>
+          </View>
+        }
+        visible={modal}
+      />
     </View>
   );
 };
