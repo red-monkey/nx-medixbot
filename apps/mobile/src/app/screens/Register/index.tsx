@@ -28,29 +28,32 @@ import SelectedIcon from '../../icons/SelectedIcon.svg'
 import UnselectedIcon from '../../icons/UnselectedIcon.svg'
 import EmailValidationIcon from '../../icons/EmailValidationIcon.svg';
 import EmailValidationTickIcon from '../../icons/EmailValidationTickIcon.svg';
-import {CountryCode, ForgotPassProps, gender} from '../../utils/types';
+import {CountryCode, ForgotPassProps, location} from '../../utils/types';
 import {useNavigation} from '@react-navigation/native';
 import sharedStyles from '../../styles/SharedStyles';
 import {Formik} from 'formik';
 import * as yup from 'yup';
 import loginStyles, { modalStyle } from '../../styles/LoginPageStyles';
 import {focusHandler, pressOutHandler} from '../../utils/functions';
-import {PicturePickerModal} from '../../components/PicturePickerModal';
-import {setLanguageModal, setLocationModal, setMembershipModal, setPictureModal} from '../../redux/actions/modal';
+import {PicturePickerModal} from './components/PicturePickerModal';
+import {setLanguageModal, setMembershipModal, setPictureModal} from '../../redux/actions/modal';
 import {useDispatch} from 'react-redux';
 import {Dispatch} from 'redux'; 
 import {useAppSelector} from '../../utils/hooks';
-import MembershipModal from '../../components/MembershipModal';
+import MembershipModal from './components/MembershipModal';
 import CustomModal from '../../components/CustomModal';
-import { LocationModal } from '../../components/LocationModal';
 import { colors } from '../../variables/colors';
-import { LanguageModal } from '../../components/LanguageModal';
+import { LanguageModal } from './components/LanguageModal';
 import { EGender, EMembership, IRegisterUser } from '@medixbot/types';
 import { useRegisterMutation } from '../../apollo/GraphQL/Actions/useRegisterMutation';
+import { Asset } from 'react-native-image-picker';
 const RegisterScreen = () => {
   const [register] = useRegisterMutation();
   const navigation = useNavigation<ForgotPassProps>();
   const image = useAppSelector(state => state.userPictureReducer.selected);
+  const languages = useAppSelector(state => state.languageModalReducer.selectedLanguages);
+  const membership = useAppSelector(state => state.membershipReducer.membership)
+  const location = useAppSelector(state => state.locationReducer);
   const base64Icon = `data:image/jpg;base64,${image?.base64}`;
   const dispatch = useDispatch<Dispatch>();
   const [hidePassword, setHidePassword] = useState(true);
@@ -85,16 +88,34 @@ const RegisterScreen = () => {
       .required('Confirm password is required'),
   });
 
+  type props = {
+    values: {
+      email: string; 
+      password: string; 
+      phoneNumber: string; 
+      name: string; 
+      passwordRepeat: string
+    },
+    base64Icon: string,
+    location: location,
+    membership: EMembership
+  }
 
-  function setData(values: { email: string; password: string; phoneNumber: string; name: string; passwordRepeat: string; }) {
+  function setData({values,base64Icon,location,membership}: props) {
     const data: IRegisterUser = {
       fullName: values.name,
       email: values.email,
       password: values.password,
       tel: values.phoneNumber,
       gender: gender,
-      membership: EMembership.Referrer
+      membership: membership,
+      city: location.city,
+      country: location.country,
+      /*profileImage: base64Icon,*/
+      state: location.state,
+      postCode: location.postCode
     }
+    console.log(data)
     return data;
   }
 
@@ -124,7 +145,7 @@ const RegisterScreen = () => {
 
   return (
     <ScrollView contentContainerStyle={registerStyles.Container} scrollEnabled>
-            <StatusBar  translucent={false} backgroundColor={colors.backgroundColor}  barStyle="dark-content" />
+      <StatusBar  translucent={false} backgroundColor={colors.backgroundColor}  barStyle="dark-content" />
       <Header />
       <View style={registerStyles.registerPage}>
         <View style={loginStyles.topPart}>
@@ -146,7 +167,7 @@ const RegisterScreen = () => {
               passwordRepeat: '',
             }}
             onSubmit={values => {
-              register(setData(values));
+              register(setData({values,base64Icon,location,membership}));
             }}>
             {({
               handleChange,
@@ -168,7 +189,6 @@ const RegisterScreen = () => {
                 ) : null}
                 <PicturePickerModal />
                 <MembershipModal />
-                <LocationModal />
                 <LanguageModal />
                 <CustomModal onBackdropPress={() => setGenderModal(false)} content={content} visible={genderModalIsOpen}/>
                 <TouchableOpacity
@@ -286,7 +306,7 @@ const RegisterScreen = () => {
 
                 <View style={registerStyles.formSelectInputStyle}>
                   <GlobalIcon />
-                  <Text style={registerStyles.formInputStyle}>Language</Text>
+                  <Text style={registerStyles.formInputStyle}>{ languages.length > 0 ? languages.map(elem => elem+', ') : 'Language' }</Text>
                   <TouchableOpacity onPress={() => {
                       dispatch(setLanguageModal(true));
                     }}>
@@ -296,18 +316,22 @@ const RegisterScreen = () => {
 
                 <View style={registerStyles.formSelectInputStyle}>
                   <LocationIcon />
-                  <Text style={registerStyles.formInputStyle}>Location</Text>
+                  {
+                      location.country || location.city || location.state || location.postCode ?
+                      <Text style={registerStyles.formInputStyle}>{location.state} {location.city } {location.country} {location.postCode} </Text> :
+                      <Text style={registerStyles.formInputStyle}>Location</Text>
+                  }
                   <TouchableOpacity onPress={() => {
-                      dispatch(setLocationModal(true));
+                      navigation.navigate('SelectLocation');
                     }}>
-                    <Text style={registerStyles.selectButton}>Select</Text>
+                      <Text style={registerStyles.selectButton}>Select</Text>
                   </TouchableOpacity>
                 </View>
 
                 <View style={registerStyles.formSelectInputStyle}>
                   <ThreeUsersIcon />
                   <Text style={registerStyles.formInputStyle}>
-                    Referrer/Partner/Employer/Family
+                    {membership !== null ? membership : 'Referrer/Partner/Employer/Family'}
                   </Text>
                   <TouchableOpacity
                     onPress={() => {
