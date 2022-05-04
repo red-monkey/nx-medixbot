@@ -1,5 +1,6 @@
 import React, { ReactNode } from 'react';
 import { StyleSheet, FlatList, StatusBar, View } from 'react-native';
+import { style } from 'styled-system';
 import Header from '../components/CommunHeader';
 
 const ScreenSkeleton: React.FC<ReactNode> = ({ children }) => {
@@ -15,7 +16,12 @@ const ScreenSkeleton: React.FC<ReactNode> = ({ children }) => {
         style={styles.bodyContainer}
         data={[null]}
         renderItem={() => {
-          return <View>{children}</View>;
+          return (
+            <View>
+              {children}
+              <View style={styles.footer}></View>
+            </View>
+          );
         }}
       />
     </View>
@@ -35,6 +41,9 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     marginTop: 20,
     paddingTop: 20,
+  },
+  footer: {
+    height: 60,
   },
 });
 

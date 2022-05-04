@@ -13,6 +13,8 @@ import Dashboard from '../screens/Dashboard';
 import Blogs from '../screens/Blog';
 import Gamification from '../screens/Gamification';
 import BlogDetails from '../screens/Blog/Details';
+import Tabs from './BottomNavigation';
+import { View } from 'react-native';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -63,28 +65,7 @@ export default function AppContainer() {
 export const LoggedInUserAppContainer = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen
-          options={{ headerShown: false }}
-          name="Dashboard"
-          component={Dashboard}
-        />
-        <Stack.Screen
-          options={{ headerShown: false }}
-          name="Blogs"
-          component={Blogs}
-        />
-        <Stack.Screen
-          options={{ headerShown: false }}
-          name="BlogDetails"
-          component={BlogDetails}
-        />
-        <Stack.Screen
-          options={{ headerShown: false }}
-          name="Gamification"
-          component={Gamification}
-        />
-      </Stack.Navigator>
+      <Tabs />
     </NavigationContainer>
   );
 };
