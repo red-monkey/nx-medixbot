@@ -10,6 +10,7 @@ const sharedStyles = StyleSheet.create({
   dashedBorder: {borderWidth: 1, borderStyle: 'dashed', borderColor: '#DEDEE8'},
   margin_left_20: {marginLeft: 20},
   margin_left_30: {marginLeft: 30},
+  display_none: {backfaceVisibility: 'hidden'}
 });
 
 export default sharedStyles;

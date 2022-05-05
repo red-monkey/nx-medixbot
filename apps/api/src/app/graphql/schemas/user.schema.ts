@@ -3,12 +3,21 @@ import { gql } from 'apollo-server-express';
 export default gql`
   type TUser {
     id: ID
-    name: String
-    surname: String
+    fullName: String
     email: String
+    tel: String
     gender: EGender
-    role: EUserRole
-    accountStatus: Boolean
+    userRole: EUserRole
+    accountStatus: EUserAccountStatus
+    registeredWith: String
+    dateOfBirth: String
+    country: String
+    city: String
+    state: String
+    postCode: String
+    languages: [String]
+    membership: EMembership
+    profileImage: String
   }
   type TPaginatedUsers {
     results: [TUser]!
@@ -17,18 +26,79 @@ export default gql`
     totalPages: Int!
     totalResults: Int!
   }
+  type TDoctorList {
+    results: [TDoctor]!
+    page: Int!
+    limit: Int!
+    totalPages: Int!
+    totalResults: Int!
+  }
+  type TTime {
+    hour: Int
+    min: Int
+    period: String
+  }
+  type TAvailability {
+    day: Int
+    times: [TTime]
+  }
+  type TDocument {
+    type: String
+    url: String
+  }
+  input ITime {
+    hour: Int
+    min: Int
+    period: String
+  }
+  input IAvailability {
+    day: Int
+    times: [ITime]
+  }
+  input IDocument {
+    type: String
+    url: String
+  }
+  type TDoctor {
+    info: TUser
+    domain: String
+    about: String
+    documents: [TDocument]
+    availability: [TAvailability]
+    unAvailability: [String]
+  }
+  type TPatient {
+    info: TUser
+  }
   input IUpdateUser {
-    name: String
-    surname: String
+    fullName: String
     email: String
+    tel: String
     gender: EGender
-    role: EUserRole
-    password: String
+    dateOfBirth: String
+    country: String
+    city: String
+    state: String
+    postCode: String
+    languages: [String]
+    membership: EMembership
+    profileImage: Upload
+  }
+  input IUpdateDoctor {
+    domain: String
+    about: String
+    documents: [IDocument]
+    availability: [IAvailability]
+    unAvailability: [String]
   }
   # Queries
   type Query {
+    me: TUser
     user(userId: ID!): TUser
-    users(role: EUserRole, limit: Int, page: Int): TPaginatedUsers!
+    users(userRole: EUserRole, limit: Int, page: Int): TPaginatedUsers!
+    doctor(userId: ID!): TDoctor
+    doctors(limit: Int, page: Int): TDoctorList!
+    patient(userId: ID!): TPatient
   }
   # Mutations
   type Mutation {
@@ -37,9 +107,10 @@ export default gql`
       surname: String!
       email: String!
       gender: EGender
-      role: EUserRole
+      userRole: EUserRole
     ): TUser
-    updateUser(userId: ID!, data: IUpdateUser!): TUser
+    updateAccount(data: IUpdateUser!): TUser
+    updateDoctorInfo(data: IUpdateDoctor!): String!
     deleteUser(userId: ID!): String!
   }
 `;

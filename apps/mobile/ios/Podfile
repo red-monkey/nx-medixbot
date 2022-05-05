@@ -19,7 +19,6 @@ target 'Mobile' do
   # you should disable the next line.
   use_flipper!()
 
-  pod 'react-native-splash-screen', :path => '../node_modules/react-native-splash-screen'
 
   post_install do |installer|
     react_native_post_install(installer)

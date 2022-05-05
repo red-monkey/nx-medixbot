@@ -1,32 +1,34 @@
 import { catchReq } from '../../utils';
-import { userValidation } from '../../validations';
 import { auth } from '../../middlewares';
 import { userController } from '../../controllers';
-import { EUserRole } from '@medixbot/types/enum';
+import { EUserRole } from '@medixbot/types';
 
 export default {
   Query: {
-    user: auth(catchReq(userValidation.getUser, userController.getUser), [
-      EUserRole.PATIENT,
-      EUserRole.DOCTOR,
-      EUserRole.ADMIN,
+    me: auth(catchReq(userController.getMe), [
+      EUserRole.Patient,
+      EUserRole.Doctor,
+      EUserRole.Admin,
     ]),
-    users: auth(catchReq(userValidation.getUsers, userController.getUsers), [
-      EUserRole.ADMIN,
+    user: auth(catchReq(userController.getUser), [EUserRole.Admin]),
+    users: auth(catchReq(userController.getUsers), [EUserRole.Admin]),
+    doctor: auth(catchReq(userController.getDoctor), [EUserRole.Patient]),
+    doctors: auth(catchReq(userController.getDoctors), [
+      EUserRole.Patient,
+      EUserRole.Doctor,
     ]),
+    patient: auth(catchReq(userController.getPatient), [EUserRole.Doctor]),
   },
   Mutation: {
-    createUser: auth(
-      catchReq(userValidation.createUser, userController.createUser),
-      [EUserRole.ADMIN]
-    ),
-    updateUser: auth(
-      catchReq(userValidation.updateUser, userController.updateUser),
-      [EUserRole.ADMIN, EUserRole.PATIENT]
-    ),
-    deleteUser: auth(
-      catchReq(userValidation.deleteUser, userController.deleteUser),
-      [EUserRole.ADMIN]
-    ),
+    createUser: auth(catchReq(userController.createUser), [EUserRole.Admin]),
+    updateAccount: auth(catchReq(userController.updateUser), [
+      EUserRole.Admin,
+      EUserRole.Patient,
+      EUserRole.Doctor,
+    ]),
+    updateDoctorInfo: auth(catchReq(userController.updateDoctor), [
+      EUserRole.Admin,
+    ]),
+    deleteUser: auth(catchReq(userController.deleteUser), [EUserRole.Admin]),
   },
 };

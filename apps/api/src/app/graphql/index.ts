@@ -1,26 +1,46 @@
-import { UserModel, TokenModel } from '@medixbot/models';
 import { ApolloServer } from 'apollo-server-express';
+import { GraphQLUpload } from 'graphql-upload';
 import { merge } from 'lodash';
-import { TokenDataSource, UserDataSource } from '../datasources';
+import { dataSources } from '../datasources';
 import { context } from '../utils';
-import { authResolver, userResolver } from './resolvers';
-import { AppSchema, AuthSchema, UserSchema } from './schemas';
+import {
+  authResolver,
+  blogResolver,
+  userResolver,
+  foodRecognitionResolver,
+} from './resolvers';
+import {
+  AppSchema,
+  AuthSchema,
+  UserSchema,
+  BlogSchema,
+  foodRecognitionSchema,
+} from './schemas';
 
 const apolloServer = new ApolloServer({
-  typeDefs: [AppSchema, AuthSchema, UserSchema],
+  typeDefs: [
+    AppSchema,
+    AuthSchema,
+    UserSchema,
+    BlogSchema,
+    foodRecognitionSchema,
+  ],
   resolvers: merge(
     {
       Query: {},
       Mutation: {},
+      Upload: GraphQLUpload,
     },
     authResolver,
-    userResolver
+    userResolver,
+    blogResolver,
+    foodRecognitionResolver
   ),
+  mocks: true,
+  mockEntireSchema: false,
   context,
-  dataSources: () => ({
-    users: new UserDataSource(UserModel),
-    tokens: new TokenDataSource(TokenModel),
-  }),
+  dataSources,
+  introspection: true,
 });
 
 export default apolloServer;

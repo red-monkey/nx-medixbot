@@ -7,6 +7,7 @@ import AppContainer, {
 } from './navigation/AppContainer';
 import { useIsUser } from './customHooks/useIsUser';
 import { useAppSelector } from './utils/hooks';
+
 const App = () => {
   const [setUser, getUser] = useIsUser();
   const isLoggedIn = useAppSelector((state) => state.loginReducer.isLoggedIn);
@@ -15,8 +16,7 @@ const App = () => {
   }, []);
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      {/* {isLoggedIn ? <LoggedInUserAppContainer /> : <AppContainer />} */}
-      <LoggedInUserAppContainer />
+      {isLoggedIn ? <LoggedInUserAppContainer /> : <AppContainer />}
     </SafeAreaView>
   );
 };

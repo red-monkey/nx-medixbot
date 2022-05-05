@@ -6,7 +6,6 @@ import loginStyles, {
   forgotPassword,
   verificationCode,
 } from '../../styles/LoginPageStyles';
-import {GradientRedButton} from '../../commun/Gradients';
 import sharedStyles from '../../styles/SharedStyles';
 import {useAppSelector} from '../../utils/hooks';
 import {getItem} from '../../redux/crud';

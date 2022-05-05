@@ -4,10 +4,10 @@ import * as cors from 'cors';
 import helmet from 'helmet';
 import * as xss from 'xss-clean';
 import * as mongoSanitize from 'express-mongo-sanitize';
+import { graphqlUploadExpress } from 'graphql-upload';
 import * as compression from 'compression';
 import rateLimit from 'express-rate-limit';
-
-import { ENodeEnv } from '@medixbot/types/enum';
+import { ENodeEnv } from '@medixbot/types';
 import { config } from './app/configs';
 import apolloServer from './app/graphql';
 
@@ -41,6 +41,8 @@ const setupExpress = async (): Promise<Express> => {
   app.use(compression());
 
   app.use(cors());
+
+  app.use(graphqlUploadExpress());
 
   // Apollo Graphql
   apolloServer.applyMiddleware({ app, path: '/graphql' });

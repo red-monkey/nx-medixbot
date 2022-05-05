@@ -1,6 +1,6 @@
 import { GraphQlApiError } from '../utils';
 import { IContext } from '../types';
-import { EGraphQlErrorCode, ETokenType, EUserRole } from '@medixbot/types/enum';
+import { EGraphQlErrorCode, ETokenType, EUserRole } from '@medixbot/types';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export const auth =

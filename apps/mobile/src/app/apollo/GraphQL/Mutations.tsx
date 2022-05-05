@@ -1,46 +1,70 @@
 import {gql} from '@apollo/client';
-export const LOGIN_WITH_EMAIL_MUTATION = gql`
-  mutation LoginWithEmail($email: String!, $password: String!) {
-    loginWithEmail(email: $email, password: $password) {
-      tokens {
-        access {
-          token
-          expires
-        }
-        refresh {
-          token
-          expires
-        }
+export const LOGIN_MUTATION = gql`
+mutation Login($username: String!, $password: String!) {
+  login(username: $username, password: $password) {
+    user {
+      id
+      fullName
+      email
+      tel
+      gender
+      userRole
+      accountStatus
+      registeredWith
+      dateOfBirth
+      country
+      city
+      state
+      postCode
+      languages
+      membership
+      profileImage
+    }
+    tokens {
+      access {
+        token
+        expires
       }
-      user {
-        id
-        firstname
-        lastname
-        email
+      refresh {
+        token
+        expires
       }
     }
   }
+}
 `;
 
-export const LOGIN_WITH_PHONE_MUTATION = gql`
-  mutation LoginWithTel($tel: String!, $password: String!) {
-    loginWithTel(tel: $tel, password: $password) {
-      user {
-        id
-        firstname
-        lastname
-        email
+
+export const REGISTER_MUTATION = gql`
+mutation Register($data: IRegisterUser!) {
+  register(data: $data) {
+    user {
+      id
+      fullName
+      email
+      tel
+      gender
+      userRole
+      accountStatus
+      registeredWith
+      dateOfBirth
+      country
+      city
+      state
+      postCode
+      languages
+      membership
+      profileImage
+    }
+    tokens {
+      access {
+        token
+        expires
       }
-      tokens {
-        access {
-          expires
-          token
-        }
-        refresh {
-          token
-          expires
-        }
+      refresh {
+        token
+        expires
       }
     }
   }
-`;
+}`

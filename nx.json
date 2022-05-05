@@ -4,7 +4,7 @@
     "defaultBase": "main"
   },
   "cli": {
-    "defaultCollection": "@nrwl/react-native"
+    "defaultCollection": "@nrwl/express"
   },
   "implicitDependencies": {
     "package.json": {
@@ -18,7 +18,7 @@
       "runner": "@nrwl/nx-cloud",
       "options": {
         "cacheableOperations": ["build", "lint", "test", "e2e"],
-        "accessToken": "NWRiOGY0NDMtOTVlYi00N2VjLWFiNjItM2FhMTczZmQ2OWYyfHJlYWQtd3JpdGU="
+        "accessToken": "NjI1MTIyNjgtMzUzMi00MzU4LTkxYzUtZTgxYzZmMWU4ZjcxfHJlYWQtd3JpdGU="
       }
     }
   },
@@ -30,7 +30,7 @@
       }
     ]
   },
-  "defaultProject": "mobile",
+  "defaultProject": "api",
   "generators": {
     "@nrwl/react": {
       "application": {

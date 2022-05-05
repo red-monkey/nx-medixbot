@@ -15,6 +15,7 @@ import Gamification from '../screens/Gamification';
 import BlogDetails from '../screens/Blog/Details';
 import Tabs from './BottomNavigation';
 import { View } from 'react-native';
+import { SelectLocation } from '../screens/Register/SelectLocation';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -56,6 +57,11 @@ export default function AppContainer() {
           options={{ headerShown: false }}
           name="Register"
           component={Register}
+        />
+        <Stack.Screen
+          options={{headerShown: false}}
+          name="SelectLocation"
+          component={SelectLocation}
         />
       </Stack.Navigator>
     </NavigationContainer>
