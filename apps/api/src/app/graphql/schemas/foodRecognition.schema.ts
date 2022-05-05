@@ -4,12 +4,13 @@ export default gql`
   type TNutrient {
     protein: Int
     fat: Int
-    vitamins: Int
+    carb: Int
   }
   type TClassificationResult {
     accuracy: String
     foodName: String
     nutrients: TNutrient
+    referenceWeight: String
   }
 
   type Query {
