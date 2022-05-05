@@ -11,7 +11,7 @@ async function predictImage(input: { image: any }, ctx: IContext) {
 
   ctx.user;
 
-  const filePath = `apps/api/src/uploads/${filename}`;
+  const filePath = `${filename}`;
 
   const stream = createReadStream();
   const out = fs.createWriteStream(filePath);
@@ -25,7 +25,6 @@ async function predictImage(input: { image: any }, ctx: IContext) {
   fs.unlink(filePath, (err) => {
     console.log(err ? err : 'file deleted');
   });
-  fs.writeFileSync(`apps/api/src/uploads/test.txt`, imageAsBase64);
 
   /**
    * Send to image to the api for prediction
