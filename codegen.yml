@@ -1,0 +1,13 @@
+overwrite: true
+schema:
+  - '**/*.ts'
+documents:
+  - '**/*.graphql'
+generates:
+  './libs/types/src/lib/generated.ts':
+    plugins:
+      - 'typescript'
+      - 'typescript-operations'
+      - 'typescript-react-apollo'
+    config:
+      skipTypename: true

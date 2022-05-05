@@ -1,2 +1,4 @@
 export { default as userResolver } from './user.resolver';
 export { default as authResolver } from './auth.resolver';
+export { default as blogResolver } from './blog.resolver';
+export { default as foodRecognitionResolver } from './foodRecognition.resolver';

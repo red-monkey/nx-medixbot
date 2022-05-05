@@ -1,9 +1,13 @@
-import { IUser } from '@medixbot/types';
-import { EGraphQlErrorCode, EUserRole } from '@medixbot/types/enum';
+import {
+  EGraphQlErrorCode,
+  EUserRole,
+  IUpdateDoctor,
+  TUser,
+} from '@medixbot/types';
 import { IContext } from '../types';
 import { GraphQlApiError, pick } from '../utils';
 
-async function createUser(data: IUser, ctx: IContext) {
+async function createUser(data: TUser & { password: string }, ctx: IContext) {
   data.password = 'password1';
   const user = await ctx.dataSources.users.createUser(data);
   return user;
@@ -22,15 +26,18 @@ async function getUsers(data: IGetUserArgs, ctx: IContext) {
   return result;
 }
 
-async function getUser(data: { userId: string }, ctx: IContext) {
-  // User can't have access to another user
-  if (ctx.user.id != data.userId && ctx.user.userRole !== EUserRole.ADMIN) {
+async function getMe(data: unknown, ctx: IContext) {
+  const user = await ctx.dataSources.users.getUser(ctx.user.id);
+  if (!user) {
     throw new GraphQlApiError(
-      "You don't have access to this ressource",
-      EGraphQlErrorCode.FORBIDDEN
+      'User not found',
+      EGraphQlErrorCode.PERSISTED_QUERY_NOT_FOUND
     );
   }
+  return user;
+}
 
+async function getUser(data: { userId: string }, ctx: IContext) {
   const user = await ctx.dataSources.users.getUser(data.userId);
   if (!user) {
     throw new GraphQlApiError(
@@ -42,13 +49,13 @@ async function getUser(data: { userId: string }, ctx: IContext) {
 }
 
 async function updateUser(
-  data: { userId: string; data: IUser },
+  data: { userId: string; data: TUser },
   ctx: IContext
 ) {
   // User can't update another user
-  if (ctx.user.id != data.userId && ctx.user.userRole !== EUserRole.ADMIN) {
+  if (ctx.user.id != data.userId && ctx.user.userRole !== EUserRole.Admin) {
     throw new GraphQlApiError(
-      "You don't have access to this ressource",
+      "You don't have access to this resource",
       EGraphQlErrorCode.FORBIDDEN
     );
   }
@@ -60,10 +67,32 @@ async function deleteUser(data: { userId: string }, ctx: IContext) {
   return 'Deleted';
 }
 
+async function getDoctor(data: { userId: string }, ctx: IContext) {
+  const result = await ctx.dataSources.users.getDoctor(data.userId);
+  return result;
+}
+async function getDoctors(
+  data: { limit: number; page: number },
+  ctx: IContext
+) {
+  return await ctx.dataSources.users.getDoctors({}, data);
+}
+async function getPatient(data: { userId: string }, ctx: IContext) {
+  return await ctx.dataSources.users.getPatient(data.userId);
+}
+async function updateDoctor(data: IUpdateDoctor, ctx: IContext) {
+  return await ctx.dataSources.users.createORUpdateDoctor(ctx.user.id, data);
+}
+
 export default {
   getUser,
   getUsers,
   createUser,
   updateUser,
   deleteUser,
+  getMe,
+  getDoctor,
+  getDoctors,
+  getPatient,
+  updateDoctor,
 };

@@ -1,4 +1,7 @@
+import 'dotenv/config';
+import * as dotenv from 'dotenv';
 import * as Joi from 'joi';
+dotenv.config({ path: '.env.local' });
 
 const envVarsSchema = Joi.object()
   .keys({
@@ -35,6 +38,10 @@ const envVarsSchema = Joi.object()
     FACEBOOK_SECRET: Joi.string()
       .required()
       .description('Facebook auth client secret required'),
+    TWILIO_ACCOUNT_SID: Joi.string().required(),
+    TWILIO_AUTH_TOKEN: Joi.string().required(),
+    AWS_ACCESS_KEY_ID: Joi.string().required(),
+    AWS_SECRET_KEY: Joi.string().required(),
   })
   .unknown();
 
@@ -77,5 +84,13 @@ export const config = {
   facebook: {
     clientID: envVars.FACEBOOK_APP_ID as string,
     clientSecret: envVars.FACEBOOK_SECRET as string,
+  },
+  twilio: {
+    accountSID: envVars.TWILIO_ACCOUNT_SID as string,
+    authToken: envVars.TWILIO_AUTH_TOKEN as string,
+  },
+  aws: {
+    accessKeyId: envVars.AWS_ACCESS_KEY_ID as string,
+    secretAccessKey: envVars.AWS_SECRET_KEY as string,
   },
 };

@@ -1,6 +1,8 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { Animated } from 'react-native';
+import { EMembership } from '@medixbot/types';
+
 import {
   Asset,
   ErrorCode,
@@ -8,15 +10,20 @@ import {
   PhotoQuality,
 } from 'react-native-image-picker';
 import {
+  ADD_OR_REMOVE_LANGUAGE,
+  CLOSE_LANGUAGE_MODAL,
   CLOSE_MEMBERSHIP_MODAL,
   CLOSE_PICTURE_PICKER_MODAL,
+  OPEN_LANGUAGE_MODAL,
   OPEN_MEMBERSHIP_MODAL,
   OPEN_PICTURE_PICKER_MODAL,
+  SET_LOCATION,
   SET_LOGIN_METHOD_EMAIL,
   SET_LOGIN_METHOD_PHONE_NUMBER,
   SET_USER_BADGES,
   SET_USER_CHALLENGES,
   SET_USER_GOALS,
+  SET_MEMBERSHIP,
   SET_USER_IS_LOGGED_IN,
   SET_USER_MOOD,
   SET_USER_PICTURE,
@@ -36,16 +43,17 @@ export type RootStackParamList = {
   Blogs: undefined;
   Gamification: undefined;
   BlogDetails: undefined;
+  SelectLocation: undefined;
 };
 
-export type InformationNavProps = NativeStackScreenProps<
-  RootStackParamList,
-  'Information'
->;
-export type InfScreenProp = StackNavigationProp<
-  RootStackParamList,
-  'Information'
->;
+export type InformationProps = {
+  title: string,
+  description: string,
+};
+
+export type InformationScreenHeaderProps = {
+  extended: boolean
+};
 export type HomeNavProps = NativeStackScreenProps<RootStackParamList, 'Home'>;
 export type ForgotPassProps = StackNavigationProp<
   RootStackParamList,
@@ -348,14 +356,30 @@ export interface SetLoginMethodAction {
   payload: loginMethod;
 }
 
+export interface SetLocationAction {
+  type: typeof SET_LOCATION;
+  payload: location;
+}
+
 export interface SetModaldAction {
   type: typeof OPEN_PICTURE_PICKER_MODAL | typeof CLOSE_PICTURE_PICKER_MODAL;
   payload: boolean;
 }
 
+
+export interface SetLanguageModaldAction {
+  type: typeof OPEN_LANGUAGE_MODAL | typeof CLOSE_LANGUAGE_MODAL | typeof ADD_OR_REMOVE_LANGUAGE;
+  payload: string[];
+}
+
 export interface SetMembershipModaldAction {
   type: typeof OPEN_MEMBERSHIP_MODAL | typeof CLOSE_MEMBERSHIP_MODAL;
   payload: boolean;
+}
+
+export interface SetMembershipAction {
+  type: typeof SET_MEMBERSHIP;
+  payload: EMembership;
 }
 
 export interface SetPictureAction {
@@ -457,3 +481,12 @@ export type ChallengeAction =
   | UpdateBadgesAction
   | UpdateGoalsAction
   | UpdateRewardsAction;
+
+export type location = {
+  country?: string,
+  city?: string,
+  state?: string,
+  postCode?: string,
+  addressLine1?: string,
+  addressLine2?: string
+}

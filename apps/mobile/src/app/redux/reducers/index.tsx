@@ -1,9 +1,10 @@
 import { combineReducers } from 'redux';
 import { loginReducer, loginMethodReducer } from './loginReducer';
-import modalReducer from './modalReducer';
+import {modalReducer, languageModalReducer} from './modalReducer';
 import userPictureReducer from './userPictureReducer';
-import membershipModalReducer from './membershipModalReducer';
+import membershipModalReducer, {membershipReducer} from './membershipModalReducer';
 import { challengeReducer } from './challengeReducer';
+import { locationReducer } from './locationReducer';
 
 const reducers = combineReducers({
   loginReducer,
@@ -12,5 +13,8 @@ const reducers = combineReducers({
   userPictureReducer,
   membershipModalReducer,
   challengeReducer,
+  locationReducer,
+  languageModalReducer,
+  membershipReducer
 });
 export default reducers;

@@ -1,15 +1,17 @@
-FROM node:alpine
+FROM node:17.9.0-alpine
 
-RUN mkdir -p /usr/src/node-app && chown -R node:node /usr/src/node-app
+RUN mkdir -p /usr/src/medixbot-api
 
-WORKDIR /usr/src/node-app
+WORKDIR /usr/src/medixbot-api
 
-COPY package.json yarn.lock ./
+COPY dist .
 
-USER node
+ENV PORT=4000
 
 RUN yarn install --pure-lockfile
+RUN yarn add compression
+RUN yarn add lodash
 
-COPY --chown=node:node . .
+CMD node ./main.js
 
-EXPOSE 4000
+EXPOSE ${PORT}
