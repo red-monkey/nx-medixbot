@@ -2,7 +2,7 @@
  * @format
  */
 import React from 'react';
-import { AppRegistry } from 'react-native';
+import { AppRegistry, Platform } from 'react-native';
 import { ApolloProvider } from '@apollo/client';
 import { client } from './app/apollo/apollo';
 import App from './app/App';
@@ -17,4 +17,7 @@ const Root = () => (
     </Provider>
   </ApolloProvider>
 );
-AppRegistry.registerComponent(appName, () => Root);
+AppRegistry.registerComponent(
+  Platform.OS === 'ios' ? 'main' : appName,
+  () => Root
+);

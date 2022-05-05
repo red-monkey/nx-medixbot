@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, { useRef, useState } from 'react';
 import {
   Text,
   View,
@@ -6,36 +6,34 @@ import {
   TextInput,
   ScrollView,
 } from 'react-native';
-import CountryPicker, {CallingCode} from 'react-native-country-picker-modal';
+import CountryPicker, { CallingCode } from 'react-native-country-picker-modal';
 import Header from '../../components/CommunHeader';
 import PhoneSelectBtn from '../../components/PhoneSelectBtn';
 import styles from '../../styles/HomepageStyles';
 import loginStyles from '../../styles/LoginPageStyles';
 import EmailValidationIcon from '../../icons/EmailValidationIcon.svg';
 import EmailValidationTickIcon from '../../icons/EmailValidationTickIcon.svg';
-import {
-  GradientTextFaceIdLogin,
-} from '../../commun/Gradients';
+import { GradientTextFaceIdLogin } from '../../commun/Gradients';
 import {
   EyeIcon,
   FaceFingerprintIconGroup,
   LockIcon,
   MailIcon,
 } from '../../commun/Icons';
-import {FacebookButton, GoogleButton} from '../../commun/Buttons';
-import {CountryCode, ForgotPassProps} from '../../utils/types';
-import {useAppSelector} from '../../utils/hooks';
-import {useNavigation} from '@react-navigation/native';
+import { FacebookButton, GoogleButton } from '../../commun/Buttons';
+import { CountryCode, ForgotPassProps } from '../../utils/types';
+import { useAppSelector } from '../../utils/hooks';
+import { useNavigation } from '@react-navigation/native';
 import sharedStyles from '../../styles/SharedStyles';
-import {Formik} from 'formik';
+import { Formik } from 'formik';
 import * as yup from 'yup';
-import {focusHandler, pressOutHandler} from '../../utils/functions';
-import {useLoginMutation} from '../../apollo/GraphQL/Actions/useLoginMutation';
+import { focusHandler, pressOutHandler } from '../../utils/functions';
+import { useLoginMutation } from '../../apollo/GraphQL/Actions/useLoginMutation';
 
 const LoginPage = () => {
   const navigation = useNavigation<ForgotPassProps>();
   const loginMethod = useAppSelector(
-    state => state.loginMethodReducer.communicationMethod,
+    (state) => state.loginMethodReducer.communicationMethod
   );
   const [loginMutation] = useLoginMutation();
   const [hidePassword, setHidePassword] = useState(true);
@@ -57,14 +55,14 @@ const LoginPage = () => {
     }),
     password: yup
       .string()
-      .min(8, ({min}) => `Password must be at least ${min} characters`)
+      .min(8, ({ min }) => `Password must be at least ${min} characters`)
       .required('Password is required'),
     phoneNumber: yup.string().when('method', {
       is: 'phone',
       then: yup
         .string()
         .required('Phone Number is Required')
-        .min(8, ({min}) => `Phone Number must be at least ${min} characters`),
+        .min(8, ({ min }) => `Phone Number must be at least ${min} characters`),
       otherwise: yup.string().default(''),
     }),
   });
@@ -85,12 +83,18 @@ const LoginPage = () => {
         <View style={loginStyles.formContainer}>
           <Formik
             validationSchema={loginValidationSchema}
-            initialValues={{email: '', password: '', phoneNumber: ''}}
-            onSubmit={values =>
-              {loginMutation(loginMethod === 'email'?values.email:countryCallingCode + values.phoneNumber,values.password)}
-            }>
+            initialValues={{ email: '', password: '', phoneNumber: '' }}
+            onSubmit={(values) => {
+              loginMutation(
+                loginMethod === 'email'
+                  ? values.email
+                  : countryCallingCode + values.phoneNumber,
+                values.password
+              );
+            }}
+          >
             {({
-              handleChange,                
+              handleChange,
               handleBlur,
               handleSubmit,
               values,
@@ -132,7 +136,7 @@ const LoginPage = () => {
                       withFlag={true}
                       withCallingCode={true}
                       withCountryNameButton={false}
-                      onSelect={country => {
+                      onSelect={(country) => {
                         setCountryCode(country.cca2);
                         setCountryCallingCode(country.callingCode[0]);
                       }}
@@ -183,7 +187,8 @@ const LoginPage = () => {
                   <TouchableOpacity
                     onPress={() => {
                       setHidePassword(!hidePassword);
-                    }}>
+                    }}
+                  >
                     <EyeIcon />
                   </TouchableOpacity>
                 </View>
@@ -193,17 +198,25 @@ const LoginPage = () => {
                 <TouchableOpacity
                   onPress={() => {
                     navigation.navigate('ForgotPassword');
-                  }}>
-                  <Text style={loginStyles.forgotPassword}>Forgot Password?</Text>
+                  }}
+                >
+                  <Text style={loginStyles.forgotPassword}>
+                    Forgot Password?
+                  </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                   style={loginStyles.signInButton}
-                  onPress={()=>handleSubmit()}
-                  disabled={!isValid}>
-                    <Text style={[
-                  loginStyles.forgotPassword,
-                  {textAlign: 'center', marginTop: 0, color: '#fff'},
-                ]}>Sign In</Text>
+                  onPress={() => handleSubmit()}
+                  disabled={!isValid}
+                >
+                  <Text
+                    style={[
+                      loginStyles.forgotPassword,
+                      { textAlign: 'center', marginTop: 0, color: '#fff' },
+                    ]}
+                  >
+                    Sign In
+                  </Text>
                 </TouchableOpacity>
               </>
             )}
@@ -214,8 +227,13 @@ const LoginPage = () => {
         <Text
           style={[
             loginStyles.loginPageText,
-            {textAlign: 'center', marginTop: 25, fontFamily: 'Montserrat-Medium'},
-          ]}>
+            {
+              textAlign: 'center',
+              marginTop: 25,
+              fontFamily: 'Montserrat-Medium',
+            },
+          ]}
+        >
           Or Sign Up / Sign In with
         </Text>
         <View style={loginStyles.socialMediaBtnGroup}>
@@ -223,14 +241,27 @@ const LoginPage = () => {
           <FacebookButton />
         </View>
         <View style={loginStyles.bottomPart}>
-          <Text style={[loginStyles.loginPageText, {textAlign: 'center', fontFamily: 'Montserrat-Medium'}]}>
+          <Text
+            style={[
+              loginStyles.loginPageText,
+              { textAlign: 'center', fontFamily: 'Montserrat-Medium' },
+            ]}
+          >
             Don’t Have An Account?
           </Text>
           <TouchableOpacity
             onPress={() => {
               navigation.navigate('Register');
-            }}>
-            <Text style={[loginStyles.forgotPassword,{textAlign: 'center', marginTop: 0, marginLeft: 5}]}>Sign Up</Text>
+            }}
+          >
+            <Text
+              style={[
+                loginStyles.forgotPassword,
+                { textAlign: 'center', marginTop: 0, marginLeft: 5 },
+              ]}
+            >
+              Sign Up
+            </Text>
           </TouchableOpacity>
         </View>
       </View>
