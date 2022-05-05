@@ -36,6 +36,7 @@
     "styled-system": "*",
     "react-moment": "*",
     "moment": "*",
-    "react-navigation": "*"
+    "react-navigation": "*",
+    "@react-navigation/bottom-tabs": "*"
   }
 }
