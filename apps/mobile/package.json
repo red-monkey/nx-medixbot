@@ -31,6 +31,8 @@
     "redux": "^4.2.0",
     "redux-logger": "^3.0.6",
     "yup": "*",
-    "react-native-multiple-select": "*"
+    "react-native-multiple-select": "*",
+    "apollo-upload-client": "*",
+    "react-native-mime-types": "*"
   }
 }

@@ -1,7 +1,7 @@
 import { EMembership } from '@medixbot/types';
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {StackNavigationProp} from '@react-navigation/stack';
-import {Animated} from 'react-native';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { Animated } from 'react-native';
 import {
   Asset,
   ErrorCode,
@@ -25,23 +25,24 @@ import {
 } from '../redux/actions/actionTypes';
 export type RootStackParamList = {
   Home: undefined;
-  Information: {title: string};
+  Information: { title: string };
   Login: undefined;
   ForgotPassword: undefined;
   ResetPassword: undefined;
   VerificationCode: undefined;
   Register: undefined;
   Dashboard: undefined;
+  FoodRecognition: undefined;
   SelectLocation: undefined;
 };
 
 export type InformationProps = {
-  title: string,
-  description: string,
+  title: string;
+  description: string;
 };
 
 export type InformationScreenHeaderProps = {
-  extended: boolean
+  extended: boolean;
 };
 export type HomeNavProps = NativeStackScreenProps<RootStackParamList, 'Home'>;
 export type ForgotPassProps = StackNavigationProp<
@@ -344,9 +345,11 @@ export interface SetModaldAction {
   payload: boolean;
 }
 
-
 export interface SetLanguageModaldAction {
-  type: typeof OPEN_LANGUAGE_MODAL | typeof CLOSE_LANGUAGE_MODAL | typeof ADD_OR_REMOVE_LANGUAGE;
+  type:
+    | typeof OPEN_LANGUAGE_MODAL
+    | typeof CLOSE_LANGUAGE_MODAL
+    | typeof ADD_OR_REMOVE_LANGUAGE;
   payload: string[];
 }
 
@@ -422,10 +425,10 @@ export type loginmutationParams = {
 };
 
 export type location = {
-  country?: string,
-  city?: string,
-  state?: string,
-  postCode?: string,
-  addressLine1?: string,
-  addressLine2?: string
-}
+  country?: string;
+  city?: string;
+  state?: string;
+  postCode?: string;
+  addressLine1?: string;
+  addressLine2?: string;
+};
