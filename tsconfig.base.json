@@ -16,7 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@medixbot/models": ["libs/models/src/index.ts"],
-      "@medixbot/theme": ["libs/ui/theme/src/index.ts"],
+      "@medixbot/theme": ["libs/theme/src/index.ts"],
       "@medixbot/types": ["libs/types/src/index.ts"]
     }
   },

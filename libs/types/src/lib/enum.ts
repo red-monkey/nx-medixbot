@@ -24,6 +24,7 @@ export enum EModelNames {
   PATIENT_FIELD = 'PatientField',
   HOSPITAL = 'Hospital',
   MEDICAL_IMAGE = 'MedicalImage',
+  BLOG = 'Blog',
 }
 export enum ETokenType {
   ACCESS = 'access',

@@ -10,4 +10,5 @@ export * from './lib/insurance.Interfaces';
 export * from './lib/labTest.Interfaces';
 export * from './lib/medicalImage.Interfaces';
 export * from './lib/prescription.Interfaces';
+export * from './lib/blog.interfaces';
 export * from './lib/generated';
