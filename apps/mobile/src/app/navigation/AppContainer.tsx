@@ -9,6 +9,7 @@ import ResetPasswordPage from '../screens/Login/ResetPassword';
 import VerificationCode from '../screens/Login/VerificationCode';
 import Register from '../screens/Register';
 import Dashboard from '../screens/Dashboard';
+import { SelectLocation } from '../screens/Register/SelectLocation';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -45,6 +46,11 @@ export default function AppContainer() {
           options={{headerShown: false}}
           name="Register"
           component={Register}
+        />
+        <Stack.Screen
+          options={{headerShown: false}}
+          name="SelectLocation"
+          component={SelectLocation}
         />
       </Stack.Navigator>
     </NavigationContainer>

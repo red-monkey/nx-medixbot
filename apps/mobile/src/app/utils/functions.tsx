@@ -1,4 +1,5 @@
-import {TouchableOpacity, View} from 'react-native';
+import { useCallback } from 'react';
+import {TextInput, TouchableOpacity, View} from 'react-native';
 import { colors } from '../variables/colors';
 
 export const focusHandler = (reference: React.RefObject<View>) => {
@@ -13,16 +14,35 @@ export const pressOutHandler = (reference: React.RefObject<View>) => {
     borderColor: 'transparent',
   });
 };
-
-export const selectElement = (reference: React.RefObject<TouchableOpacity>) => {
+/*
+export const selectElement = useCallback((reference: React.RefObject<TextInput>) => {
   reference.current?.setNativeProps({
-    borderColor: 'yellow',
-    borderWidth: 1,
-  });
-};
+    style:{
+      color: 'yellow',
+      fontFamily: 'Montserrat-Bold',  
+      }
+  })},[])
 
-export const UnselectElement = (reference: React.RefObject<TouchableOpacity>) => {
+
+export const UnselectElement = useCallback((reference: React.RefObject<TextInput>) => {
   reference.current?.setNativeProps({
-    borderColor: 'transparent',
-  });
-};
+    style:{
+    color: '#fff',
+    fontFamily: 'Roboto',      
+    }
+  })},[])*/
+
+
+export const checkIfSelected = (lang: string ,languageArray: Array<string>) => {
+  let inserted = false;
+  languageArray.forEach((item,i) => {
+    if(item === lang)inserted =true;
+  });  
+  return inserted;     
+}
+
+export const removeFromList = (lang: string ,languageArray: Array<string>) => {
+  languageArray.forEach((item,i) => {
+    if(item === lang)languageArray.splice(i,1);
+  });    
+}

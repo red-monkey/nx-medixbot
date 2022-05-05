@@ -1,3 +1,4 @@
+import { EMembership } from '@medixbot/types';
 import {Asset} from 'react-native-image-picker';
 import { languageModalReducer } from '../reducers/modalReducer';
 import * as actionTypes from './actionTypes';
@@ -22,15 +23,12 @@ export const setMembershipModal = (isOpen: boolean) => {
   };
 };
 
-export const setLocationModal = (isOpen: boolean) => {
+export const setMembership = (membership: EMembership) => {
   return {
-    type:
-      isOpen === true
-        ? actionTypes.OPEN_LOCATION_MODAL
-        : actionTypes.CLOSE_LOCATION_MODAL,
-    payload: isOpen,
-  };
-};
+    type: actionTypes.SET_MEMBERSHIP,
+    payload: membership
+  }
+}
 
 export const setLanguageModal = (isOpen: boolean) => {
   return {
@@ -42,10 +40,10 @@ export const setLanguageModal = (isOpen: boolean) => {
   };
 };
 
-export const setSelectedLanguages = (language: string) => {
+export const setSelectedLanguages = (languages: string[]) => {
   return {
     type: actionTypes.ADD_OR_REMOVE_LANGUAGE,
-    payload: language
+    payload: languages
   }
 }
 

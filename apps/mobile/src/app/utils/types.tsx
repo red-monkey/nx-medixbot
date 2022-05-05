@@ -1,3 +1,4 @@
+import { EMembership } from '@medixbot/types';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {Animated} from 'react-native';
@@ -10,15 +11,15 @@ import {
 import {
   ADD_OR_REMOVE_LANGUAGE,
   CLOSE_LANGUAGE_MODAL,
-  CLOSE_LOCATION_MODAL,
   CLOSE_MEMBERSHIP_MODAL,
   CLOSE_PICTURE_PICKER_MODAL,
   OPEN_LANGUAGE_MODAL,
-  OPEN_LOCATION_MODAL,
   OPEN_MEMBERSHIP_MODAL,
   OPEN_PICTURE_PICKER_MODAL,
+  SET_LOCATION,
   SET_LOGIN_METHOD_EMAIL,
   SET_LOGIN_METHOD_PHONE_NUMBER,
+  SET_MEMBERSHIP,
   SET_USER_IS_LOGGED_IN,
   SET_USER_PICTURE,
 } from '../redux/actions/actionTypes';
@@ -30,7 +31,8 @@ export type RootStackParamList = {
   ResetPassword: undefined;
   VerificationCode: undefined;
   Register: undefined;
-  Dashboard: undefined
+  Dashboard: undefined;
+  SelectLocation: undefined;
 };
 
 export type InformationProps = {
@@ -59,7 +61,7 @@ export type RegisterProps = StackNavigationProp<RootStackParamList, 'Register'>;
 export type IndicatorProps = {
   scrollx: Animated.Value;
 };
-export type gender = 'Male' | 'Female' | 'Other';
+export type gender = 'male' | 'female' | 'others';
 export type membership = 'Referrer' | 'Partner' | 'Employer' | 'Family';
 export const CountryCodeList = [
   'AF',
@@ -332,24 +334,30 @@ export interface SetLoginMethodAction {
   payload: loginMethod;
 }
 
+export interface SetLocationAction {
+  type: typeof SET_LOCATION;
+  payload: location;
+}
+
 export interface SetModaldAction {
   type: typeof OPEN_PICTURE_PICKER_MODAL | typeof CLOSE_PICTURE_PICKER_MODAL;
   payload: boolean;
 }
 
-export interface SetLocationModaldAction {
-  type: typeof OPEN_LOCATION_MODAL | typeof CLOSE_LOCATION_MODAL;
-  payload: boolean;
-}
 
 export interface SetLanguageModaldAction {
   type: typeof OPEN_LANGUAGE_MODAL | typeof CLOSE_LANGUAGE_MODAL | typeof ADD_OR_REMOVE_LANGUAGE;
-  payload: boolean | string;
+  payload: string[];
 }
 
 export interface SetMembershipModaldAction {
   type: typeof OPEN_MEMBERSHIP_MODAL | typeof CLOSE_MEMBERSHIP_MODAL;
   payload: boolean;
+}
+
+export interface SetMembershipAction {
+  type: typeof SET_MEMBERSHIP;
+  payload: EMembership;
 }
 
 export interface SetPictureAction {
@@ -412,3 +420,12 @@ export type loginmutationParams = {
   password: string;
   method: loginMethod;
 };
+
+export type location = {
+  country?: string,
+  city?: string,
+  state?: string,
+  postCode?: string,
+  addressLine1?: string,
+  addressLine2?: string
+}

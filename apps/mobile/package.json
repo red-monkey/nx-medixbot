@@ -8,15 +8,13 @@
     "@react-native-async-storage/async-storage": "*",
     "@react-navigation/native": "*",
     "@react-navigation/native-stack": "*",
-    "@storybook/addon-ondevice-actions": "*",
-    "@storybook/addon-ondevice-backgrounds": "*",
-    "@storybook/addon-ondevice-controls": "*",
-    "@storybook/addon-ondevice-notes": "*",
-    "@storybook/react-native": "*",
+    "@react-navigation/stack": "*",
     "@testing-library/jest-native": "*",
     "@testing-library/react-native": "*",
     "formik": "*",
+    "jsonwebtoken": "*",
     "metro-config": "*",
+    "mongoose": "*",
     "react": "*",
     "react-native": "*",
     "react-native-config": "*",
@@ -33,8 +31,6 @@
     "redux": "^4.2.0",
     "redux-logger": "^3.0.6",
     "yup": "*",
-    "styled-system": "*",
-    "jsonwebtoken": "*",
-    "mongoose": "*"
+    "react-native-multiple-select": "*"
   }
 }

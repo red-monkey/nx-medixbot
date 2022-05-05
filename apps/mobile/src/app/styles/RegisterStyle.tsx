@@ -192,6 +192,15 @@ export const LocationModalStyles = StyleSheet.create({
     justifyContent: 'flex-start',
     width: '80%'
   },
+  formInputContainerStyle: {
+    marginTop: 15,
+    backgroundColor: 'rgba(65, 64, 66, 0.05)',
+    borderRadius: 34,
+    paddingHorizontal: 3,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+  },
   inputContainer: {
     backgroundColor: '#fff',
     width: '100%',
@@ -216,6 +225,10 @@ export const LocationModalStyles = StyleSheet.create({
     fontFamily: 'Lora-Regular',
     width: '100%',
     color: '#414042'
+  },
+  highlightedText: {
+    color: 'yellow', 
+    fontFamily: 'Montserrat-Bold',  
   }
 })
 
@@ -224,10 +237,11 @@ export const LanguageModalStyles = StyleSheet.create({
       height:280,
       paddingLeft: 10
     },
-    selectedText: {
-      borderColor: 'yellow',
-      borderWidth: 1,
-    }
+    option: {
+      color: '#fff',
+      padding: 0,
+      height: 20
+    },
 })
 
 export const leftButton: buttonStyle = {
