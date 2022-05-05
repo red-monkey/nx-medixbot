@@ -89,12 +89,20 @@ export type IRegisterUser = {
   profileImage?: InputMaybe<Scalars['Upload']>;
   state?: InputMaybe<Scalars['String']>;
   tel?: InputMaybe<Scalars['String']>;
+  userRole: EUserRole;
 };
 
 export type ITime = {
   hour?: InputMaybe<Scalars['Int']>;
   min?: InputMaybe<Scalars['Int']>;
   period?: InputMaybe<Scalars['String']>;
+};
+
+export type IUpdateAppointment = {
+  conditions?: InputMaybe<Scalars['String']>;
+  dateTime?: InputMaybe<Scalars['String']>;
+  doctorRef?: InputMaybe<Scalars['ID']>;
+  symptoms?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
 export type IUpdateBlog = {
@@ -129,6 +137,7 @@ export type IUpdateUser = {
 export type Mutation = {
   createBlog?: Maybe<TBlog>;
   createUser?: Maybe<TUser>;
+  deleteAppointment: Scalars['String'];
   deleteBlog: Scalars['String'];
   deleteUser: Scalars['String'];
   forgotPassword: TNormalResponse;
@@ -140,6 +149,8 @@ export type Mutation = {
   resetPassword: TNormalResponse;
   sendVerificationEmail: TNormalResponse;
   updateAccount?: Maybe<TUser>;
+  updateAppointment?: Maybe<TAppointment>;
+  updateAppointmentStatus?: Maybe<TAppointment>;
   updateBlog?: Maybe<TBlog>;
   updateDoctorInfo: Scalars['String'];
 };
@@ -154,6 +165,10 @@ export type MutationCreateUserArgs = {
   name: Scalars['String'];
   surname: Scalars['String'];
   userRole?: InputMaybe<EUserRole>;
+};
+
+export type MutationDeleteAppointmentArgs = {
+  appointmentId: Scalars['ID'];
 };
 
 export type MutationDeleteBlogArgs = {
@@ -198,6 +213,15 @@ export type MutationUpdateAccountArgs = {
   data: IUpdateUser;
 };
 
+export type MutationUpdateAppointmentArgs = {
+  data: IUpdateBlog;
+};
+
+export type MutationUpdateAppointmentStatusArgs = {
+  appointmentId: Scalars['ID'];
+  newStatus: EAppointmentStatus;
+};
+
 export type MutationUpdateBlogArgs = {
   data: IUpdateBlog;
 };
@@ -208,6 +232,7 @@ export type MutationUpdateDoctorInfoArgs = {
 
 export type Query = {
   appointment?: Maybe<TAppointment>;
+  appointments: TPaginatedAppointment;
   doctor?: Maybe<TDoctor>;
   doctors: TDoctorList;
   getBlog?: Maybe<TBlog>;
@@ -220,6 +245,11 @@ export type Query = {
 
 export type QueryAppointmentArgs = {
   appointmentId?: InputMaybe<Scalars['ID']>;
+};
+
+export type QueryAppointmentsArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
 };
 
 export type QueryDoctorArgs = {

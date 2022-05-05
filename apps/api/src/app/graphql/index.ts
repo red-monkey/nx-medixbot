@@ -3,11 +3,22 @@ import { GraphQLUpload } from 'graphql-upload';
 import { merge } from 'lodash';
 import { dataSources } from '../datasources';
 import { context } from '../utils';
-import { authResolver, blogResolver, userResolver } from './resolvers';
-import { AppSchema, AuthSchema, UserSchema, BlogSchema } from './schemas';
+import {
+  authResolver,
+  blogResolver,
+  userResolver,
+  appointmentResolver,
+} from './resolvers';
+import {
+  AppSchema,
+  AuthSchema,
+  UserSchema,
+  BlogSchema,
+  AppointmentSchema,
+} from './schemas';
 
 const apolloServer = new ApolloServer({
-  typeDefs: [AppSchema, AuthSchema, UserSchema, BlogSchema],
+  typeDefs: [AppSchema, AuthSchema, UserSchema, BlogSchema, AppointmentSchema],
   resolvers: merge(
     {
       Query: {},
@@ -16,7 +27,8 @@ const apolloServer = new ApolloServer({
     },
     authResolver,
     userResolver,
-    blogResolver
+    blogResolver,
+    appointmentResolver
   ),
   mocks: true,
   mockEntireSchema: false,
