@@ -2,9 +2,9 @@ import { gql } from 'apollo-server-express';
 
 export default gql`
   type TNutrient {
-    protein: Int
-    fat: Int
-    carb: Int
+    protein: String
+    fat: String
+    carb: String
   }
   type TClassificationResult {
     accuracy: String
