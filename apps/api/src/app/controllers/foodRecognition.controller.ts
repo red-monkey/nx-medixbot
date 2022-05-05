@@ -1,10 +1,15 @@
 import * as fs from 'fs';
+import axios from 'axios';
 import { finished } from 'stream/promises';
 import { IContext } from '../types';
+import { GraphQlApiError } from '../utils';
+import { EGraphQlErrorCode } from '@medixbot/types';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 async function predictImage(input: { image: any }, ctx: IContext) {
-  const { createReadStream, filename } = await input.image;
+  const { createReadStream, filename, mimetype } = await input.image;
+
+  ctx.user;
 
   const filePath = `apps/api/src/uploads/${filename}`;
 
@@ -13,25 +18,48 @@ async function predictImage(input: { image: any }, ctx: IContext) {
   stream.pipe(out);
   await finished(out);
 
-  const imageAsBase64 = fs.readFileSync(filePath, 'base64');
+  const base64 = fs.readFileSync(filePath, 'base64');
+
+  const imageAsBase64 = `data:${mimetype};base64,${base64}`;
 
   fs.unlink(filePath, (err) => {
     console.log(err ? err : 'file deleted');
   });
-  console.log(imageAsBase64.substring(0, 100));
+  fs.writeFileSync(`apps/api/src/uploads/test.txt`, imageAsBase64);
 
   /**
    * Send to image to the api for prediction
    */
 
-  return {
-    accuracy: 95.8,
-    foodName: 'Smit',
-    nutrients: {
-      protein: 20,
-      fat: 50,
+  const data = JSON.stringify({ base64_image: imageAsBase64 });
+  const config = {
+    method: 'get',
+    url: 'https://medixbot-food-classifier.herokuapp.com/api/predict',
+    headers: {
+      'Content-Type': 'application/json',
     },
+    data: data,
   };
+
+  try {
+    const result = await axios(config);
+
+    return {
+      accuracy: result.data?.result?.accuracy,
+      foodName: result.data?.result?.food_name,
+      nutrients: {
+        protein: result.data?.result?.protein,
+        fat: result.data?.result?.fat,
+        carb: result.data?.result['carb '],
+        referenceWeight: result.data?.result?.reference_weight,
+      },
+    };
+  } catch (error) {
+    throw new GraphQlApiError(
+      'An error occurred on the food prediction api',
+      EGraphQlErrorCode.INTERNAL_SERVER_ERROR
+    );
+  }
 }
 
 export default {
