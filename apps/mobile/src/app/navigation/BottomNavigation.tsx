@@ -46,7 +46,7 @@ const Tabs = () => {
             return (
               <CustomTab
                 label="Home"
-                icon={<AppointmentIcon fill={focused ? '#fff' : ''} />}
+                icon={<HomeIcon fill={focused ? '#fff' : ''} />}
                 focused={focused}
               />
             );

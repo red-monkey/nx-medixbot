@@ -1,6 +1,5 @@
 import React from 'react';
-import { SafeAreaView, StatusBar, Image, View } from 'react-native';
-import HomepageHeader from '../../components/HomepageHeader';
+import { SafeAreaView, StatusBar } from 'react-native';
 import HomepageScrollView from '../../components/HomepageScrollView';
 import styles from '../../styles/HomepageStyles';
 import { colors } from '../../variables/colors';
@@ -12,7 +11,6 @@ const Homepage = () => {
         backgroundColor={colors.backgroundColor}
         barStyle="dark-content"
       />
-      <HomepageHeader />
       <HomepageScrollView />
     </SafeAreaView>
   );
