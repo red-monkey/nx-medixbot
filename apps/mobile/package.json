@@ -33,6 +33,7 @@
     "yup": "*",
     "react-native-multiple-select": "*",
     "apollo-upload-client": "*",
-    "react-native-mime-types": "*"
+    "react-native-mime-types": "*",
+    "moment": "*"
   }
 }

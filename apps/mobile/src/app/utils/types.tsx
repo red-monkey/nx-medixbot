@@ -11,17 +11,23 @@ import {
 import {
   ADD_OR_REMOVE_LANGUAGE,
   CLOSE_LANGUAGE_MODAL,
-  CLOSE_MEMBERSHIP_MODAL,
-  CLOSE_PICTURE_PICKER_MODAL,
   OPEN_LANGUAGE_MODAL,
-  OPEN_MEMBERSHIP_MODAL,
-  OPEN_PICTURE_PICKER_MODAL,
   SET_LOCATION,
-  SET_LOGIN_METHOD_EMAIL,
-  SET_LOGIN_METHOD_PHONE_NUMBER,
   SET_MEMBERSHIP,
   SET_USER_IS_LOGGED_IN,
   SET_USER_PICTURE,
+  SET_USER_MOOD,
+  CLOSE_MEMBERSHIP_MODAL,
+  CLOSE_PICTURE_PICKER_MODAL,
+  OPEN_MEMBERSHIP_MODAL,
+  OPEN_PICTURE_PICKER_MODAL,
+  SET_LOGIN_METHOD_EMAIL,
+  SET_LOGIN_METHOD_PHONE_NUMBER,
+  SET_USER_BADGES,
+  SET_USER_CHALLENGES,
+  SET_USER_GOALS,
+  SET_USER_REWARDS,
+  SET_USER_SCORE,
 } from '../redux/actions/actionTypes';
 export type RootStackParamList = {
   Home: undefined;
@@ -32,6 +38,9 @@ export type RootStackParamList = {
   VerificationCode: undefined;
   Register: undefined;
   Dashboard: undefined;
+  Blogs: undefined;
+  Gamification: undefined;
+  BlogDetails: undefined;
   FoodRecognition: undefined;
   SelectLocation: undefined;
 };
@@ -62,6 +71,17 @@ export type RegisterProps = StackNavigationProp<RootStackParamList, 'Register'>;
 export type IndicatorProps = {
   scrollx: Animated.Value;
 };
+
+export type BlogsProps = StackNavigationProp<RootStackParamList, 'Blogs'>;
+export type BlogDetailsProp = StackNavigationProp<
+  RootStackParamList,
+  'BlogDetails'
+>;
+export type GamificationProps = StackNavigationProp<
+  RootStackParamList,
+  'Gamification'
+>;
+
 export type gender = 'male' | 'female' | 'others';
 export type membership = 'Referrer' | 'Partner' | 'Employer' | 'Family';
 export const CountryCodeList = [
@@ -432,3 +452,42 @@ export type location = {
   addressLine1?: string;
   addressLine2?: string;
 };
+
+export type TMood = null | 'great' | 'good' | 'okay' | 'bad' | 'awful';
+interface UpdateMoodAction {
+  type: typeof SET_USER_MOOD;
+  payload: TMood;
+}
+
+interface UpdateScoreAction {
+  type: typeof SET_USER_SCORE;
+  payload: number;
+}
+
+interface UpdateChallengesAtion {
+  type: typeof SET_USER_CHALLENGES;
+  payload: number;
+}
+
+interface UpdateBadgesAction {
+  type: typeof SET_USER_BADGES;
+  payload: number;
+}
+
+interface UpdateGoalsAction {
+  type: typeof SET_USER_GOALS;
+  payload: number;
+}
+
+interface UpdateRewardsAction {
+  type: typeof SET_USER_REWARDS;
+  payload: number;
+}
+
+export type ChallengeAction =
+  | UpdateMoodAction
+  | UpdateScoreAction
+  | UpdateChallengesAtion
+  | UpdateBadgesAction
+  | UpdateGoalsAction
+  | UpdateRewardsAction;
