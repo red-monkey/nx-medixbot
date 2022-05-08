@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
-import { BlogsProps } from 'apps/mobile/src/app/utils/types';
+import { BlogsProps } from '../../../../utils/types';
 import React from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import Carousal from './Carousal';

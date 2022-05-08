@@ -2,7 +2,7 @@ import ReminderIcon from '../../../../icons/ReminderIcon';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import Notification from './Notification';
-import MessageIcon from 'apps/mobile/src/app/icons/MessageIcon';
+import MessageIcon from '../../../../icons/MessageIcon';
 
 const Notifications = () => {
   return (

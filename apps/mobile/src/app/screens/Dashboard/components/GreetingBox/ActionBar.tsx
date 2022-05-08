@@ -11,11 +11,10 @@ import GoalIcon from '../../../icons/GoalIcon.svg';
 import RewardIcon from '../../../icons/RewardIcon.svg';
 import ScoreIcon from '../../../icons/ScoreIcon.svg';
 import { useSelector, useDispatch } from 'react-redux';
-import { updateMood } from 'apps/mobile/src/app/redux/actions/challenge';
+import { updateMood } from '../../../../redux/actions/challenge';
 import { AppState } from '../../../../redux/store/ConfigureStore';
-import { color, style } from 'styled-system';
 import { useNavigation } from '@react-navigation/native';
-import { GamificationProps } from 'apps/mobile/src/app/utils/types';
+import { GamificationProps } from '../../../../utils/types';
 
 export const feelings = {
   great: <GreatEmoji />,

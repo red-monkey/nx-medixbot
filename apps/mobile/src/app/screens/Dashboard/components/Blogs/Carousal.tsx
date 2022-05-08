@@ -27,7 +27,7 @@ const Carousal = () => {
           horizontal
           style={styles.wrap}
         >
-          {data.map((item, index) => {
+          {(data as any).map((item, index) => {
             return (
               <CarousalItem
                 key={'key' + index}
@@ -39,7 +39,7 @@ const Carousal = () => {
           })}
         </ScrollView>
         <View style={styles.wrapDot}>
-          {data.map((_, index) => {
+          {(data as any).map((_, index) => {
             return (
               <Text
                 key={'key' + index}

@@ -33,9 +33,11 @@
     "yup": "*",
     "styled-system": "*",
     "react-moment": "*",
-    "moment": "*",
     "react-navigation": "*",
     "@react-navigation/bottom-tabs": "*",
-    "react-native-multiple-select": "*"
+    "react-native-multiple-select": "*",
+    "apollo-upload-client": "*",
+    "react-native-mime-types": "*",
+    "moment": "*"
   }
 }

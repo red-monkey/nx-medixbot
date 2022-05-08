@@ -14,7 +14,7 @@ import FitnessHealth from '../../../icons/FitnessHealth.svg';
 import { LinearTextGradient } from 'react-native-text-gradient';
 import LinearGradient from 'react-native-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
-import { BlogDetailsProp } from 'apps/mobile/src/app/utils/types';
+import { BlogDetailsProp } from '../../../../utils/types';
 
 export const IconWrapper: React.FC<
   ViewProps & {

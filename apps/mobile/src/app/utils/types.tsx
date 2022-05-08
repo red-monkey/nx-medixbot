@@ -1,8 +1,9 @@
+
+import { EMembership } from '@medixbot/types';
+
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { Animated } from 'react-native';
-import { EMembership } from '@medixbot/types';
-
 import {
   Asset,
   ErrorCode,
@@ -12,11 +13,7 @@ import {
 import {
   ADD_OR_REMOVE_LANGUAGE,
   CLOSE_LANGUAGE_MODAL,
-  CLOSE_MEMBERSHIP_MODAL,
-  CLOSE_PICTURE_PICKER_MODAL,
   OPEN_LANGUAGE_MODAL,
-  OPEN_MEMBERSHIP_MODAL,
-  OPEN_PICTURE_PICKER_MODAL,
   SET_LOCATION,
   SET_LOGIN_METHOD_EMAIL,
   SET_LOGIN_METHOD_PHONE_NUMBER,
@@ -27,6 +24,11 @@ import {
   SET_USER_IS_LOGGED_IN,
   SET_USER_MOOD,
   SET_USER_PICTURE,
+  CLOSE_MEMBERSHIP_MODAL,
+  CLOSE_PICTURE_PICKER_MODAL,
+  OPEN_MEMBERSHIP_MODAL,
+  OPEN_PICTURE_PICKER_MODAL,
+
   SET_USER_REWARDS,
   SET_USER_SCORE,
 } from '../redux/actions/actionTypes';
@@ -43,16 +45,17 @@ export type RootStackParamList = {
   Blogs: undefined;
   Gamification: undefined;
   BlogDetails: undefined;
+  FoodRecognition: undefined;
   SelectLocation: undefined;
 };
 
 export type InformationProps = {
-  title: string,
-  description: string,
+  title: string;
+  description: string;
 };
 
 export type InformationScreenHeaderProps = {
-  extended: boolean
+  extended: boolean;
 };
 export type HomeNavProps = NativeStackScreenProps<RootStackParamList, 'Home'>;
 export type ForgotPassProps = StackNavigationProp<
@@ -366,9 +369,11 @@ export interface SetModaldAction {
   payload: boolean;
 }
 
-
 export interface SetLanguageModaldAction {
-  type: typeof OPEN_LANGUAGE_MODAL | typeof CLOSE_LANGUAGE_MODAL | typeof ADD_OR_REMOVE_LANGUAGE;
+  type:
+    | typeof OPEN_LANGUAGE_MODAL
+    | typeof CLOSE_LANGUAGE_MODAL
+    | typeof ADD_OR_REMOVE_LANGUAGE;
   payload: string[];
 }
 
@@ -483,10 +488,49 @@ export type ChallengeAction =
   | UpdateRewardsAction;
 
 export type location = {
-  country?: string,
-  city?: string,
-  state?: string,
-  postCode?: string,
-  addressLine1?: string,
-  addressLine2?: string
+  country?: string;
+  city?: string;
+  state?: string;
+  postCode?: string;
+  addressLine1?: string;
+  addressLine2?: string;
+};
+
+export type TMood = null | 'great' | 'good' | 'okay' | 'bad' | 'awful';
+interface UpdateMoodAction {
+  type: typeof SET_USER_MOOD;
+  payload: TMood;
 }
+
+interface UpdateScoreAction {
+  type: typeof SET_USER_SCORE;
+  payload: number;
+}
+
+interface UpdateChallengesAtion {
+  type: typeof SET_USER_CHALLENGES;
+  payload: number;
+}
+
+interface UpdateBadgesAction {
+  type: typeof SET_USER_BADGES;
+  payload: number;
+}
+
+interface UpdateGoalsAction {
+  type: typeof SET_USER_GOALS;
+  payload: number;
+}
+
+interface UpdateRewardsAction {
+  type: typeof SET_USER_REWARDS;
+  payload: number;
+}
+
+export type ChallengeAction =
+  | UpdateMoodAction
+  | UpdateScoreAction
+  | UpdateChallengesAtion
+  | UpdateBadgesAction
+  | UpdateGoalsAction
+  | UpdateRewardsAction;
