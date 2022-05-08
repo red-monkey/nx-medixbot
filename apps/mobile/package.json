@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
-    "@apollo/client": "*",
+    "@apollo/client": "^3.5.10",
     "@emotion/native": "*",
     "@react-native-async-storage/async-storage": "*",
     "@react-navigation/native": "*",

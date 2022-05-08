@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
   PermissionsAndroid,
   Platform,
@@ -7,16 +7,15 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { Header } from './components/Header';
 import registerStyles from '../../styles/RegisterStyle';
 import sharedStyles from '../../styles/SharedStyles';
 import { UserIcon } from '../../commun/Icons';
 import * as Picker from 'react-native-image-picker';
 import { ImagePickerResponse } from 'react-native-image-picker';
-import { gql, useLazyQuery } from '@apollo/client';
 import Item from './components/Item';
 import { ReactNativeFile } from 'apollo-upload-client';
 import * as mime from 'react-native-mime-types';
+import axios from 'axios';
 
 /**
  * @author Djibril
@@ -24,56 +23,50 @@ import * as mime from 'react-native-mime-types';
  * by the frontend team later
  */
 
-const SINGLE_UPLOAD = gql`
-  query PredictImage($image: Upload!) {
-    predictImage(image: $image) {
-      accuracy
-      foodName
-      nutrients {
-        protein
-        fat
-        carb
-      }
-      referenceWeight
-    }
-  }
-`;
-
 const FoodRecognition = () => {
-  const [upload, { loading, error, data }] = useLazyQuery(SINGLE_UPLOAD);
-
-  const picker = useCallback(() => {
+  const [loading, setLoading] = useState(false);
+  const [data, setData] = useState({} as any);
+  const picker = async () => {
     Picker.launchCamera(
       { mediaType: 'photo', includeBase64: true },
-      (response: ImagePickerResponse) => {
+      async (response: ImagePickerResponse) => {
         if (response) {
           if (
             !response.didCancel &&
             !response.errorMessage &&
             response.assets
           ) {
-            const file = new ReactNativeFile({
-              uri: response.assets[0].uri,
-              type: mime.lookup(response.assets[0].uri),
-              name: response.assets[0].fileName,
-            });
-            upload({
-              variables: {
-                image: file,
-              },
-            });
-            // console.log(response.assets[0]);
-            console.log(error);
-          } else {
-            // console.log(response);
-            console.log(error);
+            setLoading(true);
+            axios
+              .post(
+                'http://medixbot-food-classifier.herokuapp.com/api/predict',
+                {
+                  base64_image: `data:${mime.lookup(
+                    response.assets[0].uri
+                  )};base64,${response.assets[0].base64}`,
+                },
+                {
+                  headers: {
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json',
+                  },
+                }
+              )
+              .then((res) => {
+                setData(res.data);
+                setLoading(false);
+              })
+              .catch((err) => {
+                setLoading(false);
+                alert(JSON.stringify(err));
+              });
           }
         }
       }
     );
-  }, [upload, error]);
+  };
 
-  const takePicture = useCallback(async () => {
+  const takePicture = async () => {
     try {
       if (Platform.OS === 'android') {
         const granted = await PermissionsAndroid.request(
@@ -98,15 +91,9 @@ const FoodRecognition = () => {
     } catch (err) {
       console.warn(err);
     }
-  }, [picker]);
+  };
 
-  useEffect(() => {
-    console.log(error);
-    console.log(data);
-    console.log(loading);
-  }, [error, data, loading]);
-
-  if (error) return <Text>{JSON.stringify(error, null, 2)}</Text>;
+  if (loading) return <Text>Loading ...</Text>;
 
   return (
     <View
@@ -122,24 +109,19 @@ const FoodRecognition = () => {
         backgroundColor={'transparent'}
         barStyle="light-content"
       />
-      {/* <GreetingBox /> */}
-      {!loading ? (
-        <TouchableOpacity
-          style={[
-            registerStyles.formSelectInputStyle,
-            sharedStyles.dashedBorder,
-            { backgroundColor: '#fff' },
-          ]}
-          onPress={takePicture}
-        >
-          <UserIcon />
-          <Text style={registerStyles.formInputStyle}>
-            Upload Profile Image
-          </Text>
-        </TouchableOpacity>
-      ) : (
-        <Text>Loading...{JSON.stringify(error, null, 2)}</Text>
-      )}
+
+      <TouchableOpacity
+        style={[
+          registerStyles.formSelectInputStyle,
+          sharedStyles.dashedBorder,
+          { backgroundColor: '#fff' },
+        ]}
+        onPress={takePicture}
+      >
+        <UserIcon />
+        <Text style={registerStyles.formInputStyle}>Upload Profile Image</Text>
+      </TouchableOpacity>
+
       {data?.predictImage && (
         <Text style={{ fontSize: 18, textAlign: 'center' }}>
           I am{' '}
@@ -155,32 +137,24 @@ const FoodRecognition = () => {
       <View>
         <Item
           category="Food name"
-          value={data?.predictImage?.foodName || ''}
+          value={data?.food_name || ''}
           color="#F5007E"
         />
         <Item
           category="Accuracy"
-          value={data?.predictImage?.foodName || '0%'}
+          value={data?.accuracy || '0%'}
           color="#F5007E"
         />
-        <Item
-          category="Carb"
-          value={data?.predictImage?.foodName || '0%'}
-          color="#F5007E"
-        />
-        <Item
-          category="Fat"
-          value={data?.predictImage?.foodName || '0%'}
-          color="#F5007E"
-        />
+        <Item category="Carb" value={data?.carb || '0%'} color="#F5007E" />
+        <Item category="Fat" value={data?.fat || '0%'} color="#F5007E" />
         <Item
           category="Protein"
-          value={data?.predictImage?.foodName || '0%'}
+          value={data?.protein || '0%'}
           color="#F5007E"
         />
         <Item
           category="Reference"
-          value={data?.predictImage?.foodName || ''}
+          value={data?.referece_weight || ''}
           color="#F5007E"
         />
       </View>

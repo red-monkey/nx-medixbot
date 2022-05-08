@@ -10,6 +10,7 @@ import { name as appName } from '../app.json';
 import configureStore from './app/redux/store/ConfigureStore';
 import { Provider } from 'react-redux';
 const store = configureStore();
+
 const Root = () => (
   <ApolloProvider client={client}>
     <Provider store={store}>

@@ -16,13 +16,11 @@ const authLink = setContext((_, { headers }) => {
   };
 });
 
-const uploadLink = createUploadLink({
-  uri: `https://tranquil-oasis-91821.herokuapp.com/graphql`,
-}) as never;
-
-const link = authLink.concat(uploadLink);
-
 export const client = new ApolloClient({
   cache: new InMemoryCache(),
-  link,
+  link: authLink.concat(
+    createUploadLink({
+      uri: `${process.env['NX_API_URL']}/graphql`,
+    }) as never
+  ),
 });
