@@ -38,6 +38,8 @@
     "react-native-multiple-select": "*",
     "apollo-upload-client": "*",
     "react-native-mime-types": "*",
-    "moment": "*"
+    "moment": "*",
+    "axios": "*",
+    "use-force-update": "*"
   }
 }
