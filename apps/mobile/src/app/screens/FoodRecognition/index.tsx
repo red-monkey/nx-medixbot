@@ -1,11 +1,15 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import useForceUpdate from 'use-force-update';
 import {
+  StyleSheet,
   PermissionsAndroid,
   Platform,
   StatusBar,
   Text,
   TouchableOpacity,
   View,
+  Image,
+  ScrollView,
 } from 'react-native';
 import registerStyles from '../../styles/RegisterStyle';
 import sharedStyles from '../../styles/SharedStyles';
@@ -13,7 +17,6 @@ import { UserIcon } from '../../commun/Icons';
 import * as Picker from 'react-native-image-picker';
 import { ImagePickerResponse } from 'react-native-image-picker';
 import Item from './components/Item';
-import { ReactNativeFile } from 'apollo-upload-client';
 import * as mime from 'react-native-mime-types';
 import axios from 'axios';
 
@@ -25,11 +28,13 @@ import axios from 'axios';
 
 const FoodRecognition = () => {
   const [loading, setLoading] = useState(false);
-  const [data, setData] = useState({} as any);
-  const picker = async () => {
+  const [data, setData] = useState<any>(null);
+  const [img, setImg] = useState<any>();
+  const forceUpdate = useForceUpdate();
+  const picker = useCallback(async () => {
     Picker.launchCamera(
       { mediaType: 'photo', includeBase64: true },
-      async (response: ImagePickerResponse) => {
+      (response: ImagePickerResponse) => {
         if (response) {
           if (
             !response.didCancel &&
@@ -37,6 +42,7 @@ const FoodRecognition = () => {
             response.assets
           ) {
             setLoading(true);
+            setImg(response.assets[0]);
             axios
               .post(
                 'http://medixbot-food-classifier.herokuapp.com/api/predict',
@@ -53,20 +59,22 @@ const FoodRecognition = () => {
                 }
               )
               .then((res) => {
-                setData(res.data);
+                setData(res.data.result ? res.data.result : res.data);
                 setLoading(false);
+                forceUpdate();
               })
               .catch((err) => {
                 setLoading(false);
                 alert(JSON.stringify(err));
+                forceUpdate();
               });
           }
         }
       }
     );
-  };
+  }, []);
 
-  const takePicture = async () => {
+  const takePicture = useCallback(async () => {
     try {
       if (Platform.OS === 'android') {
         const granted = await PermissionsAndroid.request(
@@ -91,75 +99,103 @@ const FoodRecognition = () => {
     } catch (err) {
       console.warn(err);
     }
-  };
+  }, [picker]);
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
 
-  if (loading) return <Text>Loading ...</Text>;
+  if (loading)
+    return (
+      <View style={styles.loadingContainer}>
+        <Text>Loading ...</Text>
+      </View>
+    );
 
   return (
-    <View
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#fff',
-      }}
-    >
+    <ScrollView contentContainerStyle={styles.container}>
       <StatusBar
         translucent={true}
         backgroundColor={'transparent'}
         barStyle="light-content"
       />
-
-      <TouchableOpacity
-        style={[
-          registerStyles.formSelectInputStyle,
-          sharedStyles.dashedBorder,
-          { backgroundColor: '#fff' },
-        ]}
-        onPress={takePicture}
-      >
-        <UserIcon />
-        <Text style={registerStyles.formInputStyle}>Upload Profile Image</Text>
-      </TouchableOpacity>
-
-      {data?.predictImage && (
-        <Text style={{ fontSize: 18, textAlign: 'center' }}>
-          I am{' '}
-          <Text style={{ color: '#F5007E' }}>
-            {data?.predictImage?.accuracy || '0%'}
-          </Text>{' '}
-          sure that this is a{' '}
-          <Text style={{ color: '#F5007E' }}>
-            {data?.predictImage?.foodName || 'food'}
+      {!data && (
+        <TouchableOpacity
+          style={[
+            registerStyles.formSelectInputStyle,
+            sharedStyles.dashedBorder,
+            styles.uploadButton,
+          ]}
+          onPress={takePicture}
+        >
+          <UserIcon />
+          <Text style={registerStyles.formInputStyle}>
+            Upload Profile Image
           </Text>
-        </Text>
+        </TouchableOpacity>
       )}
-      <View>
-        <Item
-          category="Food name"
-          value={data?.food_name || ''}
-          color="#F5007E"
-        />
-        <Item
-          category="Accuracy"
-          value={data?.accuracy || '0%'}
-          color="#F5007E"
-        />
-        <Item category="Carb" value={data?.carb || '0%'} color="#F5007E" />
-        <Item category="Fat" value={data?.fat || '0%'} color="#F5007E" />
-        <Item
-          category="Protein"
-          value={data?.protein || '0%'}
-          color="#F5007E"
-        />
-        <Item
-          category="Reference"
-          value={data?.referece_weight || ''}
-          color="#F5007E"
-        />
+      <View style={styles.imageContainer}>
+        <Image style={styles.image} source={img} />
       </View>
-    </View>
+      {data && (
+        <View>
+          <Item category="accuracy" value={data?.accuracy} color="#2a2a2a" />
+          <Item category="food" value={data?.food_name} color="#2a2a2a" />
+          <Item category="protein" value={data?.protein} color="#2a2a2a" />
+          <Item category="carb" value={data['carb ']} color="#2a2a2a" />
+          <Item category="fat" value={data?.fat} color="#2a2a2a" />
+          <Item
+            category="reference weight"
+            value={data?.refence_weight}
+            color="#2a2a2a"
+          />
+        </View>
+      )}
+    </ScrollView>
   );
 };
+
+const styles = StyleSheet.create({
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  container: {
+    display: 'flex',
+    flex: 1,
+    justifyContent: 'center',
+    backgroundColor: '#fff',
+    paddingHorizontal: 40,
+  },
+
+  uploadButton: {
+    marginBottom: 15,
+  },
+
+  imageContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+
+  image: {
+    width: 200,
+    height: 200,
+    borderRadius: 15,
+  },
+
+  textContainer: {
+    display: 'flex',
+    width: '100%',
+    backgroundColor: '#f7f7f7',
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    marginBottom: 10,
+  },
+  text: {
+    textTransform: 'capitalize',
+    marginLeft: 40,
+  },
+});
 
 export default FoodRecognition;

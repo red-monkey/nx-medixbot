@@ -20,7 +20,7 @@ export const client = new ApolloClient({
   cache: new InMemoryCache(),
   link: authLink.concat(
     createUploadLink({
-      uri: `${process.env['NX_API_URL']}/graphql`,
+      uri: `https://tranquil-oasis-91821.herokuapp.com/graphql`,
     }) as never
   ),
 });
