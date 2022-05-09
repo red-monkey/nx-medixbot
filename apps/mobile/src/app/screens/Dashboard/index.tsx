@@ -3,25 +3,28 @@ import React from 'react';
 import {
   FlatList,
   StatusBar,
-  Text,
   TouchableOpacity,
   View,
+  Text,
 } from 'react-native';
+import styles from '../../styles/DashboardStyles';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
 import { useAccessToken } from '../../customHooks/useAuthToken';
 import { useIsUser } from '../../customHooks/useIsUser';
 import { setIsLoggedIn } from '../../redux/actions/login';
 import GreetingBox from './components/GreetingBox';
-import { Header } from './components/Header';
-import styles from '../../styles/DashboardStyles';
-import { AppState } from '../../redux/store/ConfigureStore';
 import Notifications from './components/Notifications';
+import { Header } from './components/Header';
+import Categories from './components/Categories';
 import Blogs from './components/Blogs';
 import Appointment from './components/Appointment';
-import Categories from './components/Categories';
+import { AppState } from '../../redux/store/ConfigureStore';
 
 const Dashboard = () => {
+  const { mood } = useSelector((state: AppState) => state.challengeReducer);
+
   const [, , removeAuthToken] = useAccessToken();
   const [, , deleteUserData] = useIsUser();
   const dispatch = useDispatch<Dispatch>();
@@ -34,7 +37,6 @@ const Dashboard = () => {
   const goToFoodRecognition = () => {
     navigation.navigate('FoodRecognition');
   };
-  // const { mood } = useSelector((state: AppState) => state.challengeReducer);
   return (
     <View style={styles.root}>
       <FlatList
@@ -50,13 +52,13 @@ const Dashboard = () => {
               />
               <Header />
               <TouchableOpacity onPress={goToFoodRecognition}>
-                <Text style={{ color: '#F5007E', textAlign: 'center' }}>
-                  Got to Food Recognition
+                <Text style={{ textAlign: 'center', color: '#fff' }}>
+                  Food Recognition
                 </Text>
               </TouchableOpacity>
               <View style={styles.screenContent}>
-                {/* <GreetingBox /> */}
-                {true && (
+                <GreetingBox />
+                {mood && (
                   <>
                     <Appointment />
                     <Notifications />

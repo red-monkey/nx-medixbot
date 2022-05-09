@@ -45,7 +45,7 @@ const HealthIcon = (props: SvgProps) => (
         y1={14.971}
         x2={12}
         y2={8.843}
-        radientUnits="userSpaceOnUse"
+        gradientUnits="userSpaceOnUse"
       >
         <Stop stopColor={props.stroke || '#41416E'} />
         <Stop offset={1} stopColor={props.stroke || '#41416E'} />

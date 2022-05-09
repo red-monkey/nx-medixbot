@@ -2,15 +2,15 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Homepage from '../screens/Homepage';
+import Information from '../screens/Homepage/components/Information';
 import { RootStackParamList } from '../utils/types';
 import LoginPage from '../screens/Login';
 import ForgotPasswordPage from '../screens/Login/ForgotPassword';
 import ResetPasswordPage from '../screens/Login/ResetPassword';
 import VerificationCode from '../screens/Login/VerificationCode';
 import Register from '../screens/Register';
-import Dashboard from '../screens/Dashboard';
+import Tabs from './BottomNavigation';
 import { SelectLocation } from '../screens/Register/SelectLocation';
-import FoodRecognition from '../screens/FoodRecognition';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -32,6 +32,11 @@ export default function AppContainer() {
           options={{ headerShown: false }}
           name="ForgotPassword"
           component={ForgotPasswordPage}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="Information"
+          component={Information}
         />
         <Stack.Screen
           options={{ headerShown: false }}
@@ -61,18 +66,7 @@ export default function AppContainer() {
 export const LoggedInUserAppContainer = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Dashboard">
-        <Stack.Screen
-          options={{ headerShown: false }}
-          name="Dashboard"
-          component={Dashboard}
-        />
-        <Stack.Screen
-          options={{ headerShown: false }}
-          name="FoodRecognition"
-          component={FoodRecognition}
-        />
-      </Stack.Navigator>
+      <Tabs />
     </NavigationContainer>
   );
 };

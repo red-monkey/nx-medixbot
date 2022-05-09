@@ -1,4 +1,6 @@
+
 import { EMembership } from '@medixbot/types';
+
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { Animated } from 'react-native';
@@ -13,22 +15,24 @@ import {
   CLOSE_LANGUAGE_MODAL,
   OPEN_LANGUAGE_MODAL,
   SET_LOCATION,
-  SET_MEMBERSHIP,
-  SET_USER_IS_LOGGED_IN,
-  SET_USER_PICTURE,
-  SET_USER_MOOD,
-  CLOSE_MEMBERSHIP_MODAL,
-  CLOSE_PICTURE_PICKER_MODAL,
-  OPEN_MEMBERSHIP_MODAL,
-  OPEN_PICTURE_PICKER_MODAL,
   SET_LOGIN_METHOD_EMAIL,
   SET_LOGIN_METHOD_PHONE_NUMBER,
   SET_USER_BADGES,
   SET_USER_CHALLENGES,
   SET_USER_GOALS,
+  SET_MEMBERSHIP,
+  SET_USER_IS_LOGGED_IN,
+  SET_USER_MOOD,
+  SET_USER_PICTURE,
+  CLOSE_MEMBERSHIP_MODAL,
+  CLOSE_PICTURE_PICKER_MODAL,
+  OPEN_MEMBERSHIP_MODAL,
+  OPEN_PICTURE_PICKER_MODAL,
+
   SET_USER_REWARDS,
   SET_USER_SCORE,
 } from '../redux/actions/actionTypes';
+
 export type RootStackParamList = {
   Home: undefined;
   Information: { title: string };
@@ -82,7 +86,7 @@ export type GamificationProps = StackNavigationProp<
   'Gamification'
 >;
 
-export type gender = 'male' | 'female' | 'others';
+export type gender = 'male' | 'female' | 'other';
 export type membership = 'Referrer' | 'Partner' | 'Employer' | 'Family';
 export const CountryCodeList = [
   'AF',
@@ -443,6 +447,45 @@ export type loginmutationParams = {
   password: string;
   method: loginMethod;
 };
+
+export type TMood = null | 'great' | 'good' | 'okay' | 'bad' | 'awful';
+interface UpdateMoodAction {
+  type: typeof SET_USER_MOOD;
+  payload: TMood;
+}
+
+interface UpdateScoreAction {
+  type: typeof SET_USER_SCORE;
+  payload: number;
+}
+
+interface UpdateChallengesAtion {
+  type: typeof SET_USER_CHALLENGES;
+  payload: number;
+}
+
+interface UpdateBadgesAction {
+  type: typeof SET_USER_BADGES;
+  payload: number;
+}
+
+interface UpdateGoalsAction {
+  type: typeof SET_USER_GOALS;
+  payload: number;
+}
+
+interface UpdateRewardsAction {
+  type: typeof SET_USER_REWARDS;
+  payload: number;
+}
+
+export type ChallengeAction =
+  | UpdateMoodAction
+  | UpdateScoreAction
+  | UpdateChallengesAtion
+  | UpdateBadgesAction
+  | UpdateGoalsAction
+  | UpdateRewardsAction;
 
 export type location = {
   country?: string;

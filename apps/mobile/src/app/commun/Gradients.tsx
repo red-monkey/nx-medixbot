@@ -65,16 +65,14 @@ export const GradientTextFaceIdLogin = ({ text }: { text: string }) => {
   );
 };
 
-export const DashboardHeaderGradient = ({ content }: { content?: any }) => {
+export const DashboardHeaderGradient = () => {
   return (
     <LinearGradient
       colors={['#00AEEF', '#CC40B6']}
-      locations={[0.1476, 1.2808]}
+      locations={[0.1476, 1.2108]}
       useAngle={true}
       angle={303.24}
       style={dashboard.HeaderGradientBox}
-    >
-      {content}
-    </LinearGradient>
+    ></LinearGradient>
   );
 };

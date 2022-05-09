@@ -1,0 +1,58 @@
+{
+  "Suggestions": [
+    {
+      "id": "1",
+      "category": "challenge 1",
+      "title": "Workout for 1 hour, run 1 km",
+      "url": "https://images.unsplash.com/photo-1599058917212-d750089bc07e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1469&q=80"
+    },
+    {
+      "id": "2",
+      "category": "challenge 2",
+      "title": "Workout for 1 hour, cycle 1 km",
+      "url": "https://images.unsplash.com/photo-1533107862482-0e6974b06ec4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1941&q=80"
+    },
+    {
+      "id": "3",
+      "category": "challenge 3",
+      "title": "Workout for 1 hour, yoga for 1 hour",
+      "url": "https://images.unsplash.com/photo-1518611012118-696072aa579a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
+    }
+  ],
+
+  "Badges": [
+    {
+      "id": "1",
+      "title": "7 days straight badge",
+      "url": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=799&q=80"
+    },
+    {
+      "id": "2",
+      "title": "7 days straight badge",
+      "url": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=799&q=80"
+    },
+    {
+      "id": "3",
+      "title": "7 days straight badge",
+      "url": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=799&q=80"
+    }
+  ],
+
+  "Goals": [
+    {
+      "id": "1",
+      "title": "Go Fit",
+      "url": "https://images.unsplash.com/photo-1579722820903-01d3e776f85e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
+    },
+    {
+      "id": "2",
+      "title": "Drink 3L Of Water Per Day",
+      "url": "https://images.unsplash.com/photo-1542013936693-884638332954?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
+    },
+    {
+      "id": "3",
+      "title": "Sleep 7H Per Day",
+      "url": "https://images.unsplash.com/photo-1531353826977-0941b4779a1c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
+    }
+  ]
+}
