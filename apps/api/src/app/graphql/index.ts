@@ -8,6 +8,7 @@ import {
   blogResolver,
   userResolver,
   appointmentResolver,
+  medicineImageResolver,
 } from './resolvers';
 import {
   AppSchema,
@@ -15,10 +16,18 @@ import {
   UserSchema,
   BlogSchema,
   AppointmentSchema,
+  MedecineImageSchema,
 } from './schemas';
 
 const apolloServer = new ApolloServer({
-  typeDefs: [AppSchema, AuthSchema, UserSchema, BlogSchema, AppointmentSchema],
+  typeDefs: [
+    AppSchema,
+    AuthSchema,
+    UserSchema,
+    BlogSchema,
+    AppointmentSchema,
+    MedecineImageSchema,
+  ],
   resolvers: merge(
     {
       Query: {},
@@ -28,7 +37,8 @@ const apolloServer = new ApolloServer({
     authResolver,
     userResolver,
     blogResolver,
-    appointmentResolver
+    appointmentResolver,
+    medicineImageResolver
   ),
   mocks: true,
   mockEntireSchema: false,

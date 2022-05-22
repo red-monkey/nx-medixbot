@@ -1,9 +1,9 @@
 import {
   EModelNames,
   IMedicalImageDocument,
-  IMedicalImages,
+  IMedicalImageModel,
 } from '@medixbot/types';
-import { Schema, model, Model, Types } from 'mongoose';
+import { Schema, model, Types } from 'mongoose';
 import { paginate, toJSON } from './plugins';
 
 const medicalImageSchema: Schema<IMedicalImageDocument, IMedicalImageModel> =
@@ -14,7 +14,7 @@ const medicalImageSchema: Schema<IMedicalImageDocument, IMedicalImageModel> =
         required: true,
         trim: true,
       },
-      hospitalName: {
+      hospital_name: {
         type: String,
         required: true,
         trim: true,
@@ -34,7 +34,7 @@ const medicalImageSchema: Schema<IMedicalImageDocument, IMedicalImageModel> =
         required: true,
         trim: true,
       },
-      userRef: {
+      user: {
         type: Types.ObjectId,
         ref: EModelNames.USER,
         required: true,
@@ -44,13 +44,6 @@ const medicalImageSchema: Schema<IMedicalImageDocument, IMedicalImageModel> =
       timestamps: true,
     }
   );
-
-interface IMedicalImageModel extends Model<IMedicalImageDocument> {
-  paginate?: (
-    filter: IMedicalImages,
-    options: unknown
-  ) => Promise<[IMedicalImageDocument, unknown]>;
-}
 
 // add plugin that converts mongoose to json
 medicalImageSchema.plugin(toJSON);
