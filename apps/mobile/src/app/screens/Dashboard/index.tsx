@@ -1,5 +1,5 @@
 import { useNavigation, useRoute } from '@react-navigation/native';
-import React from 'react';
+import React, { useState } from 'react';
 import Healthcare from './components/Healthcare'
 import {
   FlatList,
@@ -24,9 +24,9 @@ import Appointment from './components/Appointment';
 import { AppState } from '../../redux/store/ConfigureStore';
 import sharedStyles from '../../styles/SharedStyles';
 
+
 const Dashboard = () => {
   const { mood } = useSelector((state: AppState) => state.challengeReducer);
-
   const [, , removeAuthToken] = useAccessToken();
   const [, , deleteUserData] = useIsUser();
   const dispatch = useDispatch<Dispatch>();
@@ -53,7 +53,7 @@ const Dashboard = () => {
                 barStyle="dark-content"
               />
               <Header />
-              <View style={[sharedStyles.row,sharedStyles.justifyCenter]}>
+              <View style={{justifyContent: 'flex-start'}}>
                 <TouchableOpacity onPress={goToFoodRecognition}>
                   <Text style={{ textAlign: 'center', color: '#fff' }}>
                     Food Recognition  | 
@@ -71,7 +71,6 @@ const Dashboard = () => {
                     <Appointment />
                     <Notifications />
                     <Healthcare />
-                    <Categories />
                     <Blogs />
                   </>
               </View>

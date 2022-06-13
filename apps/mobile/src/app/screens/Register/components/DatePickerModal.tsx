@@ -34,7 +34,7 @@ const DatePickerModal = () => {
         calendarWidth={width*0.75}
         calendarHeight={350}
         style={{
-          marginHorizontal: width*0.125,
+          marginLeft: width*0.125,
         }}
         theme = {{
           backgroundColor: 'transparent',
