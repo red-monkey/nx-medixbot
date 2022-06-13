@@ -40,6 +40,23 @@ export const setLanguageModal = (isOpen: boolean) => {
   };
 };
 
+export const setDateModal = (isOpen: boolean) => {
+  return {
+    type:
+      isOpen === true
+        ? actionTypes.OPEN_DATE_PICKER_MODAL
+        : actionTypes.CLOSE_DATE_PICKER_MODAL,
+    payload: isOpen,
+  };
+};
+
+export const setDate = (date: string) => {
+  return {
+    type: actionTypes.SET_BIRTH_DATE,
+    payload: date,
+  }
+}
+
 export const setSelectedLanguages = (languages: string[]) => {
   return {
     type: actionTypes.ADD_OR_REMOVE_LANGUAGE,

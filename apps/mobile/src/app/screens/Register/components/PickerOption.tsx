@@ -42,7 +42,7 @@ export const PickerOption = ({selectedButtonref,unselectedButtonRef,IsSelected,s
                             selectElement(selectedButtonref)
                             UnselectElement(unselectedButtonRef)
                             }}>
-                            <Text >{element}</Text>
+                            <Text style={{color: '#fff'}}>{element}</Text>
                           </TouchableOpacity>
         </>
     )

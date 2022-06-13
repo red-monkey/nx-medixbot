@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Text, TouchableOpacity, Dimensions } from 'react-native';
 import GreatEmoji from '../../../icons/GreatEmoji.svg';
 import GoodEmoji from '../../../icons/GoodEmoji.svg';
 import OkayEmoji from '../../../icons/OkayEmoji.svg';
@@ -15,6 +15,7 @@ import { updateMood } from '../../../../redux/actions/challenge';
 import { AppState } from '../../../../redux/store/ConfigureStore';
 import { useNavigation } from '@react-navigation/native';
 import { GamificationProps } from '../../../../utils/types';
+import Medixbot from '../../../../icons/Medixbot.svg'
 
 export const feelings = {
   great: <GreatEmoji />,
@@ -120,7 +121,9 @@ const ActionBar = () => {
             ? 'Are you ready to challenge yourself?'
             : 'How are you feeling today?'}
         </Text>
-        <Text style={styles.status}>Member of Family</Text>
+        <Medixbot />
+        <Text style={styles.status}>Member of Family 
+        <Text style={{fontSize: 20}}>MEDIXBOT</Text></Text>
       </View>
       {mood ? <ChallengeBar mood={mood} /> : <EmojiBar />}
     </View>
@@ -137,16 +140,19 @@ const styles = StyleSheet.create({
   status: {
     position: 'relative',
     fontFamily: 'Montserrat-Black',
+    fontSize: 14,
     color: '#41416E',
-    top: -10,
+    marginLeft: 5,
+    width: 140
   },
   question: {
-    width: 150,
+    width: 110,
     color: '#414042',
     fontFamily: 'Lora-Medium',
     fontSize: 16,
     opacity: 0.5,
     marginVertical: 15,
+    marginRight: 5
   },
 
   feelings: {

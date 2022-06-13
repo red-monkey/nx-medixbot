@@ -1,5 +1,6 @@
 import { useNavigation, useRoute } from '@react-navigation/native';
 import React from 'react';
+import Healthcare from './components/Healthcare'
 import {
   FlatList,
   StatusBar,
@@ -21,6 +22,7 @@ import Categories from './components/Categories';
 import Blogs from './components/Blogs';
 import Appointment from './components/Appointment';
 import { AppState } from '../../redux/store/ConfigureStore';
+import sharedStyles from '../../styles/SharedStyles';
 
 const Dashboard = () => {
   const { mood } = useSelector((state: AppState) => state.challengeReducer);
@@ -51,21 +53,27 @@ const Dashboard = () => {
                 barStyle="dark-content"
               />
               <Header />
-              <TouchableOpacity onPress={goToFoodRecognition}>
-                <Text style={{ textAlign: 'center', color: '#fff' }}>
-                  Food Recognition
-                </Text>
-              </TouchableOpacity>
+              <View style={[sharedStyles.row,sharedStyles.justifyCenter]}>
+                <TouchableOpacity onPress={goToFoodRecognition}>
+                  <Text style={{ textAlign: 'center', color: '#fff' }}>
+                    Food Recognition  | 
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => logout()}>
+                  <Text style={{ textAlign: 'center', color: '#fff',marginLeft: 10 }}>
+                    Logout
+                  </Text>
+                </TouchableOpacity>
+              </View>
               <View style={styles.screenContent}>
                 <GreetingBox />
-                {mood && (
                   <>
                     <Appointment />
                     <Notifications />
+                    <Healthcare />
                     <Categories />
                     <Blogs />
                   </>
-                )}
               </View>
             </View>
           );

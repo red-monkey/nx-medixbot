@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import { loginReducer, loginMethodReducer } from './loginReducer';
 
-import { modalReducer, languageModalReducer } from './modalReducer';
+import { modalReducer, languageModalReducer, DatePickerModalReducer } from './modalReducer';
 import userPictureReducer from './userPictureReducer';
 import membershipModalReducer, {
   membershipReducer,
@@ -18,6 +18,6 @@ const reducers = combineReducers({
   locationReducer,
   languageModalReducer,
   membershipReducer,
-  challengeReducer,
+  DatePickerModalReducer
 });
 export default reducers;
