@@ -3,7 +3,7 @@ import React, { LegacyRef, MutableRefObject, useEffect, useRef, useState } from 
 import {Alert,StyleSheet, Dimensions, Text,TouchableOpacity,View} from "react-native"
 import { Agenda, AgendaEntry, AgendaSchedule, DateData } from 'react-native-calendars'
 import CalendarStrip from 'react-native-calendar-strip';
-import { colors } from 'apps/mobile/src/app/variables/colors'
+import { colors } from '../../../../../variables/colors'
 import ReactNativeCalendarStrip from 'react-native-calendar-strip';
 import Appointment from './Appointment';
 
@@ -21,7 +21,7 @@ type Tevent = {
 const events:Tevent[] =
  [
     {
-        date: '2022-06-09',
+        date: '2022-06-18',
         appointments: [
             {
                 status: 'Completed',
@@ -44,7 +44,7 @@ const events:Tevent[] =
         ]
     },
     {
-        date: '2022-06-10',
+        date: '2022-06-17',
         appointments: [
             {
                 status: 'Pending',
@@ -107,7 +107,9 @@ const AgendaComponent = () => {
             ref={calendarRef}
             onDateSelected={(date) => {setAppointments(getDates(date));setSelectedDate(date.toString())}}
             markedDates={markedDatesArray}
-            style={{height: 90,paddingTop: 20}}            
+            style={{height: 90,paddingTop: 20}}  
+            highlightDateNameStyle={{color: '#ffffff97'}}  
+            highlightDateNumberStyle={{color: '#ffffff97'}}       
             calendarColor={'#fff'}
             calendarHeaderStyle={{color: colors.Text,marginBottom: 25,fontSize: 13}}
             dateNumberStyle={{color: colors.Text, marginBottom: -1}}

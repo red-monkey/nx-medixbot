@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     left: 0,
     overflow: 'hidden',
     width: '100%',
-    height: 200,
+    height: 180,
     borderBottomLeftRadius: 15,
     borderBottomRightRadius: 15,
   },
@@ -24,10 +24,9 @@ const styles = StyleSheet.create({
     position: 'relative',
     top: -120,
     left: '-8%',
-    transform: [{ rotateZ: '20deg' }],
   },
   HeaderActionBar: {
-    paddingTop: 45,
+    paddingTop: 30,
     paddingHorizontal: 20,
   },
   HeaderRow: {

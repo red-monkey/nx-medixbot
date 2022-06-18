@@ -73,7 +73,7 @@ const categories: TCategory[] = [
 ]
 const index = () => {
   return (
-    <View style={{flexDirection: 'row', flexWrap: 'wrap', paddingHorizontal: 10, width: '100%'}}>
+    <View style={{flexDirection: 'row', flexWrap: 'wrap', paddingHorizontal: 0, width: '100%'}}>
         {categories.map((item,index) => (
             <Category category={item} key={index} />
         ))}

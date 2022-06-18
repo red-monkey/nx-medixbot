@@ -1,5 +1,5 @@
-import sharedStyles from 'apps/mobile/src/app/styles/SharedStyles';
-import { colors } from 'apps/mobile/src/app/variables/colors';
+import sharedStyles from '../../../../styles/SharedStyles';
+import { colors } from '../../../../variables/colors';
 import React from 'react';
 import { StyleSheet, View,Text,TouchableOpacity, Dimensions} from 'react-native';
 import Calendar from '../../../../icons/CalendarIcon.svg'
