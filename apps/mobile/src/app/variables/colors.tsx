@@ -2,5 +2,9 @@ export const colors = {
     backgroundColor: 'rgb(218, 244, 265)',
     ThemeColor: '#E6F2FC',
     MedixBotPrimaryColor: '#4C5DF4',
-    error: "#EB5757"
+    MedixBotPrimaryColor1:'#9800CC',
+    error: "#EB5757",
+    Text:  "#414042",
+    PureGreen: '#09A129',
+    PureGreenBackground: '#01FF7622'
 }

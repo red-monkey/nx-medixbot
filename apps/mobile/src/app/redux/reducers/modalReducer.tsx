@@ -1,4 +1,4 @@
-import {SetLanguageModaldAction, SetModaldAction} from '../../utils/types';
+import {SetDateModalAction, SetLanguageModaldAction, SetModaldAction} from '../../utils/types';
 import * as actionTypes from '../actions/actionTypes';
 
 const initialState: {isOpen: boolean} = {
@@ -10,6 +10,11 @@ const languageInitialState: {isOpen: boolean,selectedLanguages: Array<string>} =
   isOpen: false,
   selectedLanguages: []
 };
+
+const dateInitialState: {isOpen: boolean, date: string} = {
+  isOpen: false,
+  date: ""
+}
 
 export function modalReducer(state = initialState, action: SetModaldAction) {
   switch (action.type) {
@@ -33,6 +38,20 @@ export function languageModalReducer(state = languageInitialState, action: SetLa
       /*if(checkIfSelected(action.payload,state.selectedLanguages) === true)removeFromList(action.payload,state.selectedLanguages)
       else {if(typeof(action.payload)==='string')state.selectedLanguages.push(action.payload)}*/
       return {...state,selectedLanguages: payload};
+    default:
+      return state;
+  }
+}
+
+export function DatePickerModalReducer(state = dateInitialState, action: SetDateModalAction ) {
+  const {payload} = action
+  switch (action.type) {
+    case actionTypes.OPEN_DATE_PICKER_MODAL:
+      return{...state,isOpen : true};
+    case actionTypes.CLOSE_DATE_PICKER_MODAL:
+      return{...state,isOpen: false}
+    case actionTypes.SET_BIRTH_DATE:
+      return{...state,date: payload}
     default:
       return state;
   }

@@ -96,6 +96,7 @@ const loginStyles = StyleSheet.create({
     marginTop: 35,
     borderRadius: 30,
     justifyContent: 'center',
+    alignSelf: 'center'
   },
   forgotPassword: {
     color: colors.MedixBotPrimaryColor,

@@ -1,5 +1,6 @@
 import { useNavigation, useRoute } from '@react-navigation/native';
-import React from 'react';
+import React, { useState } from 'react';
+import Healthcare from './components/Healthcare'
 import {
   FlatList,
   StatusBar,
@@ -21,10 +22,11 @@ import Categories from './components/Categories';
 import Blogs from './components/Blogs';
 import Appointment from './components/Appointment';
 import { AppState } from '../../redux/store/ConfigureStore';
+import sharedStyles from '../../styles/SharedStyles';
+
 
 const Dashboard = () => {
   const { mood } = useSelector((state: AppState) => state.challengeReducer);
-
   const [, , removeAuthToken] = useAccessToken();
   const [, , deleteUserData] = useIsUser();
   const dispatch = useDispatch<Dispatch>();
@@ -51,21 +53,26 @@ const Dashboard = () => {
                 barStyle="dark-content"
               />
               <Header />
-              <TouchableOpacity onPress={goToFoodRecognition}>
-                <Text style={{ textAlign: 'center', color: '#fff' }}>
-                  Food Recognition
-                </Text>
-              </TouchableOpacity>
+              <View style={{justifyContent: 'flex-start'}}>
+                <TouchableOpacity onPress={goToFoodRecognition}>
+                  <Text style={{ textAlign: 'center', color: '#fff' }}>
+                    Food Recognition  | 
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => logout()}>
+                  <Text style={{ textAlign: 'center', color: '#fff',marginLeft: 10 }}>
+                    Logout
+                  </Text>
+                </TouchableOpacity>
+              </View>
               <View style={styles.screenContent}>
                 <GreetingBox />
-                {mood && (
                   <>
                     <Appointment />
                     <Notifications />
-                    <Categories />
+                    <Healthcare />
                     <Blogs />
                   </>
-                )}
               </View>
             </View>
           );

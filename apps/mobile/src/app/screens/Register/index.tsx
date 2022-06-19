@@ -36,7 +36,7 @@ import * as yup from 'yup';
 import loginStyles, { modalStyle } from '../../styles/LoginPageStyles';
 import {focusHandler, pressOutHandler} from '../../utils/functions';
 import {PicturePickerModal} from './components/PicturePickerModal';
-import {setLanguageModal, setMembershipModal, setPictureModal} from '../../redux/actions/modal';
+import {setDateModal, setLanguageModal, setMembershipModal, setPictureModal} from '../../redux/actions/modal';
 import {useDispatch} from 'react-redux';
 import {Dispatch} from 'redux'; 
 import {useAppSelector} from '../../utils/hooks';
@@ -46,7 +46,7 @@ import { colors } from '../../variables/colors';
 import { LanguageModal } from './components/LanguageModal';
 import { EGender, EMembership, IRegisterUser } from '@medixbot/types';
 import { useRegisterMutation } from '../../apollo/GraphQL/Actions/useRegisterMutation';
-import { Asset } from 'react-native-image-picker';
+import DatePickerModal from './components/DatePickerModal';
 const RegisterScreen = () => {
   const [register] = useRegisterMutation();
   const navigation = useNavigation<ForgotPassProps>();
@@ -54,6 +54,7 @@ const RegisterScreen = () => {
   const languages = useAppSelector(state => state.languageModalReducer.selectedLanguages);
   const membership = useAppSelector(state => state.membershipReducer.membership)
   const location = useAppSelector(state => state.locationReducer);
+  const birthDate = useAppSelector(state => state.DatePickerModalReducer.date)
   const base64Icon = `data:image/jpg;base64,${image?.base64}`;
   const dispatch = useDispatch<Dispatch>();
   const [hidePassword, setHidePassword] = useState(true);
@@ -71,15 +72,13 @@ const RegisterScreen = () => {
   const registrationValidationSchema = yup.object().shape({
     email: yup
       .string()
-      .email('Please enter valid email')
-      .required('Email Address is Required'),
+      .email('Please enter valid email'),
     password: yup
       .string()
       .min(8, ({min}) => `Password must be at least ${min} characters`)
       .required('Password is required'),
     phoneNumber: yup
       .string()
-      .required('Phone Number is Required')
       .min(8, ({min}) => `Phone Number must be at least ${min} characters`),
     name: yup.string().required('Name is required'),
     passwordRepeat: yup
@@ -104,9 +103,8 @@ const RegisterScreen = () => {
   function setData({values,base64Icon,location,membership}: props) {
     const data: IRegisterUser = {
       fullName: values.name,
-      email: values.email,
       password: values.password,
-      tel: values.phoneNumber,
+      dateOfBirth: birthDate,
       gender: gender,
       membership: membership,
       city: location.city,
@@ -116,7 +114,9 @@ const RegisterScreen = () => {
       postCode: location.postCode
     }
     console.log(data)
-    return data;
+    if (values.email.length < 1) return {...data,tel: values.phoneNumber} 
+    else return {...data,email: values.email} 
+    
   }
 
   //Gender modal
@@ -190,6 +190,7 @@ const RegisterScreen = () => {
                 <PicturePickerModal />
                 <MembershipModal />
                 <LanguageModal />
+                <DatePickerModal />
                 <CustomModal onBackdropPress={() => setGenderModal(false)} content={content} visible={genderModalIsOpen}/>
                 <TouchableOpacity
                   style={[
@@ -253,9 +254,9 @@ const RegisterScreen = () => {
                     value={values.phoneNumber}
                   />
                 </View>
-                {errors.phoneNumber && touched.phoneNumber && (
+                {touched.phoneNumber && values.email.length < 1 && values.phoneNumber.length < 1 && (
                   <Text style={loginStyles.errorText}>
-                    {errors.phoneNumber}
+                    {errors.phoneNumber = 'please enter at least phone number or email address'}
                   </Text>
                 )}
 
@@ -282,9 +283,10 @@ const RegisterScreen = () => {
                     <EmailValidationIcon />
                   )}
                 </View>
-                {errors.email && touched.email && (
-                  <Text style={loginStyles.errorText}>{errors.email}</Text>
-                )}
+                {touched.phoneNumber && values.email.length < 1 && values.phoneNumber.length < 1 && !errors.phoneNumber && (
+                  <Text style={loginStyles.errorText}>
+                    {errors.email = 'please enter at least phone number or email address'}
+                  </Text>)}
 
                 <View style={registerStyles.formSelectInputStyle}>
                   <GenderIcon />
@@ -297,9 +299,9 @@ const RegisterScreen = () => {
                 <View style={registerStyles.formSelectInputStyle}>
                   <CalendarIcon />
                   <Text style={registerStyles.formInputStyle}>
-                    Date Of Birth
+                    {birthDate.length > 0 ? birthDate : 'Date Of Birth'}
                   </Text>
-                  <TouchableOpacity>
+                  <TouchableOpacity onPress={()=>{dispatch(setDateModal(true))}}>
                     <Text style={registerStyles.selectButton}>Select</Text>
                   </TouchableOpacity>
                 </View>
@@ -396,6 +398,7 @@ const RegisterScreen = () => {
                     sharedStyles.row,
                     sharedStyles.alignCenter,
                     sharedStyles.padding_15,
+                    sharedStyles.justifyCenter
                   ]}>
                   <Text style={registerStyles.termsText}>
                     By tapping “Sign Up”, you accept our

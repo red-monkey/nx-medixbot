@@ -1,4 +1,5 @@
 import { Dimensions, StyleSheet } from 'react-native';
+import { colors } from '../variables/colors';
 
 const styles = StyleSheet.create({
   root: {
@@ -12,7 +13,7 @@ const styles = StyleSheet.create({
     left: 0,
     overflow: 'hidden',
     width: '100%',
-    height: 200,
+    height: 180,
     borderBottomLeftRadius: 15,
     borderBottomRightRadius: 15,
   },
@@ -23,10 +24,9 @@ const styles = StyleSheet.create({
     position: 'relative',
     top: -120,
     left: '-8%',
-    transform: [{ rotateZ: '20deg' }],
   },
   HeaderActionBar: {
-    paddingTop: 45,
+    paddingTop: 30,
     paddingHorizontal: 20,
   },
   HeaderRow: {
@@ -85,3 +85,54 @@ const styles = StyleSheet.create({
 });
 
 export default styles;
+
+export const navMenuStyles = StyleSheet.create({
+  centeredView: {
+    flex: 1,
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    width: '100%',
+    marginTop: 38
+  },
+  modalView: {
+    width: Dimensions.get('screen').width,
+    backgroundColor: 'transparent',
+    alignItems: 'flex-start',
+    borderTopRightRadius: 25,
+    borderBottomRightRadius: 25,
+  },
+  gradient: {
+    borderTopRightRadius: 25,
+    borderBottomRightRadius: 25,
+    width: '67%',
+    paddingVertical: 20,
+    paddingHorizontal: 15,
+    marginTop: 7,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  button: {
+    height: 45,
+    paddingHorizontal: 5,
+    borderBottomColor: '#fff',
+    borderBottomWidth: 1,
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  btn: {
+    height: 35,
+    justifyContent: 'center',
+    paddingLeft:24
+  },
+  navMenuText: {
+    fontFamily: 'Montserrat-Medium',
+    marginLeft: 7,
+    color: '#fff'
+  }
+})

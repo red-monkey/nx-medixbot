@@ -40,6 +40,8 @@
     "react-native-mime-types": "*",
     "moment": "*",
     "axios": "*",
-    "use-force-update": "*"
+    "use-force-update": "*",
+    "react-native-calendars": "*",
+    "react-native-calendar-strip": "*"
   }
 }
