@@ -236,7 +236,7 @@ export const DatePickerModalStyle = StyleSheet.create({
   submitButtonGroup: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingHorizontal: '11%'
+    paddingHorizontal: '10%'
   },
 })
 

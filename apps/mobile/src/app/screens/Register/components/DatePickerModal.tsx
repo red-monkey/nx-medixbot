@@ -5,19 +5,23 @@ import { Dispatch } from 'redux';
 import CustomModal from '../../../components/CustomModal'
 import { setDate, setDateModal } from '../../../redux/actions/modal';
 import { useAppSelector } from '../../../utils/hooks';
-import {CalendarList} from 'react-native-calendars';
+import {Calendar, CalendarList} from 'react-native-calendars';
 import { MarkingProps } from 'react-native-calendars/src/calendar/day/marking';
 import * as styles from '../../../styles/RegisterStyle';
 import loginStyles from '../../../styles/LoginPageStyles';
+import CustomHeader from './DatePickerHeader';
 
 declare type MarkedDatesType = {
   [key: string]: MarkingProps;
 };
 
+
 const DatePickerModal = () => {
   const dispatch = useDispatch<Dispatch>();
   const [markedDates,setmarkedDates] = useState<MarkedDatesType>()
   const [birthDate,setbirthDate] = useState<string>('')
+  const [selectedMonth, setSelectedMonth] = useState<string>(new Date().getMonth().toString())
+  const [selectedYear, setSelectedYear] = useState<number>(new Date().getFullYear())
   const bDate = useAppSelector(state => state.DatePickerModalReducer.date)
   const getSelectedDayEvents = (date:string) => {
     const markedDates = {};
@@ -26,15 +30,15 @@ const DatePickerModal = () => {
 };
   const { width } = Dimensions.get('screen');
   const isOpen = useAppSelector(state => state.DatePickerModalReducer.isOpen);
-  const content = <View style={{height:380,paddingBottom: 70}}>
-      <CalendarList
-        horizontal={true}
-        pagingEnabled={true}
-        scrollsToTop={false}
-        calendarWidth={width*0.75}
-        calendarHeight={350}
+  const content = <View style={{height:415,paddingBottom: 70}}>
+      <Calendar
+        key={birthDate}
+        current={birthDate}
+        customHeader={()=>CustomHeader({currentDay: birthDate,setCurrent: setbirthDate,setMonth: setSelectedMonth,setYear: setSelectedYear, currentMonth: selectedMonth, currentYear: selectedYear})}
         style={{
-          marginLeft: width*0.125,
+          marginLeft: width*0.11,
+          height: 350,
+          width: width*0.8
         }}
         theme = {{
           backgroundColor: 'transparent',
@@ -67,7 +71,7 @@ const DatePickerModal = () => {
         style={[styles.MembershipModalStyle.submitButton,styles.MembershipModalStyle.createNewBtn]}>
         <Text style={[loginStyles.forgotPassword,{textAlign: 'center', marginTop: 0, color: '#41416E'}]}>Cancel</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={[styles.MembershipModalStyle.submitButton]} onPress={()=>{dispatch(setDate(birthDate));
+      <TouchableOpacity style={[styles.MembershipModalStyle.submitButton,{marginLeft: 10}]} onPress={()=>{dispatch(setDate(birthDate));
       dispatch(setDateModal(false))
       }}>
           <Text style={[loginStyles.forgotPassword,{textAlign: 'center', marginTop: 0, color: '#fff'}]}>Save</Text>
