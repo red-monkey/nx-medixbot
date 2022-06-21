@@ -50,6 +50,7 @@ export type RootStackParamList = {
   BlogDetails: undefined;
   FoodRecognition: undefined;
   SelectLocation: undefined;
+  MedicalHistory: undefined
 };
 
 export type InformationProps = {

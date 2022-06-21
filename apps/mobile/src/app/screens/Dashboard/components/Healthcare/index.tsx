@@ -5,7 +5,8 @@ import Category from './components/Category'
 export type TCategory = {
     name: string,
     iconPath: any,
-    color: string
+    color: string,
+    path?: string
 }
 
 const categories: TCategory[] = [
@@ -48,7 +49,8 @@ const categories: TCategory[] = [
     {
         name: 'Medical History Reports & Docs',
         iconPath: require('../icons/medicalHistoryReports.png'),
-        color: '#FF27FF'
+        color: '#FF27FF',
+        path: 'MedicalHistory'
     },
     {
         name: 'Body Health',
@@ -75,7 +77,7 @@ const index = () => {
   return (
     <View style={{flexDirection: 'row', flexWrap: 'wrap', paddingHorizontal: 0, width: '100%'}}>
         {categories.map((item,index) => (
-            <Category category={item} key={index} />
+            <Category category={item} key={index}/>
         ))}
     </View>
   )

@@ -5,6 +5,8 @@ import BlogDetails from '../screens/Blog/Details';
 import Dashboard from '../screens/Dashboard';
 import Gamification from '../screens/Gamification';
 import FoodRecognition from '../screens/FoodRecognition';
+import { RootStackParamList } from '../utils/types';
+import MedicalHistory from '../screens/Patient/MedicalHistory';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -15,6 +17,11 @@ export const DashBoardStackNavigator = () => {
         options={{ headerShown: false }}
         name="Dashboard"
         component={Dashboard}
+      />
+      <Stack.Screen
+        options={{ headerShown: false }}
+        name="MedicalHistory"
+        component={MedicalHistory}
       />
       <Stack.Screen
         options={{ headerShown: false }}
