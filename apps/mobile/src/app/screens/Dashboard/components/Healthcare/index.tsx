@@ -19,7 +19,8 @@ const categories: TCategory[] = [
     {
         name: 'Consultations & Visits',
         iconPath: require('../icons/consultations.png'),
-        color: '#FD5308'
+        color: '#FD5308',
+        path: 'Visits'
     },
     {
         name: 'Diagnostics/Treatments',

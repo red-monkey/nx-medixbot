@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react'
 import { TouchableOpacity,Text,StyleSheet, View } from 'react-native'
 import RightArrowIcon from '../../../../icons/RightArrow.svg';
@@ -6,13 +7,17 @@ import sharedStyles from '../../../styles/SharedStyles';
 type Props = {
     icon?: any,
     name: string,
-    component?: any,
+    component?: string,
     noBorder?: boolean
 }
 
 const SettingMenu = (props: Props) => {
+  const navigation = useNavigation<any>();
+  const navigateToScreen = () => {
+    navigation.navigate(props.component);
+  }
   return (
-    <TouchableOpacity style={[SettingMenuStyle.container,props.noBorder ? {borderBottomWidth: 0} : null]}>
+    <TouchableOpacity onPress={ props.component ? navigateToScreen : null} style={[SettingMenuStyle.container,props.noBorder ? {borderBottomWidth: 0} : null]}>
         <View style={[sharedStyles.row,sharedStyles.alignCenter]}>
             {props.icon ? props.icon : null}
             <Text style={SettingMenuStyle.text}>{props.name}</Text>            

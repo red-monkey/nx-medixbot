@@ -14,7 +14,7 @@ const ProfileSettings = () => {
     return(
         <View style={[styles.appointmentContainer]}>
             <SettingMenu name={'Edit Profile'} icon={<UserIcon />} />
-            <SettingMenu name={'Subscription Detail'} icon={<WalletIcon />} />
+            <SettingMenu name={'Subscription Detail'} icon={<WalletIcon /> }  component={'SubscriptionDetails'}/>
             <SettingMenu name={'Payment Method'} icon={<DollarIcon />} />
             <SettingMenu name={'Notification Settings'} icon={<RingIcon />} />
             <SettingMenu name={'Connected Devices'} icon={<LinkIcon />} />

@@ -1,6 +1,6 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { DashBoardStackNavigator } from './StackNavigation';
+import { DashBoardStackNavigator, PatientProfileStackNavigator } from './StackNavigation';
 import { StyleSheet, View, Text } from 'react-native';
 import HomeIcon from '../icons/HomeIcon';
 import AppointmentIcon from '../icons/AppointmentIcon';
@@ -118,7 +118,7 @@ const Tabs = () => {
           },
         }}
         name="Profile"
-        component={PatientProfile}
+        component={PatientProfileStackNavigator}
       />
     </Tab.Navigator>
   );
