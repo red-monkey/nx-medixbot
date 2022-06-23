@@ -107,7 +107,7 @@ export const navMenuStyles = StyleSheet.create({
     width: '67%',
     paddingVertical: 20,
     paddingHorizontal: 15,
-    marginTop: 7,
+    marginTop: -5,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,

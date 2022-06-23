@@ -14,12 +14,13 @@ const current = moment(Date.now()).toString().substring(0,15)
 const Appointment = (props: Props) => {
   const getDay = () => {
       let currentDay = '';
+      const date = new Date(props.date)
       if (current === props.date.substring(0,15)){
           currentDay = 'Today at '
       }
-      else if(moment(Date.now()).diff(moment(props.date),'years') === 0 && moment(Date.now()).diff(moment(props.date),'months') === 0){
-          if(moment(Date.now()).day() === moment(props.date).day() - 1)currentDay = 'Tomorrow at ';
-          else if (moment(Date.now()).day() === moment(props.date).day() + 1)currentDay = 'Yesterday at ';
+      else if(moment(date).year() - moment(Date.now()).year() === 0 && moment(date).month() - moment(Date.now()).month() === 0){
+          if(moment(Date.now()).day() === moment(date).day() - 1)currentDay = 'Tomorrow at ';
+          else if (moment(Date.now()).day() === moment(date).day() + 1)currentDay = 'Yesterday at ';
       }
       return currentDay
   }
@@ -36,7 +37,7 @@ const Appointment = (props: Props) => {
                 <Text style={{color: colors.Text,fontFamily: 'Montserrat-SemiBold',fontSize: 12}}>{props.appointment.doctorType}</Text>
                 <Text style={{color: colors.MedixBotPrimaryColor, fontFamily: 'Lora-SemiBold',marginTop: 5}}>{props.appointment.doctor}</Text>
              </View>
-             <Text style={{color: colors.Text, fontFamily: 'Lora-Regular', width: 95}}>
+             <Text style={{color: colors.Text, fontFamily: 'Lora-Regular', width: 95,textAlign: 'right'}}>
                 {getDay()}{props.appointment.time}
              </Text>
            </View>
@@ -80,7 +81,8 @@ const styles = StyleSheet.create({
         height: 27,
         textAlignVertical: 'center',
         textAlign: 'center',
-        borderRadius: 2
+        borderRadius: 2,
+        color: "#ffffff98"
     },
     AppointmentDetail: {
         backgroundColor: '#4140421A',

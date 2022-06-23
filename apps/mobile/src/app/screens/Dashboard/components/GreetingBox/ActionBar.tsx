@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { View, StyleSheet, Text, TouchableOpacity, Dimensions } from 'react-native';
 import GreatEmoji from '../../../icons/GreatEmoji.svg';
 import GoodEmoji from '../../../icons/GoodEmoji.svg';
@@ -14,16 +14,36 @@ import { useSelector, useDispatch } from 'react-redux';
 import { updateMood } from '../../../../redux/actions/challenge';
 import { AppState } from '../../../../redux/store/ConfigureStore';
 import { useNavigation } from '@react-navigation/native';
-import { GamificationProps } from '../../../../utils/types';
+import { GamificationProps, TMood } from '../../../../utils/types';
 import Medixbot from '../../../../icons/Medixbot.svg'
 
-export const feelings = {
+
+export const feelings =  {
   great: <GreatEmoji />,
   good: <GoodEmoji />,
   okay: <OkayEmoji />,
   bad: <BadEmoji />,
   awful: <AwfulEmoji />,
 };
+
+export const FeelingsCustomizable = ({mood,size}:{mood: TMood,size?: number}) => {
+  const props = size ? {width: size, height: size} : null
+  let icon: any ;
+  switch (mood) {
+    case 'great' : icon = <GreatEmoji {...props}/> 
+    break;
+    case 'good' : icon = <GoodEmoji {...props}/>
+    break;
+    case 'okay' : icon = <OkayEmoji {...props}/>
+    break;
+    case 'bad' : icon = <BadEmoji {...props}/>
+    break;
+    case 'awful' : icon = <AwfulEmoji {...props}/>
+    break;
+    default : icon = <View />
+  }
+  return icon
+}
 
 const roadMap = {
   score: {
@@ -51,7 +71,7 @@ const roadMap = {
   },
 };
 
-const EmojiBar = () => {
+export const EmojiBar = () => {
   const dispatch = useDispatch();
   const handleEmojiPress = (mood: string) => {
     dispatch(updateMood(mood));

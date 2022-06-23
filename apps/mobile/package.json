@@ -42,6 +42,8 @@
     "axios": "*",
     "use-force-update": "*",
     "react-native-calendars": "*",
-    "react-native-calendar-strip": "*"
+    "react-native-calendar-strip": "*",
+    "react-native-vector-icons": "*",
+    "react-native-gesture-handler": "*"
   }
 }

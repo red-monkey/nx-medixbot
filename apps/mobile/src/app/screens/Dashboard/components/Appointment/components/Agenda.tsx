@@ -21,7 +21,7 @@ type Tevent = {
 const events:Tevent[] =
  [
     {
-        date: '2022-06-18',
+        date: '2022-06-20',
         appointments: [
             {
                 status: 'Completed',
@@ -44,7 +44,7 @@ const events:Tevent[] =
         ]
     },
     {
-        date: '2022-06-17',
+        date: '2022-06-21',
         appointments: [
             {
                 status: 'Pending',
@@ -55,7 +55,7 @@ const events:Tevent[] =
         ]       
     },
     {
-        date: '2022-06-08',
+        date: '2021-11-04',
         appointments: [
             {
                 status: 'Completed',

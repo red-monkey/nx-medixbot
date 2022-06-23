@@ -50,7 +50,12 @@ export type RootStackParamList = {
   BlogDetails: undefined;
   FoodRecognition: undefined;
   SelectLocation: undefined;
+  MedicalHistory: undefined;
+  SubscriptionDetails: undefined;
+  PatientProfile: undefined;
+  Visits: undefined
 };
+
 
 export type InformationProps = {
   title: string;

@@ -22,7 +22,7 @@ const Appointment = () => {
   );
 };
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     width: '95%',
