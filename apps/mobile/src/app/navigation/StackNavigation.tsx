@@ -5,6 +5,8 @@ import BlogDetails from '../screens/Blog/Details';
 import Dashboard from '../screens/Dashboard';
 import Gamification from '../screens/Gamification';
 import FoodRecognition from '../screens/FoodRecognition';
+import MyCart from '../screens/Marketplace/MyCart';
+import Checkout from '../screens/Marketplace/Checkout';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -35,6 +37,16 @@ export const DashBoardStackNavigator = () => {
         options={{ headerShown: false }}
         name="FoodRecognition"
         component={FoodRecognition}
+      />
+      <Stack.Screen 
+        options={{ headerShown: false }}
+        name="MyCart"
+        component={MyCart}
+      />
+      <Stack.Screen 
+        options={{ headerShown: false }}
+        name="Checkout"
+        component={Checkout}
       />
     </Stack.Navigator>
   );

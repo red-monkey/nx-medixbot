@@ -6,12 +6,21 @@ import { colors } from "../../variables/colors";
 import {Products} from "./data/data";
 import { Header } from "./components/Header";
 import styles from "../../styles/MarketplaceStyles";
-import GreatEmoji from "../../icons/GreatEmoji.svg";
+import Star from "../../icons/Star.svg";
+import Vector from "../../icons/Vector.svg";
 import { useState } from "react";
+import { useNavigation } from "@react-navigation/native";
+
+// interface MyCartProps {
+//     navigation:any;
+// }
 
 export const MyProducts = () => {
     const initialValue = 0;
-const [counter, setCounter] = useState(initialValue);
+    const [counter, setCounter] = useState(initialValue);
+    const navigation = useNavigation<any>();
+
+    const myCart = () => navigation.navigate('MyCart');
 
     return(
         <SafeAreaView style={styles.root}>
@@ -21,6 +30,14 @@ const [counter, setCounter] = useState(initialValue);
             />
             <Header />
             <View style={styles.screenContent}>
+                <View>
+                    <Pressable
+                        onPress={myCart}
+                        style={styles.cartIcon}
+                    >
+                        <Vector />
+                    </Pressable>
+                </View>
                 <View style={styles.productDescription}>
                     <Text style={{color:'#D7EAFF', fontSize: 28, fontWeight:'bold', marginTop: 38, marginLeft:21}}>
                         Watchit Smartly
@@ -28,7 +45,7 @@ const [counter, setCounter] = useState(initialValue);
                     </Text>
                 </View>
                 <View style={{flexDirection:'row', justifyContent:'flex-start', alignItems:'center',marginLeft:21, marginTop:-320}}>
-                    <GreatEmoji height={20}/>
+                    <Star height={20}/>
                     <Text style={{color: '#D7EAFF', fontSize: 18, fontWeight:'400'}}>4.5</Text>
                 </View>
                 <View style={{ justifyContent:'space-between', flexDirection:'row', marginRight:23, alignItems:'center', height:33}}>
