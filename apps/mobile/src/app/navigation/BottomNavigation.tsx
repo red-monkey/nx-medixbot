@@ -7,6 +7,7 @@ import AppointmentIcon from '../icons/AppointmentIcon';
 import SearchIcon from '../icons/SearchIcon';
 import HealthIcon from '../icons/HealthIcon';
 import ProfileIcon from '../icons/ProfileIcon';
+import { MyProducts } from '../screens/Marketplace/MyProducts';
 
 const CustomTab: React.FC<{
   label: string;
@@ -78,15 +79,15 @@ const Tabs = () => {
           tabBarIcon: ({ focused }) => {
             return (
               <CustomTab
-                label="Search"
+                label="Marketplace"
                 icon={<SearchIcon stroke={focused ? '#fff' : ''} />}
                 focused={focused}
               />
             );
           },
         }}
-        name="Search"
-        component={DashBoardStackNavigator}
+        name="Marketplace"
+        component={MyProducts}
       />
       <Tab.Screen
         options={{
