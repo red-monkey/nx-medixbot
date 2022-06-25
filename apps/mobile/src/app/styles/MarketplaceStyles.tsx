@@ -103,8 +103,11 @@ const styles = StyleSheet.create({
         margin:12,
         borderRadius:18,
     },
-    cartProductDetails:{
-        flex:2,
+    deleteButton:{
+        width:23, 
+        height:21, 
+        backgroundColor:'#E6F2FC',
+        alignItems:'center',
     },
     cartIcon:{
         marginTop: 60,
@@ -160,6 +163,25 @@ const styles = StyleSheet.create({
         color:'#fff',
         fontWeight:'700',
         fontSize:15,
+    },
+    arrowLeft:{
+        width:29,
+        height:29,
+        opacity:0.1,
+        borderRadius:6,
+        backgroundColor:'#3095E2',
+        alignItems:'center',
+    },
+    deliveryOptions:{
+
+    },
+    payCheckoutButton:{
+        width:330,
+        height:60,
+        borderRadius:16,
+        backgroundColor:'#3095E2',
+        alignItems:'center',
+        justifyContent:'center'
     }
 
 });
