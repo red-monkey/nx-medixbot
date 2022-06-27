@@ -1,9 +1,9 @@
 // import { useEffect } from "react";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Button, Pressable, StatusBar, Text, View } from "react-native";
+import { Pressable, StatusBar, Text, View } from "react-native";
 import { colors } from "../../variables/colors";
-import {Products} from "./data/data";
+// import {Products} from "./data/data";
 import { Header } from "./components/Header";
 import styles from "../../styles/MarketplaceStyles";
 import Star from "../../icons/Star.svg";
@@ -11,11 +11,16 @@ import Vector from "../../icons/Vector.svg";
 import { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 
+import { connect } from "react-redux";
+import { addToCart } from "../../redux/actions/marketplace";
+
+import data from './data/data.json'
+
 // interface MyCartProps {
 //     navigation:any;
 // }
 
-export const MyProducts = () => {
+export const MyProducts = ({ addToCart }) => {
     const initialValue = 0;
     const [counter, setCounter] = useState(initialValue);
     const navigation = useNavigation<any>();
@@ -70,7 +75,10 @@ export const MyProducts = () => {
                     </Text>
                 </View>
                 <View style={{flexDirection:'row', marginTop:25, justifyContent:'space-between', marginLeft:23, marginRight:23}}>
-                    <Pressable style={styles.addToCart}>
+                    <Pressable 
+                        style={styles.addToCart}
+                        onPress={() => addToCart(data.products)}
+                    >
                         <Text style={styles.addToCartText}>Add To Cart</Text>
                     </Pressable>
                     <Pressable style={styles.likeIcon}>
@@ -80,4 +88,12 @@ export const MyProducts = () => {
             </View>
         </SafeAreaView>
     );
+};
+
+const mapDispatchToProps = dispatch => {
+    return{
+        addToCart: (id: number) => dispatch(addToCart(id)),
+    }
 }
+
+// export default MyProducts;

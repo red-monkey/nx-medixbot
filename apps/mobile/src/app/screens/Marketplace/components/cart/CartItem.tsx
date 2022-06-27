@@ -10,7 +10,7 @@ export const CartItem = () => {
         <View style={styles.boxOne}>
             <View style={styles.cartProduct}>
                 <Image 
-                    source={{uri:'https://unsplash.com/photos/hbTKIbuMmBI'}}
+                    source={{uri:'https://images.unsplash.com/photo-1599058917212-d750089bc07e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1469&q=80'}}
                     style={styles.cartImage}
                 />
             </View>
