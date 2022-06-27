@@ -17,3 +17,7 @@ export const SET_USER_CHALLENGES = 'SET_USER_CHALLENGES';
 export const SET_USER_BADGES = 'SET_USER_BADGES';
 export const SET_USER_GOALS = 'SET_USER_GOALS';
 export const SET_USER_REWARDS = 'SET_USER_REWARDS';
+export const ADD_TO_CART = 'ADD_TO_CART';
+export const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
+export const VIEW_PRODUCT = 'VIEW_PRODUCT';
+export const ADJUST_QTY = 'ADJUST_QTY';
