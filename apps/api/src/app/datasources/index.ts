@@ -6,12 +6,18 @@ import {
   BlogModel,
   AppointmentModel,
   MedicalImageModel,
+  CategoryModel,
+  ProductModel,
+  OrderModel,
 } from '@medixbot/models';
 import { AppointmentDataSource } from './Appointment.datasource';
 import { BlogDataSource } from './Blog.datasource';
 import { TokenDataSource } from './Token.datasource';
 import { UserDataSource } from './User.datasource';
 import { MedecineImageDataSource } from './MedecineImage.datasource';
+import { CategoryDataSource } from './Category.datasource';
+import { ProductDataSource } from './Product.datasource';
+import { OrderDataSource } from './Order.datasource';
 
 export type DataSources = {
   users: UserDataSource;
@@ -19,6 +25,9 @@ export type DataSources = {
   blogs: BlogDataSource;
   appointments: AppointmentDataSource;
   medicalImages: MedecineImageDataSource;
+  categories: CategoryDataSource;
+  products: ProductDataSource;
+  orders: OrderDataSource;
 };
 
 export const dataSources = () => ({
@@ -27,4 +36,7 @@ export const dataSources = () => ({
   blogs: new BlogDataSource(BlogModel),
   appointemnts: new AppointmentDataSource(AppointmentModel),
   medicalImages: new MedecineImageDataSource(MedicalImageModel),
+  categories: new CategoryDataSource(CategoryModel),
+  products: new ProductDataSource(ProductModel),
+  orders: new OrderDataSource(OrderModel),
 });

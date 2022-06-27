@@ -11,4 +11,8 @@ export * from './lib/labTest.Interfaces';
 export * from './lib/medicalImage.Interfaces';
 export * from './lib/prescription.Interfaces';
 export * from './lib/blog.interfaces';
+export * from './lib/category.interfaces';
+export * from './lib/product.interface';
+export * from './lib/order.interface';
+
 export * from './lib/generated';
