@@ -182,6 +182,10 @@ const styles = StyleSheet.create({
         backgroundColor:'#3095E2',
         alignItems:'center',
         justifyContent:'center'
+    },
+    cartImage:{
+        height:80,
+        width: 60,
     }
 
 });
