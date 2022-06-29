@@ -188,7 +188,74 @@ const styles = StyleSheet.create({
         height:85,
         width: 65,
         top: 18,
-    }
+    },
+    productDescriptionText: {
+        color:'#D7EAFF', 
+        fontSize: 28, 
+        fontWeight:'bold', 
+        marginTop: 38, 
+        marginLeft:21,
+    },
+    ratingsView:{
+        flexDirection:'row', 
+        justifyContent:'flex-start', 
+        alignItems:'center',
+        marginLeft:21, 
+        marginTop:-320,
+    },
+    ratingsText:{
+        color: '#D7EAFF', 
+        fontSize: 18, 
+        fontWeight:'400',
+    },
+    productsPriceView:{
+        justifyContent:'space-between', 
+        flexDirection:'row', 
+        marginRight:23, 
+        alignItems:'center', 
+        height:33,
+    },
+    productsPriceText:{
+        color: '#D7EAFF', 
+        marginLeft:23,  
+        fontSize:22, 
+        fontWeight:'700', 
+        marginTop:10,
+    },
+    productsCounterView:{
+        flexDirection:'row', 
+        width:100, 
+        justifyContent:'space-between', 
+        alignItems:'center',
+    },
+    productsDescriptionView:{
+        marginLeft:23, 
+        marginRight:23, 
+        marginTop:50,
+    },
+    productsDescriptionTitle:{
+        color:'#D7EAFF', 
+        fontWeight:'400', 
+        fontSize:18,
+    },
+    productDescriptionTextView:{
+        marginLeft:23, 
+        marginRight:23, 
+        marginTop:10,
+    },
+    productDescriptionTextTwo:{
+        color:'#D7EAFF', 
+        fontSize:16, 
+        fontWeight:'400', 
+        fontFamily:'Lora',
+    },
+    addToCartButtonView:{
+        flexDirection:'row', 
+        marginTop:25, 
+        justifyContent:'space-between', 
+        marginLeft:23, 
+        marginRight:23,
+    },
 
 });
 

@@ -41,18 +41,18 @@ export const MyProducts = ({ addToCart }) => {
                     </Pressable>
                 </View>
                 <View style={styles.productDescription}>
-                    <Text style={{color:'#D7EAFF', fontSize: 28, fontWeight:'bold', marginTop: 38, marginLeft:21}}>
+                    <Text style={styles.productDescriptionText}>
                         Watchit Smartly
 
                     </Text>
                 </View>
-                <View style={{flexDirection:'row', justifyContent:'flex-start', alignItems:'center',marginLeft:21, marginTop:-320}}>
+                <View style={styles.ratingsView}>
                     <Star height={20}/>
-                    <Text style={{color: '#D7EAFF', fontSize: 18, fontWeight:'400'}}>4.5</Text>
+                    <Text style={styles.ratingsText}>4.5</Text>
                 </View>
-                <View style={{ justifyContent:'space-between', flexDirection:'row', marginRight:23, alignItems:'center', height:33}}>
-                    <Text style={{color: '#D7EAFF', marginLeft:23,  fontSize:22, fontWeight:'700', marginTop:10}}>$200</Text>
-                    <View style={{flexDirection:'row', width:100, justifyContent:'space-between', alignItems:'center'}}>
+                <View style={styles.productsPriceView}>
+                    <Text style={styles.productsPriceText}>$200</Text>
+                    <View style={styles.productsCounterView}>
                         <Pressable style={styles.button}>
                             <Text style={styles.buttonText}>+</Text>
                         </Pressable>
@@ -63,15 +63,15 @@ export const MyProducts = ({ addToCart }) => {
                     </View>
                     
                 </View>
-                <View style={{marginLeft:23, marginRight:23, marginTop:50}}>
-                    <Text style={{color:'#D7EAFF', fontWeight:'400', fontSize:18}}>Description</Text>
+                <View style={styles.productsDescriptionView}>
+                    <Text style={styles.productsDescriptionTitle}>Description</Text>
                 </View>
-                <View style={{marginLeft:23, marginRight:23, marginTop:10}}>
-                    <Text style={{color:'#D7EAFF', fontSize:16, fontWeight:'400', fontFamily:'Lora'}}>
+                <View style={styles.productDescriptionTextView}>
+                    <Text style={styles.productDescriptionTextTwo}>
                     Get control of your vitals with our smart Watchit device. You can now also be able to connect our CGM device to Watchit as you manage your diabetes on the go. Get display of your health vitals and recommendations on how to improve your health.
                     </Text>
                 </View>
-                <View style={{flexDirection:'row', marginTop:25, justifyContent:'space-between', marginLeft:23, marginRight:23}}>
+                <View style={styles.addToCartButtonView}>
                     <Pressable 
                         style={styles.addToCart}
                         
