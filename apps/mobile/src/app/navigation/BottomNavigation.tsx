@@ -6,6 +6,7 @@ import HomeIcon from '../icons/HomeIcon';
 import AppointmentIcon from '../icons/AppointmentIcon';
 import SearchIcon from '../icons/SearchIcon';
 import HealthIcon from '../icons/HealthIcon';
+import ProfileIcon from '../icons/ProfileIcon';
 
 const CustomTab: React.FC<{
   label: string;
