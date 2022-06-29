@@ -3,7 +3,6 @@ import React from 'react'
 import styles from "../../styles/MarketplaceStyles";
 import { CartHeader } from './components/CartHeader';
 import { colors } from '../../variables/colors';
-import Star from "../../icons/Star.svg";
 import { useNavigation } from '@react-navigation/native';
 import CartItem from './components/cart/CartItem';
 
