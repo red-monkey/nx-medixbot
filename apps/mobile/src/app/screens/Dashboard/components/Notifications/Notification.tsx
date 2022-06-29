@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
-import RightArrowIcon from '../../../../icons/RightArrowIcon.svg';
+import RightArrowIcon from '../../../../icons/RightArrow.svg';
 
 interface INotification {
   color: string;

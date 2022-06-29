@@ -10,7 +10,7 @@ export const setAuthToken = async (token: IToken, type: TokenType) => {
     } else if (type === 'refreshToken') {
       await AsyncStorage.setItem('refreshToken', tokenJSON);
     }
-  } catch (e) {}
+  } catch (e) {console.error(e)}
 };
 
 export const storeItem = async (value: string, type: loginMethod) => {
@@ -20,7 +20,7 @@ export const storeItem = async (value: string, type: loginMethod) => {
     } else if (type === 'phone') {
       await AsyncStorage.setItem('phone-number', value);
     }
-  } catch (e) {}
+  } catch (e) {console.error(e)}
 };
 
 export const getItem = async (type: loginMethod) => {
@@ -28,5 +28,5 @@ export const getItem = async (type: loginMethod) => {
     const itemName = type === 'phone' ? 'phone-number' : 'email-address';
     const jsonValue = await AsyncStorage.getItem(itemName);
     return jsonValue != null ? jsonValue.toString() : null;
-  } catch (e) {}
+  } catch (e) {console.error(e)}
 };

@@ -232,6 +232,14 @@ export const LocationModalStyles = StyleSheet.create({
   }
 })
 
+export const DatePickerModalStyle = StyleSheet.create({
+  submitButtonGroup: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: '10%'
+  },
+})
+
 export const LanguageModalStyles = StyleSheet.create({
     languagesList: {
       height:280,
@@ -284,5 +292,7 @@ export const greyBackground = {
 export const darkGreyBackground = {
   backgroundColor: "#E6E6E6"
  }
+
+
 
 export default registerStyles;

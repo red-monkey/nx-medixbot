@@ -31,6 +31,9 @@ import {
 
   SET_USER_REWARDS,
   SET_USER_SCORE,
+  OPEN_DATE_PICKER_MODAL,
+  CLOSE_DATE_PICKER_MODAL,
+  SET_BIRTH_DATE,
 } from '../redux/actions/actionTypes';
 
 export type RootStackParamList = {
@@ -47,7 +50,15 @@ export type RootStackParamList = {
   BlogDetails: undefined;
   FoodRecognition: undefined;
   SelectLocation: undefined;
+  MedicalHistory: undefined;
+  SubscriptionDetails: undefined;
+  PatientProfile: undefined;
+  Visits: undefined,
+  MyCart: undefined,
+  Checkout: undefined,
+  MyProducts: undefined,
 };
+
 
 export type InformationProps = {
   title: string;
@@ -377,6 +388,14 @@ export interface SetLanguageModaldAction {
   payload: string[];
 }
 
+export interface SetDateModalAction {
+  type: 
+  typeof OPEN_DATE_PICKER_MODAL |
+  typeof CLOSE_DATE_PICKER_MODAL |
+  typeof SET_BIRTH_DATE
+  payload: string
+}
+
 export interface SetMembershipModaldAction {
   type: typeof OPEN_MEMBERSHIP_MODAL | typeof CLOSE_MEMBERSHIP_MODAL;
   payload: boolean;
@@ -496,11 +515,7 @@ export type location = {
   addressLine2?: string;
 };
 
-export type TMood = null | 'great' | 'good' | 'okay' | 'bad' | 'awful';
-interface UpdateMoodAction {
-  type: typeof SET_USER_MOOD;
-  payload: TMood;
-}
+
 
 interface UpdateScoreAction {
   type: typeof SET_USER_SCORE;
@@ -527,10 +542,3 @@ interface UpdateRewardsAction {
   payload: number;
 }
 
-export type ChallengeAction =
-  | UpdateMoodAction
-  | UpdateScoreAction
-  | UpdateChallengesAtion
-  | UpdateBadgesAction
-  | UpdateGoalsAction
-  | UpdateRewardsAction;

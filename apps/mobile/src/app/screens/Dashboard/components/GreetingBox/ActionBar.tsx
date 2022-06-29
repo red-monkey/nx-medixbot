@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import React, { ReactNode } from 'react';
+import { View, StyleSheet, Text, TouchableOpacity, Dimensions } from 'react-native';
 import GreatEmoji from '../../../icons/GreatEmoji.svg';
 import GoodEmoji from '../../../icons/GoodEmoji.svg';
 import OkayEmoji from '../../../icons/OkayEmoji.svg';
@@ -14,15 +14,36 @@ import { useSelector, useDispatch } from 'react-redux';
 import { updateMood } from '../../../../redux/actions/challenge';
 import { AppState } from '../../../../redux/store/ConfigureStore';
 import { useNavigation } from '@react-navigation/native';
-import { GamificationProps } from '../../../../utils/types';
+import { GamificationProps, TMood } from '../../../../utils/types';
+import Medixbot from '../../../../icons/Medixbot.svg'
 
-export const feelings = {
+
+export const feelings =  {
   great: <GreatEmoji />,
   good: <GoodEmoji />,
   okay: <OkayEmoji />,
   bad: <BadEmoji />,
   awful: <AwfulEmoji />,
 };
+
+export const FeelingsCustomizable = ({mood,size}:{mood: TMood,size?: number}) => {
+  const props = size ? {width: size, height: size} : null
+  let icon: any ;
+  switch (mood) {
+    case 'great' : icon = <GreatEmoji {...props}/> 
+    break;
+    case 'good' : icon = <GoodEmoji {...props}/>
+    break;
+    case 'okay' : icon = <OkayEmoji {...props}/>
+    break;
+    case 'bad' : icon = <BadEmoji {...props}/>
+    break;
+    case 'awful' : icon = <AwfulEmoji {...props}/>
+    break;
+    default : icon = <View />
+  }
+  return icon
+}
 
 const roadMap = {
   score: {
@@ -50,7 +71,7 @@ const roadMap = {
   },
 };
 
-const EmojiBar = () => {
+export const EmojiBar = () => {
   const dispatch = useDispatch();
   const handleEmojiPress = (mood: string) => {
     dispatch(updateMood(mood));
@@ -120,7 +141,9 @@ const ActionBar = () => {
             ? 'Are you ready to challenge yourself?'
             : 'How are you feeling today?'}
         </Text>
-        <Text style={styles.status}>Member of Family</Text>
+        <Medixbot />
+        <Text style={styles.status}>Member of Family 
+        <Text style={{fontSize: 20}}>MEDIXBOT</Text></Text>
       </View>
       {mood ? <ChallengeBar mood={mood} /> : <EmojiBar />}
     </View>
@@ -137,16 +160,19 @@ const styles = StyleSheet.create({
   status: {
     position: 'relative',
     fontFamily: 'Montserrat-Black',
+    fontSize: 14,
     color: '#41416E',
-    top: -10,
+    marginLeft: 5,
+    width: 140
   },
   question: {
-    width: 150,
+    width: 110,
     color: '#414042',
     fontFamily: 'Lora-Medium',
     fontSize: 16,
     opacity: 0.5,
     marginVertical: 15,
+    marginRight: 5
   },
 
   feelings: {

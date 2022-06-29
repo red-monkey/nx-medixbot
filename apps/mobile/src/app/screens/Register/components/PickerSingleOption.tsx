@@ -49,7 +49,7 @@ export const PickerSingleOption = ({setPartner,selectedButtonref,element,refs,cu
           selectElement();
           setPartner(element)
       }} ref={selectedButtonref}  style={ currentPartner !== element ? {display: 'flex'} :  {display: 'none'}}>
-        <Text>{element}</Text>
+        <Text  style={{color: '#fff'}}>{element}</Text>
       </TouchableOpacity>
       <TouchableOpacity ref={highlightRef} style={ currentPartner === element ? {display: 'flex'} : {display: 'none'}}>
         <Text style={LocationModalStyles.highlightedText}>{element}</Text>

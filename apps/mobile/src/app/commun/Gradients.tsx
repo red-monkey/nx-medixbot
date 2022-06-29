@@ -76,3 +76,15 @@ export const DashboardHeaderGradient = () => {
     ></LinearGradient>
   );
 };
+
+export const NavGradient = () => {
+  return (
+    <LinearGradient
+      colors={['rgba(0,194,239,0.5)', 'rgba(204,64,182,0.5)']}
+      locations={[0.1476, 1.2108]}
+      useAngle={true}
+      angle={303.24}
+      style={dashboard.HeaderGradientBox}   
+    ></LinearGradient>
+  );
+};

@@ -36,7 +36,7 @@ export const SelectLocation = () => {
                             setIsVisible(false);
                             pressOutHandler(countryRef)
                             }}>
-                            <Text style={element === selectedCountry ? LocationModalStyles.highlightedText : null}>{element}</Text>
+                            <Text style={element === selectedCountry ? LocationModalStyles.highlightedText : {color: "#fff"}}>{element}</Text>
                           </TouchableOpacity>
                         ))}
     </ScrollView>
@@ -101,9 +101,6 @@ export const SelectLocation = () => {
               handleBlur,
               handleSubmit,
               values,
-              errors,
-              touched,
-              isValid,
             }) => (
                 <>
                 <View style={[registerStyles.formSelectInputStyle, {paddingHorizontal: 3,paddingRight: 15}]} ref={countryRef}>

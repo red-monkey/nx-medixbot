@@ -27,7 +27,7 @@ export default function AppContainer() {
           options={{ headerShown: false }}
           name="Login"
           component={LoginPage}
-        />
+        />    
         <Stack.Screen
           options={{ headerShown: false }}
           name="ForgotPassword"
