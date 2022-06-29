@@ -6,8 +6,6 @@ import HomeIcon from '../icons/HomeIcon';
 import AppointmentIcon from '../icons/AppointmentIcon';
 import SearchIcon from '../icons/SearchIcon';
 import HealthIcon from '../icons/HealthIcon';
-import ProfileIcon from '../icons/ProfileIcon';
-import Blog from '../screens/Blog';
 
 const CustomTab: React.FC<{
   label: string;
@@ -87,7 +85,7 @@ const Tabs = () => {
           },
         }}
         name="Search"
-        component={Blog}
+        component={DashBoardStackNavigator}
       />
       <Tab.Screen
         options={{
