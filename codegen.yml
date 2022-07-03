@@ -1,6 +1,6 @@
 overwrite: true
 schema:
-  - '**/*.ts'
+  - '**/*.schema.ts'
 documents:
   - '**/*.graphql'
 generates:
