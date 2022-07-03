@@ -14,8 +14,8 @@ type Props = {};
 
 const MarketPlace = (props: Props) => {
   return (
-    <ScrollView contentContainerStyle={styles.Container} scrollEnabled>
-      <StatusBar  backgroundColor={colors.backgroundColor} barStyle="dark-content" />
+    <ScrollView contentContainerStyle={[styles.Container]} scrollEnabled>
+      <StatusBar  translucent={false}  backgroundColor={colors.backgroundColor} barStyle="dark-content" />
       <Header />
       <View style={styles.MarketPlacePlace}>
         <UserCartSection />

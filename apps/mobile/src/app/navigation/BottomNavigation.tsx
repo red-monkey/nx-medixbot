@@ -9,6 +9,7 @@ import HealthIcon from '../icons/HealthIcon';
 import ProfileIcon from '../icons/ProfileIcon';
 import Blog from "../screens/Blog"
 import PatientProfile from '../screens/PatientProfile';
+import MarketPlace from '../screens/Marketplace';
 
 const CustomTab: React.FC<{
   label: string;
@@ -88,7 +89,7 @@ const Tabs = () => {
           },
         }}
         name="Search"
-        component={Blog}
+        component={MarketPlace}
       />
       <Tab.Screen
         options={{
