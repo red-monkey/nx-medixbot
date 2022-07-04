@@ -84,9 +84,43 @@ export type ICreateMedecineImage = {
   user: Scalars['ID'];
 };
 
+export type ICreateOrder = {
+  itemsPrice?: InputMaybe<Scalars['Float']>;
+  orderItems?: InputMaybe<IOrderItem>;
+  paymentMethod?: InputMaybe<Scalars['String']>;
+  shippingAddress?: InputMaybe<IShippingAddress>;
+  shippingPrice?: InputMaybe<Scalars['Float']>;
+  taxPrice?: InputMaybe<Scalars['Float']>;
+  totalPrice?: InputMaybe<Scalars['Float']>;
+};
+
+export type ICreateProduct = {
+  brand?: InputMaybe<Scalars['String']>;
+  categoryRef?: InputMaybe<Scalars['ID']>;
+  countInStock?: InputMaybe<Scalars['Float']>;
+  description?: InputMaybe<Scalars['String']>;
+  image?: InputMaybe<Scalars['Upload']>;
+  name?: InputMaybe<Scalars['String']>;
+  price?: InputMaybe<Scalars['Float']>;
+};
+
+export type ICreateReview = {
+  comment?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
+  productRef?: InputMaybe<Scalars['ID']>;
+  rating?: InputMaybe<Scalars['Float']>;
+};
+
 export type IDocument = {
   type?: InputMaybe<Scalars['String']>;
   url?: InputMaybe<Scalars['String']>;
+};
+
+export type IOrderItem = {
+  image?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
+  price?: InputMaybe<Scalars['Float']>;
+  quantity?: InputMaybe<Scalars['Float']>;
 };
 
 export type IRegisterUser = {
@@ -104,6 +138,13 @@ export type IRegisterUser = {
   state?: InputMaybe<Scalars['String']>;
   tel?: InputMaybe<Scalars['String']>;
   userRole: EUserRole;
+};
+
+export type IShippingAddress = {
+  address?: InputMaybe<Scalars['String']>;
+  city?: InputMaybe<Scalars['String']>;
+  country?: InputMaybe<Scalars['String']>;
+  postcode?: InputMaybe<Scalars['String']>;
 };
 
 export type ITime = {
@@ -149,6 +190,27 @@ export type IUpdateMedecineImage = {
   user: Scalars['ID'];
 };
 
+export type IUpdateOrder = {
+  itemsPrice?: InputMaybe<Scalars['Float']>;
+  orderItems?: InputMaybe<IOrderItem>;
+  paymentMethod?: InputMaybe<Scalars['String']>;
+  shippingAddress?: InputMaybe<IShippingAddress>;
+  shippingPrice?: InputMaybe<Scalars['Float']>;
+  taxPrice?: InputMaybe<Scalars['Float']>;
+  totalPrice?: InputMaybe<Scalars['Float']>;
+};
+
+export type IUpdateProduct = {
+  brand?: InputMaybe<Scalars['String']>;
+  categoryRef?: InputMaybe<Scalars['ID']>;
+  countInStock?: InputMaybe<Scalars['Float']>;
+  description?: InputMaybe<Scalars['String']>;
+  image?: InputMaybe<Scalars['Upload']>;
+  name?: InputMaybe<Scalars['String']>;
+  price?: InputMaybe<Scalars['Float']>;
+  rating?: InputMaybe<Scalars['Float']>;
+};
+
 export type IUpdateUser = {
   city?: InputMaybe<Scalars['String']>;
   country?: InputMaybe<Scalars['String']>;
@@ -168,11 +230,15 @@ export type Mutation = {
   createBlog?: Maybe<TBlog>;
   createCategory?: Maybe<TCategory>;
   createMedecineImage?: Maybe<TMedecineImage>;
+  createOrder?: Maybe<TOrder>;
+  createProduct?: Maybe<TProduct>;
+  createProductReview?: Maybe<Scalars['String']>;
   createUser?: Maybe<TUser>;
   deleteAppointment: Scalars['String'];
   deleteBlog: Scalars['String'];
   deleteCategory: Scalars['String'];
   deleteMedecineImage: Scalars['String'];
+  deleteProduct: Scalars['String'];
   deleteUser: Scalars['String'];
   forgotPassword: TNormalResponse;
   login: TAuthSuccess;
@@ -189,6 +255,10 @@ export type Mutation = {
   updateCategory?: Maybe<TCategory>;
   updateDoctorInfo: Scalars['String'];
   updateMedecineImage?: Maybe<TMedecineImage>;
+  updateOrder?: Maybe<TOrder>;
+  updateOrderToDelivered: TOrder;
+  updateOrderToPaid?: Maybe<TOrder>;
+  updateProduct?: Maybe<TProduct>;
 };
 
 export type MutationCreateBlogArgs = {
@@ -201,6 +271,19 @@ export type MutationCreateCategoryArgs = {
 
 export type MutationCreateMedecineImageArgs = {
   data: ICreateMedecineImage;
+};
+
+export type MutationCreateOrderArgs = {
+  data: ICreateOrder;
+};
+
+export type MutationCreateProductArgs = {
+  data: ICreateProduct;
+};
+
+export type MutationCreateProductReviewArgs = {
+  data: ICreateReview;
+  productId: Scalars['ID'];
 };
 
 export type MutationCreateUserArgs = {
@@ -225,6 +308,10 @@ export type MutationDeleteCategoryArgs = {
 
 export type MutationDeleteMedecineImageArgs = {
   medecineImageId: Scalars['ID'];
+};
+
+export type MutationDeleteProductArgs = {
+  productId: Scalars['ID'];
 };
 
 export type MutationDeleteUserArgs = {
@@ -290,6 +377,24 @@ export type MutationUpdateMedecineImageArgs = {
   data: IUpdateMedecineImage;
 };
 
+export type MutationUpdateOrderArgs = {
+  data: IUpdateOrder;
+  orderId: Scalars['ID'];
+};
+
+export type MutationUpdateOrderToDeliveredArgs = {
+  orderId: Scalars['ID'];
+};
+
+export type MutationUpdateOrderToPaidArgs = {
+  orderId: Scalars['ID'];
+};
+
+export type MutationUpdateProductArgs = {
+  data: IUpdateProduct;
+  productId: Scalars['ID'];
+};
+
 export type Query = {
   appointment?: Maybe<TAppointment>;
   appointments: TPaginatedAppointment;
@@ -301,6 +406,12 @@ export type Query = {
   getCategory?: Maybe<TCategory>;
   getMedecineImage?: Maybe<TMedecineImage>;
   getMedecineImages: TPaginatedMedecineImage;
+  getMyOrders: Array<TOrder>;
+  getOrder?: Maybe<TOrder>;
+  getOrders: TPaginatedOrders;
+  getProduct?: Maybe<TProduct>;
+  getProducts: TPaginatedProducts;
+  getTopProducts: Array<Maybe<TProduct>>;
   me?: Maybe<TUser>;
   patient?: Maybe<TPatient>;
   user?: Maybe<TUser>;
@@ -348,6 +459,24 @@ export type QueryGetMedecineImageArgs = {
 };
 
 export type QueryGetMedecineImagesArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+};
+
+export type QueryGetOrderArgs = {
+  orderId: Scalars['ID'];
+};
+
+export type QueryGetOrdersArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+};
+
+export type QueryGetProductArgs = {
+  productId: Scalars['ID'];
+};
+
+export type QueryGetProductsArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   page?: InputMaybe<Scalars['Int']>;
 };
@@ -439,6 +568,30 @@ export type TNormalResponse = {
   message: Scalars['String'];
 };
 
+export type TOrder = {
+  deliveredAt?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['ID']>;
+  isDelivered?: Maybe<Scalars['Boolean']>;
+  isPaid?: Maybe<Scalars['Boolean']>;
+  orderItems?: Maybe<TOrderItems>;
+  paidAt?: Maybe<Scalars['String']>;
+  paymentMethod?: Maybe<Scalars['String']>;
+  paymentResult?: Maybe<TPaymentResult>;
+  shippingAddress?: Maybe<TShippingAddress>;
+  shippingPrice?: Maybe<Scalars['Float']>;
+  taxPrice?: Maybe<Scalars['Float']>;
+  totalPrice?: Maybe<Scalars['Float']>;
+  user?: Maybe<TUser>;
+};
+
+export type TOrderItems = {
+  image?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  price?: Maybe<Scalars['Float']>;
+  product?: Maybe<TProduct>;
+  quantity?: Maybe<Scalars['Float']>;
+};
+
 export type TPaginatedAppointment = {
   limit: Scalars['Int'];
   page: Scalars['Int'];
@@ -471,6 +624,22 @@ export type TPaginatedMedecineImage = {
   totalResults: Scalars['Int'];
 };
 
+export type TPaginatedOrders = {
+  limit: Scalars['Int'];
+  page: Scalars['Int'];
+  results: Array<Maybe<TOrder>>;
+  totalPages: Scalars['Int'];
+  totalResults: Scalars['Int'];
+};
+
+export type TPaginatedProducts = {
+  limit: Scalars['Int'];
+  page: Scalars['Int'];
+  results: Array<Maybe<TProduct>>;
+  totalPages: Scalars['Int'];
+  totalResults: Scalars['Int'];
+};
+
 export type TPaginatedUsers = {
   limit: Scalars['Int'];
   page: Scalars['Int'];
@@ -481,6 +650,42 @@ export type TPaginatedUsers = {
 
 export type TPatient = {
   info?: Maybe<TUser>;
+};
+
+export type TPaymentResult = {
+  email_address?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+  status?: Maybe<Scalars['String']>;
+  update_time?: Maybe<Scalars['String']>;
+};
+
+export type TProduct = {
+  brand?: Maybe<Scalars['String']>;
+  category?: Maybe<TCategory>;
+  countInStock?: Maybe<Scalars['Float']>;
+  description?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['ID']>;
+  image?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  numReviews?: Maybe<Scalars['Float']>;
+  price?: Maybe<Scalars['Float']>;
+  rating?: Maybe<Scalars['Float']>;
+  reviews?: Maybe<Array<Maybe<TReview>>>;
+  user?: Maybe<TUser>;
+};
+
+export type TReview = {
+  comment?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  rating?: Maybe<Scalars['Float']>;
+  user?: Maybe<TUser>;
+};
+
+export type TShippingAddress = {
+  address?: Maybe<Scalars['String']>;
+  city?: Maybe<Scalars['String']>;
+  country?: Maybe<Scalars['String']>;
+  postcode?: Maybe<Scalars['String']>;
 };
 
 export type TTime = {

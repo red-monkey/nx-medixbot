@@ -61,9 +61,14 @@ export class ProductDataSource extends MongoDataSource<
     return product;
   }
 
-  async getTopProducts() {
-    const products = await this.Product.find({}).sort({ rating: -1 });
-    return products;
+  async getTopProducts(
+    filter: FilterQuery<IProductDocument>,
+    options: IPaginateOption<unknown>
+  ) {
+    const products = await this.Product.paginate(filter, options);
+    if (products) {
+      return await this.Product.find({}).sort({ rating: -1 });
+    }
   }
 
   async createProductReview(productId: string, review: TReview) {

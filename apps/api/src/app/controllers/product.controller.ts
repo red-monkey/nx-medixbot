@@ -84,8 +84,10 @@ async function deleteProduct(data: { productId: string }, ctx: IContext) {
   return 'Deleted';
 }
 
-async function getTopProducts(ctx: IContext) {
-  const result = await ctx.dataSources.products.getTopProducts();
+async function getTopProducts(data: IGetProductsArgs, ctx: IContext) {
+  const filter = {};
+  const options = pick(data, ['sortBy', 'limit', 'page']);
+  const result = await ctx.dataSources.products.getTopProducts(filter, options);
   return result;
 }
 
