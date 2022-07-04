@@ -11,6 +11,7 @@ import {
   medicineImageResolver,
   categoryResolver,
   productResolver,
+  orderResolver,
 } from './resolvers';
 import {
   AppSchema,
@@ -21,6 +22,7 @@ import {
   MedecineImageSchema,
   CategorySchema,
   ProductSchema,
+  OrderSchema,
 } from './schemas';
 
 const apolloServer = new ApolloServer({
@@ -33,6 +35,7 @@ const apolloServer = new ApolloServer({
     MedecineImageSchema,
     CategorySchema,
     ProductSchema,
+    OrderSchema,
   ],
   resolvers: merge(
     {
@@ -46,7 +49,8 @@ const apolloServer = new ApolloServer({
     appointmentResolver,
     medicineImageResolver,
     categoryResolver,
-    productResolver
+    productResolver,
+    orderResolver
   ),
   mocks: true,
   mockEntireSchema: false,

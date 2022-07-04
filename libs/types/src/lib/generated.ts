@@ -86,7 +86,7 @@ export type ICreateMedecineImage = {
 
 export type ICreateOrder = {
   itemsPrice?: InputMaybe<Scalars['Float']>;
-  orderItems?: InputMaybe<IOrderItem>;
+  orderItems?: InputMaybe<Array<InputMaybe<IOrderItem>>>;
   paymentMethod?: InputMaybe<Scalars['String']>;
   shippingAddress?: InputMaybe<IShippingAddress>;
   shippingPrice?: InputMaybe<Scalars['Float']>;
@@ -120,7 +120,15 @@ export type IOrderItem = {
   image?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
   price?: InputMaybe<Scalars['Float']>;
+  product: Scalars['ID'];
   quantity?: InputMaybe<Scalars['Float']>;
+};
+
+export type IPaymentResult = {
+  email_address?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['String']>;
+  status?: InputMaybe<Scalars['String']>;
+  update_time?: InputMaybe<Scalars['String']>;
 };
 
 export type IRegisterUser = {
@@ -387,6 +395,7 @@ export type MutationUpdateOrderToDeliveredArgs = {
 };
 
 export type MutationUpdateOrderToPaidArgs = {
+  data: IPaymentResult;
   orderId: Scalars['ID'];
 };
 
@@ -573,7 +582,7 @@ export type TOrder = {
   id?: Maybe<Scalars['ID']>;
   isDelivered?: Maybe<Scalars['Boolean']>;
   isPaid?: Maybe<Scalars['Boolean']>;
-  orderItems?: Maybe<TOrderItems>;
+  orderItems?: Maybe<Array<Maybe<TOrderItem>>>;
   paidAt?: Maybe<Scalars['String']>;
   paymentMethod?: Maybe<Scalars['String']>;
   paymentResult?: Maybe<TPaymentResult>;
@@ -584,7 +593,7 @@ export type TOrder = {
   user?: Maybe<TUser>;
 };
 
-export type TOrderItems = {
+export type TOrderItem = {
   image?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   price?: Maybe<Scalars['Float']>;

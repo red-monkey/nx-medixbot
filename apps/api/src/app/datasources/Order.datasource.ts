@@ -72,7 +72,8 @@ export class OrderDataSource extends MongoDataSource<IOrderDocument, IContext> {
       );
     }
 
-    (order.isPaid = true), (order.paidAt = Date.now().toString());
+    order.isPaid = true;
+    order.paidAt = Date.now().toString();
     order.paymentResult = {
       id: data.id,
       status: data.status,

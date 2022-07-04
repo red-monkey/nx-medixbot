@@ -1,7 +1,7 @@
 import { gql } from 'apollo-server-express';
 
 export default gql`
-  type TOrderItems {
+  type TOrderItem {
     name: String
     quantity: Float
     image: String
@@ -24,7 +24,7 @@ export default gql`
   type TOrder {
     id: ID
     user: TUser
-    orderItems: TOrderItems
+    orderItems: [TOrderItem]
     shippingAddress: TShippingAddress
     paymentMethod: String
     paymentResult: TPaymentResult
@@ -42,6 +42,13 @@ export default gql`
     quantity: Float
     image: String
     price: Float
+    product: ID!
+  }
+  input IPaymentResult {
+    id: String
+    status: String
+    update_time: String
+    email_address: String
   }
 
   input IShippingAddress {
@@ -52,7 +59,7 @@ export default gql`
   }
 
   input ICreateOrder {
-    orderItems: IOrderItem
+    orderItems: [IOrderItem]
     shippingAddress: IShippingAddress
     paymentMethod: String
     itemsPrice: Float
@@ -91,6 +98,6 @@ export default gql`
     createOrder(data: ICreateOrder!): TOrder
     updateOrder(orderId: ID!, data: IUpdateOrder!): TOrder
     updateOrderToDelivered(orderId: ID!): TOrder!
-    updateOrderToPaid(orderId: ID!): TOrder
+    updateOrderToPaid(orderId: ID!, data: IPaymentResult!): TOrder
   }
 `;
