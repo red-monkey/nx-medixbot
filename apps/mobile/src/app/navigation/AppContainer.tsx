@@ -11,6 +11,7 @@ import VerificationCode from '../screens/Login/VerificationCode';
 import Register from '../screens/Register';
 import Tabs from './BottomNavigation';
 import { SelectLocation } from '../screens/Register/SelectLocation';
+import MarketPlace from '../screens/Marketplace';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -47,6 +48,11 @@ export default function AppContainer() {
           options={{ headerShown: false }}
           name="VerificationCode"
           component={VerificationCode}
+        />
+        <Stack.Screen
+          options={{headerShown: false}}
+          name="Market"
+          component={MarketPlace}
         />
         <Stack.Screen
           options={{ headerShown: false }}
