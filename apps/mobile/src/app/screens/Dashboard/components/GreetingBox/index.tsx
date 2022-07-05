@@ -6,14 +6,14 @@ import { feelings } from './ActionBar';
 import { useSelector } from 'react-redux';
 import { AppState } from '../../../../redux/store/ConfigureStore';
 import { useIsUser } from '../../../../customHooks/useIsUser';
-import { IUser } from 'apps/mobile/src/app/apollo/GraphQL/types';
+import { IUser } from '../../../../apollo/GraphQL/types';
 
 
 const GreetingBox = () => {
   const { mood } = useSelector((state: AppState) => state.challengeReducer);
-  const [, getUser, deleteUserData] = useIsUser();
+  const [, getUser,] = useIsUser();
   const [userInf,setUserInf] = useState<IUser | null>();
-  const user = getUser().then(user => setUserInf(JSON.parse(user)));
+  getUser().then(user => setUserInf(JSON.parse(user)));
   return (
     <View style={styles.GreetingBoxContainer}>
       <Image
