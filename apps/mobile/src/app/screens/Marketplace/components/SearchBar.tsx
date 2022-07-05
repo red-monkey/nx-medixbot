@@ -8,17 +8,11 @@ import {
 } from 'react-native';
 import React from 'react';
 import SearchIcon from '../../../icons/marketplaceicons/search.svg';
-//   import SearchIcon from "../../../assets/search.svg";
-//   import SearchSettings from "../../../assets/settingsGrid.svg";
-//   import Arrow from "../../../assets/arrow.svg";
 import Arrow from '../../../icons/marketplaceicons/arrow.svg';
 import SearchSettings from '../../../icons/marketplaceicons/settingsGrid.svg';
 
-type Props = {};
 
-const deviceWidth = Dimensions.get('window').width;
-
-const SearchBar = (props: Props) => {
+const SearchBar = () => {
   return (
     <View style={styles.container}>
       <View style={styles.input}>
@@ -26,8 +20,9 @@ const SearchBar = (props: Props) => {
           <SearchIcon />
         </View>
         <TextInput
-          style={{ width: '80%', paddingLeft: 10 }}
+          style={{ width: '75%', paddingLeft: 10, fontFamily: "Lora-Medium", color: '#000' }}
           placeholder="Looking for..."
+          placeholderTextColor="#A09FA0"
         />
       </View>
       <TouchableOpacity
@@ -55,7 +50,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderWidth: 1,
     borderRadius: 15,
-    padding: 8,
+    paddingHorizontal: 10,
     marginBottom: 25,
     borderColor: 'rgba(65, 64, 66, 0.15)',
   },

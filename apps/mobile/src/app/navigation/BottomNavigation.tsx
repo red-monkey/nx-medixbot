@@ -10,6 +10,8 @@ import ProfileIcon from '../icons/ProfileIcon';
 import Blog from "../screens/Blog"
 import PatientProfile from '../screens/PatientProfile';
 import MarketPlace from '../screens/Marketplace';
+import MarketPlaceIcon from '../icons/Marketplace';
+import Yedek from '../icons/marketplace.svg'
 
 const CustomTab: React.FC<{
   label: string;
@@ -81,8 +83,8 @@ const Tabs = () => {
           tabBarIcon: ({ focused }) => {
             return (
               <CustomTab
-                label="Search"
-                icon={<SearchIcon stroke={focused ? '#fff' : ''} />}
+                label="Marketplace"
+                icon={<MarketPlaceIcon fill={focused ? '#fff' : ''} />}
                 focused={focused}
               />
             );

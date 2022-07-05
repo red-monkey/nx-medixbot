@@ -18,33 +18,36 @@ export const CardStyle = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
-  wrapper: {},
+  wrapper: {
+    marginVertical: 10, 
+    justifyContent: 'center',
+    backgroundColor: 'transparent',
+    borderRadius: 8,
+  },
 });
 
 export const ProductCardStyles = StyleSheet.create({
   title: {
-    fontSize: 20,
-    fontWeight: '600',
+    fontSize: 16,
+    fontFamily: 'Montserrat-SemiBold',
     color: '#41416E',
     fontStyle: 'normal',
     lineHeight: 24,
   },
   price: {
     fontSize: 18,
-    fontWeight: '700',
+    fontFamily: 'Montserrat-Bold',
     lineHeight: 27,
     color: '#41416E',
   },
   CardActions: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'flex-end',
-    height: 80,
+    alignItems: 'center',
   },
   card: {
     justifyContent:'center',
     alignItems:'center',
-    width: 170,
     marginTop: 20,
     backgroundColor:'#fffff',
     borderRadius: 8,
@@ -54,9 +57,10 @@ export const ProductCardStyles = StyleSheet.create({
   },
   contentContainer: {},
   image: {
-    width: 100,
-    height: 118,
+    width: 120,
+    minHeight: 140,
     margin: 5,
+    resizeMode: 'stretch'
   },
   imageContainer: { alignItems: 'center', justifyContent: 'center' },
   addToCart: {
@@ -72,8 +76,8 @@ export const ProductCardStyles = StyleSheet.create({
   },
   rating: {
     fontSize: 14,
-    fontWeight: '400',
-    lineHeight: 17,
+    fontFamily: 'Montserrat-Regular',
+    lineHeight: 15,
     color: '#41416E',
     paddingLeft: 4,
   },
@@ -82,7 +86,7 @@ export const ProductCardStyles = StyleSheet.create({
 const styles = StyleSheet.create({
   Container: {
     backgroundColor: colors.backgroundColor,
-    paddingTop: 20,
+    paddingVertical: 30,
     alignItems: 'center',
     justifyContent: 'space-between',
   },
@@ -96,8 +100,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 40,
     marginTop: 15,
     width: '100%',
-    paddingLeft: 18,
-    paddingRight: 18,
+    paddingHorizontal: 15,
     paddingVertical: 40,
   },
   wrapper: {
@@ -130,30 +133,30 @@ const styles = StyleSheet.create({
   },
   categoriesText: {
     color: '#41416E',
-    fontWeight: '700',
+    fontFamily: 'Montserrat-Bold',
     fontSize: 24,
     width: '80%',
   },
   pageWrapper: {},
   userText: {
     justifyContent: 'center',
-    padding: 8,
+    paddingLeft: 8,
   },
   greetingText: {
-    fontWeight: '900',
     fontSize: 12,
     color: '#41416E',
+    fontFamily: 'Montserrat-Black'
   },
   userName: {
-    fontWeight: '900',
+    fontFamily: 'Montserrat-Black',
     fontSize: 20,
     color: '#41416E',
   },
   container: {
-    backgroundColor: '#fff',
     justifyContent: 'space-between',
     flexDirection: 'row',
     flexWrap: 'wrap',
+    width: '100%',
   },
 });
 export default styles;

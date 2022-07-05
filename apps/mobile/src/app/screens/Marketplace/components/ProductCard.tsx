@@ -12,33 +12,33 @@ import LinearGradient from "react-native-linear-gradient";
 import Star from '../../../icons/marketplaceicons/star.svg'
 import AddToCart from '../../../icons/marketplaceicons/addToCart.svg'
 import AddedToCart from '../../../icons/marketplaceicons/heartFilled.svg'
+import { IItemProp } from '../index';
 
-type Props = {};
 
-const ProductCard = (props: Props) => {
+const ProductCard = (props: IItemProp) => {
   const [added, setAdded] = useState(true);
   return (
-    <TouchableOpacity>
+    <TouchableOpacity style={{width: '49%'}}>
       <View style={ProductCardStyles.card}>
       <View style={ProductCardStyles.cardContent}>
         <View style={ProductCardStyles.contentContainer}>
           <View style={ProductCardStyles.imageContainer}>
             <Image
               style={ProductCardStyles.image}
-              source={{ uri: "https://picsum.photos/id/237/200/300" }}
+              source={{ uri: props.image }}
             />
           </View>
         </View>
         <View style={ProductCardStyles.titleWrapper}>
-          <Text style={ProductCardStyles.title}>Watchit Smartly Man</Text>
+          <Text style={ProductCardStyles.title}>{props.name}</Text>
         </View>
         <View style={styless.itemRating}>
           <Star />
-          <Text style={ProductCardStyles.rating}>4.5</Text>
+          <Text style={ProductCardStyles.rating}>{props.rate}</Text>
         </View>
         <View style={ProductCardStyles.CardActions}>
-          <View style={{width:50}}>
-            <Text style={ProductCardStyles.price}>$280</Text>
+          <View>
+            <Text style={ProductCardStyles.price}>{props.price} $</Text>
           </View>
           <TouchableHighlight>
             <LinearGradient
@@ -54,11 +54,11 @@ const ProductCard = (props: Props) => {
               >
                 {added ? <AddToCart /> : <AddedToCart />}
                 {added ? (
-                  <Text style={{ paddingHorizontal: 4, color: "#414042" }}>
+                  <Text style={{ paddingHorizontal: 4, color: "#414042", fontFamily: 'Montserrat-Bold', fontSize: 12}}>
                     Add Cart
                   </Text>
                 ) : (
-                  <Text style={{ paddingHorizontal: 4, color: "#414042" }}>
+                  <Text style={{ paddingHorizontal: 4, color: "#414042", fontFamily: 'Montserrat-Bold', fontSize: 12 }}>
                     Added
                   </Text>
                 )}
