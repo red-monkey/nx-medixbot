@@ -49,14 +49,14 @@ import { categoryStyle } from "../../../styles/MarketPlaceStyles";
     },
     buttonTextPressed: {
       color: "white",
-      fontSize: 16,
-      fontWeight: "700",
+      fontSize: 14,
+      fontFamily: 'Montserrat-Bold',
       lineHeight: 20,
     },
     buttonTexNormal: {
       color: "#41416E",
-      fontSize: 16,
-      fontWeight: "700",
+      fontSize: 14,
+      fontFamily: 'Montserrat-Bold',
       lineHeight: 20,
     },
     buttonNormal: {

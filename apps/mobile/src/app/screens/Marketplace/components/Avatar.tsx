@@ -2,9 +2,8 @@ import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { Image } from 'react-native'
 
-type Props = {}
 
-const Avatar = (props: Props) => {
+const Avatar = () => {
   return (
       <Image style={styles.wrapper} source={{uri:"https://picsum.photos/200/300"}}/>
   )
