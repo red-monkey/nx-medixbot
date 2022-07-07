@@ -1,6 +1,5 @@
 import React from "react"
 import { ScrollView, View,Text, TouchableOpacity, StyleSheet, Dimensions } from "react-native"
-import { CardIcon } from "../../../icons/cardIcon"
 import HourIcon from "../../../icons/Hour"
 import styles from "../../../styles/HomepageStyles"
 import loginStyles from "../../../styles/LoginPageStyles"
@@ -13,7 +12,7 @@ import Detail from "./components/Detail"
 
 const SubscriptionDetails = () => {
     return(
-        <View style={[styles.Container]}>
+        <View style={[styles.Container,{paddingTop:40}]}>
             <Header title={'Subscription Detail'} right={<HourIcon />}/>
             <View style={[loginStyles.loginPage,{paddingVertical: 25, paddingLeft: 10,paddingRight: 10, minHeight: Dimensions.get('screen').height}]}>
             <View style={sharedStyles.row}>

@@ -3,7 +3,7 @@ import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { colors } from '../../variables/colors'
 import { CheckoutHeader } from './components/CheckoutHeader'
-import styles from '../../styles/MarketplaceStyles'
+import styles from '../../styles/CardStyles'
 
 const Checkout = () => {
   return (

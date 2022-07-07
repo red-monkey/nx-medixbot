@@ -35,6 +35,7 @@ import {
   CLOSE_DATE_PICKER_MODAL,
   SET_BIRTH_DATE,
 } from '../redux/actions/actionTypes';
+import { IItemProp } from '../screens/Marketplace';
 
 export type RootStackParamList = {
   Home: undefined;
@@ -54,11 +55,13 @@ export type RootStackParamList = {
   SubscriptionDetails: undefined;
   PatientProfile: undefined;
   Visits: undefined,
-  MyCart: undefined,
-  Checkout: undefined,
-  MyProducts: undefined,
 };
 
+export type MarketplaceStackParamList = {
+  Marketplace: undefined,
+  ProductDetails: {id: number, added: boolean},
+  Cart: undefined
+}
 
 export type InformationProps = {
   title: string;
@@ -82,6 +85,12 @@ export type VerificationCode = StackNavigationProp<
   RootStackParamList,
   'VerificationCode'
 >;
+
+export type ProductProps = StackNavigationProp<
+  MarketplaceStackParamList,
+  'ProductDetails'
+>;
+
 export type RegisterProps = StackNavigationProp<RootStackParamList, 'Register'>;
 export type IndicatorProps = {
   scrollx: Animated.Value;

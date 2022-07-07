@@ -1,395 +1,163 @@
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from 'react-native';
+import { colors } from '../variables/colors';
+export const PADDING_HORIZONTAL = 20;
+export const MARGIN_DOT = 5;
+export const DOT_SIZE = 8;
+
+export const categoryStyle = StyleSheet.create({
+  wrapper: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 15,
+    marginBottom: 15,
+  },
+});
+
+export const CardStyle = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  wrapper: {
+    marginVertical: 10, 
+    justifyContent: 'center',
+    backgroundColor: 'transparent',
+    borderRadius: 8,
+  },
+});
+
+export const ProductCardStyles = StyleSheet.create({
+  title: {
+    fontSize: 16,
+    fontFamily: 'Montserrat-SemiBold',
+    color: '#41416E',
+    fontStyle: 'normal',
+    lineHeight: 24,
+  },
+  price: {
+    fontSize: 18,
+    fontFamily: 'Montserrat-Bold',
+    lineHeight: 27,
+    color: '#41416E',
+  },
+  CardActions: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  card: {
+    justifyContent:'center',
+    alignItems:'center',
+    marginTop: 20,
+    backgroundColor:'#fffff',
+    borderRadius: 8,
+    padding:3,
+    borderWidth:1,
+    borderColor:'rgba(65, 64, 66, 0.15)',
+  },
+  contentContainer: {},
+  image: {
+    width: 120,
+    minHeight: 140,
+    margin: 5,
+    resizeMode: 'contain'
+  },
+  imageContainer: { alignItems: 'center', justifyContent: 'center' },
+  addToCart: {
+    height: 40,
+  },
+  titleWrapper: {
+    paddingBottom: 2,
+    marginTop:3,
+  },
+  cardContent: {
+    paddingVertical: 16,
+    paddingHorizontal: 8,
+  },
+  rating: {
+    fontSize: 14,
+    fontFamily: 'Montserrat-Regular',
+    lineHeight: 15,
+    color: '#41416E',
+    paddingLeft: 4,
+  },
+});
 
 const styles = StyleSheet.create({
-    root: {
-        flex:1,
-        backgroundColor: '#E6F2FC',
-        paddingBottom: 40,
-    },
-    rootTwo: {
-        flex:1,
-        backgroundColor: '#E6F2FC',
-        paddingBottom: 40,
-    },
-    screenContent: {
-        height: 728,
-        backgroundColor: '#fff',
-        borderRadius: 30,
-        top: 117,
-        position: "absolute",
-        left: 0,
-        width: '100%',
-        // bottom: 10,
-        // alignItems: 'center'
-    },
-    productDescription: {
-        height: 512,
-        width: '100%',
-        top: 100,
-        borderRadius: 32,
-        backgroundColor: '#4C5DF4',
-        // marginLeft: 21,
+  Container: {
+    backgroundColor: colors.backgroundColor,
+    paddingVertical: 30,
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  categoriesWrapper: {
+    marginTop: 15,
+  },
 
-    },
-    button: {
-        height: 23,
-        width: 33,
-        borderRadius: 8,
-        backgroundColor: '#FEC026',
-        alignItems:'center'
-    },
-    buttonText:{
-        fontSize: 20,
-        fontWeight: '700',
-        color: '#414042',
-        alignItems: 'center',
-        marginTop: -3,
-    },
-    buttonLeft: {
-        height: 23,
-        width: 33,
-        borderRadius: 8,
-        backgroundColor: '#E6E6E6',
-        alignItems:'center'
-    },
-    addToCart:{
-        height: 47,
-        width: 220,
-        borderRadius:16,
-        backgroundColor: '#FEC026',
-        alignItems: 'center',
-    },
-    addToCartText:{
-        fontSize:18,
-        fontWeight:'700',
-        color: '#414042',
-        marginTop: 8,
-    },
-    likeIcon:{
-        height: 47,
-        width:58,
-        backgroundColor: '#E6E6E6',
-        borderRadius:20,
-        alignItems: 'center',
-    },
-    screenContentCart: {
-        height: '100%',
-        backgroundColor: '#fff',
-        borderRadius: 30,
-        top: 117,
-        position: "absolute",
-        left: 0,
-        width: '100%',
-        // bottom: 10,
-        // alignItems: 'center'
-    },
-    boxOne:{
-        marginLeft: 12,
-        marginRight:12,
-        borderRadius:8,
-        height:147,
-        // backgroundColor:'#E6E6FF',
-        top: 50,
-        flexDirection:'row',
-        padding:2,
-        shadowColor:'#D7EAFF',
-        elevation:3,
-        shadowOpacity:0.1,
-    },
-    cartProduct:{
-        width:'33%',
-        backgroundColor: '#D7EAFF',
-        alignItems:'center',
-        margin:12,
-        borderRadius:18,
-    },
-    deleteButton:{
-        width:23, 
-        height:21, 
-        backgroundColor:'#E6F2FC',
-        alignItems:'center',
-    },
-    cartIcon:{
-        marginTop: 60,
-        marginBottom:-70,
-        alignItems:'flex-end',
-        marginRight:45,
-        
-    },
-    cartTotals:{
-        height: 20,
-        justifyContent: 'space-between',
-        width: '90%',
-        flexDirection: 'row',
-        top:16,
-        marginLeft:23,
-        marginRight:23,
-    },
-    boxTwo:{
-        marginLeft: 12,
-        marginRight:12,
-        borderRadius:8,
-        height:141,
-        // backgroundColor:'#E6E6FF',
-        top: 90,
-        // flexDirection:'row',
-        padding:2,
-        // marginBottom: -100,
-        alignItems: 'center',
-        // borderColor:'#D7EAFF',
-        // paddingBottom:20,
-        // paddingTop:20,
-        shadowColor:'#D7EAFF',
-        elevation:3,
-        shadowOpacity:0.1,
-        paddingHorizontal:20,
-        // paddingVertical:20,
-        // shadowOffset: {
-        //     height:1,
-        //     width:1
-        // }
-    },
-    proceedCheckout:{
-        backgroundColor: '#3095E2',
-        alignItems:'center',
-        height:50,
-        width:300,
-        top:100,
-        marginLeft:30,
-        borderRadius:15
-    },
-    proceedCheckoutText:{
-        top:12,
-        color:'#fff',
-        fontWeight:'700',
-        fontSize:15,
-    },
-    arrowLeft:{
-        width:29,
-        height:29,
-        opacity:0.1,
-        borderRadius:6,
-        backgroundColor:'#3095E2',
-        alignItems:'center',
-    },
-    deliveryOptions:{
-
-    },
-    payCheckoutButton:{
-        width:330,
-        height:60,
-        borderRadius:16,
-        backgroundColor:'#3095E2',
-        alignItems:'center',
-        justifyContent:'center'
-    },
-    cartImage:{
-        justifyContent:'center',
-        height:85,
-        width: 65,
-        top: 18,
-    },
-    productDescriptionText: {
-        color:'#D7EAFF', 
-        fontSize: 28, 
-        fontWeight:'bold', 
-        marginTop: 38, 
-        marginLeft:21,
-    },
-    ratingsView:{
-        flexDirection:'row', 
-        justifyContent:'flex-start', 
-        alignItems:'center',
-        marginLeft:21, 
-        marginTop:-320,
-    },
-    ratingsText:{
-        color: '#D7EAFF', 
-        fontSize: 18, 
-        fontWeight:'400',
-    },
-    productsPriceView:{
-        justifyContent:'space-between', 
-        flexDirection:'row', 
-        marginRight:23, 
-        alignItems:'center', 
-        height:33,
-    },
-    productsPriceText:{
-        color: '#D7EAFF', 
-        marginLeft:23,  
-        fontSize:22, 
-        fontWeight:'700', 
-        marginTop:10,
-    },
-    productsCounterView:{
-        flexDirection:'row', 
-        width:100, 
-        justifyContent:'space-between', 
-        alignItems:'center',
-    },
-    productsDescriptionView:{
-        marginLeft:23, 
-        marginRight:23, 
-        marginTop:50,
-    },
-    productsDescriptionTitle:{
-        color:'#D7EAFF', 
-        fontWeight:'400', 
-        fontSize:18,
-    },
-    productDescriptionTextView:{
-        marginLeft:23, 
-        marginRight:23, 
-        marginTop:10,
-    },
-    productDescriptionTextTwo:{
-        color:'#D7EAFF', 
-        fontSize:16, 
-        fontWeight:'400', 
-        fontFamily:'Lora',
-    },
-    addToCartButtonView:{
-        flexDirection:'row', 
-        marginTop:25, 
-        justifyContent:'space-between', 
-        marginLeft:23, 
-        marginRight:23,
-    },
-    itemsInCartView:{
-        height:24, 
-        flexDirection:'row', 
-        marginLeft: 21, 
-        marginRight:28, 
-        justifyContent:'space-between', 
-        marginTop:40,
-    },
-    itemsInCartText:{
-        fontSize:20, 
-        fontWeight:'700', 
-        color:'#41416E',
-    },
-    clearCart:{
-        fontSize:20, 
-        fontWeight:'700', 
-        color:'#3095E2',
-    },
-    boxTwoText:{
-        fontSize:16,
-        fontWeight:'400',
-        color:'#41416E',
-    },
-    promoCodeView:{
-        flexDirection:'row', 
-        height:59, top:80, 
-        marginLeft:12, 
-        marginRight:12, 
-        justifyContent:'space-between', 
-        borderRadius:8, 
-        alignItems:'center', 
-        shadowColor:'#D7EAFF', 
-        elevation:3, 
-        shadowOpacity:0.1,
-    },
-    promoCodeText:{
-        marginLeft:23, 
-        fontWeight:'400', 
-        fontSize:16, 
-        color:'#41416E',
-    },
-    totalPriceView:{
-        flexDirection:'row',
-        width:'90%', 
-        justifyContent:'space-between', 
-        marginTop:35,
-    },
-    totalPriceText:{
-        fontWeight:'700', 
-        fontSize:18, 
-        color:'#41416E',
-    },
-    cartItemTitleView:{
-        height:24, 
-        flexDirection:'row', 
-        marginTop:12, 
-        justifyContent:'space-between',
-    },
-    cartItemText:{
-        fontSize:20, 
-        fontWeight:'700', 
-        color:'#41416E',
-    },
-    cartItemX:{
-        color:'#4C5DF4', 
-        fontWeight:'700',
-    },
-    cartItemRatingsView:{
-        flexDirection:'row', 
-        marginTop: 15,
-    },
-    cartItemRatingsText:{
-        fontSize:14, 
-        fontWeight:'400', 
-        width:28, 
-        alignItems:'stretch',
-    },
-    cartItemPriceView:{
-        flexDirection:'row', 
-        height:30, 
-        justifyContent:'space-between', 
-        marginTop:15, 
-        marginLeft:15, 
-        alignItems:'center',
-    },
-    cartItemPrice:{
-        fontWeight:'700', 
-        fontSize:22, 
-        color:'#41416E',
-    },
-    cartItemAdjustQty:{
-        flexDirection:'row', 
-        width:90, 
-        justifyContent:'space-between',
-    },
-    checkoutCartNumber:{
-        height:24, 
-        flexDirection:'row', 
-        marginLeft: 21, 
-        marginRight:28, 
-        justifyContent:'space-between', 
-        marginTop:40,
-    },
-    checkoutText:{
-        fontSize:20, 
-        fontWeight:'700', 
-        color:'#41416E',
-    },
-    checkoutTotalView:{
-        flexDirection:'row', 
-        justifyContent:'space-between', 
-        width:100,
-    },
-    checkoutTotalText:{
-        fontSize:18, 
-        fontWeight:'400', 
-        color:'#41416E',
-    },
-    checkoutTotalPrice:{
-        fontSize:20, 
-        fontWeight:'700', 
-        color:'#3095E2',
-    },
-    checkoutDeliveryOptions:{
-        fontSize:20, 
-        fontWeight:'700', 
-        color:'#41416E',
-    },
-    checkoutPaymentOptions:{
-        fontSize:20, 
-        fontWeight:'700', 
-        color:'#41416E',
-    },
-
+  MarketPlacePlace: {
+    backgroundColor: '#fff',
+    borderTopRightRadius: 40,
+    borderTopLeftRadius: 40,
+    marginTop: 15,
+    width: '100%',
+    paddingHorizontal: 15,
+    paddingVertical: 40,
+  },
+  wrapper: {
+    backgroundColor: '#E6F2FC',
+  },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    height: 100,
+  },
+  logo: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    textAlign: 'center',
+    width: '100%',
+  },
+  content: {
+    paddingTop: 15,
+    borderTopLeftRadius: 15,
+    borderTopRightRadius: 15,
+    backgroundColor: '#fff',
+  },
+  cartUserWrapper: {
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 35,
+  },
+  categoriesText: {
+    color: '#41416E',
+    fontFamily: 'Montserrat-Bold',
+    fontSize: 24,
+    width: '80%',
+  },
+  pageWrapper: {},
+  userText: {
+    justifyContent: 'center',
+    paddingLeft: 8,
+  },
+  greetingText: {
+    fontSize: 12,
+    color: '#41416E',
+    fontFamily: 'Montserrat-Black'
+  },
+  userName: {
+    fontFamily: 'Montserrat-Black',
+    fontSize: 20,
+    color: '#41416E',
+  },
+  container: {
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    width: '100%',
+  },
 });
 
 export default styles;

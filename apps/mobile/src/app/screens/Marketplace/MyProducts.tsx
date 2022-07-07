@@ -1,89 +1,91 @@
-// import { useEffect } from "react";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Pressable, StatusBar, Text, View } from "react-native";
+import { Image, Pressable, ScrollView, StatusBar, Text, TouchableOpacity, View } from "react-native";
 import { colors } from "../../variables/colors";
 // import {Products} from "./data/data";
-import { Header } from "./components/Header";
-import styles from "../../styles/MarketplaceStyles";
-import Star from "../../icons/Star.svg";
-import Vector from "../../icons/Vector.svg";
+import styles from "../../styles/CardStyles";
+import Star from '../../../icons/marketplaceicons/star.svg'
+import Cart from '../../../icons/marketplaceicons/cart.svg'
 import { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
-
 import { connect } from "react-redux";
 import { addToCart } from "../../redux/actions/marketplace";
+import Header from "../Patient/components/Header";
+import { ProductProps } from "../../utils/types";
+import { items } from ".";
+import loginStyles from "../../styles/LoginPageStyles";
+import YellowButton from "./components/YellowButton";
+import HeartIcon from "../../icons/Heart";
 
-import data from './data/data.json'
 
+export const MyProducts = ({ route }) => {
+    const [counter, setCounter] = useState(1);
+    const [liked, setLiked] = useState(false);
+    const {id, added} = route.params
+    const navigation = useNavigation<ProductProps>();
+    const goToCart = () => navigation.navigate('Cart')
+    const product = items.find(item => item.id === id)
+    const increase = () => {
+        setCounter(counter+1)
+    }
 
-export const MyProducts = ({ addToCart }) => {
-    const initialValue = 0;
-    const [counter, setCounter] = useState(initialValue);
-    const navigation = useNavigation<any>();
-
-    const myCart = () => navigation.navigate('MyCart');
+    const decrease = () => {
+        setCounter(counter-1)
+    }
 
     return(
-        <SafeAreaView style={styles.root}>
-            <StatusBar 
-                backgroundColor={colors.backgroundColor}
-                barStyle="dark-content"
-            />
-            <Header />
-            <View style={styles.screenContent}>
-                <View>
-                    <Pressable
-                        onPress={myCart}
-                        style={styles.cartIcon}
-                    >
-                        <Vector />
-                    </Pressable>
-                </View>
-                <View style={styles.productDescription}>
-                    <Text style={styles.productDescriptionText}>
-                        Watchit Smartly
-
-                    </Text>
-                </View>
-                <View style={styles.ratingsView}>
-                    <Star height={20}/>
-                    <Text style={styles.ratingsText}>4.5</Text>
-                </View>
-                <View style={styles.productsPriceView}>
-                    <Text style={styles.productsPriceText}>$200</Text>
-                    <View style={styles.productsCounterView}>
-                        <Pressable style={styles.button}>
-                            <Text style={styles.buttonText}>+</Text>
-                        </Pressable>
-                        <Text style={{fontWeight:'700', fontSize:20, color:'#D7EAFF'}}>1</Text>
-                        <Pressable style={styles.buttonLeft}>
-                            <Text style={styles.buttonText}>-</Text>
-                        </Pressable>
-                    </View>
-                    
-                </View>
-                <View style={styles.productsDescriptionView}>
-                    <Text style={styles.productsDescriptionTitle}>Description</Text>
-                </View>
-                <View style={styles.productDescriptionTextView}>
-                    <Text style={styles.productDescriptionTextTwo}>
-                    Get control of your vitals with our smart Watchit device. You can now also be able to connect our CGM device to Watchit as you manage your diabetes on the go. Get display of your health vitals and recommendations on how to improve your health.
-                    </Text>
-                </View>
-                <View style={styles.addToCartButtonView}>
-                    <Pressable 
-                        style={styles.addToCart}
-                        
-                    >
-                        <Text style={styles.addToCartText}>Add To Cart</Text>
-                    </Pressable>
-                    <Pressable style={styles.likeIcon}>
-                        <Text>Icon</Text>
-                    </Pressable>
+        <View style={styles.root}>
+            <Header title="Details"/>
+            <View style={[loginStyles.loginPage,{paddingVertical: 25, paddingLeft: 0, zIndex: 1}]}>
+                <View style={styles.upperPart}>
+                    <View />
+                    <Image source={{uri: product.image}} style={{width: 160, height:170, resizeMode: 'contain'}}/>
+                    <TouchableOpacity onPress={goToCart}>
+                        <Cart />
+                    </TouchableOpacity>
                 </View>
             </View>
-        </SafeAreaView>
+            <View style={[{flex: 1},styles.productDescription]}>
+            <ScrollView horizontal={false} scrollEnabled>
+                        <Text style={styles.productDescriptionText}>
+                            {product.name}
+                        </Text>
+                        <View style={styles.ratingsView}>
+                            <Star />
+                            <Text style={styles.ratingsText}>{product.rate}</Text>
+                        </View>
+                        <View style={styles.productsPriceView}>
+                            <Text style={styles.productsPriceText}>${product.price}</Text>
+                            <View style={styles.productsCounterView}>
+                                <YellowButton style={{borderRadius: 8}} content={<TouchableOpacity style={styles.button} onPress={increase}>
+                                    <Text style={styles.buttonText}>+</Text>
+                                </TouchableOpacity>} />
+                                <Text style={{fontWeight:'700', fontSize:20, color:'#D7EAFF'}}>{counter}</Text>
+                                <YellowButton style={{borderRadius: 8}} content={<TouchableOpacity disabled={counter === 1} style={counter === 1 ? styles.buttonLeft : styles.button} onPress={decrease}>
+                                    <Text style={styles.buttonText}>-</Text>
+                                </TouchableOpacity>} />
+                            </View>
+                            
+                        </View>
+                        <View style={styles.productsDescriptionView}>
+                            <Text style={styles.productsDescriptionTitle}>Description</Text>
+                        </View>
+                        <View style={styles.productDescriptionTextView}>
+                            <Text style={styles.productDescriptionTextTwo}>
+                            Get control of your vitals with our smart Watchit device. You can now also be able to connect our CGM device to Watchit as you manage your diabetes on the go. Get display of your health vitals and recommendations on how to improve your health.
+                            </Text>
+                        </View>
+                        <View style={styles.addToCartButtonView}>
+                            <YellowButton style={{borderRadius:16,}} content={<TouchableOpacity disabled={added} style={styles.addToCart}>
+                                <Text style={styles.addToCartText}>{added ?  'Added' :'Add to Cart' }</Text>
+                            </TouchableOpacity>} />
+                            <YellowButton style={{borderRadius:20}} content={<TouchableOpacity style={styles.likeIcon} onPress={()=>setLiked(!liked)}>
+                                <HeartIcon fill={liked === true ? '#414042' : ''}/>
+                            </TouchableOpacity>}/>
+                        </View>
+                    </ScrollView>
+                    </View>
+        </View>
     );
 };
 

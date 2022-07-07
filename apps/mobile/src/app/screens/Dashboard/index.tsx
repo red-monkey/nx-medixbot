@@ -59,11 +59,6 @@ const Dashboard = () => {
                     Food Recognition  | 
                   </Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => logout()}>
-                  <Text style={{ textAlign: 'center', color: '#fff',marginLeft: 10 }}>
-                    Logout
-                  </Text>
-                </TouchableOpacity>
               </View>
               <View style={styles.screenContent}>
                 <GreetingBox />

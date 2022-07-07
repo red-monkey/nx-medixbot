@@ -50,11 +50,6 @@ export default function AppContainer() {
           component={VerificationCode}
         />
         <Stack.Screen
-          options={{headerShown: false}}
-          name="Market"
-          component={MarketPlace}
-        />
-        <Stack.Screen
           options={{ headerShown: false }}
           name="Register"
           component={Register}
