@@ -60,7 +60,7 @@ export const ProductCardStyles = StyleSheet.create({
     width: 120,
     minHeight: 140,
     margin: 5,
-    resizeMode: 'stretch'
+    resizeMode: 'contain'
   },
   imageContainer: { alignItems: 'center', justifyContent: 'center' },
   addToCart: {
@@ -159,4 +159,5 @@ const styles = StyleSheet.create({
     width: '100%',
   },
 });
+
 export default styles;
