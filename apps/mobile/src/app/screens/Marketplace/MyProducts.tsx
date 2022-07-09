@@ -8,14 +8,15 @@ import Star from '../../../icons/marketplaceicons/star.svg'
 import Cart from '../../../icons/marketplaceicons/cart.svg'
 import { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { connect } from "react-redux";
-import { addToCart } from "../../redux/actions/marketplace";
+import { connect, useDispatch } from "react-redux";
+import { addToCart, addToCartWithCounter } from "../../redux/actions/marketplace";
 import Header from "../Patient/components/Header";
 import { ProductProps } from "../../utils/types";
 import { items } from ".";
 import loginStyles from "../../styles/LoginPageStyles";
 import YellowButton from "./components/YellowButton";
 import HeartIcon from "../../icons/Heart";
+import { Dispatch } from "redux";
 
 
 export const MyProducts = ({ route }) => {
@@ -23,15 +24,24 @@ export const MyProducts = ({ route }) => {
     const [liked, setLiked] = useState(false);
     const {id, added} = route.params
     const navigation = useNavigation<ProductProps>();
+    const [addedTocart,setAddedTocart] = useState(added)
+    const dispatch = useDispatch<Dispatch>()
     const goToCart = () => navigation.navigate('Cart')
     const product = items.find(item => item.id === id)
     const increase = () => {
         setCounter(counter+1)
+        setAddedTocart(false)
     }
 
     const decrease = () => {
         setCounter(counter-1)
+        setAddedTocart(false)
     }
+
+    const addProductToCart = () => {
+        setAddedTocart(true)
+        dispatch(addToCartWithCounter(id,counter))
+      }
 
     return(
         <View style={styles.root}>
@@ -76,8 +86,8 @@ export const MyProducts = ({ route }) => {
                             </Text>
                         </View>
                         <View style={styles.addToCartButtonView}>
-                            <YellowButton style={{borderRadius:16,}} content={<TouchableOpacity disabled={added} style={styles.addToCart}>
-                                <Text style={styles.addToCartText}>{added ?  'Added' :'Add to Cart' }</Text>
+                            <YellowButton style={{borderRadius:16,}} content={<TouchableOpacity onPress={addProductToCart} disabled={addedTocart} style={styles.addToCart}>
+                                <Text style={styles.addToCartText}>{addedTocart ?  'Added' :'Add to Cart' }</Text>
                             </TouchableOpacity>} />
                             <YellowButton style={{borderRadius:20}} content={<TouchableOpacity style={styles.likeIcon} onPress={()=>setLiked(!liked)}>
                                 <HeartIcon fill={liked === true ? '#414042' : ''}/>

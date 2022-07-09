@@ -6,9 +6,22 @@ import Star from '../../../../icons/marketplaceicons/star.svg'
 import { IItemProp, items, TCartItem } from '../..'
 import XIcon from '../../../../icons/XIcon'
 import YellowButton from '../YellowButton'
+import { useDispatch } from 'react-redux'
+import { Dispatch } from 'redux'
+import { addToCart, decreaseQty, removeFromCart } from '../../../../redux/actions/marketplace'
 
 
 export const CartItem = (props: TCartItem) => {
+    const dispatch = useDispatch<Dispatch>()
+    const addProductToCart = () => {
+        dispatch(addToCart(props.id))
+    }
+    const removeProductFromCart = () => {
+        dispatch(removeFromCart(props.id))   
+      }
+    const decreaseProductCount = () => {
+        dispatch(decreaseQty(props.id))   
+      }
   return (
     <View>
         <View style={styles.boxOne}>
@@ -21,7 +34,7 @@ export const CartItem = (props: TCartItem) => {
             <View style={{ width: '48%'}}>
                 <View style={styles.cartItemTitleView}>
                     <Text style={styles.cartItemText}>{props.name}</Text>
-                    <TouchableOpacity style={styles.deleteButton}>
+                    <TouchableOpacity style={styles.deleteButton} onPress={removeProductFromCart}>
                         <XIcon />
                     </TouchableOpacity>
                 </View>
@@ -32,11 +45,11 @@ export const CartItem = (props: TCartItem) => {
                 <View style={styles.cartItemPriceView}>
                     <Text style={styles.cartItemPrice}>${props.price}</Text>
                     <View style={styles.cartItemAdjustQty}>
-                        <YellowButton style={{borderRadius: 8}} content={<TouchableOpacity style={styles.button} >
+                        <YellowButton style={{borderRadius: 8}} content={<TouchableOpacity onPress={addProductToCart} style={styles.button} >
                                     <Text style={styles.buttonText}>+</Text>
                                 </TouchableOpacity>} />
                         <Text style={styles.buttonText}>{props.qty}</Text>
-                        <YellowButton style={{borderRadius: 8,height: 23}} content={<TouchableOpacity disabled={props.qty === 1} style={props.qty === 1 ? styles.buttonLeft : styles.button}>
+                        <YellowButton style={{borderRadius: 8,height: 23}} content={<TouchableOpacity onPress={decreaseProductCount} disabled={props.qty === 1} style={props.qty === 1 ? styles.buttonLeft : styles.button}>
                                     <Text style={styles.buttonText}>-</Text>
                                 </TouchableOpacity>} />
                     </View>    

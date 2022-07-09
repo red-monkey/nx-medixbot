@@ -5,6 +5,7 @@ import { Dispatch } from 'redux';
 import { useAccessToken } from '../../../customHooks/useAuthToken';
 import { useIsUser } from '../../../customHooks/useIsUser';
 import { setIsLoggedIn } from '../../../redux/actions/login';
+import { clearCart } from '../../../redux/actions/marketplace';
 import loginStyles from '../../../styles/LoginPageStyles';
 import * as styles from '../../../styles/RegisterStyle';
 
@@ -15,6 +16,7 @@ const LogoutButton = () => {
   const logout = () => {
     removeAuthToken();
     deleteUserData();
+    dispatch(clearCart());
     dispatch(setIsLoggedIn(false));
   };
 

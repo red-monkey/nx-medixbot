@@ -8,30 +8,28 @@ import Header from '../Patient/components/Header';
 import PromoIcon from '../../icons/PromoIcon';
 import { useAppSelector } from '../../utils/hooks';
 import EmptyCart from './components/cart/EmptyCart';
+import { clearCart } from '../../redux/actions/marketplace';
+import { useDispatch } from 'react-redux';
+import { Dispatch } from 'redux';
 
 
 const MyCart = () => {
 
     const navigation = useNavigation<any>();
+    const dispatch = useDispatch<Dispatch>()
     const marketPlace = useAppSelector((state) => state.marketplaceReducer);
-    const [sum, setSum] = useState<number>(marketPlace.total)
     const DeliveryFee = 10 
-    /*const getSum = () => {
-        let sumTemp
-        cart.forEach((item) => {
-            sumTemp += item.price
-        })
-        setSum(sumTemp);
-    }*/
-    const checkout = () => navigation.navigate('Checkout')
-    console.log(marketPlace.cart)
+    const clearAll = () => {
+        dispatch(clearCart())
+    }
+    const checkout = () => navigation.navigate('Checkout',{totalPrice: marketPlace.total + DeliveryFee})
   return (
     <ScrollView contentContainerStyle={[marketPlaceStyles.Container]} >
             <Header title='My cart'/>
                 {marketPlace.cart.length === 0 ? <EmptyCart/> : <View style={styles.screenContentCart}>
                     <View style={styles.itemsInCartView}>
                         <Text style={styles.itemsInCartText}>{marketPlace.cart.length} Item In Cart</Text>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={clearAll}>
                             <Text style={styles.clearCart}>Clear All</Text>
                         </TouchableOpacity>
                     </View>   
@@ -48,7 +46,7 @@ const MyCart = () => {
                      <View style={styles.boxTwo}>
                         <View style={styles.cartTotals}>
                             <Text style={styles.boxTwoText}>SubtTotal</Text>
-                            <Text style={styles.boxTwoText}>${sum}</Text>
+                            <Text style={styles.boxTwoText}>${marketPlace.total}</Text>
                         </View>
                         <View style={styles.cartTotals}>
                             <Text style={styles.boxTwoText}>Discount</Text>
@@ -60,7 +58,7 @@ const MyCart = () => {
                         </View>
                         <View style={styles.totalPriceView}>
                             <Text style={styles.totalPriceText}>Total</Text>
-                            <Text style={styles.totalPriceText}>${sum + DeliveryFee}</Text>
+                            <Text style={styles.totalPriceText}>${marketPlace.total + DeliveryFee}</Text>
                         </View>
                     </View>
                    <TouchableOpacity 

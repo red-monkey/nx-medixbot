@@ -163,9 +163,10 @@ const styles = StyleSheet.create({
 
     },
     payCheckoutButton:{
-        width:330,
+        width:'91%',
         height:60,
         borderRadius:16,
+        marginVertical: 15,
         backgroundColor:'#3095E2',
         alignItems:'center',
         justifyContent:'center'
@@ -327,44 +328,78 @@ const styles = StyleSheet.create({
         justifyContent:'space-between',
     },
     checkoutCartNumber:{
-        height:24, 
         flexDirection:'row', 
-        marginLeft: 21, 
-        marginRight:28, 
+        alignItems: 'center',
+        marginHorizontal: 21, 
         justifyContent:'space-between', 
         marginTop:40,
     },
     checkoutText:{
         fontSize:20, 
-        fontWeight:'700', 
+        fontFamily: 'Montserrat-Bold',
         color:'#41416E',
     },
     checkoutTotalView:{
         flexDirection:'row', 
         justifyContent:'space-between', 
+        alignItems: 'center',
         width:100,
     },
     checkoutTotalText:{
         fontSize:18, 
-        fontWeight:'400', 
+        fontFamily: 'Montserrat-Regular',
         color:'#41416E',
     },
     checkoutTotalPrice:{
         fontSize:20, 
-        fontWeight:'700', 
+        fontFamily: 'Montserrat-Bold',
         color:'#3095E2',
     },
     checkoutDeliveryOptions:{
         fontSize:20, 
-        fontWeight:'700', 
+        fontFamily: 'Montserrat-Bold',
         color:'#41416E',
     },
     checkoutPaymentOptions:{
         fontSize:20, 
-        fontWeight:'700', 
+        fontFamily: 'Montserrat-Bold',
         color:'#41416E',
     },
-
+    optionsContainer: {
+        paddingHorizontal: 15,
+        marginTop: 30
+    },
+    optionsBox: {
+        minHeight: 100,
+        marginTop: 10,
+        borderRadius: 6,
+        borderWidth: 1,
+        borderColor: colors.newLightBlue,
+        padding: 12
+    },
+    option: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        padding: 5,
+        paddingVertical: 10,
+        width: '80%'
+    },
+    optionText: {
+        marginLeft: 7,
+        fontFamily: 'Montserrat-Bold',
+        color: colors.newBlack,
+        fontSize: 15
+    },
+    address: {
+        fontFamily: 'Lora-Regular',
+        marginVertical: 5,
+        marginLeft: 35
+    },
+    editIcon:{
+        position: 'absolute',
+        top: 5,
+        left: '100%'
+    }
 });
 
 export default styles;

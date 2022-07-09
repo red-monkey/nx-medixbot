@@ -60,7 +60,8 @@ export type RootStackParamList = {
 export type MarketplaceStackParamList = {
   Marketplace: undefined,
   ProductDetails: {id: number, added: boolean},
-  Cart: undefined
+  Cart: undefined,
+  Checkout: {totalPrice: number}
 }
 
 export type InformationProps = {
@@ -524,6 +525,13 @@ export type location = {
   addressLine2?: string;
 };
 
+export type TDelivery =
+{
+  type: TDeliveryOptions,
+  address: string
+}
+export type TDeliveryOptions = 'Home Address' | 'Nearest Pharmacy'
+export type TPaymentOptions = 'Credit Card' | 'Medixcoins' | 'Charity'
 
 
 interface UpdateScoreAction {
