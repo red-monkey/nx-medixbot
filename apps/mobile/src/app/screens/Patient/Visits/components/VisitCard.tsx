@@ -1,6 +1,4 @@
-import { EyeEmoji } from 'apps/mobile/src/app/icons/EyeEmoji'
-import HospitalIcon from 'apps/mobile/src/app/icons/Hospital'
-import { ShareIcon } from 'apps/mobile/src/app/icons/ShareIcon'
+
 import React, { useState } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { TVisit } from '..'
@@ -9,7 +7,10 @@ import GoodEmoji from '../../../../icons/GoodEmoji.svg'
 import OkayEmoji from '../../../../icons/OkayEmoji.svg'
 import BadEmoji from '../../../../icons/BadEmoji.svg'
 import AwfulEmoji from '../../../../icons/AwfulEmoji.svg'
-import { colors } from 'apps/mobile/src/app/variables/colors'
+import HospitalIcon from '../../../../icons/Hospital'
+import { colors } from '../../../../variables/colors'
+import { ShareIcon } from '../../../..//icons/ShareIcon'
+import { EyeEmoji } from '../../../..//icons/EyeEmoji'
 
 const VisitCard = (props: TVisit) => {
   const [feedback, setFeedback] = useState<any>(null)
@@ -25,15 +26,15 @@ const VisitCard = (props: TVisit) => {
     </View>
 
     <View style={styles.field}>
-      <Text style={{fontFamily: 'Lora-Regular'}}>Clinic Name</Text>
+      <Text style={{fontFamily: 'Lora-Regular', color: colors.Text}}>Clinic Name</Text>
       <Text style={[styles.text]}>{props.ClinicName}</Text>
     </View>
     <View style={styles.field}>
-      <Text style={{fontFamily: 'Lora-Regular'}}>Doctor Name</Text>
+      <Text style={{fontFamily: 'Lora-Regular', color: colors.Text}}>Doctor Name</Text>
       <Text style={[styles.text]}>{props.DoctoName}</Text>
     </View>
     <View style={[styles.field,{marginBottom: 15}]}>
-      <Text style={{fontFamily: 'Lora-Regular'}}>Hospital Tracking No</Text>
+      <Text style={{fontFamily: 'Lora-Regular', color: colors.Text}}>Hospital Tracking No</Text>
       <Text style={[styles.text]}>{props.HospitalTrackingNo}</Text>
     </View>
     <Text style={[styles.text, { marginBottom: 5 }]}>Evaluate</Text>

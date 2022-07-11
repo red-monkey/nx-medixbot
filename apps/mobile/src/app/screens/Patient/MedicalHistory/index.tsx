@@ -8,7 +8,7 @@ import Header from "../components/Header"
 
 const MedicalHistory = () => {
     return (
-        <ScrollView contentContainerStyle={[styles.Container,{paddingBottom: 30}]} scrollEnabled>
+        <ScrollView contentContainerStyle={[styles.Container,{paddingBottom: 30,paddingTop: 40}]} scrollEnabled>
             <Header title={'Medical History'}/>
             <View style={[loginStyles.loginPage,{paddingVertical: 25, paddingLeft: 20}]}>
                 <Text style={{fontFamily: 'Montserrat-Bold',color: '#000',paddingLeft: 5}}>Please Add the Correct Infomation</Text>

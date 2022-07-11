@@ -1,7 +1,8 @@
-import { CardIcon } from 'apps/mobile/src/app/icons/cardIcon'
-import sharedStyles from 'apps/mobile/src/app/styles/SharedStyles'
+import { CardIcon } from '../../../../icons/cardIcon'
+import sharedStyles from '../../../../styles/SharedStyles'
 import React from 'react'
 import { View, Text,StyleSheet } from 'react-native'
+import { colors } from '../../../../variables/colors'
 
 
 function Card() {
@@ -18,7 +19,7 @@ function Card() {
       </View>
       <View style={[sharedStyles.row,sharedStyles.alignCenter,sharedStyles.justifyCenter,{marginVertical: 10}]}>
         <View style={[subscriptionStyles.circle,{marginRight: '8.5%'}]}/>
-        <Text style={{ textAlign: 'center', opacity: 0.4 }}>
+        <Text style={{ textAlign: 'center', opacity: 0.4, color: colors.Text }}>
             - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         </Text>
         <View style={[subscriptionStyles.circle,{marginLeft: '8.5%'}]}/>
@@ -128,6 +129,7 @@ const subscriptionStyles = StyleSheet.create({
         borderRadius: 6,
       },
       Lora: {
-        fontFamily: 'Lora-Medium'
+        fontFamily: 'Lora-Medium',
+        color: colors.Text
       },
 })

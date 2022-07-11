@@ -27,7 +27,7 @@ const visits: TVisit[] = [
 ]
 const Visits = () => {
   return (
-    <ScrollView contentContainerStyle={[styles.Container]}>
+    <ScrollView contentContainerStyle={[styles.Container,{paddingTop: 40}]}>
         <Header title={'Visits'} />
         <View style={[loginStyles.loginPage,{paddingTop: 25, paddingBottom: 70, paddingLeft: 10,paddingRight: 10}]}>
             <Text style={{fontFamily: 'Montserrat-Bold',color: '#000',paddingLeft: 5, marginBottom: 10}}>Please Add The Correct Information</Text>

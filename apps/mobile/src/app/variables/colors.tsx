@@ -5,6 +5,8 @@ export const colors = {
     MedixBotPrimaryColor1:'#9800CC',
     error: "#EB5757",
     Text:  "#414042",
+    newBlack: '#41416E',
+    newLightBlue:"#D7EAFF",
     PureGreen: '#09A129',
     PureGreenBackground: '#01FF7622'
 }

@@ -5,14 +5,18 @@ import BlogDetails from '../screens/Blog/Details';
 import Dashboard from '../screens/Dashboard';
 import Gamification from '../screens/Gamification';
 import FoodRecognition from '../screens/FoodRecognition';
-import { RootStackParamList } from '../utils/types';
+import MyCart from '../screens/Marketplace/MyCart';
+import Checkout from '../screens/Marketplace/Checkout';
+import { MyProducts } from '../screens/Marketplace/MyProducts';
+import { RootStackParamList,MarketplaceStackParamList } from '../utils/types';
 import MedicalHistory from '../screens/Patient/MedicalHistory';
 import SubscriptionDetails from '../screens/Patient/SubcriptionDetails';
 import PatientProfile from '../screens/PatientProfile';
 import Visits from '../screens/Patient/Visits';
+import MarketPlace from '../screens/Marketplace';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
-const ProfileStack =  createNativeStackNavigator<RootStackParamList>();
+const MarketStack =  createNativeStackNavigator<MarketplaceStackParamList>();
 
 export const DashBoardStackNavigator = () => {
   return (
@@ -75,5 +79,32 @@ export const PatientProfileStackNavigator = () => {
         component={SubscriptionDetails}
       />
     </Stack.Navigator>
+  )
+}
+
+export const MarketPlaceStackNavigator = () => {
+  return (
+    <MarketStack.Navigator initialRouteName="Marketplace">
+      <MarketStack.Screen
+        options={{ headerShown: false }}
+        name="Marketplace"
+        component={MarketPlace}
+      />
+      <MarketStack.Screen
+        options={{ headerShown: false }}
+        name="ProductDetails"
+        component={MyProducts}
+      />
+      <MarketStack.Screen
+        options={{ headerShown: false }}
+        name="Cart"
+        component={MyCart}
+      />
+      <MarketStack.Screen
+        options={{ headerShown: false }}
+        name="Checkout"
+        component={Checkout}
+      />
+    </MarketStack.Navigator>
   )
 }

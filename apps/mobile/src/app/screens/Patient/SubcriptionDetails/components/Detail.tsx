@@ -1,5 +1,6 @@
-import { IUser } from 'apps/mobile/src/app/apollo/GraphQL/types';
-import { useIsUser } from 'apps/mobile/src/app/customHooks/useIsUser';
+import { IUser } from '../../../../apollo/GraphQL/types';
+import { useIsUser } from '../../../../customHooks/useIsUser';
+import { colors } from '../../../../variables/colors';
 import React, { useState } from 'react'
 import { View,Text, TouchableOpacity, StyleSheet } from 'react-native'
 
@@ -62,7 +63,8 @@ const styles = StyleSheet.create({
     },
     describtionText: {
       fontSize: 12,
-      fontFamily: 'Lora-Medium'
+      fontFamily: 'Lora-Medium',
+      color: colors.Text
     },
     buttons: {
       marginTop: 15,

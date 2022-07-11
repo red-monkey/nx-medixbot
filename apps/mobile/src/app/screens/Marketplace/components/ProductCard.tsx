@@ -8,17 +8,33 @@ import {
 } from 'react-native';
 import React, { useState } from 'react';
 import { ProductCardStyles } from '../../../styles/MarketPlaceStyles';
-import LinearGradient from "react-native-linear-gradient";
 import Star from '../../../icons/marketplaceicons/star.svg'
 import AddToCart from '../../../icons/marketplaceicons/addToCart.svg'
 import AddedToCart from '../../../icons/marketplaceicons/heartFilled.svg'
 import { IItemProp } from '../index';
+import { useNavigation } from '@react-navigation/native';
+import { MarketplaceStackParamList } from '../../../utils/types';
+import YellowButton from './YellowButton';
+import { useDispatch } from 'react-redux';
+import { Dispatch } from 'redux';
+import { addToCart, removeFromCart } from '../../../redux/actions/marketplace';
+import { useAppSelector } from '../../../utils/hooks';
 
 
 const ProductCard = (props: IItemProp) => {
-  const [added, setAdded] = useState(true);
+  const [added, setAdded] = useState(false);
+  const navigation = useNavigation<any>();
+  const dispatch = useDispatch<Dispatch>()
+  const addProductToCart = () => {
+    setAdded(!added)
+    dispatch(addToCart(props.id))
+  }
+  const removeProductFromCart = () => {
+    setAdded(!added)
+    dispatch(removeFromCart(props.id))   
+  }
   return (
-    <TouchableOpacity style={{width: '49%'}}>
+    <TouchableOpacity style={{width: '49%'}} onPress={()=>navigation.navigate('ProductDetails',{id: props.id, added: added})}>
       <View style={ProductCardStyles.card}>
       <View style={ProductCardStyles.cardContent}>
         <View style={ProductCardStyles.contentContainer}>
@@ -41,19 +57,13 @@ const ProductCard = (props: IItemProp) => {
             <Text style={ProductCardStyles.price}>{props.price} $</Text>
           </View>
           <TouchableHighlight>
-            <LinearGradient
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 1 }}
-              colors={["#F9ED32", "#fdc73d"]}
-              style={styless.linearGradient}
-              locations={[0, 0.5]}
-            >
+            <YellowButton style={{width: 100,height: 35,}} content={
               <TouchableOpacity
                 style={styless.items}
-                onPress={() => setAdded(!added)}
+                onPress={added ? removeProductFromCart : addProductToCart}
               >
-                {added ? <AddToCart /> : <AddedToCart />}
-                {added ? (
+                {added ? <AddedToCart /> :<AddToCart />}
+                {!added ? (
                   <Text style={{ paddingHorizontal: 4, color: "#414042", fontFamily: 'Montserrat-Bold', fontSize: 12}}>
                     Add Cart
                   </Text>
@@ -62,8 +72,7 @@ const ProductCard = (props: IItemProp) => {
                     Added
                   </Text>
                 )}
-              </TouchableOpacity>
-            </LinearGradient>
+              </TouchableOpacity>} />
           </TouchableHighlight>
         </View>
       </View>

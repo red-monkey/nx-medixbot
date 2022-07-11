@@ -35,6 +35,7 @@ import {
   CLOSE_DATE_PICKER_MODAL,
   SET_BIRTH_DATE,
 } from '../redux/actions/actionTypes';
+import { IItemProp } from '../screens/Marketplace';
 
 export type RootStackParamList = {
   Home: undefined;
@@ -53,9 +54,15 @@ export type RootStackParamList = {
   MedicalHistory: undefined;
   SubscriptionDetails: undefined;
   PatientProfile: undefined;
-  Visits: undefined
+  Visits: undefined,
 };
 
+export type MarketplaceStackParamList = {
+  Marketplace: undefined,
+  ProductDetails: {id: number, added: boolean},
+  Cart: undefined,
+  Checkout: {totalPrice: number}
+}
 
 export type InformationProps = {
   title: string;
@@ -79,6 +86,12 @@ export type VerificationCode = StackNavigationProp<
   RootStackParamList,
   'VerificationCode'
 >;
+
+export type ProductProps = StackNavigationProp<
+  MarketplaceStackParamList,
+  'ProductDetails'
+>;
+
 export type RegisterProps = StackNavigationProp<RootStackParamList, 'Register'>;
 export type IndicatorProps = {
   scrollx: Animated.Value;
@@ -512,6 +525,13 @@ export type location = {
   addressLine2?: string;
 };
 
+export type TDelivery =
+{
+  type: TDeliveryOptions,
+  address: string
+}
+export type TDeliveryOptions = 'Home Address' | 'Nearest Pharmacy'
+export type TPaymentOptions = 'Credit Card' | 'Medixcoins' | 'Charity'
 
 
 interface UpdateScoreAction {

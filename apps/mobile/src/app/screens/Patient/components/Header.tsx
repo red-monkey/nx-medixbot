@@ -1,6 +1,6 @@
 import {useNavigation} from '@react-navigation/native';
 import React from 'react';
-import {Image, TouchableOpacity, View,Text} from 'react-native';
+import {Image, TouchableOpacity, View,Text, StatusBar} from 'react-native';
 import styles from '../../../styles/HomepageStyles';
 import { LoginProps } from '../../../utils/types';
 import { colors } from '../../../variables/colors';
@@ -13,7 +13,7 @@ type Props = {
 export default function Header({title,right}: Props) {
   const navigation = useNavigation<LoginProps>();
   return (
-    <View style={[styles.HeaderGroupInfo,{paddingTop: 20,justifyContent: 'space-between',paddingHorizontal: 10}]}>
+    <View style={[styles.HeaderGroupInfo,{justifyContent: 'space-between',paddingHorizontal: 10}]}>
       <TouchableOpacity
         onPress={() => {
           navigation.goBack();
