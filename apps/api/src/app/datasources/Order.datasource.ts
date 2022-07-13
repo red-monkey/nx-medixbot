@@ -30,7 +30,7 @@ export class OrderDataSource extends MongoDataSource<IOrderDocument, IContext> {
   }
 
   async createOrder(order: TOrder) {
-    return await await this.model.create(order);
+    return await this.model.create(order);
   }
 
   async updateOrder(orderId: string, data: FilterQuery<IOrderDocument>) {
@@ -78,7 +78,7 @@ export class OrderDataSource extends MongoDataSource<IOrderDocument, IContext> {
       id: data.id,
       status: data.status,
       update_time: data.update_time,
-      email_address: data.payer.email_address,
+      email_address: data.email_address,
     };
 
     const updatedOrder = await order.save();

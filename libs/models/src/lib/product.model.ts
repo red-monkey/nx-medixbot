@@ -42,7 +42,7 @@ const modelSchema: Schema<IProductDocument> = new Schema(
     category: {
       type: Types.ObjectId,
       required: true,
-      ref: EModelNames.Category,
+      ref: EModelNames.CATEGORY,
     },
     description: {
       type: String,
@@ -87,6 +87,6 @@ modelSchema.plugin(toJSON);
 modelSchema.plugin(paginate);
 
 export const ProductModel = model<IProductDocument, IProductModel>(
-  EModelNames.Product,
+  EModelNames.PRODUCT,
   modelSchema
 );

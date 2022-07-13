@@ -6,12 +6,12 @@ export default gql`
     quantity: Float
     image: String
     price: Float
-    product: TProduct
+    product: ID
   }
   type TShippingAddress {
     address: String
     city: String
-    postcode: String
+    postalCode: String
     country: String
   }
   type TPaymentResult {
@@ -54,7 +54,7 @@ export default gql`
   input IShippingAddress {
     address: String
     city: String
-    postcode: String
+    postalCode: String
     country: String
   }
 

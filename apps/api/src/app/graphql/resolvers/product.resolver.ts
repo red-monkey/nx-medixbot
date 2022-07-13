@@ -13,15 +13,15 @@ export default {
   Mutation: {
     createProduct: auth(catchReq(productController.createProduct), [
       EUserRole.Patient,
-      EUserRole.Patient,
+      EUserRole.Doctor,
     ]),
     updateProduct: auth(catchReq(productController.updateProduct), [
       EUserRole.Patient,
-      EUserRole.Patient,
+      EUserRole.Doctor,
     ]),
     deleteProduct: auth(catchReq(productController.deleteProduct), [
       EUserRole.Patient,
-      EUserRole.Patient,
+      EUserRole.Doctor,
     ]),
     createProductReview: auth(catchReq(productController.createProductReview), [
       EUserRole.Patient,

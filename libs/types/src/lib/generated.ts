@@ -152,7 +152,7 @@ export type IShippingAddress = {
   address?: InputMaybe<Scalars['String']>;
   city?: InputMaybe<Scalars['String']>;
   country?: InputMaybe<Scalars['String']>;
-  postcode?: InputMaybe<Scalars['String']>;
+  postalCode?: InputMaybe<Scalars['String']>;
 };
 
 export type ITime = {
@@ -597,7 +597,7 @@ export type TOrderItem = {
   image?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   price?: Maybe<Scalars['Float']>;
-  product?: Maybe<TProduct>;
+  product?: Maybe<Scalars['ID']>;
   quantity?: Maybe<Scalars['Float']>;
 };
 
@@ -694,7 +694,7 @@ export type TShippingAddress = {
   address?: Maybe<Scalars['String']>;
   city?: Maybe<Scalars['String']>;
   country?: Maybe<Scalars['String']>;
-  postcode?: Maybe<Scalars['String']>;
+  postalCode?: Maybe<Scalars['String']>;
 };
 
 export type TTime = {

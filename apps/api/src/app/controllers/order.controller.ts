@@ -19,9 +19,9 @@ async function createOrder(
 
   //create order
 
-  //const order = await ctx.dataSources.orders.createOrder(createData);
+  const order = await ctx.dataSources.orders.createOrder(createData);
 
-  // return order;
+  return order;
 }
 
 interface IGetOrdersArgs {

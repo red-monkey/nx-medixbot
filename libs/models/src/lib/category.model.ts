@@ -28,6 +28,6 @@ modelSchema.plugin(toJSON);
 modelSchema.plugin(paginate);
 
 export const CategoryModel = model<ICategoryDocument, ICategoryModel>(
-  EModelNames.Category,
+  EModelNames.CATEGORY,
   modelSchema
 );

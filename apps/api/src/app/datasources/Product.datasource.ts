@@ -33,7 +33,7 @@ export class ProductDataSource extends MongoDataSource<
   }
 
   async createProduct(product: ICreateProduct) {
-    return await await this.model.create(product);
+    return await this.model.create(product);
   }
 
   async updateProduct(productId: string, data: FilterQuery<IProductDocument>) {
