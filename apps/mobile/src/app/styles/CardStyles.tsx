@@ -393,7 +393,8 @@ const styles = StyleSheet.create({
     address: {
         fontFamily: 'Lora-Regular',
         marginVertical: 5,
-        marginLeft: 35
+        marginLeft: 35,
+        color: colors.newBlack
     },
     editIcon:{
         position: 'absolute',

@@ -95,7 +95,7 @@ export const EmojiBar = () => {
   );
 };
 
-export const ChallengeBar: React.FC<{ mood: string }> = ({ mood }) => {
+export const ChallengeBar: React.FC<{ mood: string}> = ({ mood }) => {
   const navigation = useNavigation<GamificationProps>();
 
   const challengeState = useSelector(
@@ -130,20 +130,22 @@ export const ChallengeBar: React.FC<{ mood: string }> = ({ mood }) => {
   );
 };
 
-const ActionBar = () => {
+const ActionBar = ({showMember}:{showMember: boolean}) => {
   const { mood } = useSelector((state: AppState) => state.challengeReducer);
 
   return (
     <View>
       <View style={styles.topContainer}>
-        <Text style={styles.question}>
+        <Text style={[styles.question, !showMember ? {width: 210}:null ]}>
           {mood
             ? 'Are you ready to challenge yourself?'
             : 'How are you feeling today?'}
         </Text>
-        <Medixbot />
+{ showMember ? <>
+      <Medixbot />
         <Text style={styles.status}>Member of Family 
         <Text style={{fontSize: 20}}>MEDIXBOT</Text></Text>
+        </> : null}
       </View>
       {mood ? <ChallengeBar mood={mood} /> : <EmojiBar />}
     </View>
