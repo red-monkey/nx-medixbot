@@ -44,6 +44,7 @@
     "react-native-calendars": "*",
     "react-native-calendar-strip": "*",
     "react-native-vector-icons": "*",
-    "react-native-gesture-handler": "*"
+    "react-native-gesture-handler": "*",
+    "react-native-shadow-2": "*"
   }
 }

@@ -11,6 +11,7 @@ import { TDelivery, TDeliveryOptions, TPaymentOptions } from '../../utils/types'
 import { useIsUser } from '../../customHooks/useIsUser'
 import { IUser } from '../../apollo/GraphQL/types'
 import Edit from '../../icons/Edit'
+import { Shadow } from 'react-native-shadow-2';
 
 const Checkout = ({route}) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -31,12 +32,10 @@ const Checkout = ({route}) => {
     <ScrollView contentContainerStyle={[marketPlaceStyles.Container]}>
     <Modal
     isVisible={modalVisible}
-    onBackdropPress={() => {
-      setModalVisible(!modalVisible);
-    }}
+    style={{}}
     >
-      <View style={styles.centeredView}>
-        <View style={styles.modalView}>
+      <View style={[styles.centeredView]}>
+        <Shadow viewStyle={styles.modalV} radius={20} distance={25} startColor={'#fff'} finalColor={'#ffffff10'} >
           <Image
           style={styles.img}
           source={require('../../icons/marketplaceicons/order-img.png')}
@@ -49,12 +48,12 @@ const Checkout = ({route}) => {
             >
               <Text style={{fontSize:19, color:'#fff', fontFamily: 'Montserrat-Bold'}}>Track Order</Text>
             </TouchableOpacity>
-          <Pressable
+          <TouchableOpacity
             onPress={() => setModalVisible(!modalVisible)}
           >
             <Text style={styles.textStyle}>Go Back</Text>
-          </Pressable>
-        </View>
+          </TouchableOpacity>
+        </Shadow>
       </View>
     </Modal>
         <Header title='Checkout'/>
