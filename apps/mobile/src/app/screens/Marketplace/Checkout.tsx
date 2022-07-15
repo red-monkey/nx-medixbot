@@ -1,4 +1,5 @@
-import { View, Text, ScrollView, TouchableOpacity } from 'react-native'
+import { View, Text, ScrollView, TouchableOpacity, Image, Pressable } from 'react-native'
+import Modal from 'react-native-modal'
 import React, { useState } from 'react'
 import styles from '../../styles/CardStyles'
 import marketPlaceStyles from '../../styles/MarketPlaceStyles'
@@ -12,6 +13,7 @@ import { IUser } from '../../apollo/GraphQL/types'
 import Edit from '../../icons/Edit'
 
 const Checkout = ({route}) => {
+  const [modalVisible, setModalVisible] = useState(false);
   const marketPlace = useAppSelector((state) => state.marketplaceReducer);
   const [, getUser,] = useIsUser();
   const [userInf,setUserInf] = useState<IUser | null>();
@@ -26,7 +28,35 @@ const Checkout = ({route}) => {
   const [paymentOption, setPaymentOption] = useState<TPaymentOptions>('Credit Card')
   const {totalPrice} = route.params;
   return (
-    <ScrollView contentContainerStyle={[marketPlaceStyles.Container]} >
+    <ScrollView contentContainerStyle={[marketPlaceStyles.Container]}>
+    <Modal
+    isVisible={modalVisible}
+    onBackdropPress={() => {
+      setModalVisible(!modalVisible);
+    }}
+    >
+      <View style={styles.centeredView}>
+        <View style={styles.modalView}>
+          <Image
+          style={styles.img}
+          source={require('../../icons/marketplaceicons/order-img.png')}
+          />
+          <Text style={styles.txt_Confirmed}>Order Confirmed</Text>
+          <Text style={styles.txt_Thank}>Thank You!</Text>
+          <TouchableOpacity
+              style={styles.payCheckoutButton}
+              onPress={() => {setModalVisible(true)}}
+            >
+              <Text style={{fontSize:19, color:'#fff', fontFamily: 'Montserrat-Bold'}}>Track Order</Text>
+            </TouchableOpacity>
+          <Pressable
+            onPress={() => setModalVisible(!modalVisible)}
+          >
+            <Text style={styles.textStyle}>Go Back</Text>
+          </Pressable>
+        </View>
+      </View>
+    </Modal>
         <Header title='Checkout'/>
         <View style={styles.screenContentCart}>
           {/* first view with number o items in cart */}
@@ -76,6 +106,7 @@ const Checkout = ({route}) => {
           <View style={{alignItems:'center'}}>
             <TouchableOpacity
               style={styles.payCheckoutButton}
+              onPress={() => {setModalVisible(true)}}
             >
               <Text style={{fontSize:19, color:'#fff', fontFamily: 'Montserrat-Bold'}}>Pay ${totalPrice}</Text>
             </TouchableOpacity>

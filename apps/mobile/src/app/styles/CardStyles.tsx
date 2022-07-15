@@ -395,11 +395,184 @@ const styles = StyleSheet.create({
         marginVertical: 5,
         marginLeft: 35
     },
+    orderIdBox: {
+        minHeight: 80,
+        borderRadius: 6,
+        borderWidth: 1,
+        borderColor: colors.newLightBlue,
+        padding: 12
+    },
+    orderId: {
+        fontFamily: 'Lora-Bold',
+        marginVertical: 5,
+    },
+    orderIdHeader: {
+        fontSize:20, 
+        fontFamily: 'Montserrat-Bold',
+        color:'#41416E',
+    },
+    orderStatusContainer: {
+        marginVertical: 12,
+        display: "flex",
+        flexDirection: "row",
+    },
+    orderStatus: {
+        fontSize:18, 
+        fontFamily: 'Montserrat-Bold',
+        color:'#41416E',
+    },
+    orderStatusIcon: {
+        marginHorizontal: 15,
+        marginRight: 25,
+        marginTop: 5,
+    },
+    orderDate: {
+        fontFamily: 'Lora-Regular',
+        fontSize: 16,
+    },
+    verticalLine: {
+        borderLeftWidth: 2,
+        borderLeftColor: "gray",
+        height: 40,
+        left: 9,
+        top: 26,
+        position: "absolute"
+    },
     editIcon:{
         position: 'absolute',
         top: 5,
         left: '100%'
-    }
+    },
+    copyIcon:{
+        position: 'absolute',
+        top: 15,
+        left: '100%'
+    },
+    TimelineBox: {
+        minHeight: 100,
+        marginTop: 10,
+        borderRadius: 6,
+        borderWidth: 1,
+        borderColor: colors.newLightBlue,
+        padding: 12
+    },
+    confirmDeliveryButton: {
+        width:'91%',
+        height: 70,
+        borderRadius:16,
+        marginVertical: 15,
+        backgroundColor:'#3095E2',
+        alignItems:'center',
+        justifyContent:'center',
+        marginTop: '20%'
+    },
+    centeredView: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: 22,
+      },
+      modalView: {
+        margin: 20,
+        width: "104%",
+        height: '80%',
+        backgroundColor: "white",
+        borderRadius: 20,
+        padding: 35,
+        alignItems: "center",
+        shadowColor: "#000",
+        shadowOffset: {
+          width: 0,
+          height: 2
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5
+      },
+      buttonn: {
+        borderRadius: 20,
+        padding: 10,
+        elevation: 2
+      },
+      buttonOpen: {
+        backgroundColor: "#F194FF",
+      },
+      buttonClose: {
+        backgroundColor: "#2196F3",
+      },
+      textStyle: {
+        color: '#3095E2',
+        fontWeight: "bold",
+        marginTop: 5,
+        fontSize: 17,
+        textAlign: "center"
+      },
+      modalText: {
+        marginBottom: 15,
+        textAlign: "center"
+      },
+      viewContainer: {
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      },
+      img: {
+        width: 191,
+        height: 145,
+        marginBottom: 56,
+        marginTop: 40
+      },
+      txt_Confirmed: {
+        fontSize: 28,
+        fontFamily: "Montserrat, sans-serif",
+        fontWeight: "700",
+        color: "rgba(65,65,110,1)",
+        width: 260,
+        marginLeft: 30,
+        marginBottom: 20,
+      },
+      txt_Thank: {
+        fontSize: 16,
+        fontFamily: "Lora, serif",
+        fontWeight: "400",
+        color: "rgba(65,65,110,1)",
+        width: 88,
+        marginBottom: 15,
+      },
+      viewContainerDown: {
+        width: 286,
+        height: 128.54,
+      },
+      trackButton: {
+        marginBottom: 27,
+        borderRadius: 16,
+        backgroundColor: "rgba(48,149,226,1)",
+        shadowColor: "rgba(230,230,230,0.28)",
+        elevation: 3,
+        shadowOffset: { width: 0, height: 4 },
+        width: 280,
+        height: 76,
+        justifyContent: "center",
+        alignItems: "center",
+        textAlign: "center",
+      },
+    
+      txt_trackButton: {
+        fontSize: 20,
+        fontFamily: "Montserrat, sans-serif",
+        fontWeight: "700",
+        color: "white",
+        width: 140,
+      },
+    
+      backButton: {
+        fontSize: 20,
+        fontFamily: "Montserrat, sans-serif",
+        fontWeight: "700",
+        color: "#3095E2",
+        width: 128,
+        alignItems: "center",
+      },
 });
 
 export default styles;
