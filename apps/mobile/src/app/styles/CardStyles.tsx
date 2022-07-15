@@ -372,8 +372,10 @@ const styles = StyleSheet.create({
     optionsBox: {
         minHeight: 100,
         marginTop: 10,
-        borderRadius: 6,
-        padding: 12
+        borderRadius: 15,
+        padding: 12,
+        borderColor: colors.newLightBlue,
+        borderWidth: 1
     },
     option: {
         flexDirection: 'row',
@@ -506,7 +508,7 @@ const styles = StyleSheet.create({
       },
       modalV: {
         height: '90%',
-        width: Dimensions.get('screen').width*0.78,
+        width: Dimensions.get('screen').width*0.85,
         backgroundColor: "white",
         borderRadius: 20,
         padding: 35,

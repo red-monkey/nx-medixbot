@@ -15,6 +15,7 @@ import { Shadow } from 'react-native-shadow-2';
 import { useNavigation } from '@react-navigation/native'
 import { useDispatch } from 'react-redux'
 import { setLocation } from '../../redux/actions/location'
+import { clearCart } from '../../redux/actions/marketplace'
 
 const Checkout = ({route}) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -44,7 +45,7 @@ const Checkout = ({route}) => {
     style={{}}
     >
       <View style={[styles.centeredView]}>
-        <Shadow viewStyle={styles.modalV} radius={20} distance={25} startColor={'#fff'} finalColor={'#ffffff10'} >
+        <Shadow viewStyle={styles.modalV} radius={20} distance={15} startColor={'#fff'} finalColor={'#ffffff01'} >
           <Image
           style={styles.img}
           source={require('../../icons/marketplaceicons/order-img.png')}
@@ -58,7 +59,7 @@ const Checkout = ({route}) => {
               <Text style={{fontSize:19, color:'#fff', fontFamily: 'Montserrat-Bold'}}>Track Order</Text>
             </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => setModalVisible(!modalVisible)}
+            onPress={() => navigation.goBack()}
           >
             <Text style={styles.textStyle}>Go Back</Text>
           </TouchableOpacity>
@@ -114,7 +115,7 @@ const Checkout = ({route}) => {
           <View style={{alignItems:'center'}}>
             <TouchableOpacity
               style={styles.payCheckoutButton}
-              onPress={() => {setModalVisible(true)}}
+              onPress={() => {setModalVisible(true); dispatch(clearCart())}}
             >
               <Text style={{fontSize:19, color:'#fff', fontFamily: 'Montserrat-Bold'}}>Pay ${totalPrice}</Text>
             </TouchableOpacity>
