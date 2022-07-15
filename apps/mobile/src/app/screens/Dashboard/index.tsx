@@ -1,4 +1,4 @@
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
 import Healthcare from './components/Healthcare'
 import {
@@ -10,11 +10,7 @@ import {
 } from 'react-native';
 import styles from '../../styles/DashboardStyles';
 
-import { useDispatch, useSelector } from 'react-redux';
-import { Dispatch } from 'redux';
-import { useAccessToken } from '../../customHooks/useAuthToken';
-import { useIsUser } from '../../customHooks/useIsUser';
-import { setIsLoggedIn } from '../../redux/actions/login';
+import { useDispatch, useSelector } from 'react-redux'
 import GreetingBox from './components/GreetingBox';
 import Notifications from './components/Notifications';
 import { Header } from './components/Header';
@@ -27,15 +23,8 @@ import sharedStyles from '../../styles/SharedStyles';
 
 const Dashboard = () => {
   const { mood } = useSelector((state: AppState) => state.challengeReducer);
-  const [, , removeAuthToken] = useAccessToken();
-  const [, , deleteUserData] = useIsUser();
-  const dispatch = useDispatch<Dispatch>();
   const navigation = useNavigation<any>();
-  const logout = () => {
-    removeAuthToken();
-    deleteUserData();
-    dispatch(setIsLoggedIn(false));
-  };
+
   const goToFoodRecognition = () => {
     navigation.navigate('FoodRecognition');
   };
@@ -61,7 +50,7 @@ const Dashboard = () => {
                 </TouchableOpacity>
               </View>
               <View style={styles.screenContent}>
-                <GreetingBox />
+                <GreetingBox showLogo={true} showMedixBotter={true}/>
                   <>
                     <Appointment />
                     <Notifications />

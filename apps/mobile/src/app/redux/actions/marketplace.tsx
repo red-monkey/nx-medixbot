@@ -67,3 +67,12 @@ export const isInCart = (cart: TCartItem[],id: number) => {
                 item.id === id ? true : false);
     return inCart
 }
+
+
+export const setShippingAddress = (address: string) => {
+    //console.log(address)
+    return{
+        type: actionTypes.SET_SHIPPING_ADDRESS,
+        payload: address,
+    }
+}

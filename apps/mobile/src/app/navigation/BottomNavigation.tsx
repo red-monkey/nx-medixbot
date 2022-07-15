@@ -1,12 +1,11 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { DashBoardStackNavigator, MarketPlaceStackNavigator, PatientProfileStackNavigator } from './StackNavigation';
+import { AppointmentStackNavigator, DashBoardStackNavigator, MarketPlaceStackNavigator, PatientProfileStackNavigator } from './StackNavigation';
 import { StyleSheet, View, Text } from 'react-native';
 import HomeIcon from '../icons/HomeIcon';
 import AppointmentIcon from '../icons/AppointmentIcon';
 import HealthIcon from '../icons/HealthIcon';
 import ProfileIcon from '../icons/ProfileIcon';
-import MarketPlace from '../screens/Marketplace';
 import MarketPlaceIcon from '../icons/Marketplace';
 
 const CustomTab: React.FC<{
@@ -72,7 +71,7 @@ const Tabs = () => {
           },
         }}
         name="Appointment"
-        component={DashBoardStackNavigator}
+        component={AppointmentStackNavigator}
       />
       <Tab.Screen
         options={{
