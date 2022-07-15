@@ -8,18 +8,25 @@ import { AppState } from '../../../../redux/store/ConfigureStore';
 import { useIsUser } from '../../../../customHooks/useIsUser';
 import { IUser } from '../../../../apollo/GraphQL/types';
 
+type TProps = {
+  showMedixBotter: boolean,
+  showLogo: boolean
+}
 
-const GreetingBox = () => {
+const GreetingBox = (props: TProps) => {
   const { mood } = useSelector((state: AppState) => state.challengeReducer);
   const [, getUser,] = useIsUser();
   const [userInf,setUserInf] = useState<IUser | null>();
   getUser().then(user => setUserInf(JSON.parse(user)));
   return (
     <View style={styles.GreetingBoxContainer}>
-      <Image
+      {
+        props.showMedixBotter ? 
+        <Image
         style={styles.bot}
         source={require('../../../../../../../assets/logos/Medixboter.png')}
-      />
+      />: null
+      }
       <View style={styles.userInfo}>
         {mood ? (
           <View style={{ margin: 5, aspectRatio: 1 }}>{feelings[mood]}</View>
@@ -36,7 +43,7 @@ const GreetingBox = () => {
           <Text style={styles.userName}>{userInf?.fullName}</Text>
         </View>
       </View>
-      <ActionBar />
+      <ActionBar showMember={props.showLogo}/>
     </View>
   );
 };

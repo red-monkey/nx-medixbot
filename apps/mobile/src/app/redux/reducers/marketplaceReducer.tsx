@@ -5,13 +5,15 @@ type state = {
     products: IItemProp[],
     cart: TCartItem[],
     currentItem: IItemProp,
-    total: number
+    total: number,
+    shippingAddress: string
 }
 const INITIAL_STATE: state  = {
     products: items,
     cart:[],
     currentItem: null,
-    total: 0
+    total: 0,
+    shippingAddress: ''
 };
 
 const marketplaceReducer = (state = INITIAL_STATE, action) => {
@@ -82,18 +84,22 @@ const marketplaceReducer = (state = INITIAL_STATE, action) => {
                 cart: [],
                 total: 0
             };
-        case actionTypes.ADJUST_QTY:{
+        case actionTypes.ADJUST_QTY:
             return{
                 ...state,
                 cart: state.cart.map(item => item.id === action.payload.id ? { ...item, qty: action.payload.qty} : item),
             };
-        };
-        case actionTypes.VIEW_PRODUCT:{
+        case actionTypes.VIEW_PRODUCT:
             return{
                 ...state,
                 currentItem: action.payload,
             }
-        }
+        ;
+        case actionTypes.SET_SHIPPING_ADDRESS:
+            return{
+                ...state,
+                shippingAddress: action.payload
+            };
         default:
             return state;
     };
