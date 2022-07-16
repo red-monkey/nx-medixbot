@@ -10,7 +10,9 @@ import { IUser } from '../../../../apollo/GraphQL/types';
 
 type TProps = {
   showMedixBotter: boolean,
-  showLogo: boolean
+  showLogo: boolean,
+  title?: string,
+  SecondPart?: any
 }
 
 const GreetingBox = (props: TProps) => {
@@ -27,6 +29,7 @@ const GreetingBox = (props: TProps) => {
         source={require('../../../../../../../assets/logos/Medixboter.png')}
       />: null
       }
+      {props.title ? <Text style={styles.GreetingBoxTitle}>{props.title}</Text>: null}
       <View style={styles.userInfo}>
         {mood ? (
           <View style={{ margin: 5, aspectRatio: 1 }}>{feelings[mood]}</View>
@@ -44,6 +47,7 @@ const GreetingBox = (props: TProps) => {
         </View>
       </View>
       <ActionBar showMember={props.showLogo}/>
+      {props.SecondPart || null}
     </View>
   );
 };
