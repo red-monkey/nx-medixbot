@@ -86,6 +86,64 @@ const styles = StyleSheet.create({
       healthCareTypeDescription: {
         color: '#7B8D9E', 
         fontFamily: 'Lora-Regular'
+      },
+      inputsHeader: {
+        color: '#000000',
+        fontFamily: "Montserrat-Bold",
+        fontSize: 16,
+        paddingHorizontal: 17,
+        marginBottom: 15,
+        marginTop: 18
+      },
+      inputSection: {
+        paddingHorizontal: 17,
+      },
+      questionTxt: {
+        color: '#000000',
+        fontFamily: 'Montserrat-SemiBold',
+        fontStyle: 'normal',
+        fontSize: 13,
+        lineHeight: 18,
+        marginVertical: '4%'
+      },
+      txtInput: {
+        borderRadius: 20,
+        backgroundColor: "#F5F5F6",
+        fontSize: 12,
+        width: 319,
+        height: 93,
+        color: '#000000',
+        paddingLeft: 15,
+      },
+      yesBox: {
+        backgroundColor: colors.MedixBotPrimaryColor,
+        borderRadius: 8,
+        width: 70,
+        height: 38,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginRight: '10%'
+      },
+      noBox: {
+        backgroundColor: '#dbdffd',
+        borderRadius: 8,
+        width: 70,
+        height: 38,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginRight: '10%'
+      },
+      yesNoBoxContainer: {
+        display: 'flex',
+        flexDirection: 'row',
+      },
+      yesBtnTxt: {
+        color: '#FFFFFF',
+        fontFamily: 'Montserrat-SemiBold'
+      },
+      noBtnTxt: {
+        color: '#4c5df4',
+        fontFamily: 'Montserrat-SemiBold'
       }
 });
 
