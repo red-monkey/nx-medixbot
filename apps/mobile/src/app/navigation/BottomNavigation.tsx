@@ -8,6 +8,7 @@ import HealthIcon from '../icons/HealthIcon';
 import ProfileIcon from '../icons/ProfileIcon';
 import MarketPlace from '../screens/Marketplace';
 import MarketPlaceIcon from '../icons/Marketplace';
+import BookAppointment from '../screens/Appointment/BookAppointment';
 
 const CustomTab: React.FC<{
   label: string;
@@ -72,7 +73,7 @@ const Tabs = () => {
           },
         }}
         name="Appointment"
-        component={DashBoardStackNavigator}
+        component={BookAppointment}
       />
       <Tab.Screen
         options={{

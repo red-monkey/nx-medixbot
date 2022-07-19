@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
       },
       appointmentStatusTxt: {
-        fontSize: 8,
+        fontSize: 10,
         fontFamily: 'Montserrat-Bold',
         alignContent: 'center',
         marginTop: 8,
@@ -93,7 +93,6 @@ const styles = StyleSheet.create({
         fontSize: 16,
         paddingHorizontal: 17,
         marginBottom: 15,
-        marginTop: 18
       },
       inputSection: {
         paddingHorizontal: 17,
