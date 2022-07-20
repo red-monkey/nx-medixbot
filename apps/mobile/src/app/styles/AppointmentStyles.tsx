@@ -166,7 +166,7 @@ const styles = StyleSheet.create({
       },
       liveDoctorsSection: {
         paddingHorizontal: 30,
-        marginTop: 30
+        marginTop: 15
       },
       liveDoctorsHeader: {
         color: '#0E1012',

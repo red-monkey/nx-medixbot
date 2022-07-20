@@ -20,9 +20,9 @@ const NatureOfHealth = ({setStep}: {setStep: React.Dispatch<React.SetStateAction
   return (
         <View>
             <Text style={styles.inputsHeader}>Please, answer the following questions to get insight in to your health status</Text>
-            {questionsAndInputs.map(({question, placeholder}) => {
+            {questionsAndInputs.map(({question, placeholder},i) => {
                 return(
-                    <View style={styles.inputSection}>
+                    <View style={styles.inputSection} key={i}>
                         <Text style={styles.questionTxt}>{question} </Text>
                         <TextInput 
                             editable

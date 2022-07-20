@@ -25,7 +25,7 @@ const SelectHealthcare = ({setStep}: {setStep: React.Dispatch<React.SetStateActi
     <View>
         {healthcareCards.map(({Icon, header, desc, iconColor}, i) => {
             return(
-                <View style={styles.healthcareTypes}>
+                <View style={styles.healthcareTypes} key={i}>
                   <TouchableOpacity onPress={()=>setStep(2)} style={styles.healthcareTypesCard}>
                     <View style={[styles.healthcareIconContainer, {backgroundColor:iconColor}]}>
                       <Icon/>

@@ -32,7 +32,6 @@ const steps = [
   }
 ] 
 const AppointmentSteps = ({currentStep}: {currentStep: number}) => {
-  console.log(currentStep)
   return (
     <View style={{display: "flex", flexDirection: "row", justifyContent: 'space-evenly', paddingTop: 30}}>
             {steps.map((item,key)=>(
