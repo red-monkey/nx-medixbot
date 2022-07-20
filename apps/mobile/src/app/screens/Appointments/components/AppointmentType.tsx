@@ -1,15 +1,19 @@
+import { useNavigation } from '@react-navigation/native'
 import React from 'react'
 import { StyleSheet, TouchableOpacity,Text, View } from 'react-native'
 
 export type OptionProps = {
     title: string,
     color: string,
-    icon: any
+    icon: any,
+    path?: string
 }
 
 const AppointmentType = (props: OptionProps) => {
+    const navigation = useNavigation<any>()
+    const goToBooking = ()=>navigation.navigate(props.path) 
   return (
-    <TouchableOpacity style={optionStyles.container}>
+    <TouchableOpacity style={optionStyles.container} onPress={props.path ? goToBooking : null}>
         <Text style={optionStyles.title}>{props.title}</Text>
         <View style={[optionStyles.iconContainer,{backgroundColor: props.color}]}>
              {props.icon}

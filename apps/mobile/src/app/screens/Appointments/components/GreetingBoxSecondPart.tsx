@@ -16,7 +16,7 @@ const GreetingBoxSecondPart = () => {
         <Text style={[CustomStyles.title,{marginTop: -8}]}>Select appointment type</Text>
         <View style={CustomStyles.optionsContainer}>
             {options.map((item,i) => (
-            <AppointmentType key={i} title={item.title} color={item.color} icon={item.icon} />                
+            <AppointmentType key={i} title={item.title} color={item.color} icon={item.icon} path={item.path || null}/>                
             ))}
         </View>
     </View>
@@ -56,7 +56,8 @@ const options: OptionProps[] = [
     {
         title: 'Doctor Visit',
         color: '#DCAFEC',
-        icon: <DoctorIcon />
+        icon: <DoctorIcon />,
+        path: 'BookAppointment'
     },
     {
         title: 'Patient Visit',

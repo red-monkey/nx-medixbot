@@ -72,11 +72,7 @@ const Tabs = () => {
           },
         }}
         name="Appointment"
-<<<<<<< HEAD
-        component={BookAppointment}
-=======
         component={AppointmentStackNavigator}
->>>>>>> 86ec2d8c2b65d364b905465d913fa910c90eeca3
       />
       <Tab.Screen
         options={{

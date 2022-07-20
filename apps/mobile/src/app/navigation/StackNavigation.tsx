@@ -17,6 +17,7 @@ import MarketPlace from '../screens/Marketplace';
 import SetShipping from '../screens/Marketplace/SetShipping';
 import Apppointments from '../screens/Appointments';
 import MakeAppointment from '../screens/Appointments/MakeAppointment';
+import BookAppointment from '../screens/BookAppointment/BookAppointment';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const MarketStack =  createNativeStackNavigator<MarketplaceStackParamList>();
@@ -130,6 +131,11 @@ export const AppointmentStackNavigator = () => {
         options={{ headerShown: false }}
         name="MakeAppointment"
         component={MakeAppointment}
+      />
+      <AppointmentStack.Screen
+        options={{ headerShown: false }}
+        name="BookAppointment"
+        component={BookAppointment}
       />
   </AppointmentStack.Navigator>    
   )

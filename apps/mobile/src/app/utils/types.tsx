@@ -69,7 +69,8 @@ export type MarketplaceStackParamList = {
 
 export type AppointmentStackParamList = {
   AppointmentHome: undefined,
-  MakeAppointment: undefined
+  MakeAppointment: undefined,
+  BookAppointment: undefined
 }
 
 export type InformationProps = {
