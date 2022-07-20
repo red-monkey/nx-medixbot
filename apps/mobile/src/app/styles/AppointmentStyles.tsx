@@ -143,6 +143,109 @@ const styles = StyleSheet.create({
       noBtnTxt: {
         color: '#4c5df4',
         fontFamily: 'Montserrat-SemiBold'
+      },
+      liveDoctorImageContainer: {
+        flexDirection:"row",
+        alignItems:'center',
+        justifyContent:'center'
+      },
+      liveDoctorImage: {
+        width: 91,
+        height: 91,
+        borderRadius: 25,
+        marginHorizontal: 4
+      },
+      liveDoctors: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignContent: 'center',
+        alignItems: 'center',
+        marginTop: 5,
+        
+      },
+      liveDoctorsSection: {
+        paddingHorizontal: 30,
+        marginTop: 30
+      },
+      liveDoctorsHeader: {
+        color: '#0E1012',
+        fontFamily: 'Montserrat-Bold',
+        fontStyle: 'normal',
+        fontSize: 13,
+        lineHeight: 18,
+        marginVertical: '4%',
+        marginLeft: '2%'
+      },
+      ellipseIcon: {
+        position: 'absolute',
+        top: '1%',
+        right: '2%'
+      },
+      popularDoctorsSection: {
+        paddingHorizontal: 20,
+        marginTop: 25
+      },
+      popularDoctorsHeader: {
+        color: '#0E1012',
+        fontFamily: 'Montserrat-Bold',
+        fontStyle: 'normal',
+        fontSize: 13,
+        lineHeight: 18,
+        marginTop: '4%',
+        marginLeft: '5%',
+        marginBottom: 6
+      },
+      popularDoctors: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        marginVertical: '4%'
+      },
+      popularDoctorImage: {
+        borderRadius: 26,
+        width: 104,
+        height: 115,
+        marginLeft: '-1%'
+      },
+      popularDoctorInfosContainer: {
+        justifyContent: 'space-around',
+        marginRight: '-3%',
+        maxWidth: '62%',
+        width: '65%',
+      },
+      doctorCritics: {
+        display: 'flex',
+        flexDirection: 'row',
+        flex: .1,
+        justifyContent: 'space-evenly',
+        alignSelf: 'flex-start',
+        alignItems: 'center',
+      },
+      popularDoctorName: {
+        fontSize: 18,
+        color: '#0E1012',
+        fontFamily: 'Montserrat-SemiBold',
+        flex: 1,
+        flexWrap: 'wrap'
+      },
+      popularDoctorDescripton: {
+        fontFamily: 'Lora-Medium',
+        fontSize: 11,
+        color: '#4A545E',
+      },
+      popularDoctorRate: {
+        fontFamily: 'Lora-Bold',
+        color: '#0E1012',
+        marginHorizontal: '4%'
+      },
+      starIcon: {
+        marginTop: 2
+      },
+      popularDoctorReview: {
+        fontFamily: 'Lora-Medium',
+        fontSize: 11,
+        color: '#4A545E'
       }
 });
 

@@ -7,14 +7,14 @@ import DottedLine from '../../icons/appointmentIcons/DottedLine.svg'
 import AppointmentSteps from './components/AppointmentSteps'
 import SelectHealthcare from './components/SelectHealthcare'
 import NatureOfHealth from './components/NatureOfHealth'
-
+import SelectDoctor from './components/SelectDoctor'
 
 const BookAppointment = () => {
   const [currentStep,setCurrentStep] = useState(1)
   const Steps = [
     <SelectHealthcare setStep={setCurrentStep}/>,
     <NatureOfHealth  setStep={setCurrentStep}/>,
-    <NatureOfHealth  setStep={setCurrentStep}/>,
+    <SelectDoctor  setStep={setCurrentStep}/>,
     <NatureOfHealth  setStep={setCurrentStep} />
   ]
 
