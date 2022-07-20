@@ -85,3 +85,64 @@ const index = () => {
 }
 
 export default index
+
+export const AppointmentCategories: TCategory[] = [
+    {
+        name: 'Family Members',
+        iconPath: require('../icons/familyTree.png'),
+        color: '#FEC026'
+    },
+    {
+        name: 'Consultations',
+        iconPath: require('../icons/consultations.png'),
+        color: '#ED1C24',
+        path: 'Visits'
+    },
+    {
+      name: 'Report & Documents',
+      iconPath: require('../icons/fitnessHealth.png'),
+      color: '#CC40B6'
+    },  
+    {
+        name: 'Messages',
+        iconPath: require('../icons/chat.png'),
+        color: '#00AEEF'
+    },
+    {
+        name: 'Prescriptions',
+        iconPath: require('../icons/prescriptions.png'),
+        color: '#8DC63F'
+    },
+    {
+        name: 'Lab Tests',
+        iconPath: require('../icons/labTests.png'),
+        color: '#8601AF'
+    },
+    {
+        name: 'Medical Images',
+        iconPath: require('../icons/medicalImages.png'),
+        color: '#414042'
+    },
+    {
+      name: 'Connected Devices',
+      iconPath: require('../icons/metabolicHealth.png'),
+      color: '#D7137A'
+    },
+    {
+      name: 'Visits',
+      iconPath: require('../icons/Diagnostics.png'),
+      color: '#3FC6B6'
+    },
+    {
+      name: 'Medical History',
+      iconPath: require('../icons/mentalHealth.png'),
+      color: '#C65F3F'
+    },
+    {
+      name: 'Make Appointment',
+      iconPath: require('../icons/calendarCheck.png'),
+      color: '#9777A8',
+      path: 'MakeAppointment'
+    },
+   
+  ]

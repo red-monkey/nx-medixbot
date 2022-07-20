@@ -45,7 +45,6 @@ import {
       borderWidth: 1,
       width: '80%',
       borderRadius: 18,
-      marginTop: 30,
       borderColor: '#EEF6FC',
       alignSelf: 'center',
       marginBottom: 5,

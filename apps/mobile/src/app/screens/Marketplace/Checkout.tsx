@@ -1,24 +1,35 @@
 import { View, Text, ScrollView, TouchableOpacity, Image, Pressable } from 'react-native'
 import Modal from 'react-native-modal'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from '../../styles/CardStyles'
 import marketPlaceStyles from '../../styles/MarketPlaceStyles'
 import Header from '../Patient/components/Header'
 import { useAppSelector } from '../../utils/hooks'
 import SelectedIcon from '../icons/SelectedIcon.svg'
 import UnselectedIcon from '../icons/UnselectedIcon.svg'
-import { TDelivery, TDeliveryOptions, TPaymentOptions } from '../../utils/types'
+import { ProductProps, TDelivery, TDeliveryOptions, TPaymentOptions } from '../../utils/types'
 import { useIsUser } from '../../customHooks/useIsUser'
 import { IUser } from '../../apollo/GraphQL/types'
 import Edit from '../../icons/Edit'
+import { Shadow } from 'react-native-shadow-2';
+import { useNavigation } from '@react-navigation/native'
+import { useDispatch } from 'react-redux'
+import { setLocation } from '../../redux/actions/location'
+import { clearCart } from '../../redux/actions/marketplace'
 
 const Checkout = ({route}) => {
   const [modalVisible, setModalVisible] = useState(false);
+  const navigation = useNavigation<ProductProps>()
+  const dispatch = useDispatch()
   const marketPlace = useAppSelector((state) => state.marketplaceReducer);
   const [, getUser,] = useIsUser();
   const [userInf,setUserInf] = useState<IUser | null>();
   getUser().then(user => setUserInf(JSON.parse(user)));
-  const userAddr = userInf?.country + (userInf?.country ? ' , ' : '' )+ 
+  useEffect(()=>{
+    dispatch(setLocation({country: userInf?.country, city: userInf?.city, state: userInf?.state, postCode: userInf?.postCode}))
+  },[userInf?.country])
+  const userAddr = marketPlace.shippingAddress.length > 0 ? marketPlace.shippingAddress :
+                   userInf?.country + (userInf?.country ? ' , ' : '' )+ 
                    userInf?.city + (userInf?.city ? ' , ' : '') +
                    userInf?.postCode + (userInf?.postCode ? ' , ' : '' )+
                    userInf?.tel 
@@ -31,12 +42,10 @@ const Checkout = ({route}) => {
     <ScrollView contentContainerStyle={[marketPlaceStyles.Container]}>
     <Modal
     isVisible={modalVisible}
-    onBackdropPress={() => {
-      setModalVisible(!modalVisible);
-    }}
+    style={{}}
     >
-      <View style={styles.centeredView}>
-        <View style={styles.modalView}>
+      <View style={[styles.centeredView]}>
+        <Shadow viewStyle={styles.modalV} radius={20} distance={15} startColor={'#fff'} finalColor={'#ffffff01'} >
           <Image
           style={styles.img}
           source={require('../../icons/marketplaceicons/order-img.png')}
@@ -49,12 +58,12 @@ const Checkout = ({route}) => {
             >
               <Text style={{fontSize:19, color:'#fff', fontFamily: 'Montserrat-Bold'}}>Track Order</Text>
             </TouchableOpacity>
-          <Pressable
-            onPress={() => setModalVisible(!modalVisible)}
+          <TouchableOpacity
+            onPress={() => navigation.goBack()}
           >
             <Text style={styles.textStyle}>Go Back</Text>
-          </Pressable>
-        </View>
+          </TouchableOpacity>
+        </Shadow>
       </View>
     </Modal>
         <Header title='Checkout'/>
@@ -72,7 +81,7 @@ const Checkout = ({route}) => {
           <View style={styles.optionsContainer}>
             <Text style={styles.checkoutDeliveryOptions}>Delivery options</Text>
             <View style={styles.optionsBox}>
-              <TouchableOpacity style={styles.editIcon}>
+              <TouchableOpacity style={styles.editIcon} onPress={()=> navigation.navigate('SetShipping',{userInfo: userInf})}>
                 <Edit />
               </TouchableOpacity>
               {DeliveryOptions.map((item,i) => (
@@ -106,7 +115,7 @@ const Checkout = ({route}) => {
           <View style={{alignItems:'center'}}>
             <TouchableOpacity
               style={styles.payCheckoutButton}
-              onPress={() => {setModalVisible(true)}}
+              onPress={() => {setModalVisible(true); dispatch(clearCart())}}
             >
               <Text style={{fontSize:19, color:'#fff', fontFamily: 'Montserrat-Bold'}}>Pay ${totalPrice}</Text>
             </TouchableOpacity>

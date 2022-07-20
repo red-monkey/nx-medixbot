@@ -50,9 +50,9 @@ const SelectDoctor = ({setStep}: {setStep: React.Dispatch<React.SetStateAction<n
 
 <View style={styles.popularDoctorsSection}>
   <Text style={styles.popularDoctorsHeader}>Popular Doctors</Text>
-  {popularDoctors.map((props) => {
+  {popularDoctors.map((props,i) => {
     return(
-      <View style={styles.popularDoctors}>
+      <View key={i} style={styles.popularDoctors}>
         <Image style={styles.popularDoctorImage} source={{uri: props.imgUri}} />
         <View style={styles.popularDoctorInfosContainer}>
           <TouchableOpacity>

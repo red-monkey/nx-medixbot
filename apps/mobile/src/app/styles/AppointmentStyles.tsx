@@ -25,19 +25,18 @@ const styles = StyleSheet.create({
         alignItems: 'center',
       },
       appointmentStatusTxt: {
-        fontSize: 10,
+        fontSize: 9.5,
         fontFamily: 'Montserrat-Bold',
         alignContent: 'center',
         marginTop: 8,
-        color: '#000000'
+        color: '#000000',
+        width: '99%',
+        textAlign: 'center'
       },
       line: {
-        width: 48, 
+        minWidth: '25%', 
         height: 3, 
         backgroundColor: '#ececf1', 
-        marginLeft: -44, 
-        marginRight: -25, 
-        marginTop: 25
       },
       healthcareIcons: {
         width: 30,
@@ -180,7 +179,7 @@ const styles = StyleSheet.create({
       },
       liveDoctorsSection: {
         paddingHorizontal: 30,
-        marginTop: 30
+        marginTop: 15
       },
       liveDoctorsHeader: {
         color: '#0E1012',

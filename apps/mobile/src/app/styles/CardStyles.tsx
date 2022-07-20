@@ -367,15 +367,15 @@ const styles = StyleSheet.create({
     },
     optionsContainer: {
         paddingHorizontal: 15,
-        marginTop: 30
+        marginTop: 30,
     },
     optionsBox: {
         minHeight: 100,
         marginTop: 10,
-        borderRadius: 6,
-        borderWidth: 1,
+        borderRadius: 15,
+        padding: 12,
         borderColor: colors.newLightBlue,
-        padding: 12
+        borderWidth: 1
     },
     option: {
         flexDirection: 'row',
@@ -393,18 +393,27 @@ const styles = StyleSheet.create({
     address: {
         fontFamily: 'Lora-Regular',
         marginVertical: 5,
-        marginLeft: 35
+        marginLeft: 35,
+        color: colors.newBlack
     },
     orderIdBox: {
         minHeight: 80,
         borderRadius: 6,
-        borderWidth: 1,
-        borderColor: colors.newLightBlue,
+        shadowColor: '#000',
+        elevation: 4,
+        shadowOpacity: 0.5,
+        shadowOffset:{
+            height: 14,
+            width: 0
+        },
+        backgroundColor: '#fff',
+        shadowRadius: 10,
         padding: 12
     },
     orderId: {
-        fontFamily: 'Lora-Bold',
+        fontFamily: 'Lora-Regular',
         marginVertical: 5,
+        color: colors.newBlack
     },
     orderIdHeader: {
         fontSize:20, 
@@ -429,6 +438,7 @@ const styles = StyleSheet.create({
     orderDate: {
         fontFamily: 'Lora-Regular',
         fontSize: 16,
+        color:'#41416E',
     },
     verticalLine: {
         borderLeftWidth: 2,
@@ -451,10 +461,17 @@ const styles = StyleSheet.create({
     TimelineBox: {
         minHeight: 100,
         marginTop: 10,
-        borderRadius: 6,
-        borderWidth: 1,
-        borderColor: colors.newLightBlue,
-        padding: 12
+        borderRadius: 8,
+        backgroundColor: '#fff',
+        padding: 12,
+        shadowColor: '#000',
+        elevation: 4,
+        shadowOpacity: 0.5,
+        shadowOffset:{
+            height: 14,
+            width: 0
+        },
+        shadowRadius: 10
     },
     confirmDeliveryButton: {
         width:'91%',
@@ -489,6 +506,14 @@ const styles = StyleSheet.create({
         shadowRadius: 4,
         elevation: 5
       },
+      modalV: {
+        height: '90%',
+        width: Dimensions.get('screen').width*0.85,
+        backgroundColor: "white",
+        borderRadius: 20,
+        padding: 35,
+        alignItems: "center",
+      },
       buttonn: {
         borderRadius: 20,
         padding: 10,
@@ -502,7 +527,7 @@ const styles = StyleSheet.create({
       },
       textStyle: {
         color: '#3095E2',
-        fontWeight: "bold",
+        fontFamily: "Montserrat-Bold",
         marginTop: 5,
         fontSize: 17,
         textAlign: "center"
@@ -524,8 +549,7 @@ const styles = StyleSheet.create({
       },
       txt_Confirmed: {
         fontSize: 28,
-        fontFamily: "Montserrat, sans-serif",
-        fontWeight: "700",
+        fontFamily: "Montserrat-Bold",
         color: "rgba(65,65,110,1)",
         width: 260,
         marginLeft: 30,
@@ -533,7 +557,7 @@ const styles = StyleSheet.create({
       },
       txt_Thank: {
         fontSize: 16,
-        fontFamily: "Lora, serif",
+        fontFamily: "Lora-Regular",
         fontWeight: "400",
         color: "rgba(65,65,110,1)",
         width: 88,
@@ -559,16 +583,14 @@ const styles = StyleSheet.create({
     
       txt_trackButton: {
         fontSize: 20,
-        fontFamily: "Montserrat, sans-serif",
-        fontWeight: "700",
+        fontFamily: 'Montserrat-Bold',
         color: "white",
         width: 140,
       },
     
       backButton: {
         fontSize: 20,
-        fontFamily: "Montserrat, sans-serif",
-        fontWeight: "700",
+        fontFamily: "Montserrat-Bold",
         color: "#3095E2",
         width: 128,
         alignItems: "center",

@@ -32,12 +32,11 @@ const steps = [
   }
 ] 
 const AppointmentSteps = ({currentStep}: {currentStep: number}) => {
-  console.log(currentStep)
   return (
-    <View style={{display: "flex", flexDirection: "row", justifyContent: 'space-evenly', paddingTop: 30}}>
+    <View style={{display: "flex", flexDirection: "row",  paddingTop: 30, width: '100%', justifyContent: 'flex-end'}}>
             {steps.map((item,key)=>(
-              <Step key={key} title={item.title} icon={item.icon} selected={currentStep > key ? true :  false} iconSelected={item.iconSelected}/>
-            ))}
+                <Step current={currentStep} key={key} no={key+1} title={item.title} icon={item.icon} selected={currentStep > key ? true :  false} iconSelected={item.iconSelected}/>
+           ))}
     </View>
   )
 }
