@@ -14,6 +14,8 @@ import SubscriptionDetails from '../screens/Patient/SubcriptionDetails';
 import PatientProfile from '../screens/PatientProfile';
 import Visits from '../screens/Patient/Visits';
 import MarketPlace from '../screens/Marketplace';
+import DoctorDetails from '../screens/Appointment/DoctorDetails';
+import BookAppointment from '../screens/Appointment/BookAppointment';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const MarketStack =  createNativeStackNavigator<MarketplaceStackParamList>();
@@ -103,7 +105,7 @@ export const MarketPlaceStackNavigator = () => {
       <MarketStack.Screen
         options={{ headerShown: false }}
         name="Checkout"
-        component={Checkout}
+        component={DoctorDetails}
       />
     </MarketStack.Navigator>
   )

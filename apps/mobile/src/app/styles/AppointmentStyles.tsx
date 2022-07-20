@@ -4,7 +4,7 @@ import { colors } from "../variables/colors";
 const styles = StyleSheet.create({
     container: {
         backgroundColor: colors.backgroundColor,
-        paddingVertical: 30,
+        paddingBottom: 30,
         alignItems: 'center',
         justifyContent: 'space-between',
       },
@@ -144,6 +144,20 @@ const styles = StyleSheet.create({
         color: '#4c5df4',
         fontFamily: 'Montserrat-SemiBold'
       },
+      nextBtn: {
+        width: '80%',
+        height: 56,
+        backgroundColor: colors.MedixBotPrimaryColor,
+        borderRadius: 14,
+        alignSelf: 'center',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginVertical: '7%'
+      },
+      nextBtnTxt: {
+        color: '#FFFFFF',
+        fontFamily: 'Montserrat-SemiBold'
+      },
       liveDoctorImageContainer: {
         flexDirection:"row",
         alignItems:'center',
@@ -226,8 +240,6 @@ const styles = StyleSheet.create({
         fontSize: 18,
         color: '#0E1012',
         fontFamily: 'Montserrat-SemiBold',
-        flex: 1,
-        flexWrap: 'wrap'
       },
       popularDoctorDescripton: {
         fontFamily: 'Lora-Medium',
@@ -246,6 +258,159 @@ const styles = StyleSheet.create({
         fontFamily: 'Lora-Medium',
         fontSize: 11,
         color: '#4A545E'
+      },
+      doctorDetailsCard: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignSelf: 'center',
+        justifyContent: 'flex-start',
+        width: '82%',
+        height: 119,
+        borderRadius: 28,
+        paddingLeft: '6%',
+        alignItems: 'center',
+        marginTop: '-3%',
+        backgroundColor: '#FFFFFF',
+        shadowOffset: { width: 10, height: 10 },
+        shadowColor: 'black',
+        shadowOpacity: 1,
+        elevation: 8,
+      },
+      doctorDetailImage: {
+        width: 77,
+        height: 77,
+        borderRadius: 25,
+        marginRight: 15,
+      },
+      doctorDetailTxtGroup: {
+        alignSelf: 'center',
+        flex: 1
+      },
+      detailCardDoctorName: {
+        color: '#0E1012',
+        fontFamily: 'Montserrat-Bold',
+        fontStyle: 'normal',
+        fontSize: 17,
+        lineHeight: 18,
+        marginTop: '4%',
+      },
+      detailCardDescripton: {
+        color: '#0E1012',
+        fontFamily: 'Lora-Regular',
+        fontSize: 11,
+        lineHeight: 18,
+        marginTop: 3
+      },
+      doctorDescriptionCard: {
+        backgroundColor: '#E8EBED',
+        borderRadius: 24,
+        width: 95,
+        height: 92,
+        marginHorizontal: 4,
+        alignItems: 'flex-start',
+        justifyContent: 'center',
+        marginVertical: '12%',
+      },
+      doctorDescriptionCardContainer: {
+        display: 'flex',
+        flexDirection: 'row',
+        paddingHorizontal: 5,
+        justifyContent: 'center',
+        alignContent: 'center',
+        alignSelf: 'center',
+        alignItems: 'center'
+      },
+      descriptionCardHeader: {
+        color: '#253141',
+        fontFamily: 'Lora-Medium',
+        marginLeft: '12%'
+      },
+      descriptionCardTxt: {
+        color: '#253141',
+        fontFamily: 'Lora-Bold',
+        fontSize: 16,
+        marginLeft: '12%'
+      },
+      aboutDoctorContainer: {
+        width: '80%',
+        alignSelf: 'center',
+      },
+      aboutDoctorHeader: {
+        color: '#0E1012',
+        fontFamily: 'Montserrat-Bold',
+        fontStyle: 'normal',
+        fontSize: 13,
+        lineHeight: 18,
+      },
+      aboutDoctorDescripton: {
+        fontFamily: 'Lora-Regular',
+        fontSize: 12,
+        color: '#4A545E',
+      },
+      availabilityContainer: {
+        paddingLeft: 15,
+        paddingTop: 14,
+        borderRadius: 24,
+        backgroundColor: "rgba(255, 255, 255, 1)",
+        borderWidth: 1,
+        borderStyle: "solid",
+        borderColor: "rgba(190,202,218,1)",
+        shadowColor: "rgba(107,134,179,0.25)",
+        width: '82%',
+        height: 85,
+        flexDirection: 'row',
+        alignSelf: 'center',
+        marginTop: '10%',
+        display: 'flex',
+      },
+      availabilityTxtGroup: {
+        height: 50,
+        marginLeft: 15,
+        marginTop: 5
+      },
+      availabilityTxt: {
+        fontFamily: 'Lora-Medium',
+        color: '#0E1012',
+        fontSize: 12,
+      },
+      availableTime: {
+        fontFamily: 'Lora-Bold',
+        color: '#0E1012',
+        fontSize: 14,
+        marginTop: 3
+      },
+      availabilityIcon: {
+        paddingTop: 14,
+        paddingBottom: 15,
+        paddingLeft: 14,
+        paddingRight: 13.73,
+        borderRadius: 20,
+        alignContent: 'center',
+        alignItems: 'center',
+        width: 56.73,
+        height: 56,
+        display: 'flex',
+        backgroundColor: '#DCEDF9',
+        justifyContent: 'center',
+      },
+      rightArrowIcon: {
+        marginLeft: '30%',
+        marginTop: '7%'
+      },
+      bookNowBtn: {
+        width: '80%',
+        height: 56,
+        backgroundColor: colors.MedixBotPrimaryColor,
+        borderRadius: 14,
+        alignSelf: 'center',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: '10%',
+        marginBottom: '3%'
+      },
+      bookNowBtnTxt: {
+        color: '#FFFFFF',
+        fontFamily: 'Montserrat-SemiBold'
       }
 });
 

@@ -41,7 +41,7 @@ const NatureOfHealth = ({setStep}: {setStep: React.Dispatch<React.SetStateAction
 
                     {/* Additional Information */}
 
-                    <View>
+                <View>
                     <Text style={styles.inputsHeader}>Additional Information</Text>
                     <View style={styles.inputSection}>
                         <Text style={styles.questionTxt}>Do you live alone?</Text>
@@ -73,10 +73,15 @@ const NatureOfHealth = ({setStep}: {setStep: React.Dispatch<React.SetStateAction
                             </TouchableOpacity>
                         </View>
                     </View>
-                  </View>
+                </View>
 
                 <SearchBar />
-                </View>
+
+                <TouchableOpacity onPress={()=>setStep(3)} style={styles.nextBtn}>
+                    <Text style={styles.nextBtnTxt}>Next</Text>
+                </TouchableOpacity>
+
+        </View>
   )
 }
 
