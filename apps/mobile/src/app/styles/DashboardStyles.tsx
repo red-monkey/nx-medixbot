@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
   },
 
   GreetingBoxContainer: {
-    height: 230,
+    minHeight: 230,
     backgroundColor: '#fff',
     borderRadius: 15,
     flexDirection: 'column',
@@ -50,6 +50,13 @@ const styles = StyleSheet.create({
     shadowColor: 'rgba(0, 0, 0, 0.8)',
     shadowOpacity: 0.1,
     elevation: 3,
+  },
+  GreetingBoxTitle:{
+    fontFamily: 'Montserrat-Bold',
+    color: "#000",
+    textAlign: 'center',
+    marginBottom:10,
+    fontSize: 16
   },
   bot: {
     position: 'absolute',

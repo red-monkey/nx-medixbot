@@ -26,4 +26,5 @@ export const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
 export const VIEW_PRODUCT = 'VIEW_PRODUCT';
 export const ADJUST_QTY = 'ADJUST_QTY';
 export const DECREASE_QTY = 'DECREASE_QTY';
-export const CLEAR_CART = 'CLEAR_CART'
+export const CLEAR_CART = 'CLEAR_CART';
+export const SET_SHIPPING_ADDRESS = 'SET_SHIPPING_ADDRESS';

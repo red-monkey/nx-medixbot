@@ -1,7 +1,5 @@
 import {
-  Dimensions,
   StyleSheet,
-  Text,
   TextInput,
   TouchableOpacity,
   View,
@@ -11,8 +9,10 @@ import SearchIcon from '../../../icons/marketplaceicons/search.svg';
 import Arrow from '../../../icons/marketplaceicons/arrow.svg';
 import SearchSettings from '../../../icons/marketplaceicons/settingsGrid.svg';
 
-
-const SearchBar = () => {
+type TProps = {
+  customPlaceHolder?: string
+}
+const SearchBar = ({customPlaceHolder}: TProps) => {
   return (
     <View style={styles.container}>
       <View style={styles.input}>
@@ -21,7 +21,7 @@ const SearchBar = () => {
         </View>
         <TextInput
           style={{ width: '75%', paddingLeft: 10, fontFamily: "Lora-Medium", color: '#000' }}
-          placeholder="Looking for..."
+          placeholder={customPlaceHolder || "Looking for..."}
           placeholderTextColor="#A09FA0"
         />
       </View>

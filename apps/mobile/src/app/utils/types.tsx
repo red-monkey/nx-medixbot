@@ -3,6 +3,7 @@ import { EMembership } from '@medixbot/types';
 
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { SetStateAction } from 'react';
 import { Animated } from 'react-native';
 import {
   Asset,
@@ -10,6 +11,8 @@ import {
   MediaType,
   PhotoQuality,
 } from 'react-native-image-picker';
+import { Dispatch } from 'redux';
+import { IUser } from '../apollo/GraphQL/types';
 import {
   ADD_OR_REMOVE_LANGUAGE,
   CLOSE_LANGUAGE_MODAL,
@@ -35,7 +38,6 @@ import {
   CLOSE_DATE_PICKER_MODAL,
   SET_BIRTH_DATE,
 } from '../redux/actions/actionTypes';
-import { IItemProp } from '../screens/Marketplace';
 
 export type RootStackParamList = {
   Home: undefined;
@@ -61,7 +63,13 @@ export type MarketplaceStackParamList = {
   Marketplace: undefined,
   ProductDetails: {id: number, added: boolean},
   Cart: undefined,
-  Checkout: {totalPrice: number}
+  Checkout: {totalPrice: number},
+  SetShipping: {userInfo: IUser }
+}
+
+export type AppointmentStackParamList = {
+  AppointmentHome: undefined,
+  MakeAppointment: undefined
 }
 
 export type InformationProps = {
@@ -91,6 +99,15 @@ export type ProductProps = StackNavigationProp<
   MarketplaceStackParamList,
   'ProductDetails'
 >;
+
+export interface IAddressData {
+  state: string,
+  city: string,
+  postCode: string,
+  addressLine1: string,
+  addressLine2: string,
+  country: string
+}
 
 export type RegisterProps = StackNavigationProp<RootStackParamList, 'Register'>;
 export type IndicatorProps = {

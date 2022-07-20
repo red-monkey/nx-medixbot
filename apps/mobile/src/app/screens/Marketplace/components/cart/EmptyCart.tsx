@@ -10,7 +10,7 @@ const EmptyCart = () => {
     const navigation = useNavigation<ProductProps>()
     const goToMarketPlace = () => navigation.navigate('Marketplace')
   return (
-    <View style={[loginStyles.loginPage,{height: dimensions.height*0.75, alignItems: 'center',justifyContent: 'center',paddingHorizontal: 0}]}>
+    <View style={[loginStyles.loginPage,{height: dimensions.height*0.80, alignItems: 'center',justifyContent: 'center',paddingHorizontal: 0}]}>
         <Text style={styles.itemsInCartText}>Your Cart is empty !</Text> 
         <TouchableOpacity 
                         style={[styles.proceedCheckout,{marginLeft: 0, marginTop: 50}]}

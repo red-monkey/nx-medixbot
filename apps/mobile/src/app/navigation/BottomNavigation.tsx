@@ -1,12 +1,11 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { DashBoardStackNavigator, MarketPlaceStackNavigator, PatientProfileStackNavigator } from './StackNavigation';
+import { AppointmentStackNavigator, DashBoardStackNavigator, MarketPlaceStackNavigator, PatientProfileStackNavigator } from './StackNavigation';
 import { StyleSheet, View, Text } from 'react-native';
 import HomeIcon from '../icons/HomeIcon';
 import AppointmentIcon from '../icons/AppointmentIcon';
 import HealthIcon from '../icons/HealthIcon';
 import ProfileIcon from '../icons/ProfileIcon';
-import MarketPlace from '../screens/Marketplace';
 import MarketPlaceIcon from '../icons/Marketplace';
 import BookAppointment from '../screens/Appointment/BookAppointment';
 
@@ -73,7 +72,11 @@ const Tabs = () => {
           },
         }}
         name="Appointment"
+<<<<<<< HEAD
         component={BookAppointment}
+=======
+        component={AppointmentStackNavigator}
+>>>>>>> 86ec2d8c2b65d364b905465d913fa910c90eeca3
       />
       <Tab.Screen
         options={{

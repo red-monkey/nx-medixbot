@@ -8,15 +8,19 @@ import FoodRecognition from '../screens/FoodRecognition';
 import MyCart from '../screens/Marketplace/MyCart';
 import Checkout from '../screens/Marketplace/Checkout';
 import { MyProducts } from '../screens/Marketplace/MyProducts';
-import { RootStackParamList,MarketplaceStackParamList } from '../utils/types';
+import { RootStackParamList,MarketplaceStackParamList, AppointmentStackParamList } from '../utils/types';
 import MedicalHistory from '../screens/Patient/MedicalHistory';
 import SubscriptionDetails from '../screens/Patient/SubcriptionDetails';
 import PatientProfile from '../screens/PatientProfile';
 import Visits from '../screens/Patient/Visits';
 import MarketPlace from '../screens/Marketplace';
+import SetShipping from '../screens/Marketplace/SetShipping';
+import Apppointments from '../screens/Appointments';
+import MakeAppointment from '../screens/Appointments/MakeAppointment';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const MarketStack =  createNativeStackNavigator<MarketplaceStackParamList>();
+const AppointmentStack = createNativeStackNavigator<AppointmentStackParamList>()
 
 export const DashBoardStackNavigator = () => {
   return (
@@ -105,6 +109,29 @@ export const MarketPlaceStackNavigator = () => {
         name="Checkout"
         component={Checkout}
       />
+      <MarketStack.Screen
+        options={{ headerShown: false }}
+        name="SetShipping"
+        component={SetShipping}
+      />
     </MarketStack.Navigator>
   )
+}
+
+export const AppointmentStackNavigator = () => {
+  return(
+  <AppointmentStack.Navigator>
+      <AppointmentStack.Screen
+        options={{ headerShown: false }}
+        name="AppointmentHome"
+        component={Apppointments}
+      />
+      <AppointmentStack.Screen
+        options={{ headerShown: false }}
+        name="MakeAppointment"
+        component={MakeAppointment}
+      />
+  </AppointmentStack.Navigator>    
+  )
+
 }
