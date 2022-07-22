@@ -5,6 +5,7 @@ import marketPlaceStyles from '../../../../styles/MarketPlaceStyles'
 import Header from '../../../Patient/components/Header'
 import { useNavigation } from '@react-navigation/native'
 import { useAppSelector } from '../../../../utils/hooks'
+import EmptyOrder from './EmptyOrder'
 
 const orderInfos = [
     {orderId: '#342364', orderDate: '27-07-2022', trackingNum: 'IW3234234234', quantity: 1, totalAmount: '210'},
@@ -19,7 +20,7 @@ const MyOrders = () => {
     <ScrollView contentContainerStyle={[marketPlaceStyles.Container]} >
         <Header title='Orders'/>
         <View style={styles.screenContentCart}>
-          <View>
+          {orderInfos.length === 0 ? <EmptyOrder /> : <View>
             <Text style={styles.myOrderHeader}>My Order</Text>
             {orderInfos.map((props, id) => {
                 return(
@@ -50,7 +51,7 @@ const MyOrders = () => {
                     </View>
                 )
             })}
-          </View>
+          </View>}
         </View>
     </ScrollView>
   )

@@ -642,6 +642,43 @@ const styles = StyleSheet.create({
         fontFamily: 'Montserrat-Bold',
         fontSize: 15,
         textAlignVertical: 'center'
+    },
+    emptyOrderContainer: {
+        alignContent: 'center',
+        alignItems: 'center'
+    },
+    emptyOrderImage: {
+        alignSelf: 'flex-start',
+        marginTop: '8%'
+    },
+    emptyOrderTxtGroup: {
+        paddingHorizontal: 15,
+        marginVertical: '20%'
+    },
+    emptyOrderHeader: {
+        color: colors.newBlack,
+        fontSize: 20,
+        fontFamily: 'Montserrat-Bold',
+        textAlign: 'center',
+    },
+    emptyOrderDescription: {
+        color: colors.newBlack,
+        fontSize: 15,
+        fontFamily: 'Lora-Regular',
+        textAlign: 'center',
+        marginTop: '10%',
+        marginHorizontal: 15
+    },
+    goToMarketplaceButton: {
+        width:'91%',
+        height: 70,
+        borderRadius:16,
+        marginVertical: 15,
+        backgroundColor:'#3095E2',
+        alignItems:'center',
+        justifyContent:'center',
+        marginTop: '-2%',
+        alignContent: 'center'
     }
 });
 
