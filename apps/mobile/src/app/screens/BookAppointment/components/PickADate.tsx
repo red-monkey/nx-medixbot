@@ -24,19 +24,15 @@ const PickADate = () => {
     ]
 
   return (
-    <ScrollView contentContainerStyle={[styles.container,{paddingTop: 40}]} >
-        <Header title='Book Appointment'/>
-        <View style={styles.screenContentCart}>
-            
+        <View>
             <Calendar 
                 onDayPress={day => {
-                    console.log(day)
                     setSelectedDate(day.dateString)
                 }}
                 hideDayNames={true}
                 theme={{arrowColor: 'black' , monthTextColor: '#0E1012', textMonthFontSize: 30, todayTextColor: colors.MedixBotPrimaryColor, textMonthFontFamily: 'Montserrat-Bold', selectedDayBackgroundColor: colors.MedixBotPrimaryColor, selectedDayTextColor: '#FFFFFF',}}
                 enableSwipeMonths={true}
-                style={{width: '85%', alignSelf: 'center', marginVertical: 50 }}
+                style={{width: '85%', alignSelf: 'center'}}
                 renderArrow = {( direction ) => {
                     if ( direction === 'left') return ( <LeftArrow />);
                     if ( direction === 'right') return ( <RightArrow />);
@@ -80,7 +76,6 @@ const PickADate = () => {
             </View>
 
         </View>
-    </ScrollView>
   )
 }
 

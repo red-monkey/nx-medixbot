@@ -14,7 +14,6 @@ const styles = StyleSheet.create({
         borderTopRightRadius: 30,
         width: '100%',
         marginTop: 20,
-        paddingBottom: 35
     },
       appointmentStatusBox: {
         borderRadius: 25,
@@ -413,6 +412,7 @@ const styles = StyleSheet.create({
       },
       appointmentTimeContainer: {
         backgroundColor: colors.MedixBotPrimaryColor,
+        marginTop: 20,
         borderTopStartRadius: 32,
         borderTopEndRadius: 32,
         minHeight: 380,

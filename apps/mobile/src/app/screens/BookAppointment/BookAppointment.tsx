@@ -8,14 +8,15 @@ import AppointmentSteps from './components/AppointmentSteps'
 import SelectHealthcare from './components/SelectHealthcare'
 import NatureOfHealth from './components/NatureOfHealth'
 import SelectDoctor from './components/SelectDoctor'
+import PickADate from './components/PickADate'
 
 const BookAppointment = () => {
-  const [currentStep,setCurrentStep] = useState(1)
+  const [currentStep,setCurrentStep] = useState(4)
   const Steps = [
     <SelectHealthcare setStep={setCurrentStep}/>,
     <NatureOfHealth  setStep={setCurrentStep}/>,
     <SelectDoctor  setStep={setCurrentStep}/>,
-    <NatureOfHealth  setStep={setCurrentStep} />
+    <PickADate />
   ]
 
   return (
