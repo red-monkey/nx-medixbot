@@ -548,15 +548,15 @@ const styles = StyleSheet.create({
         marginTop: 40
       },
       txt_Confirmed: {
-        fontSize: 28,
+        fontSize: 24,
         fontFamily: "Montserrat-Bold",
         color: "rgba(65,65,110,1)",
         width: 260,
-        marginLeft: 30,
+        marginLeft: 23,
         marginBottom: 20,
       },
       txt_Thank: {
-        fontSize: 16,
+        fontSize: 14,
         fontFamily: "Lora-Regular",
         fontWeight: "400",
         color: "rgba(65,65,110,1)",

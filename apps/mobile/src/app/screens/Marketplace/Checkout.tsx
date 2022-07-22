@@ -45,7 +45,7 @@ const Checkout = ({route}) => {
     style={{}}
     >
       <View style={[styles.centeredView]}>
-        <Shadow viewStyle={styles.modalV} radius={20} distance={15} startColor={'#fff'} finalColor={'#ffffff01'} >
+        <Shadow viewStyle={styles.modalV} radius={20} distance={7} startColor={'#F5F5F5'} finalColor={'#ffffff01'} offset={[0, 4]}>
           <Image
           style={styles.img}
           source={require('../../icons/marketplaceicons/order-img.png')}
