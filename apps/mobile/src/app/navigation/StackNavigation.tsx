@@ -14,7 +14,7 @@ import SubscriptionDetails from '../screens/Patient/SubcriptionDetails';
 import PatientProfile from '../screens/PatientProfile';
 import Visits from '../screens/Patient/Visits';
 import MarketPlace from '../screens/Marketplace';
-import DoctorDetails from '../screens/Appointment/DoctorDetails';
+import DoctorDetails from '../screens/BookAppointment/DoctorDetails';
 import SetShipping from '../screens/Marketplace/SetShipping';
 import Apppointments from '../screens/Appointments';
 import MakeAppointment from '../screens/Appointments/MakeAppointment';
@@ -109,7 +109,7 @@ export const MarketPlaceStackNavigator = () => {
       <MarketStack.Screen
         options={{ headerShown: false }}
         name="Checkout"
-        component={DoctorDetails}
+        component={Checkout}
       />
       <MarketStack.Screen
         options={{ headerShown: false }}

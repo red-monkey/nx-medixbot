@@ -410,6 +410,83 @@ const styles = StyleSheet.create({
       bookNowBtnTxt: {
         color: '#FFFFFF',
         fontFamily: 'Montserrat-SemiBold'
+      },
+      appointmentTimeContainer: {
+        backgroundColor: colors.MedixBotPrimaryColor,
+        borderTopStartRadius: 32,
+        borderTopEndRadius: 32,
+        minHeight: 380,
+        height: 'auto',
+      },
+      appointmentTimeSectionWrapper: {
+        display: 'flex',
+        flexDirection: 'column',
+        flex: 1,
+        alignItems: 'center',
+      },
+      timeHeader: {
+        fontFamily: 'Montserrat-Medium',
+        color: '#FFFFFF',
+        fontSize: 24,
+        alignSelf: 'flex-start',
+        marginLeft: 32,
+        marginTop: '15%',
+        marginBottom: '-7%'
+      },
+      timeSelectBoxContainer: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        marginVertical: '10%'
+      },
+      timeSelectBoxes: {
+        display: 'flex',
+        flexDirection: 'row',
+      },
+      timeSelectBox: {
+        borderWidth: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 10,
+        gap: 10,
+        width: 88,
+        height: 42,
+        marginVertical: 12,
+        marginHorizontal: 8,
+        borderRadius: 10,
+        borderColor: '#BECADA',
+      },
+      selectedTimeBox: {
+        borderWidth: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 10,
+        gap: 10,
+        width: 88,
+        height: 42,
+        marginVertical: 12,
+        marginHorizontal: 8,
+        borderRadius: 10,
+        borderColor: '#E2B93B',
+        backgroundColor: '#E2B93B'
+      },
+      timeTxt: {
+        color: '#FFFFFF',
+        fontFamily: 'Lora-Medium',
+        fontSize: 12
+      },
+      makeAppointmentBtn: {
+        width: '82%',
+        height: 56,
+        backgroundColor: '#FFFFFF',
+        borderRadius: 14,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginBottom: 35
+      },
+      makeAppointmentBtnTxt: {
+        color: '#1C6BA4',
+        fontFamily: 'Montserrat-SemiBold'
       }
 });
 
