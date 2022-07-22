@@ -19,6 +19,8 @@ import SetShipping from '../screens/Marketplace/SetShipping';
 import Apppointments from '../screens/Appointments';
 import MakeAppointment from '../screens/Appointments/MakeAppointment';
 import BookAppointment from '../screens/BookAppointment/BookAppointment';
+import MyOrders from '../screens/Marketplace/components/order/MyOrders';
+import OrderStatus from '../screens/Marketplace/components/order/OrderStatus';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const MarketStack =  createNativeStackNavigator<MarketplaceStackParamList>();
@@ -83,6 +85,16 @@ export const PatientProfileStackNavigator = () => {
         options={{ headerShown: false }}
         name="SubscriptionDetails"
         component={SubscriptionDetails}
+      />
+      <Stack.Screen
+        options={{ headerShown: false }}
+        name="MyOrders"
+        component={MyOrders}
+      />
+      <Stack.Screen
+        options={{ headerShown: false }}
+        name="OrderStatus"
+        component={OrderStatus}
       />
     </Stack.Navigator>
   )

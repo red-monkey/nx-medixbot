@@ -595,6 +595,54 @@ const styles = StyleSheet.create({
         width: 128,
         alignItems: "center",
       },
+    orderDetailCardContainer: {
+        paddingHorizontal: 18,
+        borderColor: colors.newLightBlue,
+        borderWidth: 1,
+        borderRadius: 8,
+        marginHorizontal: 15,
+        paddingVertical: 10,
+        marginBottom: '6%'
+    },
+    orderDetailCardElement: {
+        display: 'flex', 
+        flexDirection: 'row', 
+        justifyContent: 'space-between',
+        marginVertical: 12
+    },
+    myOrderHeader: {
+        color: colors.newBlack,
+        marginLeft: 20,
+        fontFamily: 'Montserrat-Bold',
+        fontSize: 18,
+        marginBottom: 20,
+        marginTop: '18%'
+    },
+    myOrderDetailTypeTxt: {
+        color: colors.newBlack,
+        fontFamily: 'Montserrat-Bold',
+        fontSize: 15
+    },
+    myOrderDetailDescription: {
+        color: colors.newBlack,
+        fontFamily: 'Lora-Medium',
+        fontSize: 13
+    },
+    goDetailBtn: {
+        borderRadius: 32,
+        borderWidth: 1,
+        borderColor: 'black',
+        width: 120,
+        height: 40,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    deliveredTxt: {
+        color: colors.PureGreen,
+        fontFamily: 'Montserrat-Bold',
+        fontSize: 15,
+        textAlignVertical: 'center'
+    }
 });
 
 export default styles;

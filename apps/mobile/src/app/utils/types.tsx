@@ -56,7 +56,9 @@ export type RootStackParamList = {
   MedicalHistory: undefined;
   SubscriptionDetails: undefined;
   PatientProfile: undefined;
-  Visits: undefined,
+  Visits: undefined;
+  MyOrders: undefined;
+  OrderStatus: { orderID: string, orderDate: string, trackingNum: string, quantity: number, totalAmount: number, setDelivered: undefined};
 };
 
 export type MarketplaceStackParamList = {

@@ -7,7 +7,9 @@ import CopyIcon from '../../../../icons/marketplaceicons/CopyIcon.svg'
 import OrderStatusIcon from '../../../../icons/marketplaceicons/orderStatusIcon.svg'
 import OrderStatusIcon2 from '../../../../icons/marketplaceicons/orderStatusIcon2.svg'
 
-const OrderStatus = () => {
+const OrderStatus = ({route}) => {
+
+  const {orderID, orderDate} = route.params;
   
   return (
     <ScrollView contentContainerStyle={[marketPlaceStyles.Container]} >
@@ -17,7 +19,7 @@ const OrderStatus = () => {
             <View style={styles.orderIdBox}>
               <View>
                   <Text style={styles.orderIdHeader}>Order ID </Text>
-                  <Text style={styles.orderId}>#3457899</Text>
+                  <Text style={styles.orderId}>{orderID}</Text>
               </View>
               <TouchableOpacity style={styles.copyIcon}>
                 <CopyIcon />
@@ -35,7 +37,7 @@ const OrderStatus = () => {
                   </View>
                   <View>
                     <Text style={styles.orderStatus}>Order Received </Text>
-                    <Text style={styles.orderDate}>10 am, 10 june, 2022</Text>
+                    <Text style={styles.orderDate}>{orderDate}</Text>
                   </View>
                 </View>
                 <View style={styles.orderStatusContainer}>
