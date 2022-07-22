@@ -1,5 +1,5 @@
 import { View, ScrollView } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from '../../styles/AppointmentStyles'
 import Header from '../Patient/components/Header'
 
@@ -10,15 +10,19 @@ import NatureOfHealth from './components/NatureOfHealth'
 import SelectDoctor from './components/SelectDoctor'
 import PickADate from './components/PickADate'
 
-const BookAppointment = () => {
-  const [currentStep,setCurrentStep] = useState(4)
+const BookAppointment = ({route}) => {
+  const [currentStep,setCurrentStep] = useState(1)
   const Steps = [
     <SelectHealthcare setStep={setCurrentStep}/>,
     <NatureOfHealth  setStep={setCurrentStep}/>,
     <SelectDoctor  setStep={setCurrentStep}/>,
     <PickADate />
   ]
-
+  useEffect(()=>{
+    if(route.params){
+      setCurrentStep(route.params.step)
+    }
+  },[route.params])
   return (
     <ScrollView contentContainerStyle={[styles.container,{paddingTop: 40}]} >
         <Header title='Book Appointment'/>
