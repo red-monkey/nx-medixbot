@@ -48,7 +48,7 @@ const NatureOfHealth = ({setStep}: {setStep: React.Dispatch<React.SetStateAction
         setStep(3)
     }
   return (
-        <View>
+        <View style={{paddingBottom: 55}}>
             <HospitalsModal setIsOpen={setIsVisible} isOpen={modalVisible} selectedHospital={selectedHospital} setSelectedHospital={setSelectedHospital} />
             <Text style={styles.inputsHeader}>Please, answer the following questions to get insight in to your health status</Text>
             <Formik

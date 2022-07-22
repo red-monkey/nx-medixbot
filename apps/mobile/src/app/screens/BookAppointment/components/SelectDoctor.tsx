@@ -47,7 +47,7 @@ const SelectDoctor = ({setStep}: {setStep: React.Dispatch<React.SetStateAction<n
     }
   }
   return (
-    <View>
+    <View style={{paddingBottom: 50}}>
       <SearchDoctorBar />
 
       {/* Live Doctors Section */}

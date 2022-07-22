@@ -24,7 +24,7 @@ const BookAppointment = ({route}) => {
     }
   },[route.params])
   return (
-    <ScrollView contentContainerStyle={[styles.container,{paddingTop: 40}]} >
+    <ScrollView contentContainerStyle={[styles.container,{paddingTop: 40, paddingBottom: 0}]} >
         <Header title='Book Appointment'/>
         <View style={styles.screenContentCart}>
 

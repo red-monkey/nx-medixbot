@@ -22,9 +22,15 @@ export const setDoctor = (doctor: TDoctor) => {
     }
 }
 
-export const addAppointment = (appointment: TAppointment) => {
+export const addAppointment = (date: string, time: string) => {
     return {
         type: actionTypes.ADD_APPOINTMENT,
-        payload: appointment
+        payload: {date: date, time: time}
+    }
+}
+
+export const resetCurrentAppointment = () => {
+    return {
+        type: actionTypes.RESET_APPOINTMENT,
     }
 }

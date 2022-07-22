@@ -1,3 +1,4 @@
+import { EAppointmentStatus } from '@medixbot/types';
 import { AppointmentAction, TAppointment, TDoctor, THealthcare, TNatureOfHealth } from '../../utils/types';
 import * as actionTypes from '../actions/actionTypes';
 
@@ -12,7 +13,8 @@ const initialState: IState = {
         NatureOfHealth: null,
         doctor: null,
         date: '',
-        time: ''
+        time: '',
+        status: EAppointmentStatus.Pending
     },
     appointments: []
 }
@@ -35,7 +37,9 @@ export const appointmentReducer = (
             ...state, 
             currentAppointment: {...state.currentAppointment,doctor: action.payload}};   
         case actionTypes.ADD_APPOINTMENT:
-            return { ...state, appointments: state.appointments.push(action.payload) };
+            return { ...state, appointments: [...state.appointments,{...state.currentAppointment,date: action.payload.date, time: action.payload.time }] };
+        case actionTypes.RESET_APPOINTMENT:
+              return { ...state, currentAppointment: initialState.currentAppointment};
         default:
           return state;
       }

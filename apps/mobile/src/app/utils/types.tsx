@@ -1,5 +1,5 @@
 
-import { EMembership } from '@medixbot/types';
+import { EAppointmentStatus, EMembership } from '@medixbot/types';
 
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { StackNavigationProp } from '@react-navigation/stack';
@@ -41,6 +41,7 @@ import {
   SET_NATURE_OF_HEALTH,
   SET_DOCTOR,
   ADD_APPOINTMENT,
+  RESET_APPOINTMENT,
 } from '../redux/actions/actionTypes';
 
 export type RootStackParamList = {
@@ -566,7 +567,8 @@ export type TAppointment = {
   NatureOfHealth: TNatureOfHealth|null,
   doctor: TDoctor|null,
   date: string,
-  time: string
+  time: string,
+  status?: EAppointmentStatus
 }
 
 interface SetHealthCareAction {
@@ -586,7 +588,11 @@ interface SelectDoctorAction {
 
 interface AddAppointmentAction {
   type: typeof ADD_APPOINTMENT;
-  payload: TAppointment ;
+  payload: {date: string, time: string} ;
+}
+
+interface ResetCurrentAppointmentAction {
+  type: typeof RESET_APPOINTMENT
 }
 
 export type ChallengeAction =
@@ -598,7 +604,7 @@ export type ChallengeAction =
   | UpdateRewardsAction;
 
 export type AppointmentAction = SetNatureOfHealthAction |
-SetHealthCareAction | SelectDoctorAction | AddAppointmentAction
+SetHealthCareAction | SelectDoctorAction | AddAppointmentAction | ResetCurrentAppointmentAction
  
 export type location = {
   country?: string;

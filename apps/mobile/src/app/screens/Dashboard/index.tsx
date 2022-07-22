@@ -19,12 +19,11 @@ import Blogs from './components/Blogs';
 import Appointment from './components/Appointment';
 import { AppState } from '../../redux/store/ConfigureStore';
 import sharedStyles from '../../styles/SharedStyles';
+import { useAppSelector } from '../../utils/hooks';
 
 
 const Dashboard = () => {
-  const { mood } = useSelector((state: AppState) => state.challengeReducer);
   const navigation = useNavigation<any>();
-
   const goToFoodRecognition = () => {
     navigation.navigate('FoodRecognition');
   };

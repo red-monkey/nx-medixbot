@@ -413,8 +413,9 @@ const styles = StyleSheet.create({
         marginTop: 20,
         borderTopStartRadius: 32,
         borderTopEndRadius: 32,
-        minHeight: 380,
+        //minHeight: 380,
         height: 'auto',
+        paddingBottom: 40
       },
       appointmentTimeSectionWrapper: {
         display: 'flex',

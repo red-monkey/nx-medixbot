@@ -34,7 +34,7 @@ const SelectHealthcare = ({setStep}: {setStep: React.Dispatch<React.SetStateActi
     setStep(2) 
   }
   return (
-    <View>
+    <View style={{paddingBottom: 60}}>
         {healthcareCards.map(({Icon, header, desc, iconColor}, i) => {
             return(
                 <View style={styles.healthcareTypes} key={i}>
