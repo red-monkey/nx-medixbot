@@ -1,8 +1,8 @@
+import { TAppointment } from 'apps/mobile/src/app/utils/types'
 import { colors } from 'apps/mobile/src/app/variables/colors'
 import moment from 'moment'
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
-import { TAppointment } from './Agenda'
 
 type Props = {
     appointment: TAppointment,
@@ -24,6 +24,9 @@ const Appointment = (props: Props) => {
       }
       return currentDay
   }
+  const getDoctorType = () => {
+    return(props.appointment.doctor.description.slice(0,props.appointment.doctor.description.indexOf(' ') ))
+  }
   return (
     <View style={styles.container}>
        <View style={styles.statusBox}>
@@ -32,14 +35,14 @@ const Appointment = (props: Props) => {
             <Text style={props.appointment.status   === 'Completed' ? styles.TimeBoxSuccess : {color: '#A09FA0', fontFamily: 'Lora-Medium'}}>{props.appointment.time.substring(0,5)}</Text>
        </View>
        <View style={styles.AppointmentDetail}>
-           <View style={styles.appointmentCard}>
-             <View>
-                <Text style={{color: colors.Text,fontFamily: 'Montserrat-SemiBold',fontSize: 12}}>{props.appointment.doctorType}</Text>
-                <Text style={{color: colors.MedixBotPrimaryColor, fontFamily: 'Lora-SemiBold',marginTop: 5}}>{props.appointment.doctor}</Text>
+           <View>
+             <View style={styles.appointmentCard}>
+                <Text style={{color: colors.Text,fontFamily: 'Montserrat-SemiBold',fontSize: 12}}>{getDoctorType()}</Text>
+                <Text style={{color: colors.Text, fontFamily: 'Lora-Regular', width: 95,textAlign: 'right'}}>
+                    {getDay()}{props.appointment.time}
+                </Text>               
              </View>
-             <Text style={{color: colors.Text, fontFamily: 'Lora-Regular', width: 95,textAlign: 'right'}}>
-                {getDay()}{props.appointment.time}
-             </Text>
+             <Text style={{color: colors.MedixBotPrimaryColor, fontFamily: 'Lora-SemiBold',marginTop: 5}}>{props.appointment.doctor.title} {props.appointment.doctor.name}</Text>
            </View>
         </View> 
     </View>
@@ -88,7 +91,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#4140421A',
         borderRadius: 15,
         width: '82%',
-        height:75,
         marginLeft: 7,
         padding: 10,
         paddingHorizontal: 10

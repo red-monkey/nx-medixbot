@@ -1,5 +1,5 @@
 
-import { EMembership } from '@medixbot/types';
+import { EAppointmentStatus, EMembership } from '@medixbot/types';
 
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { StackNavigationProp } from '@react-navigation/stack';
@@ -37,6 +37,11 @@ import {
   OPEN_DATE_PICKER_MODAL,
   CLOSE_DATE_PICKER_MODAL,
   SET_BIRTH_DATE,
+  SET_HEALTHCARE_TYPE,
+  SET_NATURE_OF_HEALTH,
+  SET_DOCTOR,
+  ADD_APPOINTMENT,
+  RESET_APPOINTMENT,
 } from '../redux/actions/actionTypes';
 
 export type RootStackParamList = {
@@ -67,10 +72,27 @@ export type MarketplaceStackParamList = {
   SetShipping: {userInfo: IUser }
 }
 
+export type TDoctor = {
+  title: string, 
+  name:string, 
+  description: string, 
+  rate: string, 
+  reviewNumber: string, 
+  imgUri: string,
+  patients: number,
+  experience: string,
+  about: string,
+  availability: string[]
+}
 export type AppointmentStackParamList = {
   AppointmentHome: undefined,
-  MakeAppointment: undefined
+  MakeAppointment: undefined,
+  BookAppointment: {step ?: number},
+  DoctorDetails: {doctor: TDoctor}
 }
+
+export type THealthcare = 'Urgent Health Care' | 'Primary Healthcare' | 'Chronic Healthcare' | 'Mental Healthcare' | 'Pediatrics Healthcare' |
+'Gynecology Healthcare' | 'Pregnancy Healthcare'
 
 export type InformationProps = {
   title: string;
@@ -99,6 +121,11 @@ export type ProductProps = StackNavigationProp<
   MarketplaceStackParamList,
   'ProductDetails'
 >;
+
+export type DoctorDetailsProps = StackNavigationProp<
+  AppointmentStackParamList,
+  'DoctorDetails'
+  >;
 
 export interface IAddressData {
   state: string,
@@ -525,6 +552,49 @@ interface UpdateRewardsAction {
   payload: number;
 }
 
+export type TNatureOfHealth = {
+  HealthCondition: string,
+  StartDate: string,
+  Worse : string,
+  AdditionalInfo: string,
+  liveAlone: boolean,
+  impairement: boolean,
+  hospital: string,
+}
+
+export type TAppointment = {
+  Healthcare: THealthcare|null,
+  NatureOfHealth: TNatureOfHealth|null,
+  doctor: TDoctor|null,
+  date: string,
+  time: string,
+  status?: EAppointmentStatus
+}
+
+interface SetHealthCareAction {
+  type: typeof SET_HEALTHCARE_TYPE;
+  payload: THealthcare;
+}
+
+interface SetNatureOfHealthAction {
+  type: typeof SET_NATURE_OF_HEALTH;
+  payload: TNatureOfHealth ;
+}
+
+interface SelectDoctorAction {
+  type: typeof SET_DOCTOR;
+  payload: TDoctor ;
+}
+
+interface AddAppointmentAction {
+  type: typeof ADD_APPOINTMENT;
+  payload: {date: string, time: string} ;
+}
+
+interface ResetCurrentAppointmentAction {
+  type: typeof RESET_APPOINTMENT
+}
+
 export type ChallengeAction =
   | UpdateMoodAction
   | UpdateScoreAction
@@ -533,6 +603,9 @@ export type ChallengeAction =
   | UpdateGoalsAction
   | UpdateRewardsAction;
 
+export type AppointmentAction = SetNatureOfHealthAction |
+SetHealthCareAction | SelectDoctorAction | AddAppointmentAction | ResetCurrentAppointmentAction
+ 
 export type location = {
   country?: string;
   city?: string;
