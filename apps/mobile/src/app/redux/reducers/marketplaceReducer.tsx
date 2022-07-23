@@ -40,7 +40,7 @@ const marketplaceReducer = (state = INITIAL_STATE, action) => {
             const item = state.products.find((prod) => prod.id === action.payload.id);
             //check if item is in cart
             const inCart = state.cart.find((item) =>
-                item.id === action.payload.id ? true : false);
+                item.id === action.payload.id ) ? true : false;
             return{
                 ...state,
                 cart: inCart
@@ -55,10 +55,13 @@ const marketplaceReducer = (state = INITIAL_STATE, action) => {
         };
         case actionTypes.REMOVE_FROM_CART:{
             const item = state.products.find((prod) => prod.id === action.payload.id);
+            const inCart = state.cart.find((item) =>
+            item.id === action.payload.id ? true : false);
+            console.log(inCart)
             return{
                 ...state,
                 cart: state.cart.filter((item) => item.id !== action.payload.id),
-                total: (state.total - item.price)
+                total: inCart ? (state.total - item.price) : state.total
             };
         };
         case actionTypes.DECREASE_QTY:{
@@ -100,6 +103,11 @@ const marketplaceReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 shippingAddress: action.payload
             };
+        case actionTypes.RESET_SHIPPING_ADDRESS:
+                return{
+                    ...state,
+                    shippingAddress: INITIAL_STATE.shippingAddress
+                };
         default:
             return state;
     };

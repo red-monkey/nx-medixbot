@@ -37,6 +37,8 @@ import {
   OPEN_DATE_PICKER_MODAL,
   CLOSE_DATE_PICKER_MODAL,
   SET_BIRTH_DATE,
+  ADD_ORDER,
+  CHANGE_ORDER_STATUS,
 } from '../redux/actions/actionTypes';
 
 export type RootStackParamList = {
@@ -579,3 +581,28 @@ interface UpdateRewardsAction {
   payload: number;
 }
 
+/* Orders */
+export type TOrder = {
+  orderId: string,
+  TrackingNumber: string,
+  Quantity: number,
+  total: number,
+  placementDate: string,
+  status: TStatus,
+  estimatedDelivery: string, 
+  shippingAddress: string
+}
+
+export type TStatus = 'Received' | 'Shipped' | 'Delivered'
+
+interface AddOrderAction {
+  type: typeof ADD_ORDER;
+  payload: TOrder;
+}
+
+interface ChangeOrderStatusAction {
+  type: typeof CHANGE_ORDER_STATUS;
+  payload: {orderId: string, newStatus: TStatus};
+}
+
+export type orderAction = AddOrderAction | ChangeOrderStatusAction

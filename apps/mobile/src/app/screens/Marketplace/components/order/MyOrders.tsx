@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, TouchableOpacity } from 'react-native'
+import { View, Text, ScrollView, TouchableOpacity, Dimensions } from 'react-native'
 import React from 'react'
 import styles from '../../../../styles/CardStyles'
 import marketPlaceStyles from '../../../../styles/MarketPlaceStyles'
@@ -13,40 +13,41 @@ const orderInfos = [
 ]
 
 const MyOrders = () => {
-
+    const ordersList = useAppSelector((state) => state.orderReducer.orders);
     const navigation = useNavigation<any>();
 
   return (
     <ScrollView contentContainerStyle={[marketPlaceStyles.Container]} >
         <Header title='Orders'/>
-        <View style={styles.screenContentCart}>
-          {orderInfos.length === 0 ? <EmptyOrder /> : <View>
-            <Text style={styles.myOrderHeader}>My Order</Text>
-            {orderInfos.map((props, id) => {
+        <View style={[styles.screenContentCart,{minHeight: Dimensions.get('screen').height*0.75}]}>
+          {ordersList.length === 0 ? <EmptyOrder /> : <View>
+            <Text style={styles.myOrderHeader}>My Orders</Text>
+            {ordersList.map((props, id) => {
                 return(
                     <View key={id} style={styles.orderDetailCardContainer}>
-                        <View style={styles.orderDetailCardElement}>
+                        <Text style={[styles.myOrderDetailDescription, {alignSelf: 'flex-end'}]}>{props.placementDate}</Text>
+                        <View style={[styles.orderDetailCardElement, {marginTop: -8}]}>
                             <Text style={styles.myOrderDetailTypeTxt}>Order ID: <Text style={styles.myOrderDetailDescription}>{props.orderId}</Text> </Text>
-                            <Text style={styles.myOrderDetailDescription}>{props.orderDate}</Text>
                         </View>
                         <View style={styles.orderDetailCardElement}>
-                            <Text style={styles.myOrderDetailTypeTxt}>Tracking Number: <Text style={styles.myOrderDetailDescription}>{props.trackingNum}</Text></Text>
+                            <Text style={styles.myOrderDetailTypeTxt}>Tracking Number: <Text style={styles.myOrderDetailDescription}>{props.TrackingNumber}</Text></Text>
                         </View>
                         <View style={styles.orderDetailCardElement}>
-                            <Text style={styles.myOrderDetailTypeTxt}>Quantity: <Text style={styles.myOrderDetailDescription}>{props.quantity}</Text> </Text>
-                            <Text style={styles.myOrderDetailTypeTxt}>Total Amount: <Text style={styles.myOrderDetailDescription}>${props.totalAmount}</Text></Text>
+                            <Text style={styles.myOrderDetailTypeTxt}>Quantity: <Text style={styles.myOrderDetailDescription}>{props.Quantity}</Text> </Text>
+                            <Text style={styles.myOrderDetailTypeTxt}>Total Amount: <Text style={styles.myOrderDetailDescription}>${props.total}</Text></Text>
                         </View>
                         <View style={styles.orderDetailCardElement}>
                             <TouchableOpacity onPress={() => {
                                 navigation.navigate('OrderStatus', {
                                     orderID: props.orderId, 
-                                    orderDate: props.orderDate,
+                                    orderDate: props.placementDate,
+                                    orderStatus: props.status,
                                 }
                             )
                             }} style={styles.goDetailBtn}>
                                 <Text style={styles.myOrderDetailTypeTxt}>Details</Text>
                             </TouchableOpacity>
-                            <Text style={styles.deliveredTxt}>Delivered</Text>
+                            <Text style={styles.deliveredTxt}>{props.status}</Text>
                         </View>
                     </View>
                 )

@@ -76,3 +76,10 @@ export const setShippingAddress = (address: string) => {
         payload: address,
     }
 }
+
+export const resetShippingAddress = () => {
+    //console.log(address)
+    return{
+        type: actionTypes.RESET_SHIPPING_ADDRESS,
+    }
+}

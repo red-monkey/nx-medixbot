@@ -3,10 +3,11 @@ import React from 'react'
 import styles from '../../../../styles/CardStyles'
 import EmptyOrderImage from '../../../../icons/marketplaceicons/empty-order.svg'
 import { useNavigation } from '@react-navigation/native'
+import { ProductProps } from 'apps/mobile/src/app/utils/types'
 
 const EmptyOrder = () => {
     
-    const navigation = useNavigation<any>();
+    const navigation = useNavigation<ProductProps>();
 
     const marketPlace = () => navigation.navigate('Marketplace')
 

@@ -561,6 +561,7 @@ const styles = StyleSheet.create({
         fontWeight: "400",
         color: "rgba(65,65,110,1)",
         width: 88,
+        textAlign: 'center',
         marginBottom: 15,
       },
       viewContainerDown: {
@@ -608,7 +609,7 @@ const styles = StyleSheet.create({
         display: 'flex', 
         flexDirection: 'row', 
         justifyContent: 'space-between',
-        marginVertical: 12
+        marginVertical: 12,
     },
     myOrderHeader: {
         color: colors.newBlack,
@@ -616,7 +617,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Montserrat-Bold',
         fontSize: 18,
         marginBottom: 20,
-        marginTop: '18%'
+        marginTop: '10%'
     },
     myOrderDetailTypeTxt: {
         color: colors.newBlack,
@@ -645,7 +646,8 @@ const styles = StyleSheet.create({
     },
     emptyOrderContainer: {
         alignContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        height: '100%'
     },
     emptyOrderImage: {
         alignSelf: 'flex-start',
