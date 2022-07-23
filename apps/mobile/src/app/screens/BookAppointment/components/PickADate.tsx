@@ -26,7 +26,7 @@ const PickADate = () => {
         else {
             dispatch(addAppointment(selectedDate,selectedTime));
             dispatch(resetCurrentAppointment())
-            navigation.navigate('AppointmentHome')
+            navigation.navigate('Home')
         }
     }
 

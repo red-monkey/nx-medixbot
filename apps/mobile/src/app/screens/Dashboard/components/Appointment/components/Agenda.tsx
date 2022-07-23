@@ -116,7 +116,7 @@ const AgendaComponent = () => {
                     highlightDateNameStyle={{color: '#ffffff97'}}  
                     highlightDateNumberStyle={{color: '#ffffff97'}}       
                     calendarColor={'#fff'}
-                    selectedDate={moment(selectedDate)}
+                    selectedDate={selectedDate.length > 0 ? new Date(selectedDate) : new Date()}
                     calendarHeaderStyle={{color: colors.Text,marginBottom: 25,fontSize: 13}}
                     dateNumberStyle={{color: colors.Text, marginBottom: -1}}
                     dateNameStyle={{color: colors.Text, marginBottom: -2, fontFamily: 'Montserrat-SemiBold', fontSize: 10}}
