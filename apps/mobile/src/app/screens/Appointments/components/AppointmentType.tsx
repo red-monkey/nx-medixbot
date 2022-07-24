@@ -11,9 +11,9 @@ export type OptionProps = {
 
 const AppointmentType = (props: OptionProps) => {
     const navigation = useNavigation<any>()
-    const goToBooking = ()=>navigation.navigate(props.path) 
+    const goToBooking = ()=>navigation.navigate('BookAppointment') 
   return (
-    <TouchableOpacity style={optionStyles.container} onPress={props.path ? goToBooking : null}>
+    <TouchableOpacity style={optionStyles.container} onPress={goToBooking}>
         <Text style={optionStyles.title}>{props.title}</Text>
         <View style={[optionStyles.iconContainer,{backgroundColor: props.color}]}>
              {props.icon}

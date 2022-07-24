@@ -57,7 +57,6 @@ const options: OptionProps[] = [
         title: 'Doctor Visit',
         color: '#DCAFEC',
         icon: <DoctorIcon />,
-        path: 'BookAppointment'
     },
     {
         title: 'Patient Visit',
