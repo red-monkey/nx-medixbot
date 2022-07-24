@@ -1,11 +1,10 @@
 import {
   EAppointmentStatus,
   EModelNames,
-  IAppointment,
   IAppointmentDocument,
-  IPaginateOption,
+  IAppointmentModel,
 } from '@medixbot/types';
-import { Schema, model, Model, Types, FilterQuery } from 'mongoose';
+import { Schema, model, Types } from 'mongoose';
 import { paginate, toJSON } from './plugins';
 
 const ObjectId = Types.ObjectId;
@@ -48,13 +47,6 @@ const modelSchema: Schema<IAppointmentDocument> = new Schema(
     timestamps: true,
   }
 );
-
-interface IAppointmentModel extends Model<IAppointmentDocument> {
-  paginate?: (
-    filter: FilterQuery<IAppointment>,
-    options: IPaginateOption<unknown>
-  ) => Promise<[IAppointmentDocument, unknown]>;
-}
 
 // add plugin that converts mongoose to json
 modelSchema.plugin(toJSON);

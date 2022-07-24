@@ -25,6 +25,10 @@ export enum EModelNames {
   HOSPITAL = 'Hospital',
   MEDICAL_IMAGE = 'MedicalImage',
   BLOG = 'Blog',
+  CATEGORY = 'Category',
+  PRODUCT = 'Product',
+  REVIEW = 'Review',
+  ORDER = 'Order',
 }
 export enum ETokenType {
   ACCESS = 'access',

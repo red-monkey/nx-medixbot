@@ -1,5 +1,7 @@
 import * as mongoose from 'mongoose';
-import { EAppointmentStatus } from '..';
+import { Model, FilterQuery } from 'mongoose';
+import { IPaginateOption } from './app.interfaces';
+import { EAppointmentStatus } from './generated';
 
 export interface IAppointment {
   dateTime: string;
@@ -15,3 +17,10 @@ export interface IAppointment {
 }
 
 export interface IAppointmentDocument extends mongoose.Document, IAppointment {}
+
+export interface IAppointmentModel extends Model<IAppointmentDocument> {
+  paginate?: (
+    filter: FilterQuery<IAppointment>,
+    options: IPaginateOption<unknown>
+  ) => Promise<[IAppointmentDocument, unknown]>;
+}
