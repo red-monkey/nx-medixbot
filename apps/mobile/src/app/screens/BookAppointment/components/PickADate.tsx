@@ -66,7 +66,7 @@ const PickADate = () => {
                 <Text style={styles.timeHeader}>Time</Text>
 
                 <View style={styles.timeSelectBoxContainer}>
-                    {doctor.availability.map((time,i) => {
+                    {doctor && doctor.availability.map((time,i) => {
                         return(
                             <View key={i} style={styles.timeSelectBoxes}>
                                 <TouchableOpacity onPress={() => setSelectedTime(time)} style={selectedTime === time ? styles.selectedTimeBox : styles.timeSelectBox}><Text style={styles.timeTxt}>{time}</Text></TouchableOpacity>

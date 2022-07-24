@@ -9,6 +9,7 @@ import membershipModalReducer, {
 import { locationReducer } from './locationReducer';
 import { challengeReducer } from './challengeReducer';
 import marketplaceReducer from './marketplaceReducer';
+import { orderReducer } from './ordersReducer';
 import { appointmentReducer } from './appointmentReducer';
 const reducers = combineReducers({
   loginReducer,
@@ -22,6 +23,7 @@ const reducers = combineReducers({
   membershipReducer,
   DatePickerModalReducer,
   marketplaceReducer,
+  orderReducer,
   appointmentReducer
 });
 export default reducers;

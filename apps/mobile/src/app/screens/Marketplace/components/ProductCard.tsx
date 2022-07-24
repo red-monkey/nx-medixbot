@@ -6,7 +6,7 @@ import {
   TouchableHighlight,
   TouchableOpacity,
 } from 'react-native';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ProductCardStyles } from '../../../styles/MarketPlaceStyles';
 import Star from '../../../icons/marketplaceicons/star.svg'
 import AddToCart from '../../../icons/marketplaceicons/addToCart.svg'
@@ -33,6 +33,9 @@ const ProductCard = (props: IItemProp) => {
     setAdded(!added)
     dispatch(removeFromCart(props.id))   
   }
+  useEffect(()=> {
+    setAdded(false)
+  },[])
   return (
     <TouchableOpacity style={{width: '49%'}} onPress={()=>navigation.navigate('ProductDetails',{id: props.id, added: added})}>
       <View style={ProductCardStyles.card}>

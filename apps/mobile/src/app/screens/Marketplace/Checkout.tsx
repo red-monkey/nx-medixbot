@@ -1,5 +1,5 @@
-import { View, Text, ScrollView, TouchableOpacity, Image, Pressable } from 'react-native'
-import Modal from 'react-native-modal'
+import { View, Text, ScrollView, TouchableOpacity,  Dimensions } from 'react-native'
+import uuid from 'react-native-uuid';
 import React, { useEffect, useState } from 'react'
 import styles from '../../styles/CardStyles'
 import marketPlaceStyles from '../../styles/MarketPlaceStyles'
@@ -15,10 +15,12 @@ import { Shadow } from 'react-native-shadow-2';
 import { useNavigation } from '@react-navigation/native'
 import { useDispatch } from 'react-redux'
 import { setLocation } from '../../redux/actions/location'
-import { clearCart } from '../../redux/actions/marketplace'
+import { clearCart, resetShippingAddress } from '../../redux/actions/marketplace'
+import OrderCompleted from './components/checkout/OrderCompleted'
+import { addOrder } from '../../redux/actions/orders'
 
 const Checkout = ({route}) => {
-  const [modalVisible, setModalVisible] = useState(false);
+  const [orderCompleted, setOrderCompleted ] = useState(false);
   const navigation = useNavigation<ProductProps>()
   const dispatch = useDispatch()
   const marketPlace = useAppSelector((state) => state.marketplaceReducer);
@@ -38,36 +40,32 @@ const Checkout = ({route}) => {
   const [deliveryOption, setDeliveryOption] = useState<TDeliveryOptions>('Home Address')
   const [paymentOption, setPaymentOption] = useState<TPaymentOptions>('Credit Card')
   const {totalPrice} = route.params;
+
+
+  const createOrder = () => {
+    const orderId = uuid.v4().toString();
+    const trackingNo = uuid.v1().toString().slice(0,8)
+    const date = new Date().toISOString().slice(0,10)
+    const estimation = new Date().setMonth(new Date().getMonth()).toString()
+    const shipping = DeliveryOptions.find(item => item.type === deliveryOption).address
+    let amount = 0;
+    marketPlace.cart.forEach((item)=> {
+      amount += item.qty
+    })
+    dispatch(addOrder({orderId: orderId, TrackingNumber: trackingNo, Quantity: amount,
+       total: marketPlace.total, placementDate: date, status: 'Received', estimatedDelivery: estimation,
+      shippingAddress: deliveryOption === 'Home Address' ? userAddr : shipping}))
+    setOrderCompleted(true); 
+    dispatch(clearCart());
+    dispatch(resetShippingAddress())
+  }
+
   return (
     <ScrollView contentContainerStyle={[marketPlaceStyles.Container]}>
-    <Modal
-    isVisible={modalVisible}
-    style={{}}
-    >
-      <View style={[styles.centeredView]}>
-        <Shadow viewStyle={styles.modalV} radius={20} distance={15} startColor={'#fff'} finalColor={'#ffffff01'} >
-          <Image
-          style={styles.img}
-          source={require('../../icons/marketplaceicons/order-img.png')}
-          />
-          <Text style={styles.txt_Confirmed}>Order Confirmed</Text>
-          <Text style={styles.txt_Thank}>Thank You!</Text>
-          <TouchableOpacity
-              style={styles.payCheckoutButton}
-              onPress={() => {setModalVisible(true)}}
-            >
-              <Text style={{fontSize:19, color:'#fff', fontFamily: 'Montserrat-Bold'}}>Track Order</Text>
-            </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => navigation.goBack()}
-          >
-            <Text style={styles.textStyle}>Go Back</Text>
-          </TouchableOpacity>
-        </Shadow>
-      </View>
-    </Modal>
         <Header title='Checkout'/>
-        <View style={styles.screenContentCart}>
+        <View style={[styles.screenContentCart, {minHeight: Dimensions.get('screen').height*0.75}]}>
+        {orderCompleted ? <OrderCompleted /> :
+        <>
           {/* first view with number o items in cart */}
           <View style={styles.checkoutCartNumber}>
             <Text style={styles.checkoutText}>{marketPlace.cart.length} item In cart</Text>
@@ -115,11 +113,13 @@ const Checkout = ({route}) => {
           <View style={{alignItems:'center'}}>
             <TouchableOpacity
               style={styles.payCheckoutButton}
-              onPress={() => {setModalVisible(true); dispatch(clearCart())}}
+              onPress={createOrder}
             >
               <Text style={{fontSize:19, color:'#fff', fontFamily: 'Montserrat-Bold'}}>Pay ${totalPrice}</Text>
             </TouchableOpacity>
           </View>
+          </>
+        }
         </View>
     </ScrollView>
   )

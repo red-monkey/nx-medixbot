@@ -37,6 +37,8 @@ import {
   OPEN_DATE_PICKER_MODAL,
   CLOSE_DATE_PICKER_MODAL,
   SET_BIRTH_DATE,
+  ADD_ORDER,
+  CHANGE_ORDER_STATUS,
   SET_HEALTHCARE_TYPE,
   SET_NATURE_OF_HEALTH,
   SET_DOCTOR,
@@ -61,7 +63,9 @@ export type RootStackParamList = {
   MedicalHistory: undefined;
   SubscriptionDetails: undefined;
   PatientProfile: undefined;
-  Visits: undefined,
+  Visits: undefined;
+  MyOrders: undefined;
+  OrderStatus: { orderID: string, orderDate: string, trackingNum: string, quantity: number, totalAmount: number, setDelivered: undefined};
 };
 
 export type MarketplaceStackParamList = {
@@ -649,3 +653,28 @@ interface UpdateRewardsAction {
   payload: number;
 }
 
+/* Orders */
+export type TOrder = {
+  orderId: string,
+  TrackingNumber: string,
+  Quantity: number,
+  total: number,
+  placementDate: string,
+  status: TStatus,
+  estimatedDelivery: string, 
+  shippingAddress: string
+}
+
+export type TStatus = 'Received' | 'Shipped' | 'Delivered'
+
+interface AddOrderAction {
+  type: typeof ADD_ORDER;
+  payload: TOrder;
+}
+
+interface ChangeOrderStatusAction {
+  type: typeof CHANGE_ORDER_STATUS;
+  payload: {orderId: string, newStatus: TStatus};
+}
+
+export type orderAction = AddOrderAction | ChangeOrderStatusAction

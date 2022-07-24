@@ -548,19 +548,20 @@ const styles = StyleSheet.create({
         marginTop: 40
       },
       txt_Confirmed: {
-        fontSize: 28,
+        fontSize: 24,
         fontFamily: "Montserrat-Bold",
         color: "rgba(65,65,110,1)",
         width: 260,
-        marginLeft: 30,
+        marginLeft: 23,
         marginBottom: 20,
       },
       txt_Thank: {
-        fontSize: 16,
+        fontSize: 14,
         fontFamily: "Lora-Regular",
         fontWeight: "400",
         color: "rgba(65,65,110,1)",
         width: 88,
+        textAlign: 'center',
         marginBottom: 15,
       },
       viewContainerDown: {
@@ -595,6 +596,92 @@ const styles = StyleSheet.create({
         width: 128,
         alignItems: "center",
       },
+    orderDetailCardContainer: {
+        paddingHorizontal: 18,
+        borderColor: colors.newLightBlue,
+        borderWidth: 1,
+        borderRadius: 8,
+        marginHorizontal: 15,
+        paddingVertical: 10,
+        marginBottom: '6%'
+    },
+    orderDetailCardElement: {
+        display: 'flex', 
+        flexDirection: 'row', 
+        justifyContent: 'space-between',
+        marginVertical: 12,
+    },
+    myOrderHeader: {
+        color: colors.newBlack,
+        marginLeft: 20,
+        fontFamily: 'Montserrat-Bold',
+        fontSize: 18,
+        marginBottom: 20,
+        marginTop: '10%'
+    },
+    myOrderDetailTypeTxt: {
+        color: colors.newBlack,
+        fontFamily: 'Montserrat-Bold',
+        fontSize: 15
+    },
+    myOrderDetailDescription: {
+        color: colors.newBlack,
+        fontFamily: 'Lora-Medium',
+        fontSize: 13
+    },
+    goDetailBtn: {
+        borderRadius: 32,
+        borderWidth: 1,
+        borderColor: 'black',
+        width: 120,
+        height: 40,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    deliveredTxt: {
+        color: colors.PureGreen,
+        fontFamily: 'Montserrat-Bold',
+        fontSize: 15,
+        textAlignVertical: 'center'
+    },
+    emptyOrderContainer: {
+        alignContent: 'center',
+        alignItems: 'center',
+        height: '100%'
+    },
+    emptyOrderImage: {
+        alignSelf: 'flex-start',
+        marginTop: '8%'
+    },
+    emptyOrderTxtGroup: {
+        paddingHorizontal: 15,
+        marginVertical: '20%'
+    },
+    emptyOrderHeader: {
+        color: colors.newBlack,
+        fontSize: 20,
+        fontFamily: 'Montserrat-Bold',
+        textAlign: 'center',
+    },
+    emptyOrderDescription: {
+        color: colors.newBlack,
+        fontSize: 15,
+        fontFamily: 'Lora-Regular',
+        textAlign: 'center',
+        marginTop: '10%',
+        marginHorizontal: 15
+    },
+    goToMarketplaceButton: {
+        width:'91%',
+        height: 70,
+        borderRadius:16,
+        marginVertical: 15,
+        backgroundColor:'#3095E2',
+        alignItems:'center',
+        justifyContent:'center',
+        marginTop: '-2%',
+        alignContent: 'center'
+    }
 });
 
 export default styles;

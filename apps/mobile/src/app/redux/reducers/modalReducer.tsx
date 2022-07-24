@@ -35,8 +35,6 @@ export function languageModalReducer(state = languageInitialState, action: SetLa
     case actionTypes.CLOSE_LANGUAGE_MODAL:
       return {...state,isOpen : false };
     case actionTypes.ADD_OR_REMOVE_LANGUAGE:
-      /*if(checkIfSelected(action.payload,state.selectedLanguages) === true)removeFromList(action.payload,state.selectedLanguages)
-      else {if(typeof(action.payload)==='string')state.selectedLanguages.push(action.payload)}*/
       return {...state,selectedLanguages: payload};
     default:
       return state;
