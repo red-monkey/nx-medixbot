@@ -1,42 +1,45 @@
 import { View, Text, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
-import { ScrollView } from 'react-native-gesture-handler'
 import { colors } from '../../../variables/colors'
 import styles from '../../../styles/AppointmentStyles'
-import Header from '../../Patient/components/Header'
-import AppointmentSteps from './AppointmentSteps'
 import { Calendar } from 'react-native-calendars'
 import LeftArrow from '../../../icons/appointmentIcons/LeftArrow.svg'
 import RightArrow from '../../../icons/appointmentIcons/RightArrow.svg'
+import { useAppSelector } from '../../../utils/hooks'
+import { addAppointment, resetCurrentAppointment } from '../../../redux/actions/appointment'
+import { useDispatch } from 'react-redux'
+import { Dispatch } from 'redux'
+import { useNavigation } from '@react-navigation/native'
+import loginStyles from '../../../styles/LoginPageStyles'
 
 const PickADate = () => {
-
+    const [notSelected, setNotSelected] = useState(false)
     const [selectedDate,setSelectedDate] = useState<string>('')
-    const [selectedTime, setSelectedTime] = useState<number>(null);
-
-    const times = [
-        {id: 1, time: '09.00 AM'},
-        {id: 2, time: '09.30 AM'},
-        {id: 3, time: '10.00 AM'},
-        {id: 4, time: '11.00 AM'},
-        {id: 5, time: '11.30 AM'},
-        {id: 6, time: '12.00 AM'},
-    ]
+    const [selectedTime, setSelectedTime] = useState<string>('');
+    const navigation = useNavigation<any>()
+    const dispatch = useDispatch<Dispatch>()
+    const doctor = useAppSelector(state => state.appointmentReducer.currentAppointment.doctor)
+    const bookAppointment = () => {
+        if(!selectedDate || !selectedTime){
+            setNotSelected(true)
+            return;}
+        else {
+            dispatch(addAppointment(selectedDate,selectedTime));
+            dispatch(resetCurrentAppointment())
+            navigation.navigate('Home')
+        }
+    }
 
   return (
-    <ScrollView contentContainerStyle={[styles.container,{paddingTop: 40}]} >
-        <Header title='Book Appointment'/>
-        <View style={styles.screenContentCart}>
-            
+        <View style={{justifyContent: 'space-between'}}>
             <Calendar 
                 onDayPress={day => {
-                    console.log(day)
                     setSelectedDate(day.dateString)
                 }}
                 hideDayNames={true}
                 theme={{arrowColor: 'black' , monthTextColor: '#0E1012', textMonthFontSize: 30, todayTextColor: colors.MedixBotPrimaryColor, textMonthFontFamily: 'Montserrat-Bold', selectedDayBackgroundColor: colors.MedixBotPrimaryColor, selectedDayTextColor: '#FFFFFF',}}
                 enableSwipeMonths={true}
-                style={{width: '85%', alignSelf: 'center', marginVertical: 50 }}
+                style={{width: '85%', alignSelf: 'center'}}
                 renderArrow = {( direction ) => {
                     if ( direction === 'left') return ( <LeftArrow />);
                     if ( direction === 'right') return ( <RightArrow />);
@@ -63,16 +66,16 @@ const PickADate = () => {
                 <Text style={styles.timeHeader}>Time</Text>
 
                 <View style={styles.timeSelectBoxContainer}>
-                    {times.map(({id, time}) => {
+                    {doctor.availability.map((time,i) => {
                         return(
-                            <View key={id} style={styles.timeSelectBoxes}>
-                                <TouchableOpacity onPress={() => setSelectedTime(id)} style={selectedTime === id ? styles.selectedTimeBox : styles.timeSelectBox}><Text key={id} style={styles.timeTxt}>{time}</Text></TouchableOpacity>
+                            <View key={i} style={styles.timeSelectBoxes}>
+                                <TouchableOpacity onPress={() => setSelectedTime(time)} style={selectedTime === time ? styles.selectedTimeBox : styles.timeSelectBox}><Text style={styles.timeTxt}>{time}</Text></TouchableOpacity>
                             </View>
                         )
                     })}
                 </View>
-
-                <TouchableOpacity style={styles.makeAppointmentBtn}>
+                {notSelected && <Text style={[loginStyles.errorText,{textAlign: 'center'}]}>Please choose a date and a time for your appointment</Text>}
+                <TouchableOpacity onPress={bookAppointment} style={styles.makeAppointmentBtn}>
                     <Text style={styles.makeAppointmentBtnTxt}>Make Appointment</Text>
                 </TouchableOpacity>
 
@@ -80,7 +83,6 @@ const PickADate = () => {
             </View>
 
         </View>
-    </ScrollView>
   )
 }
 

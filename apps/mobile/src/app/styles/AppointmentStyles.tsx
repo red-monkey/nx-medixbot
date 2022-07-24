@@ -14,7 +14,6 @@ const styles = StyleSheet.create({
         borderTopRightRadius: 30,
         width: '100%',
         marginTop: 20,
-        paddingBottom: 35
     },
       appointmentStatusBox: {
         borderRadius: 25,
@@ -215,6 +214,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around',
         marginVertical: '4%'
       },
+      selectedDoctor: {borderRadius: 30, borderWidth: 1,paddingVertical: 15, paddingLeft: 12, borderColor: '#D9D9D9'},
       popularDoctorImage: {
         borderRadius: 26,
         width: 104,
@@ -347,8 +347,7 @@ const styles = StyleSheet.create({
         color: '#4A545E',
       },
       availabilityContainer: {
-        paddingLeft: 15,
-        paddingTop: 14,
+        paddingHorizontal: 15,
         borderRadius: 24,
         backgroundColor: "rgba(255, 255, 255, 1)",
         borderWidth: 1,
@@ -361,6 +360,8 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         marginTop: '10%',
         display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center'
       },
       availabilityTxtGroup: {
         height: 50,
@@ -392,10 +393,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#DCEDF9',
         justifyContent: 'center',
       },
-      rightArrowIcon: {
-        marginLeft: '30%',
-        marginTop: '7%'
-      },
       bookNowBtn: {
         width: '80%',
         height: 56,
@@ -413,10 +410,12 @@ const styles = StyleSheet.create({
       },
       appointmentTimeContainer: {
         backgroundColor: colors.MedixBotPrimaryColor,
+        marginTop: 20,
         borderTopStartRadius: 32,
         borderTopEndRadius: 32,
-        minHeight: 380,
+        //minHeight: 380,
         height: 'auto',
+        paddingBottom: 40
       },
       appointmentTimeSectionWrapper: {
         display: 'flex',

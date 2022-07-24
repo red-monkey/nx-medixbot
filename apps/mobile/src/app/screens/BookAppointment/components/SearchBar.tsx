@@ -9,24 +9,22 @@ import {
   import HospitalIcon from '../../../icons/appointmentIcons/HospitalIcon.svg'
   import { colors } from '../../../variables/colors';
   
-  const SearchBar = () => {
+  const SearchBar = ({setIsOpen, selectedHospital}: {setIsOpen: React.Dispatch<React.SetStateAction<boolean>>,selectedHospital: string}) => {
     return (
       <View style={styles.container}>
         <View style={styles.input}>
           <View>
             <HospitalIcon />
           </View>
-          <TextInput
-            style={{ width: '75%', paddingLeft: 10, fontFamily: "Lora-Medium", color: '#000' }}
-            placeholder="Hospital"
-            placeholderTextColor="#A09FA0"
-          />
+          <Text style={{ paddingLeft: 10, fontFamily: "Lora-Medium", color: selectedHospital ? '#000' :  '#A09FA0' }}>
+            {selectedHospital || 'Hospital'}
+          </Text>
         </View>
         <TouchableOpacity
           onPress={() => console.log('press')}
           style={{ flexDirection: 'row', alignItems: 'center' }}
         >
-          <TouchableOpacity style={styles.selectBtn}>
+          <TouchableOpacity style={styles.selectBtn} onPress={()=>setIsOpen(true)}>
             <Text style={styles.selectBtnTxt}>Select</Text>
           </TouchableOpacity>
         </TouchableOpacity>
@@ -56,7 +54,7 @@ import {
       flexDirection: 'row',
       alignItems: 'center',
       paddingHorizontal: 15,
-      width: '50%'
+      width: '78%'
     },
     selectBtnTxt: {
         color: colors.MedixBotPrimaryColor, 

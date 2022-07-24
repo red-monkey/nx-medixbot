@@ -150,6 +150,11 @@ export const AppointmentStackNavigator = () => {
         name="BookAppointment"
         component={BookAppointment}
       />
+      <AppointmentStack.Screen
+        options={{ headerShown: false }}
+        name="DoctorDetails"
+        component={DoctorDetails}
+      />
   </AppointmentStack.Navigator>    
   )
 

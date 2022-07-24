@@ -1,23 +1,39 @@
+import { EAppointmentStatus } from '@medixbot/types';
+import moment from 'moment';
 import React, { useState } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { useAppSelector } from '../../../utils/hooks';
+import AppointmentsListItem from './AppointmentsListItem';
 
 
 const AppointmentsList = () => {
-  const [selectedCategory, setSelectedCategory] = useState<appointmentCat>('Recent')
+  const [selectedCategory, setSelectedCategory] = useState<EAppointmentStatus>(EAppointmentStatus.Canceled)
+  const  appointmentsList  = useAppSelector(state => state.appointmentReducer.appointments);
   return (
     <View style={ListStyles.container}>
         <Text style={ListStyles.title}>Appointment List</Text>
-        <Text style={{color: '#2F2E41',fontWeight: '500'}}>8 Appointment made</Text>
+        <Text style={{color: '#2F2E41',fontWeight: '500'}}>{appointmentsList.length} Appointment made</Text>
         <Text style={{color: '#555555',fontFamily: 'Lora-Regular'}}>Your Health Your Wealth!</Text>
         <View style={ListStyles.categories}>
             {appointmentCategories.map((item,i) => (
                 <TouchableOpacity key={i} style={{alignItems: 'center'}} onPress={()=>setSelectedCategory(item.category)}>
                     <Text style={{color: item.color, fontWeight: '700'}}>{item.category}</Text>
-                    <Text style={{color: item.color, fontFamily: 'Lora-Regular'}}>{item.appoitments.length}</Text>
+                    <Text style={{color: item.color, fontFamily: 'Lora-Regular'}}>{/*appointmentsList.every(el => el.status === item.category)*/}</Text>
                 </TouchableOpacity>
             ))}
         </View>
         <View style={ListStyles.appointments}>
+            {
+                appointmentsList.map((item,i) => (item.status === selectedCategory &&  <AppointmentsListItem  key={i} props={item} i={i} />))
+            }
+            {/*
+                selectedCategory === 'Recent' ? 
+                appointmentsList.map((item,i) => (item.status === 'Pending' && 
+                    <AppointmentsListItem  key={i} props={item} />
+                     )) : selectedCategory === 'Completed' ? appointmentsList.map((item,i) => (item.date === current && 
+                        <AppointmentsListItem  key={i} props={item} />
+                         ))
+            }
             {appointmentCategories.find(item => item.category === selectedCategory).appoitments.map((elem,i)=>(
                 <View key={i} style={ListStyles.appointment}>
                     <Text style={ListStyles.appointmentNo}>{i}</Text>
@@ -27,7 +43,7 @@ const AppointmentsList = () => {
                         <Text style={{color: '#9A9292',fontWeight: '400'}}>{elem.date}</Text>
                     </View>
                 </View>
-            ))}
+            ))*/}
         </View>
     </View>
   )
@@ -35,7 +51,7 @@ const AppointmentsList = () => {
 
 export default AppointmentsList
 
-const ListStyles = StyleSheet.create({
+export const ListStyles = StyleSheet.create({
     container: {
         backgroundColor: '#F6F7FE',
         marginTop: -20,
@@ -85,34 +101,18 @@ const ListStyles = StyleSheet.create({
 
 const appointmentCategories: TCategory[] = [
     {
-        category: 'Recent',
+        category: EAppointmentStatus.Canceled,
         color: '#EB5757',
-        appoitments : [
-            {
-                type: 'Primary Health',
-                description: 'Lorem ipsum  lorem ipsum',
-                date: '23/01/2022'
-            },
-            {
-                type: 'Gynecology Healthcare',
-                description: 'Lorem ipsum  lorem ipsum',
-                date: '02/01/2022'
-            },
-        ]
     },
     {
-        category: 'In progress',
+        category: EAppointmentStatus.Pending,
         color: '#E2B93B',
-        appoitments : []
     },
     {
-        category: 'Completed',
+        category: EAppointmentStatus.Completed,
         color: '#01CC5E',
-        appoitments : []
     },
 ]
-
-type appointmentCat = 'In progress' | 'Completed' | 'Recent'
 
 type TAppointment = {
     type: string,
@@ -121,7 +121,6 @@ type TAppointment = {
 }
 
 type TCategory = {
-    category: appointmentCat,
+    category: EAppointmentStatus,
     color: string,
-    appoitments : TAppointment[]
 }

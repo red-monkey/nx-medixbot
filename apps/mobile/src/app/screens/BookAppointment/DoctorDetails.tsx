@@ -4,6 +4,11 @@ import styles from '../../styles/AppointmentStyles'
 import Header from '../Patient/components/Header'
 import ClockIcon from '../../icons/appointmentIcons/ClockIcon.svg'
 import RightArrowIcon from '../../icons/appointmentIcons/RightArrowIcon.svg'
+import { useNavigation } from '@react-navigation/native'
+import { AppointmentStackParamList, DoctorDetailsProps } from '../../utils/types'
+import { useDispatch } from 'react-redux'
+import { Dispatch } from 'redux'
+import { setDoctor } from '../../redux/actions/appointment'
 
 const descriptionCard = [
     {header: 'Patients', info: '200+'},
@@ -11,25 +16,31 @@ const descriptionCard = [
     {header: 'Rating', info: '4.9'},
   ]
 
-const DoctorDetails = () => {
-
+const DoctorDetails = ({route}) => {
+  const {doctor} = route.params
+  const dispatch = useDispatch<Dispatch>()
+  const navigation = useNavigation<DoctorDetailsProps>()
+  const confirm = () => {
+    dispatch(setDoctor(doctor))
+    navigation.navigate('BookAppointment', {step: 4})
+  }
   return (
     <ScrollView contentContainerStyle={[styles.container,{paddingTop: 40}]} >
         <Header title='Doctor Details'/>
         <View style={styles.screenContentCart}>
 
             <View style={styles.doctorDetailsCard}>
-                <Image style={styles.doctorDetailImage} source={{uri: 'https://cdn.create.vista.com/api/media/medium/444199198/stock-photo-woman-doctor-crossed-arms-isolated?token='}}/>
+                <Image style={styles.doctorDetailImage} source={{uri: doctor.imgUri}}/>
                 <View style={styles.doctorDetailTxtGroup}>
-                    <Text style={styles.detailCardDoctorName}>Dr. John Doe</Text>
-                    <Text style={styles.detailCardDescripton}>Cardiologist in Medixbot hospital</Text>
+                    <Text style={styles.detailCardDoctorName}>{doctor.title} {doctor.name}</Text>
+                    <Text style={styles.detailCardDescripton}>{doctor.description}</Text>
                 </View>
             </View>
 
             <View style={styles.doctorDescriptionCardContainer}>
-                {descriptionCard.map((props) => {
+                {descriptionCard.map((props,i) => {
                     return(
-                        <View style={styles.doctorDescriptionCard}>
+                        <View style={styles.doctorDescriptionCard} key={i}>
                             <Text style={styles.descriptionCardHeader}>{props.header}</Text>
                             <Text style={styles.descriptionCardTxt}>{props.info}</Text>
                         </View>
@@ -39,8 +50,7 @@ const DoctorDetails = () => {
 
             <View style={styles.aboutDoctorContainer}>
                 <Text style={styles.aboutDoctorHeader}>About</Text>
-                <Text style={styles.aboutDoctorDescripton}>{'\n'}MBBS, Ph.D., Fellow, International College of Surgeons.{'\n'}</Text>
-                <Text style={styles.aboutDoctorDescripton}>Ex- Professor & Head of Department Department of Cardiology {'\n'}Harvard University</Text>
+                <Text style={styles.aboutDoctorDescripton}>{doctor.about}</Text>
             </View>
 
             <View style={styles.availabilityContainer}>
@@ -49,14 +59,14 @@ const DoctorDetails = () => {
                 </View>
                 <View style={styles.availabilityTxtGroup}>
                     <Text style={styles.availabilityTxt}>Availability</Text>
-                    <Text style={styles.availableTime}>9 AM - 9 PM</Text>
+                    <Text style={styles.availableTime}>{doctor.availability[0]} - {doctor.availability[doctor.availability.length - 1]}</Text>
                 </View>
-                <View style={styles.rightArrowIcon}>
+                <View>
                     <RightArrowIcon />
                 </View>
             </View>
 
-            <TouchableOpacity style={styles.bookNowBtn}>
+            <TouchableOpacity style={styles.bookNowBtn} onPress={confirm}>
                     <Text style={styles.bookNowBtnTxt}>Book Now</Text>
             </TouchableOpacity>
           

@@ -7,7 +7,6 @@ import AppointmentIcon from '../icons/AppointmentIcon';
 import HealthIcon from '../icons/HealthIcon';
 import ProfileIcon from '../icons/ProfileIcon';
 import MarketPlaceIcon from '../icons/Marketplace';
-import BookAppointment from '../screens/BookAppointment/BookAppointment';
 
 const CustomTab: React.FC<{
   label: string;
