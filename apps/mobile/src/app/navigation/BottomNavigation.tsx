@@ -7,6 +7,7 @@ import AppointmentIcon from '../icons/AppointmentIcon';
 import HealthIcon from '../icons/HealthIcon';
 import ProfileIcon from '../icons/ProfileIcon';
 import MarketPlaceIcon from '../icons/Marketplace';
+import MetabolicHealth from '../screens/MetabolicHealth';
 
 const CustomTab: React.FC<{
   label: string;
@@ -101,7 +102,7 @@ const Tabs = () => {
           },
         }}
         name="Health"
-        component={DashBoardStackNavigator}
+        component={MetabolicHealth}
       />
       <Tab.Screen
         options={{

@@ -74,7 +74,6 @@ type Tevent = {
 
 const AgendaComponent = () => {
     const  appointmentsList  = useAppSelector(state => state.appointmentReducer.appointments);
-    console.log(appointmentsList)
     const markedDatesArray = []
 
     appointmentsList.forEach(elem => {
