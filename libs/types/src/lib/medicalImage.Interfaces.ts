@@ -1,13 +1,15 @@
 import * as mongoose from 'mongoose';
+import { TMedecineImage } from './generated';
+import { Model, FilterQuery } from 'mongoose';
+import { IPaginateOption } from './app.interfaces';
 
-export interface IMedicalImages {
-  date: string;
-  hospitalName: string;
-  comment?: string;
-  report?: string;
-  image?: string;
-  userRef: string | (() => string);
-}
 export interface IMedicalImageDocument
   extends mongoose.Document,
-    IMedicalImages {}
+    Omit<TMedecineImage, 'id'> {}
+
+export interface IMedicalImageModel extends Model<IMedicalImageDocument> {
+  paginate?: (
+    filter: FilterQuery<TMedecineImage>,
+    options: IPaginateOption<unknown>
+  ) => Promise<[TMedecineImage, unknown]>;
+}

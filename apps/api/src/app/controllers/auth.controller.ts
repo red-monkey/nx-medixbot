@@ -2,6 +2,7 @@ import {
   EAWSS3BucketName,
   EGraphQlErrorCode,
   ETokenType,
+  EUserRole,
   IRegisterUser,
 } from '@medixbot/types';
 import { Request, Response } from 'express';
@@ -10,6 +11,12 @@ import { IContext } from '../types';
 import { emailSender, GraphQlApiError } from '../utils';
 
 async function register(input: { data: IRegisterUser }, ctx: IContext) {
+  if (input.data.userRole === EUserRole.Admin) {
+    throw new GraphQlApiError(
+      'You can not register as an Admin',
+      EGraphQlErrorCode.FORBIDDEN
+    );
+  }
   const s3 = new awsService.AWSS3();
   const registerData = input.data;
   if (!registerData.email && !registerData.tel) {

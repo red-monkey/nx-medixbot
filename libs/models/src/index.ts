@@ -6,3 +6,7 @@ export * from './lib/clinic.model';
 export * from './lib/appointment.model';
 export * from './lib/patient.model';
 export * from './lib/blog.model';
+export * from './lib/medicalImage.model';
+export * from './lib/category.model';
+export * from './lib/product.model';
+export * from './lib/order.model';

@@ -22,6 +22,7 @@ export default gql`
     country: String
     city: String
     state: String
+    userRole: EUserRole!
     postCode: String
     languages: [String]
     password: String!
