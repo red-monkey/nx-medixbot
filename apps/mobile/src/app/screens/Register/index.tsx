@@ -59,7 +59,8 @@ const RegisterScreen = () => {
   const dispatch = useDispatch<Dispatch>();
   const [hidePassword, setHidePassword] = useState(true);
   const [gender, setGender] = useState<EGender | null>(null);
-  const [genderModalIsOpen, setGenderModal] = useState<boolean>(false)
+  const [genderModalIsOpen, setGenderModal] = useState<boolean>(false);
+  const [foodImage, setFoodImage] = useState<string>(null);
   const [hideConfirmPassword, setHideConfirmPassword] = useState(true);
   const [countryCode, setCountryCode] = useState<CountryCode>('US');
   const [countryCallingCode, setCountryCallingCode] =
@@ -187,7 +188,7 @@ const RegisterScreen = () => {
                     />
                   </View>
                 ) : null}
-                <PicturePickerModal />
+                <PicturePickerModal setFoodImage={setFoodImage}/>
                 <MembershipModal />
                 <LanguageModal />
                 <DatePickerModal />

@@ -13,7 +13,7 @@ import sharedStyles from '../../../styles/SharedStyles';
 import {ImagePickerResponse} from 'react-native-image-picker';
 import {PermissionsAndroid} from 'react-native';
 
-export function PicturePickerModal() {
+export function PicturePickerModal({setFoodImage}) {
   const isOpen = useAppSelector(state => state.modalReducer.isOpen);
   const dispatch = useDispatch<Dispatch>();
 
@@ -36,6 +36,8 @@ export function PicturePickerModal() {
           (response: ImagePickerResponse) => {
             if (response) {
               if (!response.didCancel && !response.errorMessage) {
+                setFoodImage(response.assets ? response.assets[0] : null)
+                
                 dispatch(
                   setUserPicture(response.assets ? response.assets[0] : null),
                 );
