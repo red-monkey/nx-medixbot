@@ -7,3 +7,4 @@ export { default as medicineImageResolver } from './medecineImage.resolver';
 export { default as categoryResolver } from './category.resolver';
 export { default as productResolver } from './product.resolver';
 export { default as orderResolver } from './order.resolver';
+export { default as labTestResolver } from './labTest.resolver';

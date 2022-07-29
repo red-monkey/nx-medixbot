@@ -75,6 +75,16 @@ export type ICreateCategory = {
   name?: InputMaybe<Scalars['String']>;
 };
 
+export type ICreateLabTest = {
+  data?: InputMaybe<Scalars['String']>;
+  institutionName?: InputMaybe<Scalars['String']>;
+  patientRef?: InputMaybe<Scalars['ID']>;
+  processName?: InputMaybe<Scalars['String']>;
+  referenceValue?: InputMaybe<Scalars['String']>;
+  result?: InputMaybe<Scalars['String']>;
+  resultUnit?: InputMaybe<Scalars['String']>;
+};
+
 export type ICreateMedecineImage = {
   comment?: InputMaybe<Scalars['String']>;
   date?: InputMaybe<Scalars['String']>;
@@ -188,6 +198,16 @@ export type IUpdateDoctor = {
   unAvailability?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
+export type IUpdateLabTest = {
+  data?: InputMaybe<Scalars['String']>;
+  institutionName?: InputMaybe<Scalars['String']>;
+  patientRef?: InputMaybe<Scalars['ID']>;
+  processName?: InputMaybe<Scalars['String']>;
+  referenceValue?: InputMaybe<Scalars['String']>;
+  result?: InputMaybe<Scalars['String']>;
+  resultUnit?: InputMaybe<Scalars['String']>;
+};
+
 export type IUpdateMedecineImage = {
   comment?: InputMaybe<Scalars['String']>;
   date?: InputMaybe<Scalars['String']>;
@@ -237,6 +257,7 @@ export type IUpdateUser = {
 export type Mutation = {
   createBlog?: Maybe<TBlog>;
   createCategory?: Maybe<TCategory>;
+  createLabTest?: Maybe<TLabTest>;
   createMedecineImage?: Maybe<TMedecineImage>;
   createOrder?: Maybe<TOrder>;
   createProduct?: Maybe<TProduct>;
@@ -245,6 +266,7 @@ export type Mutation = {
   deleteAppointment: Scalars['String'];
   deleteBlog: Scalars['String'];
   deleteCategory: Scalars['String'];
+  deleteLabTest: Scalars['String'];
   deleteMedecineImage: Scalars['String'];
   deleteProduct: Scalars['String'];
   deleteUser: Scalars['String'];
@@ -262,6 +284,7 @@ export type Mutation = {
   updateBlog?: Maybe<TBlog>;
   updateCategory?: Maybe<TCategory>;
   updateDoctorInfo: Scalars['String'];
+  updateLabTest?: Maybe<TLabTest>;
   updateMedecineImage?: Maybe<TMedecineImage>;
   updateOrder?: Maybe<TOrder>;
   updateOrderToDelivered: TOrder;
@@ -275,6 +298,10 @@ export type MutationCreateBlogArgs = {
 
 export type MutationCreateCategoryArgs = {
   data: ICreateCategory;
+};
+
+export type MutationCreateLabTestArgs = {
+  data: ICreateLabTest;
 };
 
 export type MutationCreateMedecineImageArgs = {
@@ -312,6 +339,10 @@ export type MutationDeleteBlogArgs = {
 
 export type MutationDeleteCategoryArgs = {
   cateogryId: Scalars['ID'];
+};
+
+export type MutationDeleteLabTestArgs = {
+  labTestId: Scalars['ID'];
 };
 
 export type MutationDeleteMedecineImageArgs = {
@@ -381,6 +412,11 @@ export type MutationUpdateDoctorInfoArgs = {
   data: IUpdateDoctor;
 };
 
+export type MutationUpdateLabTestArgs = {
+  data: IUpdateLabTest;
+  labTestId: Scalars['ID'];
+};
+
 export type MutationUpdateMedecineImageArgs = {
   data: IUpdateMedecineImage;
 };
@@ -413,6 +449,8 @@ export type Query = {
   getBlogs: TPaginatedBlogs;
   getCategories: TPaginatedCategories;
   getCategory?: Maybe<TCategory>;
+  getLabTest?: Maybe<TLabTest>;
+  getLabTests: TPaginatedLabTests;
   getMedecineImage?: Maybe<TMedecineImage>;
   getMedecineImages: TPaginatedMedecineImage;
   getMyOrders: Array<TOrder>;
@@ -423,6 +461,7 @@ export type Query = {
   getTopProducts: Array<Maybe<TProduct>>;
   me?: Maybe<TUser>;
   patient?: Maybe<TPatient>;
+  predictImage?: Maybe<TClassificationResult>;
   user?: Maybe<TUser>;
   users: TPaginatedUsers;
 };
@@ -463,6 +502,15 @@ export type QueryGetCategoryArgs = {
   categoryId: Scalars['ID'];
 };
 
+export type QueryGetLabTestArgs = {
+  labTestId: Scalars['ID'];
+};
+
+export type QueryGetLabTestsArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+};
+
 export type QueryGetMedecineImageArgs = {
   medecineImageId: Scalars['ID'];
 };
@@ -492,6 +540,10 @@ export type QueryGetProductsArgs = {
 
 export type QueryPatientArgs = {
   userId: Scalars['ID'];
+};
+
+export type QueryPredictImageArgs = {
+  image: Scalars['Upload'];
 };
 
 export type QueryUserArgs = {
@@ -541,6 +593,13 @@ export type TCategory = {
   name?: Maybe<Scalars['String']>;
 };
 
+export type TClassificationResult = {
+  accuracy?: Maybe<Scalars['String']>;
+  foodName?: Maybe<Scalars['String']>;
+  nutrients?: Maybe<TNutrient>;
+  referenceWeight?: Maybe<Scalars['String']>;
+};
+
 export type TDoctor = {
   about?: Maybe<Scalars['String']>;
   availability?: Maybe<Array<Maybe<TAvailability>>>;
@@ -563,6 +622,18 @@ export type TDocument = {
   url?: Maybe<Scalars['String']>;
 };
 
+export type TLabTest = {
+  data?: Maybe<Scalars['String']>;
+  doctor?: Maybe<TUser>;
+  id?: Maybe<Scalars['ID']>;
+  institutionName?: Maybe<Scalars['String']>;
+  patient?: Maybe<TUser>;
+  processName?: Maybe<Scalars['String']>;
+  referenceValue?: Maybe<Scalars['String']>;
+  result?: Maybe<Scalars['String']>;
+  resultUnit?: Maybe<Scalars['String']>;
+};
+
 export type TMedecineImage = {
   comment?: Maybe<Scalars['String']>;
   date?: Maybe<Scalars['String']>;
@@ -575,6 +646,12 @@ export type TMedecineImage = {
 
 export type TNormalResponse = {
   message: Scalars['String'];
+};
+
+export type TNutrient = {
+  carb?: Maybe<Scalars['String']>;
+  fat?: Maybe<Scalars['String']>;
+  protein?: Maybe<Scalars['String']>;
 };
 
 export type TOrder = {
@@ -621,6 +698,14 @@ export type TPaginatedCategories = {
   limit: Scalars['Int'];
   page: Scalars['Int'];
   results: Array<Maybe<TCategory>>;
+  totalPages: Scalars['Int'];
+  totalResults: Scalars['Int'];
+};
+
+export type TPaginatedLabTests = {
+  limit: Scalars['Int'];
+  page: Scalars['Int'];
+  results: Array<Maybe<TLabTest>>;
   totalPages: Scalars['Int'];
   totalResults: Scalars['Int'];
 };
