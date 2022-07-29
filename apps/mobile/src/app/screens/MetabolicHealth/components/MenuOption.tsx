@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native'
 import React from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
 import RightArrowIcon from '../../../icons/RightArrowIcon.svg'
@@ -11,8 +12,10 @@ export type OptionProps = {
 }
 
 const MenuOption = (props: OptionProps) => {
+  const navigation = useNavigation<any>()
+  const goToScreen = () => navigation.navigate(props.path)
   return (
-    <TouchableOpacity style={{backgroundColor: '#fff', padding: 15,elevation: 4, marginTop: 10, borderRadius: 10,shadowColor: '#000', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+    <TouchableOpacity onPress={props.path && goToScreen} style={{backgroundColor: '#fff', padding: 15,elevation: 4, marginTop: 10, borderRadius: 10,shadowColor: '#000', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
         <View style={{width: 55, height: 55, backgroundColor: props.color, justifyContent: 'center', alignItems: 'center', borderRadius: 40}}>
           {props.icon}

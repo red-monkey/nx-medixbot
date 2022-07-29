@@ -1,6 +1,7 @@
 
+import { useNavigation } from '@react-navigation/native'
 import React, { useState } from 'react'
-import { ScrollView, View } from 'react-native'
+import { ScrollView, TouchableHighlight, View , Text} from 'react-native'
 import Header from '../../components/CommunHeader'
 import BodyHealth from '../../icons/healthIcons/BodyHealth'
 import GluscoseIcon from '../../icons/healthIcons/GluscoseIcon'
@@ -23,7 +24,7 @@ const MetabolicHealth = () => {
         <MetabolicHealthScore selectedScoreType={selectedScoreType} setIsSelected={setScoreType}/>
         <Goals selectedCategory={selectedScoreType}/>
         {options.map((item,i)=>(
-        <MenuOption key={i} title={item.title} icon={item.icon} color={item.color}/>            
+        <MenuOption key={i} title={item.title} icon={item.icon} color={item.color} path={item.path || null}/>            
         ))}
         <Insights measurement={{
               percentage: 50,
@@ -48,7 +49,8 @@ const options: OptionProps[] = [
  {
     title: 'Food and Nutrition',
     icon: <NutritionIcon />,
-    color: colors.PureGreen
+    color: colors.PureGreen,
+    path: 'AddFood'
  },
  {
     title: 'Body Health',
