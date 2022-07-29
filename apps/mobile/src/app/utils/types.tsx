@@ -3,7 +3,6 @@ import { EAppointmentStatus, EMembership } from '@medixbot/types';
 
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { SetStateAction } from 'react';
 import { Animated } from 'react-native';
 import {
   Asset,
@@ -11,7 +10,6 @@ import {
   MediaType,
   PhotoQuality,
 } from 'react-native-image-picker';
-import { Dispatch } from 'redux';
 import { IUser } from '../apollo/GraphQL/types';
 import {
   ADD_OR_REMOVE_LANGUAGE,
@@ -26,12 +24,10 @@ import {
   SET_MEMBERSHIP,
   SET_USER_IS_LOGGED_IN,
   SET_USER_MOOD,
-  SET_USER_PICTURE,
   CLOSE_MEMBERSHIP_MODAL,
   CLOSE_PICTURE_PICKER_MODAL,
   OPEN_MEMBERSHIP_MODAL,
   OPEN_PICTURE_PICKER_MODAL,
-
   SET_USER_REWARDS,
   SET_USER_SCORE,
   OPEN_DATE_PICKER_MODAL,
@@ -44,7 +40,9 @@ import {
   SET_DOCTOR,
   ADD_APPOINTMENT,
   RESET_APPOINTMENT,
+  ADD_FOOD,
 } from '../redux/actions/actionTypes';
+import { FoodRecognitionData } from '../screens/MetabolicHealth/components/AddFood';
 
 export type RootStackParamList = {
   Home: undefined;
@@ -464,10 +462,6 @@ export interface SetMembershipAction {
   payload: EMembership;
 }
 
-export interface SetPictureAction {
-  type: typeof SET_USER_PICTURE;
-  payload: Asset | null;
-}
 
 export interface SetIsloggedIn {
   type: typeof SET_USER_IS_LOGGED_IN;
@@ -609,7 +603,17 @@ export type ChallengeAction =
 
 export type AppointmentAction = SetNatureOfHealthAction |
 SetHealthCareAction | SelectDoctorAction | AddAppointmentAction | ResetCurrentAppointmentAction
- 
+  
+/*food*/ 
+
+export type FoodAction = AddFoodAction
+
+interface AddFoodAction {
+  type: typeof ADD_FOOD;
+  payload: FoodRecognitionData ;
+}
+
+
 export type location = {
   country?: string;
   city?: string;

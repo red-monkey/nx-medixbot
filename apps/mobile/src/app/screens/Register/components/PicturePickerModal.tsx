@@ -3,17 +3,20 @@ import {Text, View, TouchableOpacity} from 'react-native';
 import * as Picker from 'react-native-image-picker';
 import Modal from 'react-native-modal';
 import {useAppSelector} from '../../../utils/hooks';
-import {setPictureModal, setUserPicture} from '../../../redux/actions/modal';
+import {setPictureModal} from '../../../redux/actions/modal';
 import {modalStyle} from '../../../styles/LoginPageStyles';
 import {useDispatch} from 'react-redux';
 import {Dispatch} from 'redux';
 import {PicturePickerModalStyle} from '../../../styles/RegisterStyle';
 import {CameraIcon, GalleryIcon} from '../../../commun/Icons';
 import sharedStyles from '../../../styles/SharedStyles';
-import {ImagePickerResponse} from 'react-native-image-picker';
+import {Asset, ImagePickerResponse} from 'react-native-image-picker';
 import {PermissionsAndroid} from 'react-native';
 
-export function PicturePickerModal({setFoodImage}) {
+type Props =  {
+  setPicture: React.Dispatch<React.SetStateAction<Asset>>
+}
+export function PicturePickerModal({setPicture}: Props) {
   const isOpen = useAppSelector(state => state.modalReducer.isOpen);
   const dispatch = useDispatch<Dispatch>();
 
@@ -36,11 +39,8 @@ export function PicturePickerModal({setFoodImage}) {
           (response: ImagePickerResponse) => {
             if (response) {
               if (!response.didCancel && !response.errorMessage) {
-                setFoodImage(response.assets ? response.assets[0] : null)
-                
-                dispatch(
-                  setUserPicture(response.assets ? response.assets[0] : null),
-                );
+                /*setFoodImage(response.assets ? response.assets[0] : null)*/
+                if(response.assets)setPicture(response.assets[0])
                 dispatch(setPictureModal(false));
               }
             }
@@ -60,9 +60,7 @@ export function PicturePickerModal({setFoodImage}) {
       (response: ImagePickerResponse) => {
         if (response) {
           if (!response.didCancel && !response.errorMessage) {
-            dispatch(
-              setUserPicture(response.assets ? response.assets[0] : null),
-            );
+            if(response.assets)setPicture(response.assets[0])
             dispatch(setPictureModal(false));
           }
         }

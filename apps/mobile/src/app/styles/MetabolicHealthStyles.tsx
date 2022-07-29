@@ -46,8 +46,9 @@ const styles = StyleSheet.create({
     fontSize: 12,
     width: '90%',
     height: 50,
-    color: '#000000',
+    color: colors.Text,
     paddingLeft: 15,
+    fontFamily: 'Lora-Regular'
   },
   ingredientsOfFoodContainer: {
     marginTop: '8%'
@@ -156,13 +157,30 @@ const styles = StyleSheet.create({
   },
   numInput: {
     borderRadius: 8,
-    backgroundColor: 'rgba(215, 234, 255, 0.1)',
+    backgroundColor: 'rgba(215, 234, 255, 0.3)',
     fontSize: 14,
     height: 30,
     color: '#000000',
     marginTop: -2,
     marginRight: -5,
-    padding: 5
+    width:55,
+    padding: 5,
+    fontFamily: 'Lora-Regular'
+  },
+  input: {
+    fontSize: 14,
+    padding: 0,
+    marginTop: -5,
+    height: 30,
+    width: '40%',
+    marginHorizontal: 0,
+    color: '#000000',
+    fontFamily: 'Lora-Regular'
+  },
+  percentage: {
+    width: '40%',
+    color: '#7B8D9E',
+    fontFamily: 'Lora-Regular'
   }
 });
 
