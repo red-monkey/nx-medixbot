@@ -8,5 +8,8 @@ export const colors = {
     newBlack: '#41416E',
     newLightBlue:"#D7EAFF",
     PureGreen: '#09A129',
-    PureGreenBackground: '#01FF7622'
+    PureGreenBackground: '#01FF7622',
+    newYellow: '#F9ED32',
+    blue: '#3095E2',
+    newPink:'#FF6079'
 }

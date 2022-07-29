@@ -46,6 +46,8 @@
     "react-native-vector-icons": "*",
     "react-native-gesture-handler": "*",
     "react-native-shadow-2": "*",
-    "react-native-uuid": "*"
+    "react-native-uuid": "*",
+    "react-native-shapes": "*",
+    "react-native-svg-charts": "*"
   }
 }

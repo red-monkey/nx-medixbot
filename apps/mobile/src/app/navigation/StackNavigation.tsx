@@ -8,7 +8,7 @@ import FoodRecognition from '../screens/FoodRecognition';
 import MyCart from '../screens/Marketplace/MyCart';
 import Checkout from '../screens/Marketplace/Checkout';
 import { MyProducts } from '../screens/Marketplace/MyProducts';
-import { RootStackParamList,MarketplaceStackParamList, AppointmentStackParamList } from '../utils/types';
+import { RootStackParamList,MarketplaceStackParamList, AppointmentStackParamList, MetabolicHealthStackParamList } from '../utils/types';
 import MedicalHistory from '../screens/Patient/MedicalHistory';
 import SubscriptionDetails from '../screens/Patient/SubcriptionDetails';
 import PatientProfile from '../screens/PatientProfile';
@@ -21,10 +21,13 @@ import MakeAppointment from '../screens/Appointments/MakeAppointment';
 import BookAppointment from '../screens/BookAppointment/BookAppointment';
 import MyOrders from '../screens/Marketplace/components/order/MyOrders';
 import OrderStatus from '../screens/Marketplace/components/order/OrderStatus';
+import MetabolicHealth from '../screens/MetabolicHealth';
+import AddFood from '../screens/MetabolicHealth/components/AddFood';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const MarketStack =  createNativeStackNavigator<MarketplaceStackParamList>();
 const AppointmentStack = createNativeStackNavigator<AppointmentStackParamList>()
+const MetabolicHealthStack = createNativeStackNavigator<MetabolicHealthStackParamList>()
 
 export const DashBoardStackNavigator = () => {
   return (
@@ -158,4 +161,21 @@ export const AppointmentStackNavigator = () => {
   </AppointmentStack.Navigator>    
   )
 
+}
+
+export const MetabolicHealthStackNavigator = () => {
+  return(
+    <MetabolicHealthStack.Navigator>
+      <MetabolicHealthStack.Screen
+         options={{ headerShown: false }}
+         name="MetabolicHealth"
+         component={MetabolicHealth}    
+         /> 
+      <MetabolicHealthStack.Screen
+         options={{ headerShown: false }}
+         name="AddFood"
+         component={AddFood}    
+         /> 
+    </MetabolicHealthStack.Navigator>    
+  )
 }

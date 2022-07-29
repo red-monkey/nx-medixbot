@@ -1,13 +1,13 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { AppointmentStackNavigator, DashBoardStackNavigator, MarketPlaceStackNavigator, PatientProfileStackNavigator } from './StackNavigation';
+import { AppointmentStackNavigator, DashBoardStackNavigator, MarketPlaceStackNavigator, MetabolicHealthStackNavigator, PatientProfileStackNavigator } from './StackNavigation';
 import { StyleSheet, View, Text } from 'react-native';
 import HomeIcon from '../icons/HomeIcon';
 import AppointmentIcon from '../icons/AppointmentIcon';
 import HealthIcon from '../icons/HealthIcon';
 import ProfileIcon from '../icons/ProfileIcon';
 import MarketPlaceIcon from '../icons/Marketplace';
-import AddFood from '../screens/MetabolicHealth/components/AddFood';
+import MetabolicHealth from '../screens/MetabolicHealth';
 
 const CustomTab: React.FC<{
   label: string;
@@ -102,7 +102,7 @@ const Tabs = () => {
           },
         }}
         name="Health"
-        component={AddFood}
+        component={MetabolicHealthStackNavigator}
       />
       <Tab.Screen
         options={{

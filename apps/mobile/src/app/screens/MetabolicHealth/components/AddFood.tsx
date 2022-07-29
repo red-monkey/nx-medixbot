@@ -30,7 +30,7 @@ const AddFood = () => {
       .string()
       .required('Please specify your food name.'),
     weightOfFood: yup
-      .number()
+      .string()
       .required('Please specify the quantity of your food.'),
     calorie: yup.string().required('Please specify all the nutritional intformation relative to your food !'),
     carbs: yup.string().required('Please specify all the nutritional intformation relative to your food !'),
@@ -79,7 +79,7 @@ const AddFood = () => {
     const addedFood: FoodRecognitionData = {foodName: values.foodName, quantity: parseInt(values.weightOfFood), calories: parseInt(
       values.calorie), carbs: parseInt(values.carbs), fats: parseInt(values.fats), proteins: parseInt(values.proteins) }
       dispatch(addFood(addedFood));
-      navigation.navigate('Home')
+      navigation.navigate('MetabolicHealth')
   }
 
   return (
@@ -95,6 +95,7 @@ const AddFood = () => {
             style={[styles.foodSelectionInputContainer, sharedStyles.dashedBorder]}
             onPress={() => {
             dispatch(setPictureModal(true));
+            setFoodImage(null)
         }}>
             <View style={styles.cameraIconContainer}><CameraIcon /></View>
             <Text style={styles.foodSelectionInput}>
