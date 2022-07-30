@@ -95,7 +95,8 @@ export type AppointmentStackParamList = {
 
 export type MetabolicHealthStackParamList = {
   MetabolicHealth: undefined,
-  AddFood: undefined
+  AddFood: undefined,
+  HealthAndGoodSleep: undefined
 }
 
 export type THealthcare = 'Urgent Health Care' | 'Primary Healthcare' | 'Chronic Healthcare' | 'Mental Healthcare' | 'Pediatrics Healthcare' |
