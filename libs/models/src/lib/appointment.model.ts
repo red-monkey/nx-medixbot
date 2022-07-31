@@ -11,9 +11,33 @@ const ObjectId = Types.ObjectId;
 
 const modelSchema: Schema<IAppointmentDocument> = new Schema(
   {
-    dateTime: {
+    date: {
       type: String,
       required: true,
+    },
+    time: {
+      type: String,
+      required: true,
+    },
+    country: {
+      type: String,
+      trim: true,
+    },
+    city: {
+      type: String,
+      trim: true,
+    },
+    district: {
+      type: String,
+      trim: true,
+    },
+    hospital: {
+      type: String,
+      trim: true,
+    },
+    clinic: {
+      type: String,
+      trim: true,
     },
     conditions: {
       type: String,
@@ -23,12 +47,12 @@ const modelSchema: Schema<IAppointmentDocument> = new Schema(
       type: [String],
       trim: true,
     },
-    patientRef: {
+    patient: {
       type: ObjectId,
       ref: EModelNames.USER,
       require: true,
     },
-    doctorRef: {
+    doctor: {
       type: ObjectId,
       ref: EModelNames.USER,
       require: true,

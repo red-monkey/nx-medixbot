@@ -11,3 +11,4 @@ export * from './lib/category.model';
 export * from './lib/product.model';
 export * from './lib/order.model';
 export * from './lib/labTest.model';
+export * from './lib/hospital.model';

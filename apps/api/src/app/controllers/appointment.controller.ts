@@ -1,18 +1,18 @@
 import {
-  AddAppointmentBodyInput,
   EAppointmentStatus,
   EGraphQlErrorCode,
+  ICreateAppointment,
   TAppointment,
 } from '@medixbot/types';
 import { IContext } from '../types';
 import { GraphQlApiError, pick } from '../utils';
 
 async function makeAppointment(
-  input: { data: AddAppointmentBodyInput & { patientRef: string } },
+  input: { data: ICreateAppointment & { patient: string } },
   ctx: IContext
 ) {
   const appointmentData = input.data;
-  appointmentData.patientRef = ctx.user.id;
+  appointmentData.patient = ctx.user.id;
   const appointemnt = await ctx.dataSources.appointments.makeAppointment(
     appointmentData
   );
@@ -72,8 +72,8 @@ async function updateAppointmentStatus(
     );
   }
   if (
-    ctx.user.id !== appointemnt.patientRef &&
-    ctx.user.id !== appointemnt.doctorRef
+    ctx.user.id !== appointemnt.patient.id &&
+    ctx.user.id !== appointemnt.doctor.id
   ) {
     throw new GraphQlApiError(
       'You can not update this appointment',
@@ -95,8 +95,8 @@ async function deleteAppointment(
 }
 
 export default {
-  makeAppointment,
   getAppointments,
+  makeAppointment,
   getAppointment,
   updateAppointment,
   updateAppointmentStatus,
