@@ -1,16 +1,17 @@
 import { catchReq } from '../../utils';
-import { auth } from '../../middlewares';
 import { appointmentController } from '../../controllers';
+
 import { EUserRole } from '@medixbot/types';
+import { auth } from '../../middlewares';
 
 export default {
   Query: {
-    appointments: auth(catchReq(appointmentController.getAppointments), [
+    getAppointments: auth(catchReq(appointmentController.getAppointments), [
       EUserRole.Patient,
       EUserRole.Doctor,
       EUserRole.Admin,
     ]),
-    appointment: auth(catchReq(appointmentController.getAppointment), [
+    getAppointment: auth(catchReq(appointmentController.getAppointment), [
       EUserRole.Patient,
       EUserRole.Doctor,
       EUserRole.Admin,
@@ -19,6 +20,8 @@ export default {
   Mutation: {
     makeAppointment: auth(catchReq(appointmentController.makeAppointment), [
       EUserRole.Patient,
+      EUserRole.Doctor,
+      EUserRole.Admin,
     ]),
     updateAppointment: auth(catchReq(appointmentController.updateAppointment), [
       EUserRole.Admin,

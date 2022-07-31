@@ -11,7 +11,7 @@ export default {
       EUserRole.Admin,
     ]),
     user: auth(catchReq(userController.getUser), [EUserRole.Admin]),
-    users: auth(catchReq(userController.getUsers), [EUserRole.Admin]),
+    users: auth(catchReq(userController.getUsers), [EUserRole.Patient]),
     doctor: auth(catchReq(userController.getDoctor), [EUserRole.Patient]),
     doctors: auth(catchReq(userController.getDoctors), [
       EUserRole.Patient,

@@ -59,9 +59,29 @@ export enum EUserRole {
   Patient = 'patient',
 }
 
+export enum EppointmentStatus {
+  Canceled = 'Canceled',
+  Completed = 'Completed',
+  Missed = 'Missed',
+  Pending = 'Pending',
+}
+
 export type IAvailability = {
   day?: InputMaybe<Scalars['Int']>;
   times?: InputMaybe<Array<InputMaybe<ITime>>>;
+};
+
+export type ICreateAppointment = {
+  city?: InputMaybe<Scalars['String']>;
+  clinic: Scalars['String'];
+  conditions?: InputMaybe<Scalars['String']>;
+  country?: InputMaybe<Scalars['String']>;
+  date: Scalars['String'];
+  district?: InputMaybe<Scalars['String']>;
+  doctor: Scalars['ID'];
+  hospital: Scalars['String'];
+  symptoms?: InputMaybe<Array<Scalars['String']>>;
+  time: Scalars['String'];
 };
 
 export type ICreateBlog = {
@@ -73,6 +93,17 @@ export type ICreateBlog = {
 export type ICreateCategory = {
   description?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
+};
+
+export type ICreateHospital = {
+  city: Scalars['String'];
+  clinics?: InputMaybe<Array<Scalars['String']>>;
+  country: Scalars['String'];
+  description: Scalars['String'];
+  district: Scalars['String'];
+  location: Scalars['String'];
+  name: Scalars['String'];
+  tracking_number: Scalars['String'];
 };
 
 export type ICreateLabTest = {
@@ -172,10 +203,16 @@ export type ITime = {
 };
 
 export type IUpdateAppointment = {
+  city?: InputMaybe<Scalars['String']>;
+  clinic?: InputMaybe<Scalars['String']>;
   conditions?: InputMaybe<Scalars['String']>;
-  dateTime?: InputMaybe<Scalars['String']>;
-  doctorRef?: InputMaybe<Scalars['ID']>;
+  country?: InputMaybe<Scalars['String']>;
+  date?: InputMaybe<Scalars['String']>;
+  district?: InputMaybe<Scalars['String']>;
+  doctor?: InputMaybe<Scalars['ID']>;
+  hospital?: InputMaybe<Scalars['String']>;
   symptoms?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  time?: InputMaybe<Scalars['String']>;
 };
 
 export type IUpdateBlog = {
@@ -196,6 +233,17 @@ export type IUpdateDoctor = {
   documents?: InputMaybe<Array<InputMaybe<IDocument>>>;
   domain?: InputMaybe<Scalars['String']>;
   unAvailability?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+export type IUpdateHospital = {
+  city?: InputMaybe<Scalars['String']>;
+  clinics?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  country?: InputMaybe<Scalars['String']>;
+  description?: InputMaybe<Scalars['String']>;
+  district?: InputMaybe<Scalars['String']>;
+  location?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
+  tracking_number?: InputMaybe<Scalars['String']>;
 };
 
 export type IUpdateLabTest = {
@@ -257,6 +305,7 @@ export type IUpdateUser = {
 export type Mutation = {
   createBlog?: Maybe<TBlog>;
   createCategory?: Maybe<TCategory>;
+  createHospital?: Maybe<THospital>;
   createLabTest?: Maybe<TLabTest>;
   createMedecineImage?: Maybe<TMedecineImage>;
   createOrder?: Maybe<TOrder>;
@@ -266,6 +315,7 @@ export type Mutation = {
   deleteAppointment: Scalars['String'];
   deleteBlog: Scalars['String'];
   deleteCategory: Scalars['String'];
+  deleteHospital: Scalars['String'];
   deleteLabTest: Scalars['String'];
   deleteMedecineImage: Scalars['String'];
   deleteProduct: Scalars['String'];
@@ -284,6 +334,7 @@ export type Mutation = {
   updateBlog?: Maybe<TBlog>;
   updateCategory?: Maybe<TCategory>;
   updateDoctorInfo: Scalars['String'];
+  updateHospital?: Maybe<THospital>;
   updateLabTest?: Maybe<TLabTest>;
   updateMedecineImage?: Maybe<TMedecineImage>;
   updateOrder?: Maybe<TOrder>;
@@ -298,6 +349,10 @@ export type MutationCreateBlogArgs = {
 
 export type MutationCreateCategoryArgs = {
   data: ICreateCategory;
+};
+
+export type MutationCreateHospitalArgs = {
+  data: ICreateHospital;
 };
 
 export type MutationCreateLabTestArgs = {
@@ -341,6 +396,10 @@ export type MutationDeleteCategoryArgs = {
   cateogryId: Scalars['ID'];
 };
 
+export type MutationDeleteHospitalArgs = {
+  hospitalId: Scalars['ID'];
+};
+
 export type MutationDeleteLabTestArgs = {
   labTestId: Scalars['ID'];
 };
@@ -371,7 +430,7 @@ export type MutationLogoutArgs = {
 };
 
 export type MutationMakeAppointmentArgs = {
-  data: AddAppointmentBodyInput;
+  data: ICreateAppointment;
 };
 
 export type MutationRefreshTokensArgs = {
@@ -392,7 +451,8 @@ export type MutationUpdateAccountArgs = {
 };
 
 export type MutationUpdateAppointmentArgs = {
-  data: IUpdateBlog;
+  appointmentId: Scalars['ID'];
+  data: IUpdateAppointment;
 };
 
 export type MutationUpdateAppointmentStatusArgs = {
@@ -410,6 +470,10 @@ export type MutationUpdateCategoryArgs = {
 
 export type MutationUpdateDoctorInfoArgs = {
   data: IUpdateDoctor;
+};
+
+export type MutationUpdateHospitalArgs = {
+  data: IUpdateHospital;
 };
 
 export type MutationUpdateLabTestArgs = {
@@ -441,18 +505,21 @@ export type MutationUpdateProductArgs = {
 };
 
 export type Query = {
-  appointment?: Maybe<TAppointment>;
-  appointments: TPaginatedAppointment;
   doctor?: Maybe<TDoctor>;
   doctors: TDoctorList;
+  getAppointment?: Maybe<TAppointment>;
+  getAppointments: TPaginatedAppointment;
   getBlog?: Maybe<TBlog>;
   getBlogs: TPaginatedBlogs;
   getCategories: TPaginatedCategories;
   getCategory?: Maybe<TCategory>;
+  getHospital?: Maybe<THospital>;
+  getHospitals: TPaginatedHospital;
   getLabTest?: Maybe<TLabTest>;
   getLabTests: TPaginatedLabTests;
   getMedecineImage?: Maybe<TMedecineImage>;
   getMedecineImages: TPaginatedMedecineImage;
+  getMyAppointment?: Maybe<TAppointment>;
   getMyOrders: Array<TOrder>;
   getOrder?: Maybe<TOrder>;
   getOrders: TPaginatedOrders;
@@ -466,20 +533,20 @@ export type Query = {
   users: TPaginatedUsers;
 };
 
-export type QueryAppointmentArgs = {
-  appointmentId?: InputMaybe<Scalars['ID']>;
-};
-
-export type QueryAppointmentsArgs = {
-  limit?: InputMaybe<Scalars['Int']>;
-  page?: InputMaybe<Scalars['Int']>;
-};
-
 export type QueryDoctorArgs = {
   userId: Scalars['ID'];
 };
 
 export type QueryDoctorsArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+};
+
+export type QueryGetAppointmentArgs = {
+  appointmentId: Scalars['ID'];
+};
+
+export type QueryGetAppointmentsArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   page?: InputMaybe<Scalars['Int']>;
 };
@@ -500,6 +567,15 @@ export type QueryGetCategoriesArgs = {
 
 export type QueryGetCategoryArgs = {
   categoryId: Scalars['ID'];
+};
+
+export type QueryGetHospitalArgs = {
+  hospitalId: Scalars['ID'];
+};
+
+export type QueryGetHospitalsArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
 };
 
 export type QueryGetLabTestArgs = {
@@ -557,17 +633,23 @@ export type QueryUsersArgs = {
 };
 
 export type TAppointment = {
+  city?: Maybe<Scalars['String']>;
+  clinic?: Maybe<Scalars['String']>;
   conditions?: Maybe<Scalars['String']>;
-  dateTime?: Maybe<Scalars['String']>;
+  country?: Maybe<Scalars['String']>;
+  date?: Maybe<Scalars['String']>;
+  district?: Maybe<Scalars['String']>;
   doctor?: Maybe<TUser>;
   doctorJoinAt?: Maybe<Scalars['String']>;
   doctorQuitAt?: Maybe<Scalars['String']>;
+  hospital?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['ID']>;
   patient?: Maybe<TUser>;
   patientJoinAt?: Maybe<Scalars['String']>;
   patientQuitAt?: Maybe<Scalars['String']>;
   status?: Maybe<EAppointmentStatus>;
   symptoms?: Maybe<Array<Maybe<Scalars['String']>>>;
+  time?: Maybe<Scalars['String']>;
 };
 
 export type TAuthSuccess = {
@@ -620,6 +702,18 @@ export type TDoctorList = {
 export type TDocument = {
   type?: Maybe<Scalars['String']>;
   url?: Maybe<Scalars['String']>;
+};
+
+export type THospital = {
+  city?: Maybe<Scalars['String']>;
+  clinics?: Maybe<Array<Maybe<Scalars['String']>>>;
+  country?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  district?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['ID']>;
+  location?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  tracking_number?: Maybe<Scalars['String']>;
 };
 
 export type TLabTest = {
@@ -698,6 +792,14 @@ export type TPaginatedCategories = {
   limit: Scalars['Int'];
   page: Scalars['Int'];
   results: Array<Maybe<TCategory>>;
+  totalPages: Scalars['Int'];
+  totalResults: Scalars['Int'];
+};
+
+export type TPaginatedHospital = {
+  limit: Scalars['Int'];
+  page: Scalars['Int'];
+  results: Array<Maybe<THospital>>;
   totalPages: Scalars['Int'];
   totalResults: Scalars['Int'];
 };
@@ -822,13 +924,6 @@ export type TUser = {
   state?: Maybe<Scalars['String']>;
   tel?: Maybe<Scalars['String']>;
   userRole?: Maybe<EUserRole>;
-};
-
-export type AddAppointmentBodyInput = {
-  conditions?: InputMaybe<Scalars['String']>;
-  dateTime: Scalars['String'];
-  doctorRef: Scalars['ID'];
-  symptoms?: InputMaybe<Array<Scalars['String']>>;
 };
 
 export type UserFieldsFragment = {
