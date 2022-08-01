@@ -26,7 +26,7 @@ async function getHospital(data: { hospitalId: string }, ctx: IContext) {
   const hospital = await ctx.dataSources.hospitals.getHospital(data.hospitalId);
   if (!hospital) {
     throw new GraphQlApiError(
-      'Hospital not found',
+      'Hospital not found with id of ' + data.hospitalId,
       EGraphQlErrorCode.PERSISTED_QUERY_NOT_FOUND
     );
   }
