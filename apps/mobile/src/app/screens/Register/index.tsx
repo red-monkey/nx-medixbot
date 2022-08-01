@@ -46,20 +46,21 @@ import { colors } from '../../variables/colors';
 import { LanguageModal } from './components/LanguageModal';
 import { EGender, EMembership, IRegisterUser } from '@medixbot/types';
 import { useRegisterMutation } from '../../apollo/GraphQL/Actions/useRegisterMutation';
+import {Asset} from 'react-native-image-picker';
 import DatePickerModal from './components/DatePickerModal';
 const RegisterScreen = () => {
   const [register] = useRegisterMutation();
+  const [userPicture, setUserPicture] = useState<Asset>(null);
   const navigation = useNavigation<ForgotPassProps>();
-  const image = useAppSelector(state => state.userPictureReducer.selected);
   const languages = useAppSelector(state => state.languageModalReducer.selectedLanguages);
   const membership = useAppSelector(state => state.membershipReducer.membership)
   const location = useAppSelector(state => state.locationReducer);
   const birthDate = useAppSelector(state => state.DatePickerModalReducer.date)
-  const base64Icon = `data:image/jpg;base64,${image?.base64}`;
+  const base64Icon = `data:image/jpg;base64,${userPicture?.base64}`;
   const dispatch = useDispatch<Dispatch>();
   const [hidePassword, setHidePassword] = useState(true);
   const [gender, setGender] = useState<EGender | null>(null);
-  const [genderModalIsOpen, setGenderModal] = useState<boolean>(false)
+  const [genderModalIsOpen, setGenderModal] = useState<boolean>(false);
   const [hideConfirmPassword, setHideConfirmPassword] = useState(true);
   const [countryCode, setCountryCode] = useState<CountryCode>('US');
   const [countryCallingCode, setCountryCallingCode] =
@@ -118,6 +119,7 @@ const RegisterScreen = () => {
     else return {...data,email: values.email} 
     
   }
+
 
   //Gender modal
   const content = <><Text style={modalStyle.modalTitleStyle}>Select Gender</Text>
@@ -179,7 +181,7 @@ const RegisterScreen = () => {
               isValid,
             }) => (
               <>
-                {image !== null ? (
+                {userPicture !== null ? (
                   <View style={registerStyles.imageContainer}>
                     <Image
                       style={registerStyles.imageStyle}
@@ -187,7 +189,7 @@ const RegisterScreen = () => {
                     />
                   </View>
                 ) : null}
-                <PicturePickerModal />
+                <PicturePickerModal setPicture={setUserPicture}/>
                 <MembershipModal />
                 <LanguageModal />
                 <DatePickerModal />

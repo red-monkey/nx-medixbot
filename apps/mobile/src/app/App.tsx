@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import SplashScreen from 'react-native-splash-screen';
 import { SafeAreaView } from 'react-native';
 import AppContainer, {

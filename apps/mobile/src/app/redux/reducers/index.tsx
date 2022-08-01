@@ -2,7 +2,6 @@ import { combineReducers } from 'redux';
 import { loginReducer, loginMethodReducer } from './loginReducer';
 
 import { modalReducer, languageModalReducer, DatePickerModalReducer } from './modalReducer';
-import userPictureReducer from './userPictureReducer';
 import membershipModalReducer, {
   membershipReducer,
 } from './membershipModalReducer';
@@ -11,11 +10,11 @@ import { challengeReducer } from './challengeReducer';
 import marketplaceReducer from './marketplaceReducer';
 import { orderReducer } from './ordersReducer';
 import { appointmentReducer } from './appointmentReducer';
+import { foodReducer } from './foodReducer';
 const reducers = combineReducers({
   loginReducer,
   loginMethodReducer,
   modalReducer,
-  userPictureReducer,
   membershipModalReducer,
   challengeReducer,
   locationReducer,
@@ -24,6 +23,7 @@ const reducers = combineReducers({
   DatePickerModalReducer,
   marketplaceReducer,
   orderReducer,
-  appointmentReducer
+  appointmentReducer,
+  foodReducer
 });
 export default reducers;

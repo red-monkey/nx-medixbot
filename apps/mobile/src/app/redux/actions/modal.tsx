@@ -64,9 +64,3 @@ export const setSelectedLanguages = (languages: string[]) => {
   }
 }
 
-export const setUserPicture = (base64: Asset | null) => {
-  return {
-    type: actionTypes.SET_USER_PICTURE,
-    payload: base64,
-  };
-};
