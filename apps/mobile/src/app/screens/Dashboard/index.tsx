@@ -41,13 +41,6 @@ const Dashboard = () => {
                 barStyle="dark-content"
               />
               <Header />
-              <View style={{justifyContent: 'flex-start'}}>
-                <TouchableOpacity onPress={goToFoodRecognition}>
-                  <Text style={{ textAlign: 'center', color: '#fff' }}>
-                    Food Recognition  | 
-                  </Text>
-                </TouchableOpacity>
-              </View>
               <View style={styles.screenContent}>
                 <GreetingBox showLogo={true} showMedixBotter={true}/>
                   <>
