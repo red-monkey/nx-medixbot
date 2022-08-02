@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 import axios from 'axios';
-import { finished } from 'stream/promises';
+//import { finished } from 'stream/promises';
 import { IContext } from '../types';
 import { GraphQlApiError } from '../utils';
 import { EGraphQlErrorCode } from '@medixbot/types';
@@ -16,7 +16,7 @@ async function predictImage(input: { image: any }, ctx: IContext) {
   const stream = createReadStream();
   const out = fs.createWriteStream(filePath);
   stream.pipe(out);
-  await finished(out);
+  //await finished(out);
 
   const base64 = fs.readFileSync(filePath, 'base64');
 

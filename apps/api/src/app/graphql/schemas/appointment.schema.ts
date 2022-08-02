@@ -1,10 +1,23 @@
 import { gql } from 'apollo-server-express';
 
 export default gql`
+  enum EppointmentStatus {
+    Completed
+    Pending
+    Canceled
+    Missed
+  }
+
   type TAppointment {
     id: ID
-    dateTime: String
+    date: String
+    time: String
+    country: String
+    city: String
+    district: String
+    hospital: String
     conditions: String
+    clinic: String
     symptoms: [String]
     patient: TUser
     doctor: TUser
@@ -14,6 +27,18 @@ export default gql`
     doctorQuitAt: String
     patientQuitAt: String
   }
+  input ICreateAppointment {
+    date: String!
+    time: String!
+    conditions: String
+    country: String
+    city: String
+    district: String
+    hospital: String!
+    clinic: String!
+    symptoms: [String!]
+    doctor: ID!
+  }
   type TPaginatedAppointment {
     results: [TAppointment]!
     page: Int!
@@ -21,28 +46,53 @@ export default gql`
     totalPages: Int!
     totalResults: Int!
   }
-  input addAppointmentBodyInput {
-    dateTime: String!
-    conditions: String
-    symptoms: [String!]
-    doctorRef: ID!
-  }
+
   input IUpdateAppointment {
-    dateTime: String
+    date: String
+    time: String
     conditions: String
+    country: String
+    city: String
+    district: String
+    hospital: String
+    clinic: String
     symptoms: [String]
-    doctorRef: ID
+    doctor: ID
   }
+
+  # type agoraRTMTokenType {
+  #   appID: String
+  #   uid: Int
+  #   agoraRTMToken: String
+  #   expirationTimeInSeconds: Int
+  # }
+  # type SessionOuput {
+  #   appID: String!
+  #   channel: String!
+  #   uid: Int!
+  #   agoraToken: String!
+  #   expirationTimeInSeconds: Int!
+  #   agoraRTMToken: agoraRTMTokenType
+  # }
+  # type startSessionOutput {
+  #   tokens: SessionOuput!
+  #   appointment: TAppointment!
+  # }
 
   # Queries
   type Query {
-    appointments(limit: Int, page: Int): TPaginatedAppointment!
-    appointment(appointmentId: ID): TAppointment
+    getAppointment(appointmentId: ID!): TAppointment
+    getAppointments(limit: Int, page: Int): TPaginatedAppointment!
+    getMyAppointment: TAppointment
   }
+
   # Mutations
   type Mutation {
-    makeAppointment(data: addAppointmentBodyInput!): TAppointment
-    updateAppointment(data: IUpdateBlog!): TAppointment
+    makeAppointment(data: ICreateAppointment!): TAppointment
+    updateAppointment(
+      appointmentId: ID!
+      data: IUpdateAppointment!
+    ): TAppointment
     deleteAppointment(appointmentId: ID!): String!
     updateAppointmentStatus(
       appointmentId: ID!

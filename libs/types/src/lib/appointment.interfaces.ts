@@ -1,26 +1,15 @@
 import * as mongoose from 'mongoose';
+import { TAppointment } from './generated';
 import { Model, FilterQuery } from 'mongoose';
 import { IPaginateOption } from './app.interfaces';
-import { EAppointmentStatus } from './generated';
 
-export interface IAppointment {
-  dateTime: string;
-  conditions: string;
-  symptoms: string[];
-  patientRef: string | (() => string);
-  doctorRef: string | (() => string);
-  status: EAppointmentStatus;
-  patientJoinAt: string; // ISO date string
-  doctorJoinAt: string;
-  patientQuitAt: string;
-  doctorQuitAt: string;
-}
-
-export interface IAppointmentDocument extends mongoose.Document, IAppointment {}
+export interface IAppointmentDocument
+  extends mongoose.Document,
+    Omit<TAppointment, 'id'> {}
 
 export interface IAppointmentModel extends Model<IAppointmentDocument> {
   paginate?: (
-    filter: FilterQuery<IAppointment>,
+    filter: FilterQuery<TAppointment>,
     options: IPaginateOption<unknown>
-  ) => Promise<[IAppointmentDocument, unknown]>;
+  ) => Promise<[TAppointment, unknown]>;
 }

@@ -4,7 +4,7 @@ import {
   EGraphQlErrorCode,
   IAppointmentDocument,
   IAppointmentModel,
-  TAppointment,
+  ICreateAppointment,
 } from '@medixbot/types';
 import { FilterQuery } from 'mongoose';
 import { GraphQlApiError } from '../utils';
@@ -20,6 +20,7 @@ export class AppointmentDataSource extends MongoDataSource<
     super(AppointmentModel);
     this.Appointment = AppointmentModel;
   }
+
   async getAppointment(appointmentId: string) {
     return await this.findOneById(appointmentId);
   }
@@ -31,8 +32,8 @@ export class AppointmentDataSource extends MongoDataSource<
     return await this.Appointment.paginate(filter, options);
   }
 
-  async makeAppointment(appointment: TAppointment) {
-    return await this.model.create(appointment);
+  async makeAppointment(appointment: ICreateAppointment) {
+    return this.model.create(appointment);
   }
 
   async updateAppointment(
@@ -46,7 +47,6 @@ export class AppointmentDataSource extends MongoDataSource<
         EGraphQlErrorCode.PERSISTED_QUERY_NOT_FOUND
       );
     }
-
     Object.assign(appointment, data);
     await appointment.save();
     return appointment;
