@@ -47,7 +47,6 @@ export default gql`
   input IPaymentResult {
     id: String
     status: String
-    update_time: String
     email_address: String
   }
 
@@ -77,7 +76,7 @@ export default gql`
   }
 
   input IUpdateOrder {
-    orderItems: IOrderItem
+    orderItems: [IOrderItem]
     shippingAddress: IShippingAddress
     paymentMethod: String
     itemsPrice: Float
@@ -90,7 +89,7 @@ export default gql`
   type Query {
     getOrder(orderId: ID!): TOrder
     getOrders(limit: Int, page: Int): TPaginatedOrders!
-    getMyOrders: [TOrder!]!
+    getMyOrders: TPaginatedOrders!
   }
 
   # Mutations

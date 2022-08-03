@@ -1,11 +1,8 @@
-import { EModelNames, IClinicDocument, IPaginateOption } from '@medixbot/types';
-import { Schema, model, Model, Types, FilterQuery } from 'mongoose';
-
+import { EModelNames, IClinicDocument, IClinicModel } from '@medixbot/types';
+import { Schema, model, Types } from 'mongoose';
 import { paginate, toJSON } from './plugins';
 
-const ObjectId = Types.ObjectId;
-
-const clinicSchema: Schema = new Schema(
+const modelSchema: Schema<IClinicDocument> = new Schema(
   {
     name: {
       type: String,
@@ -14,16 +11,13 @@ const clinicSchema: Schema = new Schema(
     },
     description: {
       type: String,
-      required: true,
       trim: true,
+      required: true,
     },
     hospital: {
-      type: String,
-    },
-    creator: {
-      type: ObjectId,
-      required: true,
-      ref: EModelNames.USER,
+      type: Types.ObjectId,
+      ref: EModelNames.HOSPITAL,
+      require: true,
     },
   },
   {
@@ -31,18 +25,11 @@ const clinicSchema: Schema = new Schema(
   }
 );
 
-interface IClinicModel extends Model<IClinicDocument> {
-  paginate?: (
-    filter: FilterQuery<IClinicDocument>,
-    options: IPaginateOption<unknown>
-  ) => Promise<[IClinicDocument, unknown]>;
-}
-
 // add plugin that converts mongoose to json
-clinicSchema.plugin(toJSON);
-clinicSchema.plugin(paginate);
+modelSchema.plugin(toJSON);
+modelSchema.plugin(paginate);
 
 export const ClinicModel = model<IClinicDocument, IClinicModel>(
   EModelNames.CLINIC,
-  clinicSchema
+  modelSchema
 );

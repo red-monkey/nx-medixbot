@@ -22,18 +22,50 @@ export class AppointmentDataSource extends MongoDataSource<
   }
 
   async getAppointment(appointmentId: string) {
-    return await this.findOneById(appointmentId);
+    return await (
+      await (
+        await (
+          await (
+            await this.findOneById(appointmentId)
+          ).populate({ path: 'patient', select: '-password' })
+        ).populate({ path: 'doctor', select: '-password' })
+      ).populate('hospital')
+    ).populate('clinic');
   }
 
   async getAppointments(
     filter: FilterQuery<IAppointmentDocument>,
     options: IPaginateOption<unknown>
   ) {
+    options.populate = [
+      { path: 'patient' },
+      { path: 'doctor' },
+      { path: 'hospital' },
+      { path: 'clinic' },
+    ];
+    return await this.Appointment.paginate(filter, options);
+  }
+  async getMyAppointments(
+    patientID,
+    filter: FilterQuery<IAppointmentDocument>,
+    options: IPaginateOption<unknown>
+  ) {
+    filter = { patient: patientID };
+    options.populate = [
+      { path: 'patient' },
+      { path: 'doctor' },
+      { path: 'hospital' },
+      { path: 'clinic' },
+    ];
     return await this.Appointment.paginate(filter, options);
   }
 
   async makeAppointment(appointment: ICreateAppointment) {
-    return this.model.create(appointment);
+    return (
+      await (
+        await (await await this.model.create(appointment)).populate('clinic')
+      ).populate({ path: 'patient', select: '-password' })
+    ).populate({ path: 'doctor', select: '-password' });
   }
 
   async updateAppointment(

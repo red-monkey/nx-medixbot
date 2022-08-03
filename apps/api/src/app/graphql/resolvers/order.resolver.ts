@@ -6,9 +6,18 @@ import { EUserRole } from '@medixbot/types';
 
 export default {
   Query: {
-    getOrders: catchReq(orderController.getOrders),
-    getOrder: catchReq(orderController.getOrder),
-    getMyOrders: catchReq(orderController.getMyOrders),
+    getOrders: auth(catchReq(orderController.getOrders), [
+      EUserRole.Patient,
+      EUserRole.Doctor,
+    ]),
+    getOrder: auth(catchReq(orderController.getOrder), [
+      EUserRole.Patient,
+      EUserRole.Doctor,
+    ]),
+    getMyOrders: auth(catchReq(orderController.getMyOrders), [
+      EUserRole.Patient,
+      EUserRole.Doctor,
+    ]),
   },
   Mutation: {
     createOrder: auth(catchReq(orderController.createOrder), [

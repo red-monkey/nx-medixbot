@@ -1,0 +1,74 @@
+fragment ProductFields on TProduct {
+  id
+  name
+  description
+  brand
+  rating
+  price
+  countInStock
+  image
+  numReviews
+  reviews {
+    comment
+    name
+    rating
+    user {
+      ...UserFields
+    }
+  }
+  category {
+    ...CategoryFields
+  }
+  user {
+    ...UserFields
+  }
+}
+mutation CreateProduct($data: ICreateProduct!) {
+  createProduct(data: $data) {
+    ...ProductFields
+  }
+}
+
+query GetProducts {
+  getProducts {
+    page
+    results {
+      ...ProductFields
+    }
+    limit
+    totalPages
+    totalResults
+  }
+}
+
+query GetTopProducts {
+  getTopProducts {
+    page
+    results {
+      ...ProductFields
+    }
+    limit
+    totalPages
+    totalResults
+  }
+}
+
+query GetProduct($productId: ID!) {
+  getProduct(productId: $productId) {
+    ...ProductFields
+  }
+}
+
+mutation UpdateProduct($productId: ID!, $data: IUpdateProduct!) {
+  updateProduct(productId: $productId, data: $data) {
+    ...ProductFields
+  }
+}
+
+mutation CreateProductReview($productId: ID!, $data: ICreateReview!) {
+  createProductReview(productId: $productId, data: $data)
+}
+
+mutation DeleteProduct($productId: ID!) {
+  deleteProduct(productId: $productId)
+}

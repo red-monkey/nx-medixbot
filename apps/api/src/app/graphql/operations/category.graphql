@@ -1,0 +1,39 @@
+fragment CategoryFields on TCategory {
+  id
+  name
+  description
+}
+
+query GetCategories {
+  getCategories {
+    page
+    results {
+      ...CategoryFields
+    }
+    limit
+    totalPages
+    totalResults
+  }
+}
+
+query GetCategory($categoryId: ID!) {
+  getCategory(categoryId: $categoryId) {
+    ...CategoryFields
+  }
+}
+
+mutation CreateCategory($data: ICreateCategory!) {
+  createCategory(data: $data) {
+    ...CategoryFields
+  }
+}
+
+mutation UpdateCategory($cateogryId: ID!, $data: IUpdateCategory!) {
+  updateCategory(cateogryId: $cateogryId, data: $data) {
+    ...CategoryFields
+  }
+}
+
+mutation DeleteCategory($cateogryId: ID!) {
+  deleteCategory(cateogryId: $cateogryId)
+}

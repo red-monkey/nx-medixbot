@@ -22,18 +22,27 @@ export class ProductDataSource extends MongoDataSource<
     this.Product = ProductModel;
   }
   async getProduct(productId: string) {
-    return await this.findOneById(productId);
+    return await (
+      await (
+        await this.findOneById(productId)
+      ).populate({ path: 'user', select: '-password' })
+    ).populate('category');
   }
 
   async getProducts(
     filter: FilterQuery<IProductDocument>,
     options: IPaginateOption<unknown>
   ) {
+    options.populate = [{ path: 'user' }, { path: 'category' }];
     return await this.Product.paginate(filter, options);
   }
 
   async createProduct(product: ICreateProduct) {
-    return await this.model.create(product);
+    return await (
+      await (
+        await this.model.create(product)
+      ).populate({ path: 'user', select: '-password' })
+    ).populate('category');
   }
 
   async updateProduct(productId: string, data: FilterQuery<IProductDocument>) {
@@ -46,7 +55,10 @@ export class ProductDataSource extends MongoDataSource<
     }
     Object.assign(product, data);
     await product.save();
-    return product;
+    return (await product.populate('category')).populate({
+      path: 'user',
+      select: '-password',
+    });
   }
 
   async deleteProduct(productId: string) {
@@ -65,10 +77,9 @@ export class ProductDataSource extends MongoDataSource<
     filter: FilterQuery<IProductDocument>,
     options: IPaginateOption<unknown>
   ) {
-    const products = await this.Product.paginate(filter, options);
-    if (products) {
-      return await this.Product.find({}).sort({ rating: -1 });
-    }
+    options.sortBy = '-rating';
+    options.populate = [{ path: 'user' }, { path: 'category' }];
+    return await this.Product.paginate(filter, options);
   }
 
   async createProductReview(productId: string, review: TReview) {

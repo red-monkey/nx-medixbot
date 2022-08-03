@@ -32,7 +32,8 @@ export class HospitalDataSource extends MongoDataSource<
   }
 
   async createHospital(hospital: ICreateHospital) {
-    return this.model.create(hospital);
+    console.log(hospital);
+    return await this.model.create(hospital);
   }
 
   async updateHospital(

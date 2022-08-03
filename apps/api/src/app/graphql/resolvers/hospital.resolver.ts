@@ -16,9 +16,11 @@ export default {
     ]),
     updateHospital: auth(catchReq(hospitalController.updateHospital), [
       EUserRole.Admin,
+      EUserRole.Patient,
     ]),
-    deleteBlog: auth(catchReq(hospitalController.deleteHospital), [
+    deleteHospital: auth(catchReq(hospitalController.deleteHospital), [
       EUserRole.Admin,
+      EUserRole.Patient,
     ]),
   },
 };
