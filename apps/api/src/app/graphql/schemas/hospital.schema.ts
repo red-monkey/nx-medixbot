@@ -48,6 +48,7 @@ export default gql`
   type Mutation {
     createHospital(data: ICreateHospital!): THospital
     updateHospital(hospitalId: ID!, data: IUpdateHospital!): THospital
+    updateHospital(data: IUpdateHospital!): THospital
     deleteHospital(hospitalId: ID!): String!
   }
 `;

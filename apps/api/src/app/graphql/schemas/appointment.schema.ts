@@ -84,6 +84,7 @@ export default gql`
     getAppointment(appointmentId: ID!): TAppointment
     getAppointments(limit: Int, page: Int): TPaginatedAppointment!
     getMyAppointments: TPaginatedAppointment
+
   }
 
   # Mutations

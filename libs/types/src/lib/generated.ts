@@ -80,6 +80,7 @@ export type ICreateAppointment = {
   district?: InputMaybe<Scalars['String']>;
   doctor: Scalars['ID'];
   hospital: Scalars['ID'];
+
   symptoms?: InputMaybe<Array<Scalars['String']>>;
   time: Scalars['String'];
 };
@@ -313,7 +314,6 @@ export type IUpdateUser = {
 export type Mutation = {
   createBlog?: Maybe<TBlog>;
   createCategory?: Maybe<TCategory>;
-  createClinic?: Maybe<TClinic>;
   createHospital?: Maybe<THospital>;
   createLabTest?: Maybe<TLabTest>;
   createMedecineImage?: Maybe<TMedecineImage>;
@@ -596,7 +596,6 @@ export type QueryGetCategoriesArgs = {
 export type QueryGetCategoryArgs = {
   categoryId: Scalars['ID'];
 };
-
 export type QueryGetClinicArgs = {
   clinicId: Scalars['ID'];
 };

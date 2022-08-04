@@ -31,6 +31,7 @@ import {
   LabTestSchema,
   HospitalSchema,
   ClinicSchema,
+
 } from './schemas';
 
 const apolloServer = new ApolloServer({
@@ -67,6 +68,7 @@ const apolloServer = new ApolloServer({
     labTestResolver,
     hospitalResolver,
     clinicResolver
+
   ),
   mocks: true,
   mockEntireSchema: false,

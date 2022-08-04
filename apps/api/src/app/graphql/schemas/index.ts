@@ -11,3 +11,4 @@ export { default as ProductSchema } from './product.schema';
 export { default as LabTestSchema } from './labTest.schema';
 export { default as HospitalSchema } from './hospital.schema';
 export { default as ClinicSchema } from './clinic.schema';
+
