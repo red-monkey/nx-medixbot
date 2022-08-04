@@ -55,7 +55,7 @@ export class OrderDataSource extends MongoDataSource<IOrderDocument, IContext> {
     const order = await this.getOrder(orderId);
     if (!order) {
       throw new GraphQlApiError(
-        'Order not found',
+        'Order not found with id of ' + orderId,
         EGraphQlErrorCode.PERSISTED_QUERY_NOT_FOUND
       );
     }

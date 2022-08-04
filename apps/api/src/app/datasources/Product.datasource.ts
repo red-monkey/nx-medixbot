@@ -65,7 +65,7 @@ export class ProductDataSource extends MongoDataSource<
     const product = await this.getProduct(productId);
     if (!product) {
       throw new GraphQlApiError(
-        'Product not found',
+        'Product not found with id of ' + productId,
         EGraphQlErrorCode.PERSISTED_QUERY_NOT_FOUND
       );
     }
