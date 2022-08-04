@@ -30,9 +30,13 @@ fragment OrderFields on TOrder {
 }
 query GetOrders {
   getOrders {
+    page
     results {
       ...OrderFields
     }
+    limit
+    totalPages
+    totalResults
   }
 }
 
@@ -44,9 +48,13 @@ query GetOrder($orderId: ID!) {
 
 query GetMyOrders {
   getMyOrders {
+    page
     results {
       ...OrderFields
     }
+    limit
+    totalPages
+    totalResults
   }
 }
 
