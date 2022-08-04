@@ -18,7 +18,8 @@ type Props = {
             stroke: string;
         };
     }[],
-    frequency: TFrequency
+    frequency: TFrequency,
+    labels:{ label: string, color: string} []
 }
 
 
@@ -27,15 +28,13 @@ const Chart = (props: Props) => {
   const verticalContentInset = { top: 10, bottom: 10 };
   return(
     <View style={{backgroundColor: '#fff', elevation: 3, marginTop: 20, borderRadius: 17, paddingTop: 15}}>
-        <View style={{marginLeft: 100, backgroundColor: '#fff', elevation: 3, padding: 10, borderRadius: 15, width: 130}}>
-            <View style={[sharedStyles.row,sharedStyles.alignCenter]}>
-              <View style={{height: 15, width:15,borderRadius: 15, backgroundColor: colors.newPink}} />
-              <Text style={{marginLeft: 7, color: colors.newBlack, fontWeight: '500'}}>Glucose level</Text>
-            </View>
-            <View style={[sharedStyles.row,sharedStyles.alignCenter,{marginTop: 5}]}>
-              <View style={{height: 15, width:15,borderRadius: 15, backgroundColor: colors.blue}} />
-              <Text style={{marginLeft: 7, color: colors.newBlack, fontWeight: '500'}}>Breathing rate</Text>
-            </View>            
+        <View style={{marginLeft: 100, backgroundColor: '#fff', elevation: 3, paddingTop: 10,paddingHorizontal: 15, borderRadius: 15, maxWidth: 150}}>
+            {props.labels.map((item,i) => (
+            <View key={i} style={[sharedStyles.row,sharedStyles.alignCenter,{paddingBottom: 10}]}>
+              <View style={{height: 15, width:15,borderRadius: 15, backgroundColor: item.color}} />
+              <Text style={{marginLeft: 7, color: colors.newBlack, fontWeight: '500'}}>{item.label}</Text>
+            </View>                
+            ))}          
         </View>
     <View style={{ height: 220, paddingHorizontal: 20, width: "95%", flexDirection: "row" }}>
     <YAxis
@@ -50,6 +49,7 @@ const Chart = (props: Props) => {
         min={1}
         max={8}
         numberOfTicks={8}
+        scale={scale.scaleLinear}
         formatLabel={value => `${value}`}
     />
     <View style={{ flex: 1, marginLeft: 10 }}>
@@ -65,12 +65,12 @@ const Chart = (props: Props) => {
                 stroke: colors.blue,
                 strokeWidth: 3
             }}
-            curve={props.frequency === 'Daily' ? shape.curveBasis : shape.curveNatural}
+            curve={props.frequency === 'Monthly' ? shape.curveNatural : shape.curveBasis}
             numberOfTicks={5}
         > 
         </LineChart>
         <XAxis
-            data={props.frequency === 'Daily' ? props.data[0].data.filter((_,i)=>(i%3)===0): props.data[0].data}
+            data={props.frequency === 'Daily' ? props.data[0].data.filter((_,i)=>(i%3)===0): props.frequency === 'Weekly' ? props.data[0].data.filter((_,i)=>(i%2)===0) : props.data[0].data}
             svg={{
                 fill: colors.Text,
                 fontSize: 12,
@@ -82,7 +82,7 @@ const Chart = (props: Props) => {
             style={{ height: xAxisHeight}}
             contentInset={verticalContentInset}
             scale={scale.scaleBand}
-            formatLabel={value => moment(value).format(props.frequency === 'Monthly' ? "MMM yyyy" : props.frequency === 'Daily' ? "H a" : 'ww')}
+            formatLabel={value => moment(value).format(props.frequency === 'Monthly' ? "MMM yyyy" : props.frequency === 'Daily' ? "h a" : 'WW')}
         />
     </View>
   </View>

@@ -3,6 +3,7 @@ import { createUploadLink } from 'apollo-upload-client';
 import { createHttpLink } from '@apollo/client/link/http';
 import { setContext } from '@apollo/client/link/context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { API_URI } from '@env';
 
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists
@@ -20,7 +21,7 @@ export const client = new ApolloClient({
   cache: new InMemoryCache(),
   link: authLink.concat(
     createUploadLink({
-      uri: `https://tranquil-oasis-91821.herokuapp.com/graphql`,
+      uri: API_URI,
     }) as never
   ),
 });

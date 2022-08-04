@@ -15,7 +15,8 @@ import HeartRate from '../../icons/metabolichealthicons/HeartRateIcon.svg'
 import Chart from './components/Chart'
 import FrequencySelectionBar from './components/FrequencySelectionBar'
 import HealthMenu, { MetabolicMenuProps } from './components/HealthMenu'
-import { glucoseAndBreathingDailyData, glucoseAndBreathingData } from './components/data'
+import { glucoseAndBreathingDailyData, glucoseAndBreathingData, glucoseAndBreathingWeeklyData } from './components/data'
+import { colors } from '../../variables/colors'
 
 
 const HealthAndGoodSleep = () => {
@@ -25,7 +26,7 @@ const HealthAndGoodSleep = () => {
         <Header />
         <View style={styles.MarketPlacePlace}>
             <FrequencySelectionBar inOrder={false} selected={frequency} setSelected={setFrequency} bgColor={'#FCE8E9'} />
-            <Chart data={frequency === 'Daily' ? glucoseAndBreathingDailyData : glucoseAndBreathingData} frequency={frequency}/>
+            <Chart labels={[{label: 'Glucose level', color: colors.newPink},{label: 'Breathing Rate', color: colors.blue}]} data={frequency === 'Daily' ? glucoseAndBreathingDailyData : frequency === 'Weekly' ? glucoseAndBreathingWeeklyData : glucoseAndBreathingData} frequency={frequency}/>
             {menuOptions.map((item,i) => (
                 <HealthMenu key={i} title={item.title} icon={item.icon} measure={item.measure} time={item.time} path={item.path}/>
             ))}
