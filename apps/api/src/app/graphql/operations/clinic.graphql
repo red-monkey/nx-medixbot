@@ -1,0 +1,42 @@
+fragment ClinicFields on TClinic {
+  id
+  name
+  description
+  hospital {
+    ...HospitalFields
+  }
+}
+
+mutation CreateClinic($data: ICreateClinic!) {
+  createClinic(data: $data) {
+    ...ClinicFields
+  }
+}
+
+query GetUser($clinicId: ID!) {
+  getClinic(clinicId: $clinicId) {
+    ...ClinicFields
+  }
+}
+
+query GetClinics {
+  getClinics {
+    page
+    results {
+      ...ClinicFields
+    }
+    limit
+    totalPages
+    totalResults
+  }
+}
+
+mutation UpdateClinic($clinicId: ID!, $data: IUpdateClinic!) {
+  updateClinic(clinicId: $clinicId, data: $data) {
+    ...ClinicFields
+  }
+}
+
+mutation DeleteClinic($clinicId: ID!) {
+  deleteClinic(clinicId: $clinicId)
+}

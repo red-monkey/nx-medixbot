@@ -36,11 +36,6 @@ const modelSchema: Schema<IHospitalDocument> = new Schema(
       required: true,
       trim: true,
     },
-    clinics: {
-      type: [String],
-      required: true,
-      trim: true,
-    },
     location: {
       type: String,
       required: true,

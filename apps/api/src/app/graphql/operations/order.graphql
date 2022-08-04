@@ -1,0 +1,79 @@
+fragment OrderFields on TOrder {
+  id
+  isDelivered
+  isPaid
+  deliveredAt
+  paidAt
+  paymentMethod
+  shippingAddress {
+    address
+    city
+    country
+    postalCode
+  }
+  paymentResult {
+    id
+    email_address
+    status
+    update_time
+  }
+  user {
+    ...UserFields
+  }
+  orderItems {
+    image
+    name
+    price
+    quantity
+    product
+  }
+}
+query GetOrders {
+  getOrders {
+    results {
+      ...OrderFields
+    }
+  }
+}
+
+query GetOrder($orderId: ID!) {
+  getOrder(orderId: $orderId) {
+    ...OrderFields
+  }
+}
+
+query GetMyOrders {
+  getMyOrders {
+    results {
+      ...OrderFields
+    }
+  }
+}
+
+mutation CreateOrder($data: ICreateOrder!) {
+  createOrder(data: $data) {
+    ...OrderFields
+  }
+}
+
+mutation UpdateOrder($orderId: ID!, $data: IUpdateOrder!) {
+  updateOrder(orderId: $orderId, data: $data) {
+    id
+    totalPrice
+    orderItems {
+      price
+    }
+  }
+}
+
+mutation UpdateOrderToDelivered($orderId: ID!) {
+  updateOrderToDelivered(orderId: $orderId) {
+    ...OrderFields
+  }
+}
+
+mutation UpdateOrderToPaid($orderId: ID!, $data: IPaymentResult!) {
+  updateOrderToPaid(orderId: $orderId, data: $data) {
+    ...OrderFields
+  }
+}

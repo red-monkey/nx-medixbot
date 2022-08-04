@@ -16,6 +16,11 @@ export default {
       EUserRole.Doctor,
       EUserRole.Admin,
     ]),
+    getMyAppointments: auth(catchReq(appointmentController.getMyAppointments), [
+      EUserRole.Patient,
+      EUserRole.Doctor,
+      EUserRole.Admin,
+    ]),
   },
   Mutation: {
     makeAppointment: auth(catchReq(appointmentController.makeAppointment), [

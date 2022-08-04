@@ -59,9 +59,16 @@ async function deleteOrder(data: { orderId: string }, ctx: IContext) {
   return 'Deleted';
 }
 
-async function getMyOrders(ctx: IContext) {
-  const userId = ctx.user.id.toString();
-  const result = await ctx.dataSources.orders.getMyOrders(userId);
+async function getMyOrders(data: IGetOrdersArgs, ctx: IContext) {
+  const filter = {};
+  const options = pick(data, ['sortBy', 'limit', 'page']);
+  console.log(ctx.user);
+  const userId = ctx.user.id;
+  const result = await ctx.dataSources.orders.getMyOrders(
+    userId,
+    filter,
+    options
+  );
   return result;
 }
 

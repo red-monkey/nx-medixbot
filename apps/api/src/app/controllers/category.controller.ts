@@ -7,9 +7,9 @@ import { IContext } from '../types';
 import { GraphQlApiError, pick } from '../utils';
 
 async function createCategory(input: { data: ICreateCategory }, ctx: IContext) {
-  const blog = await ctx.dataSources.categories.createCategory(input.data);
+  const category = await ctx.dataSources.categories.createCategory(input.data);
 
-  return blog;
+  return category;
 }
 
 interface IGetCategoryArgs {
@@ -40,9 +40,15 @@ async function getCategory(data: { categoryId: string }, ctx: IContext) {
   return category;
 }
 
-async function updateCategory(data: { data: IUpdateCategory }, ctx: IContext) {
-  const categoryId = data.data.id;
-  return await ctx.dataSources.categories.updateCategory(categoryId, data.data);
+async function updateCategory(
+  data: { categoryId: string; data: IUpdateCategory },
+  ctx: IContext
+) {
+  console.log(data.categoryId, data.data);
+  return await ctx.dataSources.categories.updateCategory(
+    data.categoryId,
+    data.data
+  );
 }
 
 async function deleteCategory(data: { categoryId: string }, ctx: IContext) {

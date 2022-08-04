@@ -27,8 +27,19 @@ interface IGetAppointmentArgs {
 }
 async function getAppointments(data: IGetAppointmentArgs, ctx: IContext) {
   const filter = {};
-  const options = pick(data, ['sortBy', 'limit', 'page']);
+  const options = pick(data, ['sortBy', 'populate', 'limit', 'page']);
   const result = await ctx.dataSources.appointments.getAppointments(
+    filter,
+    options
+  );
+  return result;
+}
+async function getMyAppointments(data: IGetAppointmentArgs, ctx: IContext) {
+  const filter = {};
+
+  const options = pick(data, ['sortBy', 'populate', 'limit', 'page']);
+  const result = await ctx.dataSources.appointments.getMyAppointments(
+    ctx.user.id,
     filter,
     options
   );
@@ -45,6 +56,7 @@ async function getAppointment(data: { appointmentId: string }, ctx: IContext) {
       EGraphQlErrorCode.PERSISTED_QUERY_NOT_FOUND
     );
   }
+
   return appointemnt;
 }
 
@@ -101,4 +113,5 @@ export default {
   updateAppointment,
   updateAppointmentStatus,
   deleteAppointment,
+  getMyAppointments,
 };

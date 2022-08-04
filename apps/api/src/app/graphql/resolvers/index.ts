@@ -9,3 +9,5 @@ export { default as productResolver } from './product.resolver';
 export { default as orderResolver } from './order.resolver';
 export { default as labTestResolver } from './labTest.resolver';
 export { default as hospitalResolver } from './hospital.resolver';
+export { default as clinicResolver } from './clinic.resolver';
+

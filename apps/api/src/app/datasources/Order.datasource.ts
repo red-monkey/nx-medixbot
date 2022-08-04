@@ -19,18 +19,23 @@ export class OrderDataSource extends MongoDataSource<IOrderDocument, IContext> {
     this.Order = OrderModel;
   }
   async getOrder(orderId: string) {
-    return await this.findOneById(orderId);
+    return await (
+      await this.findOneById(orderId)
+    ).populate({ path: 'user', select: '-password' });
   }
 
   async getOrders(
     filter: FilterQuery<IOrderDocument>,
     options: IPaginateOption<unknown>
   ) {
+    options.populate = [{ path: 'user' }];
     return await this.Order.paginate(filter, options);
   }
 
   async createOrder(order: TOrder) {
-    return await this.model.create(order);
+    return await (
+      await this.model.create(order)
+    ).populate({ path: 'user', select: '-password' });
   }
 
   async updateOrder(orderId: string, data: FilterQuery<IOrderDocument>) {
@@ -50,7 +55,7 @@ export class OrderDataSource extends MongoDataSource<IOrderDocument, IContext> {
     const order = await this.getOrder(orderId);
     if (!order) {
       throw new GraphQlApiError(
-        'Order not found',
+        'Order not found with id of ' + orderId,
         EGraphQlErrorCode.PERSISTED_QUERY_NOT_FOUND
       );
     }
@@ -58,13 +63,18 @@ export class OrderDataSource extends MongoDataSource<IOrderDocument, IContext> {
     return order;
   }
 
-  async getMyOrders(userId: string) {
-    const orders = await this.Order.find({ user: userId });
-    return orders;
+  async getMyOrders(
+    userId: string,
+    filter: FilterQuery<IOrderDocument>,
+    options: IPaginateOption<unknown>
+  ) {
+    filter = { user: userId };
+    options.populate = [{ path: 'user' }];
+    return await this.Order.paginate(filter, options);
   }
 
   async updateOrderToPaid(orderId: string, data: FilterQuery<TPaymentResult>) {
-    const order = await this.Order.findById(orderId);
+    const order = await this.getOrder(orderId);
     if (!order) {
       throw new GraphQlApiError(
         'Order not found',
@@ -77,7 +87,7 @@ export class OrderDataSource extends MongoDataSource<IOrderDocument, IContext> {
     order.paymentResult = {
       id: data.id,
       status: data.status,
-      update_time: data.update_time,
+      update_time: Date.now().toString(),
       email_address: data.email_address,
     };
 
@@ -86,7 +96,7 @@ export class OrderDataSource extends MongoDataSource<IOrderDocument, IContext> {
   }
 
   async updateOrderToDelivered(orderId: string) {
-    const order = await this.Order.findById(orderId);
+    const order = await this.getOrder(orderId);
     if (!order) {
       throw new GraphQlApiError(
         'Order Not Found',
