@@ -4,7 +4,6 @@ import {
   ICreateProduct,
   ICreateReview,
   IUpdateProduct,
-  TCategory,
   TUser,
 } from '@medixbot/types';
 import { awsService } from '../services';
@@ -12,25 +11,13 @@ import { IContext } from '../types';
 import { GraphQlApiError, pick } from '../utils';
 
 async function createProduct(
-  input: { data: ICreateProduct & { user: TUser; category: TCategory } },
+  input: { data: ICreateProduct & { user: string } },
   ctx: IContext
 ) {
   const createData = input.data;
 
   //set Product user
-  createData.user = ctx.user;
-
-  //set product category
-  const category = await ctx.dataSources.categories.getCategory(
-    createData.categoryRef
-  );
-  if (!category) {
-    throw new GraphQlApiError(
-      'Category not found',
-      EGraphQlErrorCode.PERSISTED_QUERY_NOT_FOUND
-    );
-  }
-  createData.category = category;
+  createData.user = ctx.user.id;
 
   //upload image
   const s3 = new awsService.AWSS3();
@@ -81,7 +68,7 @@ async function updateProduct(
 
 async function deleteProduct(data: { productId: string }, ctx: IContext) {
   await ctx.dataSources.products.deleteProduct(data.productId);
-  return 'Deleted';
+  return 'Product Deleted';
 }
 
 async function getTopProducts(data: IGetProductsArgs, ctx: IContext) {

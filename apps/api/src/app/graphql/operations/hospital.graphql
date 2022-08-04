@@ -1,0 +1,39 @@
+fragment HospitalFields on THospital {
+  id
+  name
+  description
+  district
+  city
+  country
+  location
+  tracking_number
+}
+
+# //usecreateHospitalMutation hook will be generated
+mutation createHospital($data: ICreateHospital!) {
+  createHospital(data: $data) {
+    ...HospitalFields
+  }
+}
+
+query GetHospitals {
+  getHospitals {
+    page
+    results {
+      ...HospitalFields
+    }
+    limit
+    totalPages
+    totalResults
+  }
+}
+
+mutation UpdateHospital($hospitalId: ID!, $data: IUpdateHospital!) {
+  updateHospital(hospitalId: $hospitalId, data: $data) {
+    ...HospitalFields
+  }
+}
+
+mutation DeleteHospital($hospitalId: ID!) {
+  deleteHospital(hospitalId: $hospitalId)
+}

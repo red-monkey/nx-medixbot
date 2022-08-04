@@ -11,6 +11,8 @@ import {
   LabTestModel,
   HospitalModel,
   AppointmentModel,
+  ClinicModel,
+
 } from '@medixbot/models';
 import { BlogDataSource } from './Blog.datasource';
 import { TokenDataSource } from './Token.datasource';
@@ -22,6 +24,8 @@ import { OrderDataSource } from './Order.datasource';
 import { LabTestDataSource } from './LabTest.datasource';
 import { HospitalDataSource } from './Hospital.datasource';
 import { AppointmentDataSource } from './Appointment.datasource';
+import { ClinicDataSource } from './clinic.datasource';
+
 
 export type DataSources = {
   users: UserDataSource;
@@ -34,6 +38,8 @@ export type DataSources = {
   labTests: LabTestDataSource;
   hospitals: HospitalDataSource;
   appointments: AppointmentDataSource;
+  clinics: ClinicDataSource;
+
 };
 
 export const dataSources = () => ({
@@ -47,4 +53,6 @@ export const dataSources = () => ({
   labTests: new LabTestDataSource(LabTestModel),
   hospitals: new HospitalDataSource(HospitalModel),
   appointments: new AppointmentDataSource(AppointmentModel),
+  clinics: new ClinicDataSource(ClinicModel),
+
 });

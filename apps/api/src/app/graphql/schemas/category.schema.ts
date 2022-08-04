@@ -19,7 +19,6 @@ export default gql`
   }
 
   input IUpdateCategory {
-    id: ID
     name: String
     description: String
   }
@@ -33,7 +32,7 @@ export default gql`
   # Mutations
   type Mutation {
     createCategory(data: ICreateCategory!): TCategory
-    updateCategory(data: IUpdateCategory!): TCategory
+    updateCategory(cateogryId: ID!, data: IUpdateCategory!): TCategory
     deleteCategory(cateogryId: ID!): String!
   }
 `;

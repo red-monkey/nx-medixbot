@@ -32,12 +32,14 @@ const modelSchema: Schema<IAppointmentDocument> = new Schema(
       trim: true,
     },
     hospital: {
-      type: String,
-      trim: true,
+      type: ObjectId,
+      ref: EModelNames.HOSPITAL,
+      require: true,
     },
     clinic: {
-      type: String,
-      trim: true,
+      type: ObjectId,
+      ref: EModelNames.CLINIC,
+      require: true,
     },
     conditions: {
       type: String,

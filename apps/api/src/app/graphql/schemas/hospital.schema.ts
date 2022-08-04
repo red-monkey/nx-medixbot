@@ -9,7 +9,6 @@ export default gql`
     country: String
     city: String
     district: String
-    clinics: [String]
     location: String
   }
   input ICreateHospital {
@@ -19,7 +18,6 @@ export default gql`
     country: String!
     city: String!
     district: String!
-    clinics: [String!]
     location: String!
   }
   type TPaginatedHospital {
@@ -37,7 +35,6 @@ export default gql`
     country: String
     city: String
     district: String
-    clinics: [String]
     location: String
   }
 
@@ -50,6 +47,7 @@ export default gql`
   # Mutations
   type Mutation {
     createHospital(data: ICreateHospital!): THospital
+    updateHospital(hospitalId: ID!, data: IUpdateHospital!): THospital
     updateHospital(data: IUpdateHospital!): THospital
     deleteHospital(hospitalId: ID!): String!
   }
