@@ -1861,6 +1861,10 @@ export type GetOrdersQueryVariables = Exact<{ [key: string]: never }>;
 
 export type GetOrdersQuery = {
   getOrders: {
+    page: number;
+    limit: number;
+    totalPages: number;
+    totalResults: number;
     results: Array<{
       id?: string | null;
       isDelivered?: boolean | null;
@@ -1963,6 +1967,10 @@ export type GetMyOrdersQueryVariables = Exact<{ [key: string]: never }>;
 
 export type GetMyOrdersQuery = {
   getMyOrders: {
+    page: number;
+    limit: number;
+    totalPages: number;
+    totalResults: number;
     results: Array<{
       id?: string | null;
       isDelivered?: boolean | null;
@@ -4096,9 +4104,13 @@ export type DeleteHospitalMutationOptions = Apollo.BaseMutationOptions<
 export const GetOrdersDocument = gql`
   query GetOrders {
     getOrders {
+      page
       results {
         ...OrderFields
       }
+      limit
+      totalPages
+      totalResults
     }
   }
   ${OrderFieldsFragmentDoc}
@@ -4205,9 +4217,13 @@ export type GetOrderQueryResult = Apollo.QueryResult<
 export const GetMyOrdersDocument = gql`
   query GetMyOrders {
     getMyOrders {
+      page
       results {
         ...OrderFields
       }
+      limit
+      totalPages
+      totalResults
     }
   }
   ${OrderFieldsFragmentDoc}
