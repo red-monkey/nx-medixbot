@@ -7,9 +7,21 @@ import AppContainer, {
   LoggedInUserAppContainer,
 } from './navigation/AppContainer';
 import { useAppSelector } from './utils/hooks';
+import { GetHospitalsDocument, useGetCategoriesQuery, useGetClinicsQuery, useGetHospitalsQuery, useGetProductLazyQuery, useGetProductsLazyQuery, useGetProductsQuery, useGetUserQuery, useLoginMutation } from '@medixbot/types';
+import { client } from './apollo/apollo';
+import { gql, useQuery } from '@apollo/client';
 
 const App = () => {
   const isLoggedIn = useAppSelector((state) => state.loginReducer.isLoggedIn);
+  //useGetCategoriesQuery({notifyOnNetworkStatusChange: true});
+  const {data,error} = useGetClinicsQuery()
+  console.log(data)
+/*const [mutation,mutationResults] = useLoginMutation({
+  onCompleted(data) {
+      console.log(data)
+  },
+});*/
+
   useEffect(() => {
     SplashScreen.hide();
   }, []);

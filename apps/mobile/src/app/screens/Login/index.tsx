@@ -28,14 +28,14 @@ import sharedStyles from '../../styles/SharedStyles';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import { focusHandler, pressOutHandler } from '../../utils/functions';
-import { useLoginMutation } from '../../apollo/GraphQL/Actions/useLoginMutation';
+import { useLogin } from '../../apollo/GraphQL/Actions/useLogin';
 
 const LoginPage = () => {
   const navigation = useNavigation<ForgotPassProps>();
   const loginMethod = useAppSelector(
     (state) => state.loginMethodReducer.communicationMethod
   );
-  const [loginMutation] = useLoginMutation();
+  const [login] = useLogin();
   const [hidePassword, setHidePassword] = useState(true);
   const [countryCode, setCountryCode] = useState<CountryCode>('US');
   const [countryCallingCode, setCountryCallingCode] =
@@ -85,7 +85,7 @@ const LoginPage = () => {
             validationSchema={loginValidationSchema}
             initialValues={{ email: '', password: '', phoneNumber: '' }}
             onSubmit={(values) => {
-              loginMutation(
+              login(
                 loginMethod === 'email'
                   ? values.email
                   : countryCallingCode + values.phoneNumber,

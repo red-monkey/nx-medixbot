@@ -1,8 +1,8 @@
 import { IUser} from '../apollo/GraphQL/types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import { LoginMutation } from '@medixbot/types';
 export const useIsUser = (): [
-  (user: IUser) => Promise<void>,
+  (user: LoginMutation['login']['user']) => Promise<void>,
   () => Promise<string | null | undefined>,
   () => void,
 ] => {
