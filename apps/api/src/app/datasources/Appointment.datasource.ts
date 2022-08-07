@@ -63,7 +63,7 @@ export class AppointmentDataSource extends MongoDataSource<
   async makeAppointment(appointment: ICreateAppointment) {
     return (
       await (
-        await (await await this.model.create(appointment)).populate('clinic')
+        await await await this.model.create(appointment)
       ).populate({ path: 'patient', select: '-password' })
     ).populate({ path: 'doctor', select: '-password' });
   }
