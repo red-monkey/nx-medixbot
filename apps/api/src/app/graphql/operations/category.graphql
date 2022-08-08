@@ -28,12 +28,12 @@ mutation CreateCategory($data: ICreateCategory!) {
   }
 }
 
-mutation UpdateCategory($cateogryId: ID!, $data: IUpdateCategory!) {
-  updateCategory(cateogryId: $cateogryId, data: $data) {
+mutation UpdateCategory($categoryId: ID!, $data: IUpdateCategory!) {
+  updateCategory(categoryId: $categoryId, data: $data) {
     ...CategoryFields
   }
 }
 
-mutation DeleteCategory($cateogryId: ID!) {
-  deleteCategory(cateogryId: $cateogryId)
+mutation DeleteCategory($categoryId: ID!) {
+  deleteCategory(categoryId: $categoryId)
 }

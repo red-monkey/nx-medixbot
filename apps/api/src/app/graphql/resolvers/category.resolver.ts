@@ -12,13 +12,12 @@ export default {
   Mutation: {
     createCategory: auth(catchReq(categoryController.createCategory), [
       EUserRole.Admin,
-      EUserRole.Patient,
     ]),
     updateCategory: auth(catchReq(categoryController.updateCategory), [
-      EUserRole.Patient,
+      EUserRole.Admin,
     ]),
     deleteCategory: auth(catchReq(categoryController.deleteCategory), [
-      EUserRole.Patient,
+      EUserRole.Admin,
     ]),
   },
 };

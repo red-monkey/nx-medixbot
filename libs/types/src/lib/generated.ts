@@ -80,7 +80,6 @@ export type ICreateAppointment = {
   district?: InputMaybe<Scalars['String']>;
   doctor: Scalars['ID'];
   hospital: Scalars['ID'];
-
   symptoms?: InputMaybe<Array<Scalars['String']>>;
   time: Scalars['String'];
 };
@@ -314,6 +313,7 @@ export type IUpdateUser = {
 export type Mutation = {
   createBlog?: Maybe<TBlog>;
   createCategory?: Maybe<TCategory>;
+  createClinic?: Maybe<TClinic>;
   createHospital?: Maybe<THospital>;
   createLabTest?: Maybe<TLabTest>;
   createMedecineImage?: Maybe<TMedecineImage>;
@@ -408,7 +408,7 @@ export type MutationDeleteBlogArgs = {
 };
 
 export type MutationDeleteCategoryArgs = {
-  cateogryId: Scalars['ID'];
+  categoryId: Scalars['ID'];
 };
 
 export type MutationDeleteClinicArgs = {
@@ -484,7 +484,7 @@ export type MutationUpdateBlogArgs = {
 };
 
 export type MutationUpdateCategoryArgs = {
-  cateogryId: Scalars['ID'];
+  categoryId: Scalars['ID'];
   data: IUpdateCategory;
 };
 
@@ -596,6 +596,7 @@ export type QueryGetCategoriesArgs = {
 export type QueryGetCategoryArgs = {
   categoryId: Scalars['ID'];
 };
+
 export type QueryGetClinicArgs = {
   clinicId: Scalars['ID'];
 };
@@ -1605,7 +1606,7 @@ export type CreateCategoryMutation = {
 };
 
 export type UpdateCategoryMutationVariables = Exact<{
-  cateogryId: Scalars['ID'];
+  categoryId: Scalars['ID'];
   data: IUpdateCategory;
 }>;
 
@@ -1618,7 +1619,7 @@ export type UpdateCategoryMutation = {
 };
 
 export type DeleteCategoryMutationVariables = Exact<{
-  cateogryId: Scalars['ID'];
+  categoryId: Scalars['ID'];
 }>;
 
 export type DeleteCategoryMutation = { deleteCategory: string };
@@ -3524,8 +3525,8 @@ export type CreateCategoryMutationOptions = Apollo.BaseMutationOptions<
   CreateCategoryMutationVariables
 >;
 export const UpdateCategoryDocument = gql`
-  mutation UpdateCategory($cateogryId: ID!, $data: IUpdateCategory!) {
-    updateCategory(cateogryId: $cateogryId, data: $data) {
+  mutation UpdateCategory($categoryId: ID!, $data: IUpdateCategory!) {
+    updateCategory(categoryId: $categoryId, data: $data) {
       ...CategoryFields
     }
   }
@@ -3549,7 +3550,7 @@ export type UpdateCategoryMutationFn = Apollo.MutationFunction<
  * @example
  * const [updateCategoryMutation, { data, loading, error }] = useUpdateCategoryMutation({
  *   variables: {
- *      cateogryId: // value for 'cateogryId'
+ *      categoryId: // value for 'categoryId'
  *      data: // value for 'data'
  *   },
  * });
@@ -3576,8 +3577,8 @@ export type UpdateCategoryMutationOptions = Apollo.BaseMutationOptions<
   UpdateCategoryMutationVariables
 >;
 export const DeleteCategoryDocument = gql`
-  mutation DeleteCategory($cateogryId: ID!) {
-    deleteCategory(cateogryId: $cateogryId)
+  mutation DeleteCategory($categoryId: ID!) {
+    deleteCategory(categoryId: $categoryId)
   }
 `;
 export type DeleteCategoryMutationFn = Apollo.MutationFunction<
@@ -3598,7 +3599,7 @@ export type DeleteCategoryMutationFn = Apollo.MutationFunction<
  * @example
  * const [deleteCategoryMutation, { data, loading, error }] = useDeleteCategoryMutation({
  *   variables: {
- *      cateogryId: // value for 'cateogryId'
+ *      categoryId: // value for 'categoryId'
  *   },
  * });
  */

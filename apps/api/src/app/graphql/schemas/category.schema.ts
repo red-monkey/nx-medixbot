@@ -32,7 +32,7 @@ export default gql`
   # Mutations
   type Mutation {
     createCategory(data: ICreateCategory!): TCategory
-    updateCategory(cateogryId: ID!, data: IUpdateCategory!): TCategory
-    deleteCategory(cateogryId: ID!): String!
+    updateCategory(categoryId: ID!, data: IUpdateCategory!): TCategory
+    deleteCategory(categoryId: ID!): String!
   }
 `;
