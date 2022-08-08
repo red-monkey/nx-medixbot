@@ -3,10 +3,10 @@ import { createUploadLink } from 'apollo-upload-client';
 import { createHttpLink, HttpLink } from '@apollo/client/link/http';
 import { setContext } from '@apollo/client/link/context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useAccessToken } from '../customHooks/useAuthToken';
+import { API_URI } from '@env';
 
 const httpLink = new HttpLink({
-  uri: "https://tranquil-oasis-91821.herokuapp.com/graphql"
+  uri: API_URI
 });
 
 

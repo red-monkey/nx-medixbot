@@ -12,7 +12,6 @@ import {
   HospitalModel,
   AppointmentModel,
   ClinicModel,
-
 } from '@medixbot/models';
 import { BlogDataSource } from './Blog.datasource';
 import { TokenDataSource } from './Token.datasource';
@@ -26,7 +25,6 @@ import { HospitalDataSource } from './Hospital.datasource';
 import { AppointmentDataSource } from './Appointment.datasource';
 import { ClinicDataSource } from './clinic.datasource';
 
-
 export type DataSources = {
   users: UserDataSource;
   tokens: TokenDataSource;
@@ -39,7 +37,6 @@ export type DataSources = {
   hospitals: HospitalDataSource;
   appointments: AppointmentDataSource;
   clinics: ClinicDataSource;
-
 };
 
 export const dataSources = () => ({
@@ -54,5 +51,4 @@ export const dataSources = () => ({
   hospitals: new HospitalDataSource(HospitalModel),
   appointments: new AppointmentDataSource(AppointmentModel),
   clinics: new ClinicDataSource(ClinicModel),
-
 });
