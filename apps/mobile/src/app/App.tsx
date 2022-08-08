@@ -7,6 +7,9 @@ import AppContainer, {
   LoggedInUserAppContainer,
 } from './navigation/AppContainer';
 import { useAppSelector } from './utils/hooks';
+import { useGetOrderQuery, useGetOrdersQuery } from '@medixbot/types';
+import { client } from './apollo/apollo';
+import { useCreateOrder } from './apollo/GraphQL/Actions/useGetOrders';
 
 const App = () => {
   const isLoggedIn = useAppSelector((state) => state.loginReducer.isLoggedIn);
@@ -15,6 +18,7 @@ const App = () => {
   }, []);
   return (
     <SafeAreaView style={{ flex: 1 }}>
+      {/*<LoggedInUserAppContainer />*/}
       {isLoggedIn ? <LoggedInUserAppContainer /> : <AppContainer />}
     </SafeAreaView>
   );

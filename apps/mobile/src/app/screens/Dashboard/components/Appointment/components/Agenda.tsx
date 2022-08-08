@@ -105,7 +105,7 @@ const AgendaComponent = () => {
     
     
     return(
-        <View style={{width: Dimensions.get('screen').width*0.85,paddingBottom: 15}}>
+        <View style={{width: Dimensions.get('screen').width*0.87,paddingBottom: 15}}>
         <CalendarStrip 
                     scrollable
                     ref={calendarRef}

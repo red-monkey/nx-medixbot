@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Healthcare from './components/Healthcare'
 import {
   FlatList,
@@ -20,13 +20,23 @@ import Appointment from './components/Appointment';
 import { AppState } from '../../redux/store/ConfigureStore';
 import sharedStyles from '../../styles/SharedStyles';
 import { useAppSelector } from '../../utils/hooks';
+import { useGetProductsQuery } from '@medixbot/types';
+import { client } from '../../apollo/apollo';
+import { useGetProducts } from '../../apollo/GraphQL/Actions/useGetProducts';
+import { useGetOrders } from '../../apollo/GraphQL/Actions/useGetOrders';
 
 
 const Dashboard = () => {
   const navigation = useNavigation<any>();
-  const goToFoodRecognition = () => {
-    navigation.navigate('FoodRecognition');
-  };
+  useGetProducts();
+  /*const { data, loading, error, refetch } = useGetProductsQuery({
+  client: client
+  });
+  console.log(data)
+  useEffect(()=>{
+   refetch().then(item => console.log(item?.data?.getProducts))
+  },[])*/
+  
   return (
     <View style={styles.root}>
       <FlatList
@@ -41,13 +51,6 @@ const Dashboard = () => {
                 barStyle="dark-content"
               />
               <Header />
-              <View style={{justifyContent: 'flex-start'}}>
-                <TouchableOpacity onPress={goToFoodRecognition}>
-                  <Text style={{ textAlign: 'center', color: '#fff' }}>
-                    Food Recognition  | 
-                  </Text>
-                </TouchableOpacity>
-              </View>
               <View style={styles.screenContent}>
                 <GreetingBox showLogo={true} showMedixBotter={true}/>
                   <>

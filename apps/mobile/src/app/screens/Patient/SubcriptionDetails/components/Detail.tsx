@@ -8,8 +8,7 @@ import { View,Text, TouchableOpacity, StyleSheet } from 'react-native'
 function Detail() {
     const [, getUser, ] = useIsUser();
     const details = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus massa scelerisque augue phasellus rhoncus morbi facilisis elementum. '
-    const [userInf,setUserInf] = useState<IUser | null>();
-    getUser().then(user => setUserInf(JSON.parse(user)));
+    const userInf = getUser()
   return (
     <View style={styles.container}>
           <View style={styles.showName}>

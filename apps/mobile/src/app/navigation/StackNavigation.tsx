@@ -23,6 +23,7 @@ import MyOrders from '../screens/Marketplace/components/order/MyOrders';
 import OrderStatus from '../screens/Marketplace/components/order/OrderStatus';
 import MetabolicHealth from '../screens/MetabolicHealth';
 import AddFood from '../screens/MetabolicHealth/components/AddFood';
+import HealthAndGoodSleep from '../screens/MetabolicHealth/HealthAndGoodSleep';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const MarketStack =  createNativeStackNavigator<MarketplaceStackParamList>();
@@ -175,6 +176,11 @@ export const MetabolicHealthStackNavigator = () => {
          options={{ headerShown: false }}
          name="AddFood"
          component={AddFood}    
+         /> 
+      <MetabolicHealthStack.Screen
+         options={{ headerShown: false }}
+         name="HealthAndGoodSleep"
+         component={HealthAndGoodSleep}    
          /> 
     </MetabolicHealthStack.Navigator>    
   )

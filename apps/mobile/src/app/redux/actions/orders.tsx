@@ -1,4 +1,5 @@
-import { TOrder, TStatus } from '../../utils/types';
+import { TOrder } from '@medixbot/types';
+import {  TStatus } from '../../utils/types';
 import * as actionTypes from './actionTypes';
 
 export const addOrder = (order: TOrder) => {
@@ -8,9 +9,16 @@ export const addOrder = (order: TOrder) => {
     }
 }
 
-export const changeOrderStatus = (orderId: string, newStatus: TStatus) => {
+export const setOrderTodelivered = (orderId: string) => {
     return{
         type: actionTypes.CHANGE_ORDER_STATUS,
-        payload: {orderId: orderId, newStatus: newStatus},
+        payload: {orderId: orderId},
+    }
+}
+
+export const setOrders = (orders: TOrder[],userId: string) => {
+    return {
+        type: actionTypes.SET_ORDERS,
+        payload: {orders: orders, userId: userId}
     }
 }

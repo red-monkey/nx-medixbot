@@ -16,8 +16,7 @@ const UserCartSection = (props: Props) => {
   const navigation = useNavigation<ProductProps>();
   const [, getUser,] = useIsUser();
   const goToCart = () => navigation.navigate('Cart')
-  const [userInf,setUserInf] = useState<IUser | null>();
-  getUser().then(user => setUserInf(JSON.parse(user)));
+  const userInf = getUser()
   return (
     <View style={MarketPlaceStyles.cartUserWrapper}>
                 <View style={{ flexDirection: "row" }}>

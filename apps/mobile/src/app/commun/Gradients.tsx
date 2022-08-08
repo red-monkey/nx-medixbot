@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { StyleProp, Text, TextStyle, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { LinearTextGradient } from 'react-native-text-gradient';
 import styles from '../styles/HomepageStyles';
@@ -50,6 +50,20 @@ export const GradientTextSignUp = ({ text }: { text: string }) => {
     </LinearTextGradient>
   );
 };
+
+export const GradientPersonalizableText = ({ text, colors, style }: { text: string, colors: string[], style: StyleProp<TextStyle> }) => {
+  return (
+    <LinearTextGradient
+      style={style}
+      locations={[0, 1]}
+      colors={colors}
+      start={{ x: 0, y: 0 }}
+      end={{ x: 1, y: 0 }}
+    >
+      <Text>{text}</Text>
+    </LinearTextGradient>
+  );
+}
 
 export const GradientTextFaceIdLogin = ({ text }: { text: string }) => {
   return (
