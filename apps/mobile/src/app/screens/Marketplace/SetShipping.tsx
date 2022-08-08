@@ -20,7 +20,8 @@ import * as CardStyles from '../../styles/CardStyles'
 
 const SetShipping = ({route}) => {
     const location = useAppSelector(state => state.locationReducer);
-    const [selectedCountry, setSelectedCountry] = useState<null|string>(null)
+    const {userInf} = route.params
+    const [selectedCountry, setSelectedCountry] = useState<null|string>(userInf?.country)
     const [isVisible,setIsVisible] = useState(false);
     const formatAddressString = (params: IAddressData) => {
         dispatch(setLocation({country: params.country, city: params.city, postCode: params.postCode, state: params.state, addressLine1: params.addressLine1, addressLine2: params.addressLine2}))
@@ -68,9 +69,9 @@ const SetShipping = ({route}) => {
         state: yup
           .string(),
         city: yup
-          .string(),
+          .string().required('please enter the city !'),
         postCode: yup
-          .string(),
+          .string().required('please enter the post code !'),
         addressLine1: yup
           .string(),
         addressLine2: yup
@@ -103,7 +104,7 @@ const SetShipping = ({route}) => {
             }}
             onSubmit={values => {
                 dispatch(setShippingAddress(formatAddressString({
-                  addressLine1: values.addressLine1, addressLine2: values.addressLine2, city: values.city, country: selectedCountry, postCode: values.postCode,
+                  addressLine1: values.addressLine1, addressLine2: values.addressLine2, city: values.city, country: (selectedCountry || location?.country), postCode: values.postCode,
                   state: values.state
               })))
             navigation.goBack()
@@ -113,6 +114,8 @@ const SetShipping = ({route}) => {
               handleBlur,
               handleSubmit,
               values,
+              touched,
+              errors
             }) => (
                 <>
                 <View style={[registerStyles.formSelectInputStyle, {paddingHorizontal: 3,paddingRight: 15}]} ref={countryRef}>
@@ -153,8 +156,8 @@ const SetShipping = ({route}) => {
                         value={values.city}
                     />
                     </View>
-                <View
-                    style={LocationModalStyles.formInputContainerStyle}
+                    {errors.city && touched.city && (<Text style={loginStyles.errorText}>{errors.city}</Text>)}
+                <View style={LocationModalStyles.formInputContainerStyle}
                     ref={postCodeRef}>
                     <TextInput
                         onFocus={() => focusHandler(postCodeRef)}
@@ -167,7 +170,8 @@ const SetShipping = ({route}) => {
                         onBlur={handleBlur('postCode')}
                         value={values.postCode}
                     />
-                </View>               
+                </View>
+                {errors.postCode && touched.postCode && (<Text style={loginStyles.errorText}>{errors.postCode}</Text>)}               
                 <View
                     style={LocationModalStyles.formInputContainerStyle}
                     ref={addressLine1}>

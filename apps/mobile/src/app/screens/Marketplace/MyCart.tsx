@@ -35,7 +35,7 @@ const MyCart = () => {
                     </View>   
                     <View style={styles.itemsContainer}>
                         {marketPlace.cart.map((item) => (
-                        <CartItem key={item.id} name={item.name} image={item.image} id={item.id} price={item.price} rate={item.rate} qty={item.qty} />  
+                        <CartItem key={item.product.id} product={item.product} qty={item.qty} />  
                         ))}                    
                         </View>                              
                     <View style={styles.promoCodeView}>

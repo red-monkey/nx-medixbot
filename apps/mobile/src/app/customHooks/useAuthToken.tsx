@@ -1,11 +1,13 @@
 import {IToken, TokenType} from '../apollo/GraphQL/types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useState } from 'react';
 
 export const useAccessToken = (): [
   (token: IToken, type: TokenType) => Promise<void>,
-  (type: TokenType) => Promise<string | null | undefined>,
+  (type: TokenType) => string,
   () => void,
 ] => {
+  const [token,setToken] = useState<string>('')
   const setAuthToken = async (token: IToken, type: TokenType) => {
     const tokenJSON = JSON.stringify(token);
     try {
@@ -19,17 +21,19 @@ export const useAccessToken = (): [
     }
   };
 
-  const getAuthToken = async (type: TokenType) => {
-    let token;
+  const getAuthToken =  (type: TokenType) => {
+    let tokentmp: Promise<string>;
     try {
       if (type === 'accessToken') {
-        token = await AsyncStorage.getItem('accessToken');
+        tokentmp =  AsyncStorage.getItem('accessToken');
       } else if (type === 'refreshToken') {
-        token = await AsyncStorage.getItem('refreshToken');
+        tokentmp =  AsyncStorage.getItem('refreshToken');
       }
     } catch (e) {
       console.error(e);
     }
+    //console.log(token)
+    tokentmp.then(data => setToken(JSON.parse(data).token))
     return token;
   };
 

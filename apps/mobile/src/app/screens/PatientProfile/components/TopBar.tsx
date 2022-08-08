@@ -16,8 +16,7 @@ import { AppState } from '../../../redux/store/ConfigureStore';
 const TopBar = () => {
     const { mood } = useSelector((state: AppState) => state.challengeReducer);
     const [, getUser, deleteUserData] = useIsUser();
-    const [userInf,setUserInf] = useState<IUser | null>();
-    const user = getUser().then(user => setUserInf(JSON.parse(user)));
+    const userInf = getUser()
     return (
       <View>
         <View style={[sharedStyles.row,{justifyContent: 'space-between', marginBottom: 10}]}>
