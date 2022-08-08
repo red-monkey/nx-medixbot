@@ -4,7 +4,7 @@ import {
   EGraphQlErrorCode,
   IAppointmentDocument,
   IAppointmentModel,
-  TAppointment,
+  ICreateAppointment,
 } from '@medixbot/types';
 import { FilterQuery } from 'mongoose';
 import { GraphQlApiError } from '../utils';
@@ -20,19 +20,52 @@ export class AppointmentDataSource extends MongoDataSource<
     super(AppointmentModel);
     this.Appointment = AppointmentModel;
   }
+
   async getAppointment(appointmentId: string) {
-    return await this.findOneById(appointmentId);
+    return await (
+      await (
+        await (
+          await (
+            await this.findOneById(appointmentId)
+          ).populate({ path: 'patient', select: '-password' })
+        ).populate({ path: 'doctor', select: '-password' })
+      ).populate('hospital')
+    ).populate('clinic');
   }
 
   async getAppointments(
     filter: FilterQuery<IAppointmentDocument>,
     options: IPaginateOption<unknown>
   ) {
+    options.populate = [
+      { path: 'patient' },
+      { path: 'doctor' },
+      { path: 'hospital' },
+      { path: 'clinic' },
+    ];
+    return await this.Appointment.paginate(filter, options);
+  }
+  async getMyAppointments(
+    patientID,
+    filter: FilterQuery<IAppointmentDocument>,
+    options: IPaginateOption<unknown>
+  ) {
+    filter = { patient: patientID };
+    options.populate = [
+      { path: 'patient' },
+      { path: 'doctor' },
+      { path: 'hospital' },
+      { path: 'clinic' },
+    ];
     return await this.Appointment.paginate(filter, options);
   }
 
-  async makeAppointment(appointment: TAppointment) {
-    return await this.model.create(appointment);
+  async makeAppointment(appointment: ICreateAppointment) {
+    return (
+      await (
+        await await await this.model.create(appointment)
+      ).populate({ path: 'patient', select: '-password' })
+    ).populate({ path: 'doctor', select: '-password' });
   }
 
   async updateAppointment(
@@ -46,7 +79,6 @@ export class AppointmentDataSource extends MongoDataSource<
         EGraphQlErrorCode.PERSISTED_QUERY_NOT_FOUND
       );
     }
-
     Object.assign(appointment, data);
     await appointment.save();
     return appointment;

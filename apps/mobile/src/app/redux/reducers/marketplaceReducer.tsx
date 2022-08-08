@@ -1,38 +1,46 @@
+import { TProduct } from '@medixbot/types';
 import { IItemProp, items, TCartItem } from '../../screens/Marketplace';
+import { marketplaceActions } from '../../utils/types';
 import * as actionTypes from '../actions/actionTypes'
 
 type state = {
-    products: IItemProp[],
+    products: TProduct[],
     cart: TCartItem[],
     currentItem: IItemProp,
     total: number,
     shippingAddress: string
 }
 const INITIAL_STATE: state  = {
-    products: items,
+    products: [],
     cart:[],
     currentItem: null,
     total: 0,
     shippingAddress: ''
 };
 
-const marketplaceReducer = (state = INITIAL_STATE, action) => {
+const marketplaceReducer = (state:state = INITIAL_STATE, action: marketplaceActions) => {
     switch(action.type){
+        case actionTypes.SET_PRODUCTS: {
+            return {
+                ...state,
+                products: action.payload
+            }
+        }
         case actionTypes.ADD_TO_CART:{
             //get products data
             const item = state.products.find((prod) => prod.id === action.payload.id);
             //check if item is in cart
             const inCart = state.cart.find((item) =>
-                item.id === action.payload.id ? true : false);
+                item.product?.id === action.payload.id ? true : false);
             return{
                 ...state,
                 cart: inCart
                     ?   state.cart.map((item) => 
-                            item.id === action.payload.id
+                            item.product.id === action.payload.id
                                 ? {...item, qty: item.qty + 1}
                                 : item
                         )
-                    :   [...state.cart, {...item, qty: 1}],
+                    :   [...state.cart, {product: item, qty: 1}],
                 total: state.total + item.price
             };
         };
@@ -40,27 +48,27 @@ const marketplaceReducer = (state = INITIAL_STATE, action) => {
             const item = state.products.find((prod) => prod.id === action.payload.id);
             //check if item is in cart
             const inCart = state.cart.find((item) =>
-                item.id === action.payload.id ) ? true : false;
+                item.product.id === action.payload.id ) ? true : false;
             return{
                 ...state,
                 cart: inCart
                 ?   state.cart.map((item) => 
-                        item.id === action.payload.id
+                        item.product.id === action.payload.id
                             ? {...item, qty: item.qty + action.payload.count}
                             : item
                     )
-                :   [...state.cart, {...item, qty: action.payload.count}],
+                :   [...state.cart, {product: item, qty: action.payload.count}],
                 total: state.total + item.price * action.payload.count
             }
         };
         case actionTypes.REMOVE_FROM_CART:{
             const item = state.products.find((prod) => prod.id === action.payload.id);
             const inCart = state.cart.find((item) =>
-            item.id === action.payload.id ? true : false);
+            item.product.id === action.payload.id ? true : false);
             console.log(inCart)
             return{
                 ...state,
-                cart: state.cart.filter((item) => item.id !== action.payload.id),
+                cart: state.cart.filter((item) => item.product.id !== action.payload.id),
                 total: inCart ? (state.total - item.price) : state.total
             };
         };
@@ -68,16 +76,16 @@ const marketplaceReducer = (state = INITIAL_STATE, action) => {
             const item = state.products.find((prod) => prod.id === action.payload.id);
             //check if item is in cart
             const inCart = state.cart.find((item) =>
-                item.id === action.payload.id ? true : false);
+                item.product.id === action.payload.id ? true : false);
             return{
                 ...state,
                 cart: inCart
                 ?   state.cart.map((item) => 
-                        item.id === action.payload.id
+                        item.product.id === action.payload.id
                             ? {...item, qty: item.qty - 1}
                             : item
                     )
-                :state.cart.filter((item) => item.id !== action.payload.id),
+                :state.cart.filter((item) => item.product.id !== action.payload.id),
                 total: state.total - item.price 
             }
         };
@@ -90,7 +98,7 @@ const marketplaceReducer = (state = INITIAL_STATE, action) => {
         case actionTypes.ADJUST_QTY:
             return{
                 ...state,
-                cart: state.cart.map(item => item.id === action.payload.id ? { ...item, qty: action.payload.qty} : item),
+                cart: state.cart.map(item => item.product.id === action.payload.id ? { ...item, qty: action.payload.qty} : item),
             };
         case actionTypes.VIEW_PRODUCT:
             return{

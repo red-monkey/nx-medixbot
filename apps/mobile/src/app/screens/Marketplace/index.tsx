@@ -9,6 +9,9 @@ import Category from './components/marketplace/Category';
 import MarketPlaceStyles from '../../styles/MarketPlaceStyles';
 import ProductCard from './components/ProductCard';
 import { colors } from '../../variables/colors';
+import { useGetProducts } from '../../apollo/GraphQL/Actions/useGetProducts';
+import { useAppSelector } from '../../utils/hooks';
+import { TProduct } from '@medixbot/types';
 
 export class IItemProp {
   id: number
@@ -18,15 +21,12 @@ export class IItemProp {
   rate!: number;
 }
 export type TCartItem = {
-  id: number
-  name: string,
-  price: number,
-  image: string,
-  rate: number,
+  product: TProduct
   qty: number
 }
 
 const MarketPlace = () => {
+  const {products} = useAppSelector(state => state.marketplaceReducer)
   return (
     <ScrollView contentContainerStyle={[styles.Container]} scrollEnabled>
       <StatusBar  translucent={false}  backgroundColor={colors.backgroundColor} barStyle="dark-content" />
@@ -42,8 +42,8 @@ const MarketPlace = () => {
           </View>
         </View>
         <View style={MarketPlaceStyles.container}>
-          {items.map((item,i) => (
-            <ProductCard id={item.id} key={i} name={item.name} price={item.price} rate={item.rate} image={item.image}/>    
+          {products && products.map((item,i) => (
+            <ProductCard id={item.id} key={i} name={item.name} price={item.price} rating={item.rating} image={item.image}/>    
           ))}            
         </View>
       </View>

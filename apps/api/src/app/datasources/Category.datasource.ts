@@ -40,6 +40,7 @@ export class CategoryDataSource extends MongoDataSource<
     categoryId: string,
     data: FilterQuery<ICategoryDocument>
   ) {
+    console.log(categoryId);
     const category = await this.getCategory(categoryId);
     if (!category) {
       throw new GraphQlApiError(

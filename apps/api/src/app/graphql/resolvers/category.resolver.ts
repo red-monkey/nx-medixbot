@@ -10,13 +10,15 @@ export default {
     getCategory: catchReq(categoryController.getCategory),
   },
   Mutation: {
-    createCategory:
-      (catchReq(categoryController.createCategory), [EUserRole.Admin]),
-    updateCategory: auth(catchReq(categoryController.updateCategory), [
+    createCategory: auth(catchReq(categoryController.createCategory), [
       EUserRole.Admin,
+      EUserRole.Patient,
+    ]),
+    updateCategory: auth(catchReq(categoryController.updateCategory), [
+      EUserRole.Patient,
     ]),
     deleteCategory: auth(catchReq(categoryController.deleteCategory), [
-      EUserRole.Admin,
+      EUserRole.Patient,
     ]),
   },
 };

@@ -34,7 +34,7 @@ const modelSchema: Schema<IOrderDocument> = new Schema(
     },
     paymentResult: {
       id: { type: String },
-      status: { type: String },
+      status: { type: String, default: 'Processing' },
       update_time: { type: String },
       email_address: { type: String },
     },

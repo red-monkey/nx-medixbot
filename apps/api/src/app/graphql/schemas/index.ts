@@ -8,3 +8,6 @@ export { default as MedecineImageSchema } from './medecineImage.schema';
 export { default as CategorySchema } from './category.schema';
 export { default as OrderSchema } from './order.schema';
 export { default as ProductSchema } from './product.schema';
+export { default as LabTestSchema } from './labTest.schema';
+export { default as HospitalSchema } from './hospital.schema';
+export { default as ClinicSchema } from './clinic.schema';

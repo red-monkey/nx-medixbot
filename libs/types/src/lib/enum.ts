@@ -29,6 +29,7 @@ export enum EModelNames {
   PRODUCT = 'Product',
   REVIEW = 'Review',
   ORDER = 'Order',
+  LABTEST = 'LabTest',
 }
 export enum ETokenType {
   ACCESS = 'access',

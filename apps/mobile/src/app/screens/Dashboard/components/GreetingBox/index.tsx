@@ -18,8 +18,7 @@ type TProps = {
 const GreetingBox = (props: TProps) => {
   const { mood } = useSelector((state: AppState) => state.challengeReducer);
   const [, getUser,] = useIsUser();
-  const [userInf,setUserInf] = useState<IUser | null>();
-  getUser().then(user => setUserInf(JSON.parse(user)));
+  const userInf = getUser()
   return (
     <View style={styles.GreetingBoxContainer}>
       {

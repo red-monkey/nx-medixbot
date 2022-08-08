@@ -44,12 +44,12 @@ import MembershipModal from './components/MembershipModal';
 import CustomModal from '../../components/CustomModal';
 import { colors } from '../../variables/colors';
 import { LanguageModal } from './components/LanguageModal';
-import { EGender, EMembership, IRegisterUser } from '@medixbot/types';
-import { useRegisterMutation } from '../../apollo/GraphQL/Actions/useRegisterMutation';
+import { EGender, EMembership, EUserRole, IRegisterUser } from '@medixbot/types';
+import { useRegister } from '../../apollo/GraphQL/Actions/useRegister';
 import {Asset} from 'react-native-image-picker';
 import DatePickerModal from './components/DatePickerModal';
 const RegisterScreen = () => {
-  const [register] = useRegisterMutation();
+  const [register] = useRegister();
   const [userPicture, setUserPicture] = useState<Asset>(null);
   const navigation = useNavigation<ForgotPassProps>();
   const languages = useAppSelector(state => state.languageModalReducer.selectedLanguages);
@@ -111,6 +111,7 @@ const RegisterScreen = () => {
       city: location.city,
       country: location.country,
       /*profileImage: base64Icon,*/
+      userRole: EUserRole.Patient,
       state: location.state,
       postCode: location.postCode
     }

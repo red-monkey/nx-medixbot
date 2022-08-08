@@ -1,0 +1,84 @@
+fragment AppointmentFields on TAppointment {
+  id
+  status
+  date
+  time
+  conditions
+  symptoms
+  district
+  city
+  country
+  doctor {
+    ...UserFields
+  }
+  patient {
+    ...UserFields
+  }
+  hospital {
+    ...HospitalFields
+  }
+  clinic {
+    ...ClinicFields
+  }
+  doctorJoinAt
+  doctorQuitAt
+  patientJoinAt
+  patientQuitAt
+}
+query GetAppointments {
+  getAppointments {
+    page
+    results {
+      ...AppointmentFields
+    }
+    limit
+    totalPages
+    totalResults
+  }
+}
+
+query GetAppointment($appointmentId: ID!) {
+  getAppointment(appointmentId: $appointmentId) {
+    ...AppointmentFields
+  }
+}
+
+query GetMyAppointments {
+  getMyAppointments {
+    page
+    results {
+      ...AppointmentFields
+    }
+    limit
+    totalPages
+    totalResults
+  }
+}
+
+mutation MakeAppointment($data: ICreateAppointment!) {
+  makeAppointment(data: $data) {
+    ...AppointmentFields
+  }
+}
+
+mutation UpdateAppointment($appointmentId: ID!, $data: IUpdateAppointment!) {
+  updateAppointment(appointmentId: $appointmentId, data: $data) {
+    ...AppointmentFields
+  }
+}
+
+mutation UpdateAppointmentStatus(
+  $appointmentId: ID!
+  $newStatus: EAppointmentStatus!
+) {
+  updateAppointmentStatus(
+    appointmentId: $appointmentId
+    newStatus: $newStatus
+  ) {
+    ...AppointmentFields
+  }
+}
+
+mutation DeleteAppointment($appointmentId: ID!) {
+  deleteAppointment(appointmentId: $appointmentId)
+}

@@ -1,5 +1,5 @@
 
-import { EAppointmentStatus, EMembership } from '@medixbot/types';
+import { EAppointmentStatus, EMembership, TOrder, TProduct } from '@medixbot/types';
 
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { StackNavigationProp } from '@react-navigation/stack';
@@ -41,6 +41,17 @@ import {
   ADD_APPOINTMENT,
   RESET_APPOINTMENT,
   ADD_FOOD,
+  SET_PRODUCTS,
+  ADD_TO_CART,
+  ADD_TO_CART_WITH_COUNT,
+  REMOVE_FROM_CART,
+  DECREASE_QTY,
+  CLEAR_CART,
+  ADJUST_QTY,
+  VIEW_PRODUCT,
+  SET_SHIPPING_ADDRESS,
+  RESET_SHIPPING_ADDRESS,
+  SET_ORDERS,
 } from '../redux/actions/actionTypes';
 import { FoodRecognitionData } from '../screens/MetabolicHealth/components/AddFood';
 
@@ -68,7 +79,7 @@ export type RootStackParamList = {
 
 export type MarketplaceStackParamList = {
   Marketplace: undefined,
-  ProductDetails: {id: number, added: boolean},
+  ProductDetails: {id: string, added: boolean},
   Cart: undefined,
   Checkout: {totalPrice: number},
   SetShipping: {userInfo: IUser }
@@ -665,7 +676,7 @@ interface UpdateRewardsAction {
 }
 
 /* Orders */
-export type TOrder = {
+/*export type TOrder = {
   orderId: string,
   TrackingNumber: string,
   Quantity: number,
@@ -674,7 +685,7 @@ export type TOrder = {
   status: TStatus,
   estimatedDelivery: string, 
   shippingAddress: string
-}
+}*/
 
 export type TStatus = 'Received' | 'Shipped' | 'Delivered'
 
@@ -685,7 +696,75 @@ interface AddOrderAction {
 
 interface ChangeOrderStatusAction {
   type: typeof CHANGE_ORDER_STATUS;
-  payload: {orderId: string, newStatus: TStatus};
+  payload: {orderId: string};
 }
 
-export type orderAction = AddOrderAction | ChangeOrderStatusAction
+interface SetOrdersAction {
+  type: typeof SET_ORDERS;
+  payload: {orders: TOrder[], userId: string}
+}
+
+export type orderAction = AddOrderAction | ChangeOrderStatusAction | SetOrdersAction
+
+
+
+
+/* marketplace */ 
+interface SetProductsAction {
+  type: typeof SET_PRODUCTS,
+  payload:TProduct[]
+}
+
+interface AddToCartAction {
+  type:  typeof ADD_TO_CART,
+  payload:{ id : string}
+}
+
+interface AddToCartWithCountAction {
+  type:  typeof ADD_TO_CART_WITH_COUNT,
+  payload:{id: string, count: number}
+}
+
+interface RemoveFromCartAction {
+  type:  typeof REMOVE_FROM_CART,
+  payload:{id: string }
+}
+
+interface DecreaseQtyAction {
+  type:  typeof DECREASE_QTY,
+  payload:{ id: string}
+}
+
+interface ClearCartAction {
+  type:  typeof CLEAR_CART,
+}
+
+interface AdjustQtyAction {
+  type:  typeof ADJUST_QTY,
+  payload:{  id: string, qty: number }
+}
+
+interface ViewProductAction {
+  type:  typeof VIEW_PRODUCT,
+  payload:{ product: TProduct }
+}
+
+interface setShippingAddressAction {
+  type:  typeof SET_SHIPPING_ADDRESS,
+  payload: string
+}
+
+interface ResetShippingAddressAction {
+  type:  typeof RESET_SHIPPING_ADDRESS,
+}
+
+export type marketplaceActions = SetProductsAction  |
+AddToCartAction |
+AddToCartWithCountAction |
+RemoveFromCartAction |
+DecreaseQtyAction |
+ClearCartAction |
+AdjustQtyAction |
+ViewProductAction |
+setShippingAddressAction |
+ResetShippingAddressAction 

@@ -14,5 +14,4 @@ export * from './lib/blog.interfaces';
 export * from './lib/category.interfaces';
 export * from './lib/product.interface';
 export * from './lib/order.interface';
-
 export * from './lib/generated';

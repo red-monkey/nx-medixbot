@@ -14,36 +14,36 @@ import { addToCart, decreaseQty, removeFromCart } from '../../../../redux/action
 export const CartItem = (props: TCartItem) => {
     const dispatch = useDispatch<Dispatch>()
     const addProductToCart = () => {
-        dispatch(addToCart(props.id))
+        dispatch(addToCart(props.product.id))
     }
     const removeProductFromCart = () => {
-        dispatch(removeFromCart(props.id))   
+        dispatch(removeFromCart(props.product.id))   
       }
     const decreaseProductCount = () => {
-        dispatch(decreaseQty(props.id))   
+        dispatch(decreaseQty(props.product.id))   
       }
   return (
     <View>
         <View style={styles.boxOne}>
             <View style={styles.cartProduct}>
                 <Image 
-                    source={{uri: props.image}}
+                    source={{uri: props.product.image}}
                     style={styles.cartImage}
                 />
             </View>
             <View style={{ width: '48%'}}>
                 <View style={styles.cartItemTitleView}>
-                    <Text style={styles.cartItemText}>{props.name}</Text>
+                    <Text style={styles.cartItemText}>{props.product.name}</Text>
                     <TouchableOpacity style={styles.deleteButton} onPress={removeProductFromCart}>
                         <XIcon />
                     </TouchableOpacity>
                 </View>
                 <View style={styles.cartItemRatingsView}>
                     <Star />
-                    <Text style={styles.cartItemRatingsText}>{props.rate}</Text>
+                    <Text style={styles.cartItemRatingsText}>{props.product.rating}</Text>
                 </View>
                 <View style={styles.cartItemPriceView}>
-                    <Text style={styles.cartItemPrice}>${props.price}</Text>
+                    <Text style={styles.cartItemPrice}>${props.product.price}</Text>
                     <View style={styles.cartItemAdjustQty}>
                         <YellowButton style={{borderRadius: 8}} content={<TouchableOpacity onPress={addProductToCart} style={styles.button} >
                                     <Text style={styles.buttonText}>+</Text>

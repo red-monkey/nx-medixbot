@@ -19,9 +19,10 @@ import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
 import { addToCart, removeFromCart } from '../../../redux/actions/marketplace';
 import { useAppSelector } from '../../../utils/hooks';
+import { TProduct } from '@medixbot/types';
 
 
-const ProductCard = (props: IItemProp) => {
+const ProductCard = (props: TProduct) => {
   const [added, setAdded] = useState(false);
   const navigation = useNavigation<any>();
   const dispatch = useDispatch<Dispatch>()
@@ -53,7 +54,7 @@ const ProductCard = (props: IItemProp) => {
         </View>
         <View style={styless.itemRating}>
           <Star />
-          <Text style={ProductCardStyles.rating}>{props.rate}</Text>
+          <Text style={ProductCardStyles.rating}>{props.rating}</Text>
         </View>
         <View style={ProductCardStyles.CardActions}>
           <View>

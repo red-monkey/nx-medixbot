@@ -33,7 +33,7 @@ export default gql`
     name: String
     image: Upload
     brand: String
-    categoryRef: ID
+    category: ID
     description: String
     price: Float
     countInStock: Float
@@ -51,7 +51,7 @@ export default gql`
     name: String
     image: Upload
     brand: String
-    categoryRef: ID
+    category: ID
     description: String
     price: Float
     rating: Float
@@ -62,7 +62,7 @@ export default gql`
   type Query {
     getProduct(productId: ID!): TProduct
     getProducts(limit: Int, page: Int): TPaginatedProducts!
-    getTopProducts: [TProduct]!
+    getTopProducts(limit: Int, page: Int): TPaginatedProducts!
   }
 
   # Mutations

@@ -1,7 +1,8 @@
+import { TProduct } from '@medixbot/types';
 import { TCartItem } from '../../screens/Marketplace';
 import * as actionTypes from './actionTypes';
 
-export const addToCart = (itemId: number) => {
+export const addToCart = (itemId: string) => {
     return{
         type: actionTypes.ADD_TO_CART,
         payload: {
@@ -10,7 +11,7 @@ export const addToCart = (itemId: number) => {
     }
 }
 
-export const addToCartWithCounter = (itemId: number, count: number) => {
+export const addToCartWithCounter = (itemId: string, count: number) => {
     return{
         type: actionTypes.ADD_TO_CART_WITH_COUNT,
         payload: {
@@ -20,7 +21,7 @@ export const addToCartWithCounter = (itemId: number, count: number) => {
     }
 }
 
-export const removeFromCart = (itemID: number ) => {
+export const removeFromCart = (itemID: string ) => {
     return{
         type: actionTypes.REMOVE_FROM_CART,
         payload: {
@@ -29,7 +30,7 @@ export const removeFromCart = (itemID: number ) => {
     }
 }
 
-export const decreaseQty = (itemID: number) => {
+export const decreaseQty = (itemID: string) => {
     return{
         type: actionTypes.DECREASE_QTY,
         payload: {
@@ -38,7 +39,7 @@ export const decreaseQty = (itemID: number) => {
     }
 }
 
-export const adjustQty = (itemID: number, value: number) => {
+export const adjustQty = (itemID: string, value: number) => {
     return{
         type: actionTypes.ADJUST_QTY,
         payload: {
@@ -51,7 +52,6 @@ export const adjustQty = (itemID: number, value: number) => {
 export const clearCart = () => {
     return{
         type: actionTypes.CLEAR_CART,
-        payload: {}
     }
 }
 
@@ -62,9 +62,9 @@ export const viewProduct = (item) =>{
     }
 }
 
-export const isInCart = (cart: TCartItem[],id: number) => {
+export const isInCart = (cart: TCartItem[],id: string) => {
     const inCart = cart.find((item) =>
-                item.id === id ? true : false);
+                item.product.id === id ? true : false);
     return inCart
 }
 
@@ -83,3 +83,11 @@ export const resetShippingAddress = () => {
         type: actionTypes.RESET_SHIPPING_ADDRESS,
     }
 }
+
+
+export const setProducts = (products: TProduct[]) => {
+    return {
+        type: actionTypes.SET_PRODUCTS,
+        payload: products
+    }
+} 

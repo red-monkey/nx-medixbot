@@ -1,18 +1,18 @@
 import {
-  AddAppointmentBodyInput,
   EAppointmentStatus,
   EGraphQlErrorCode,
+  ICreateAppointment,
   TAppointment,
 } from '@medixbot/types';
 import { IContext } from '../types';
 import { GraphQlApiError, pick } from '../utils';
 
 async function makeAppointment(
-  input: { data: AddAppointmentBodyInput & { patientRef: string } },
+  input: { data: ICreateAppointment & { patient: string } },
   ctx: IContext
 ) {
   const appointmentData = input.data;
-  appointmentData.patientRef = ctx.user.id;
+  appointmentData.patient = ctx.user.id;
   const appointemnt = await ctx.dataSources.appointments.makeAppointment(
     appointmentData
   );
@@ -27,8 +27,19 @@ interface IGetAppointmentArgs {
 }
 async function getAppointments(data: IGetAppointmentArgs, ctx: IContext) {
   const filter = {};
-  const options = pick(data, ['sortBy', 'limit', 'page']);
+  const options = pick(data, ['sortBy', 'populate', 'limit', 'page']);
   const result = await ctx.dataSources.appointments.getAppointments(
+    filter,
+    options
+  );
+  return result;
+}
+async function getMyAppointments(data: IGetAppointmentArgs, ctx: IContext) {
+  const filter = {};
+
+  const options = pick(data, ['sortBy', 'populate', 'limit', 'page']);
+  const result = await ctx.dataSources.appointments.getMyAppointments(
+    ctx.user.id,
     filter,
     options
   );
@@ -45,6 +56,7 @@ async function getAppointment(data: { appointmentId: string }, ctx: IContext) {
       EGraphQlErrorCode.PERSISTED_QUERY_NOT_FOUND
     );
   }
+
   return appointemnt;
 }
 
@@ -72,8 +84,8 @@ async function updateAppointmentStatus(
     );
   }
   if (
-    ctx.user.id !== appointemnt.patientRef &&
-    ctx.user.id !== appointemnt.doctorRef
+    ctx.user.id !== appointemnt.patient.id &&
+    ctx.user.id !== appointemnt.doctor.id
   ) {
     throw new GraphQlApiError(
       'You can not update this appointment',
@@ -95,10 +107,11 @@ async function deleteAppointment(
 }
 
 export default {
-  makeAppointment,
   getAppointments,
+  makeAppointment,
   getAppointment,
   updateAppointment,
   updateAppointmentStatus,
   deleteAppointment,
+  getMyAppointments,
 };

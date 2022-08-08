@@ -17,9 +17,11 @@ import loginStyles from "../../styles/LoginPageStyles";
 import YellowButton from "./components/YellowButton";
 import HeartIcon from "../../icons/Heart";
 import { Dispatch } from "redux";
+import { useAppSelector } from "../../utils/hooks";
 
 
 export const MyProducts = ({ route }) => {
+    const {products} = useAppSelector(state => state.marketplaceReducer)
     const [counter, setCounter] = useState(1);
     const [liked, setLiked] = useState(false);
     const {id, added} = route.params
@@ -27,7 +29,7 @@ export const MyProducts = ({ route }) => {
     const [addedTocart,setAddedTocart] = useState(added)
     const dispatch = useDispatch<Dispatch>()
     const goToCart = () => navigation.navigate('Cart')
-    const product = items.find(item => item.id === id)
+    const product = products.find(item => item.id === id)
     const increase = () => {
         setCounter(counter+1)
         setAddedTocart(false)
@@ -62,7 +64,7 @@ export const MyProducts = ({ route }) => {
                         </Text>
                         <View style={styles.ratingsView}>
                             <Star />
-                            <Text style={styles.ratingsText}>{product.rate}</Text>
+                            <Text style={styles.ratingsText}>{product.rating}</Text>
                         </View>
                         <View style={styles.productsPriceView}>
                             <Text style={styles.productsPriceText}>${product.price}</Text>
@@ -82,7 +84,7 @@ export const MyProducts = ({ route }) => {
                         </View>
                         <View style={styles.productDescriptionTextView}>
                             <Text style={styles.productDescriptionTextTwo}>
-                            Get control of your vitals with our smart Watchit device. You can now also be able to connect our CGM device to Watchit as you manage your diabetes on the go. Get display of your health vitals and recommendations on how to improve your health.
+                             {product.description}
                             </Text>
                         </View>
                         <View style={styles.addToCartButtonView}>
