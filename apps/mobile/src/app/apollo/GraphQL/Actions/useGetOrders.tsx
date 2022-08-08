@@ -4,7 +4,7 @@ import { Alert } from "react-native"
 import { useDispatch } from "react-redux"
 import { Dispatch } from "redux"
 import { useIsUser } from "../../../customHooks/useIsUser"
-import { setOrders } from "../../../redux/actions/orders"
+import { addOrder, setOrders } from "../../../redux/actions/orders"
 import { client } from "../../apollo"
 
 export const useGetOrders = () => {
@@ -21,6 +21,7 @@ export const useGetOrders = () => {
 }
 
 export const useCreateOrder =():[(order: ICreateOrder) => void, (id: string) => void ] => {
+    const dispatch = useDispatch<Dispatch>()
     const [mutation, mutationResults] = useCreateOrderMutation()
     const [updateMutation] = useUpdateOrderToDeliveredMutation()
     const createOrder = (order: ICreateOrder) => {
@@ -30,7 +31,11 @@ export const useCreateOrder =():[(order: ICreateOrder) => void, (id: string) => 
         onError(error) {
             console.log(error)
         },
-    })       
+        onCompleted(data) {
+            dispatch(addOrder(data?.createOrder))
+        },
+    })  
+    //console.log(mutationResults.data?.createOrder)     
     }
 
     const updateOrderToDelivered = (id: string) => {

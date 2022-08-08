@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useRef, useState } from 'react'
-import { View, Text, ScrollView, TouchableOpacity, TextInput } from 'react-native'
+import { View, Text, ScrollView, TouchableOpacity, TextInput, Alert } from 'react-native'
 import { useDispatch } from 'react-redux';
 import * as yup from 'yup';
 import { Dispatch } from 'redux';
@@ -103,6 +103,10 @@ const SetShipping = ({route}) => {
               addressLine2:  location?.addressLine2 ? location.addressLine2 : '',
             }}
             onSubmit={values => {
+                if(!selectedCountry){
+                  Alert.alert('Error', 'Country can\'t be left empty ! ')
+                  return;
+                }
                 dispatch(setShippingAddress(formatAddressString({
                   addressLine1: values.addressLine1, addressLine2: values.addressLine2, city: values.city, country: (selectedCountry || location?.country), postCode: values.postCode,
                   state: values.state
