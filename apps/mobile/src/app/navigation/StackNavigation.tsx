@@ -8,7 +8,12 @@ import FoodRecognition from '../screens/FoodRecognition';
 import MyCart from '../screens/Marketplace/MyCart';
 import Checkout from '../screens/Marketplace/Checkout';
 import { MyProducts } from '../screens/Marketplace/MyProducts';
-import { RootStackParamList,MarketplaceStackParamList, AppointmentStackParamList, MetabolicHealthStackParamList } from '../utils/types';
+import {
+  RootStackParamList,
+  MarketplaceStackParamList,
+  AppointmentStackParamList,
+  MetabolicHealthStackParamList,
+} from '../utils/types';
 import MedicalHistory from '../screens/Patient/MedicalHistory';
 import SubscriptionDetails from '../screens/Patient/SubcriptionDetails';
 import PatientProfile from '../screens/PatientProfile';
@@ -27,9 +32,11 @@ import HealthAndGoodSleep from '../screens/MetabolicHealth/HealthAndGoodSleep';
 import GlucoseLevel from '../screens/MetabolicHealth/GlucoseLevel';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
-const MarketStack =  createNativeStackNavigator<MarketplaceStackParamList>();
-const AppointmentStack = createNativeStackNavigator<AppointmentStackParamList>()
-const MetabolicHealthStack = createNativeStackNavigator<MetabolicHealthStackParamList>()
+const MarketStack = createNativeStackNavigator<MarketplaceStackParamList>();
+const AppointmentStack =
+  createNativeStackNavigator<AppointmentStackParamList>();
+const MetabolicHealthStack =
+  createNativeStackNavigator<MetabolicHealthStackParamList>();
 
 export const DashBoardStackNavigator = () => {
   return (
@@ -102,8 +109,8 @@ export const PatientProfileStackNavigator = () => {
         component={OrderStatus}
       />
     </Stack.Navigator>
-  )
-}
+  );
+};
 
 export const MarketPlaceStackNavigator = () => {
   return (
@@ -134,12 +141,12 @@ export const MarketPlaceStackNavigator = () => {
         component={SetShipping}
       />
     </MarketStack.Navigator>
-  )
-}
+  );
+};
 
 export const AppointmentStackNavigator = () => {
-  return(
-  <AppointmentStack.Navigator>
+  return (
+    <AppointmentStack.Navigator>
       <AppointmentStack.Screen
         options={{ headerShown: false }}
         name="AppointmentHome"
@@ -160,34 +167,33 @@ export const AppointmentStackNavigator = () => {
         name="DoctorDetails"
         component={DoctorDetails}
       />
-  </AppointmentStack.Navigator>    
-  )
-
-}
+    </AppointmentStack.Navigator>
+  );
+};
 
 export const MetabolicHealthStackNavigator = () => {
-  return(
-    <MetabolicHealthStack.Navigator>
+  return (
+    <MetabolicHealthStack.Navigator initialRouteName="MetabolicHealth">
       <MetabolicHealthStack.Screen
-         options={{ headerShown: false }}
-         name="MetabolicHealth"
-         component={MetabolicHealth}    
-         /> 
+        options={{ headerShown: false }}
+        name="MetabolicHealth"
+        component={MetabolicHealth}
+      />
       <MetabolicHealthStack.Screen
-         options={{ headerShown: false }}
-         name="AddFood"
-         component={AddFood}    
-         /> 
+        options={{ headerShown: false }}
+        name="AddFood"
+        component={AddFood}
+      />
       <MetabolicHealthStack.Screen
-         options={{ headerShown: false }}
-         name="HealthAndGoodSleep"
-         component={HealthAndGoodSleep}    
-         /> 
+        options={{ headerShown: false }}
+        name="HealthAndGoodSleep"
+        component={HealthAndGoodSleep}
+      />
       <MetabolicHealthStack.Screen
-         options={{ headerShown: false }}
-         name="GlucoseLevel"
-         component={GlucoseLevel}    
-         /> 
-    </MetabolicHealthStack.Navigator>    
-  )
-}
+        options={{ headerShown: false }}
+        name="GlucoseLevel"
+        component={GlucoseLevel}
+      />
+    </MetabolicHealthStack.Navigator>
+  );
+};

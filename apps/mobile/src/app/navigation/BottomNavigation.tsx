@@ -1,6 +1,12 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { AppointmentStackNavigator, DashBoardStackNavigator, MarketPlaceStackNavigator, MetabolicHealthStackNavigator, PatientProfileStackNavigator } from './StackNavigation';
+import {
+  AppointmentStackNavigator,
+  DashBoardStackNavigator,
+  MarketPlaceStackNavigator,
+  MetabolicHealthStackNavigator,
+  PatientProfileStackNavigator,
+} from './StackNavigation';
 import { StyleSheet, View, Text } from 'react-native';
 import HomeIcon from '../icons/HomeIcon';
 import AppointmentIcon from '../icons/AppointmentIcon';
