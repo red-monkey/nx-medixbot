@@ -4,10 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Mobile.iml" filepath="$PROJECT_DIR$/.idea/modules/Mobile.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Mobile.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Mobile.app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/890811400/Mobile.react-native-async-storage_async-storage.iml" filepath="$PROJECT_DIR$/.idea/modules/890811400/Mobile.react-native-async-storage_async-storage.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1413756309/Mobile.react-native-config.iml" filepath="$PROJECT_DIR$/.idea/modules/1413756309/Mobile.react-native-config.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-492271713/Mobile.react-native-splash-screen.iml" filepath="$PROJECT_DIR$/.idea/modules/-492271713/Mobile.react-native-splash-screen.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1752643151/Mobile.react-native-svg.iml" filepath="$PROJECT_DIR$/.idea/modules/-1752643151/Mobile.react-native-svg.iml" />
     </modules>
   </component>
 </project>

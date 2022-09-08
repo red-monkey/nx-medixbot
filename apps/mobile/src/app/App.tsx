@@ -5,10 +5,10 @@ import { SafeAreaView } from 'react-native';
 import AppContainer, {
   LoggedInUserAppContainer,
 } from './navigation/AppContainer';
-import { useAppSelector } from './utils/hooks';
 
 const App = () => {
-  const isLoggedIn = useAppSelector((state) => state.loginReducer.isLoggedIn);
+  // const isLoggedIn = useAppSelector((state) => state.loginReducer.isLoggedIn);
+  const isLoggedIn = true;
   useEffect(() => {
     SplashScreen.hide();
   }, []);

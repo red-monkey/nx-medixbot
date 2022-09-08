@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import {TextInput, TouchableOpacity, View} from 'react-native';
+import { TextInput, TouchableOpacity, View } from 'react-native';
 import { colors } from '../variables/colors';
 
 export const focusHandler = (reference: React.RefObject<View>) => {
@@ -32,17 +32,31 @@ export const UnselectElement = useCallback((reference: React.RefObject<TextInput
     }
   })},[])*/
 
-
-export const checkIfSelected = (lang: string ,languageArray: Array<string>) => {
+export const checkIfSelected = (lang: string, languageArray: Array<string>) => {
   let inserted = false;
-  languageArray.forEach((item,i) => {
-    if(item === lang)inserted =true;
-  });  
-  return inserted;     
-}
+  languageArray.forEach((item, i) => {
+    if (item === lang) inserted = true;
+  });
+  return inserted;
+};
 
-export const removeFromList = (lang: string ,languageArray: Array<string>) => {
-  languageArray.forEach((item,i) => {
-    if(item === lang)languageArray.splice(i,1);
-  });    
-}
+export const removeFromList = (lang: string, languageArray: Array<string>) => {
+  languageArray.forEach((item, i) => {
+    if (item === lang) languageArray.splice(i, 1);
+  });
+};
+
+export const snakeCaseToCamelCase = (object) =>
+  Object.entries(object).reduce((acc, [key, val]) => {
+    const camelCaseKey = key
+      .split('_')
+      .map((token, index) =>
+        index ? token.replace(token[0], token[0].toUpperCase()) : token
+      )
+      .join('');
+
+    return {
+      ...acc,
+      [`${camelCaseKey}`]: val,
+    };
+  }, {});

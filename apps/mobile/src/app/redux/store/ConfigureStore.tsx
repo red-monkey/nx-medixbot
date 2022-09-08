@@ -1,10 +1,8 @@
 import { createStore, applyMiddleware } from 'redux';
-import { createLogger } from 'redux-logger';
 import reducers from '../reducers/index';
 
 export default function Store() {
-  const middlewares = [createLogger({})];
-  const middleWareEnhancer = applyMiddleware(...middlewares);
+  const middleWareEnhancer = applyMiddleware(...[]);
   return createStore(reducers, middleWareEnhancer);
 }
 
