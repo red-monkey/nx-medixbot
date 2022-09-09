@@ -66,14 +66,14 @@ const AddFood = () => {
   const calculateCalories = () => {
     return (
       predictedFood[0]?.foodCharacteristic[0]?.karbonhidrat * 4 +
-      predictedFood[0]?.foodCharacteristic[0]?.yag * 9 +
-      predictedFood[0]?.foodCharacteristic[0]?.protein * 4
+        predictedFood[0]?.foodCharacteristic[0]?.yag * 9 +
+        predictedFood[0]?.foodCharacteristic[0]?.protein * 4 || 0
     );
   };
 
   useEffect(() => {
     if (!foodImage) return;
-    setImageMissing(true);
+    setImageMissing(false);
     const base64 = `data:${foodImage.type};base64,${foodImage.base64}`;
     setLoading(true);
     FoodClassifierService.predict(base64)
@@ -154,7 +154,6 @@ const AddFood = () => {
     fats: string;
     proteins: string;
   }) => {
-    if (wrongTotal) return;
     const addedFood: FoodRecognitionData = {
       foodName: values.foodName,
       quantity: parseInt(values.weightOfFood),

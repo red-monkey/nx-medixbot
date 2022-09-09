@@ -49,6 +49,7 @@
     "react-native-uuid": "*",
     "react-native-shapes": "*",
     "react-native-svg-charts": "*",
-    "victory-native": "*"
+    "victory-native": "*",
+    "firebase": "*"
   }
 }

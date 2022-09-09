@@ -46,6 +46,7 @@
     "express": "4.17.2",
     "express-mongo-sanitize": "~2.2.0",
     "express-rate-limit": "~6.3.0",
+    "firebase": "^9.9.4",
     "formik": "^2.2.9",
     "google-auth-library": "^7.14.1",
     "graphql": "^16.3.0",
