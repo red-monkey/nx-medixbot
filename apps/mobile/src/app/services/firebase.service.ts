@@ -35,7 +35,7 @@ class FirebaseService {
       const data = snapshot.val();
       if (snapshot.exists()) {
         try {
-          const glucose = Object.entries(data.glucose_info)
+          const glucose = Object.entries(data)
             .map(([id, value]: any) => {
               return {
                 id,

@@ -30,15 +30,6 @@ const HealthAndGoodSleep = () => {
     setFilteredCGM(data);
   }, [cgm, frequency]);
 
-  filteredCGM.length &&
-    menuOptions.unshift({
-      title: 'Glucose level',
-      icon: <GluscoseIcon />,
-      measure: `${filteredCGM.slice(-1)[0].value.toFixed(2)}mg/dl`,
-      time: 'last reading',
-      path: 'GlucoseLevel',
-    });
-
   return (
     <ScrollView contentContainerStyle={[styles.Container]} scrollEnabled>
       <Header />
@@ -57,7 +48,18 @@ const HealthAndGoodSleep = () => {
           data={[{ data: filteredCGM, svg: { stroke: colors.newPink } }]}
           frequency={frequency}
         />
-        {menuOptions.map((item, i) => (
+        {[
+          {
+            title: 'Glucose level',
+            icon: <GluscoseIcon />,
+            measure: `${
+              filteredCGM.length && filteredCGM.slice(-1)[0].value.toFixed(2)
+            }mg/dl`,
+            time: 'last reading',
+            path: 'GlucoseLevel',
+          },
+          ...menuOptions,
+        ].map((item, i) => (
           <HealthMenu
             key={i}
             title={item.title}

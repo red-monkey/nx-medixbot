@@ -131,8 +131,8 @@ const Chart = (props: Props) => {
                 props.frequency === 'Monthly'
                   ? 'DD MM YYYY'
                   : props.frequency === 'Daily'
-                  ? 'HH mm'
-                  : 'WW'
+                  ? 'HH'
+                  : 'w'
               )
             }
           />

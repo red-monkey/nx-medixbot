@@ -18,7 +18,7 @@ export const groupByDay = (cgm: ICGM[]) => {
   }, {});
 };
 
-export const calcMonthlyAverage = (cgm: ICGM[]) => {
+export const calcAveragePerDay = (cgm: ICGM[]) => {
   const groupedCGM = groupByDay(cgm);
   return Object.values(groupedCGM).map((data: ICGM[]) =>
     data.reduce(
@@ -48,13 +48,15 @@ export const filterCGM = (
       );
 
     case 'Weekly':
-      return cgm.filter(
-        ({ date }: ICGM) =>
-          Math.abs(today - date.getTime()) <= WEEK_IN_MILLISECONDS
+      return calcAveragePerDay(
+        cgm.filter(
+          ({ date }: ICGM) =>
+            Math.abs(today - date.getTime()) <= WEEK_IN_MILLISECONDS
+        )
       );
 
     case 'Monthly':
-      return calcMonthlyAverage(
+      return calcAveragePerDay(
         cgm.filter(
           ({ date }: ICGM) =>
             Math.abs(today - date.getTime()) <= MONTH_IN_MILLISECONDS
@@ -67,5 +69,8 @@ export const filterCGM = (
 };
 
 export const calcDailyAverage = (cgm) => {
-  return filterCGM(cgm, 'Daily').reduce((acc, val) => acc + val.value, 0);
+  return filterCGM(cgm, 'Daily').reduce(
+    (acc, val, _, arr) => acc + val.value / arr.length,
+    0
+  );
 };
