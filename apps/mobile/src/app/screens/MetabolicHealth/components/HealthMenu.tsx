@@ -55,7 +55,14 @@ const HealthMenu = ({
         >
           <ArrowIcon />
         </TouchableOpacity>
-        <Text style={BoxStyles.time}>{measure}</Text>
+        <Text
+          style={[
+            BoxStyles.time,
+            { fontSize: 10, fontWeight: '800', top: -5, left: -5 },
+          ]}
+        >
+          {measure}
+        </Text>
       </View>
     </View>
   );
@@ -89,7 +96,7 @@ const BoxStyles = StyleSheet.create({
     color: colors.newBlack,
   },
   time: {
-    fontSize: 10,
+    fontSize: 14,
     fontFamily: 'Lora-Regular',
     color: colors.newBlack,
   },

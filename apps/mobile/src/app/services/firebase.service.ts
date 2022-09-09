@@ -3,20 +3,28 @@ import { Database, getDatabase, onValue, ref } from 'firebase/database';
 import { Dispatch } from 'redux';
 import { parseDate } from '../utils/cgm.util';
 import { updateCGM, ICGM } from '../redux/actions/cgm';
+import {
+  FIREBASE_API_KEY,
+  FIREBASE_AUTH_DOMAIN,
+  FIREBASE_DATABASE_URL,
+  FIREBASE_PROJECT_ID,
+  FIREBASE_STORAGE_BUCKET,
+  FIREBASE_MESSAGING_SENDER_ID,
+  FIREBASE_APP_ID,
+} from '@env';
 
 class FirebaseService {
   private database: Database;
   constructor() {
     this.database = getDatabase(
       initializeApp({
-        apiKey: 'AIzaSyD4nJfI9GmVXSEFnNtJLinaD9x5lnQkLns',
-        authDomain: 'cgm-data.firebaseapp.com',
-        databaseURL:
-          'https://cgm-data-default-rtdb.europe-west1.firebasedatabase.app',
-        projectId: 'cgm-data',
-        storageBucket: 'cgm-data.appspot.com',
-        messagingSenderId: '1042120886086',
-        appId: '1:1042120886086:web:08c5ffbea303d337690747',
+        apiKey: FIREBASE_API_KEY,
+        authDomain: FIREBASE_AUTH_DOMAIN,
+        databaseURL: FIREBASE_DATABASE_URL,
+        projectId: FIREBASE_PROJECT_ID,
+        storageBucket: FIREBASE_STORAGE_BUCKET,
+        messagingSenderId: FIREBASE_MESSAGING_SENDER_ID,
+        appId: FIREBASE_APP_ID,
       })
     );
   }

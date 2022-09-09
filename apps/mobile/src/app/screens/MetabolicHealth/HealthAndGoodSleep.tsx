@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, ScrollView } from 'react-native';
 import Header from '../../components/CommunHeader';
 import GluscoseIcon from '../../icons/healthIcons/GluscoseIcon';

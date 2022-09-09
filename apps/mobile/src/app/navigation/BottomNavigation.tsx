@@ -38,7 +38,7 @@ const Tab = createBottomTabNavigator();
 const Tabs = () => {
   return (
     <Tab.Navigator
-      initialRouteName="Health"
+      initialRouteName="Home"
       screenOptions={{
         tabBarStyle: {
           ...styles.tabNavigator,
