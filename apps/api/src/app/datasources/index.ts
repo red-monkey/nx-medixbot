@@ -12,8 +12,12 @@ import {
   HospitalModel,
   AppointmentModel,
   ClinicModel,
-
+  BreathingRateModel,
+  SleepModel,
+  OxygenModel,
+  GlucoseModel,
 } from '@medixbot/models';
+
 import { BlogDataSource } from './Blog.datasource';
 import { TokenDataSource } from './Token.datasource';
 import { UserDataSource } from './User.datasource';
@@ -24,8 +28,11 @@ import { OrderDataSource } from './Order.datasource';
 import { LabTestDataSource } from './LabTest.datasource';
 import { HospitalDataSource } from './Hospital.datasource';
 import { AppointmentDataSource } from './Appointment.datasource';
-import { ClinicDataSource } from './clinic.datasource';
-
+import { ClinicDataSource } from './Clinic.datasource';
+import { BreathingRateDataSource } from './BreathingRate.datasource';
+import { SleepDataSource } from './Sleep.datasource';
+import { OxygenDataSource } from './Oxygen.datasourse';
+import { GlucoseDataSource } from './Glucose.datasourse';
 
 export type DataSources = {
   users: UserDataSource;
@@ -39,7 +46,10 @@ export type DataSources = {
   hospitals: HospitalDataSource;
   appointments: AppointmentDataSource;
   clinics: ClinicDataSource;
-
+  breathingRates: BreathingRateDataSource;
+  oxygens: OxygenDataSource;
+  sleeps: SleepDataSource;
+  glucoses: GlucoseDataSource;
 };
 
 export const dataSources = () => ({
@@ -54,5 +64,8 @@ export const dataSources = () => ({
   hospitals: new HospitalDataSource(HospitalModel),
   appointments: new AppointmentDataSource(AppointmentModel),
   clinics: new ClinicDataSource(ClinicModel),
-
+  breathingRates: new BreathingRateDataSource(BreathingRateModel),
+  oxygens: new OxygenDataSource(OxygenModel),
+  sleeps: new SleepDataSource(SleepModel),
+  glucoses: new GlucoseDataSource(GlucoseModel),
 });

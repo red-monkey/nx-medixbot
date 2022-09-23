@@ -16,6 +16,10 @@ import {
   labTestResolver,
   hospitalResolver,
   clinicResolver,
+  oxygenResolver,
+  glucoseResolver,
+  breathingRateResolver,
+  sleepResolver,
 } from './resolvers';
 import {
   AppSchema,
@@ -31,7 +35,10 @@ import {
   LabTestSchema,
   HospitalSchema,
   ClinicSchema,
-
+  OxygenSaturationLevelSchema,
+  SleepSchema,
+  BreathingRateSchema,
+  GlucoseLevelSchema,
 } from './schemas';
 
 const apolloServer = new ApolloServer({
@@ -49,6 +56,10 @@ const apolloServer = new ApolloServer({
     LabTestSchema,
     HospitalSchema,
     ClinicSchema,
+    OxygenSaturationLevelSchema,
+    SleepSchema,
+    BreathingRateSchema,
+    GlucoseLevelSchema,
   ],
   resolvers: merge(
     {
@@ -67,8 +78,11 @@ const apolloServer = new ApolloServer({
     orderResolver,
     labTestResolver,
     hospitalResolver,
-    clinicResolver
-
+    clinicResolver,
+    oxygenResolver,
+    glucoseResolver,
+    breathingRateResolver,
+    sleepResolver
   ),
   mocks: true,
   mockEntireSchema: false,

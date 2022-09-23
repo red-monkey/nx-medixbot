@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, TouchableOpacity } from 'react-native'
+import { View, Text, TouchableOpacity } from 'react-native'
 import React from 'react'
 import styles from '../../../../styles/CardStyles'
 import marketPlaceStyles from '../../../../styles/MarketPlaceStyles'
@@ -6,17 +6,20 @@ import Header from '../../../Patient/components/Header'
 import CopyIcon from '../../../../icons/marketplaceicons/CopyIcon.svg'
 import OrderStatusIcon from '../../../../icons/marketplaceicons/orderStatusIcon.svg'
 import OrderStatusIcon2 from '../../../../icons/marketplaceicons/orderStatusIcon2.svg'
+import { useNavigation } from '@react-navigation/native'
+import { useCreateOrder } from 'apps/mobile/src/app/apollo/GraphQL/Actions/useGetOrders'
+import { setOrderTodelivered } from 'apps/mobile/src/app/redux/actions/orders'
 import { useDispatch } from 'react-redux'
 import { Dispatch } from 'redux'
-import { changeOrderStatus } from 'apps/mobile/src/app/redux/actions/orders'
-import { useNavigation } from '@react-navigation/native'
 
 const OrderStatus = ({route}) => {
-  const dispatch = useDispatch<Dispatch>()
   const navigation = useNavigation<any>()
-  const {orderID, orderDate, orderStatus} = route.params;
+  const[,updateOrderToDelivered] = useCreateOrder()
+  const {orderID, orderDate, orderStatus, deliveryDate} = route.params;
+  const dispatch = useDispatch<Dispatch>()
   const confirmDelivery = () => {
-    dispatch(changeOrderStatus(orderID, 'Delivered'));
+    dispatch(setOrderTodelivered(orderID));
+    updateOrderToDelivered(orderID)
     navigation.navigate('MyOrders')
   }
   const goBack = () => navigation.navigate('MyOrders')
@@ -61,10 +64,10 @@ const OrderStatus = ({route}) => {
                 </View>
                 <View style={styles.orderStatusContainer}>
                   <View style={styles.orderStatusIcon}>
-                  {orderStatus === 'Delivered' ? <OrderStatusIcon /> : <OrderStatusIcon2 />}</View>
+                  {orderStatus ? <OrderStatusIcon /> : <OrderStatusIcon2 />}</View>
                   <View>
                     <Text style={styles.orderStatus}>Delivered </Text>
-                    <Text style={styles.orderDate}>Deliver in the next 50 mins</Text>
+                    <Text style={styles.orderDate}>{orderStatus ? deliveryDate : 'Deliver in the next 50 mins'}</Text>
                   </View>
                 </View>
             </View>

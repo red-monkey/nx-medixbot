@@ -14,4 +14,8 @@ export * from './lib/blog.interfaces';
 export * from './lib/category.interfaces';
 export * from './lib/product.interface';
 export * from './lib/order.interface';
+export * from './lib/oxygen.interfaces';
+export * from './lib/BreathingRate.interfaces';
+export * from './lib/sleep.interfaces';
+export * from './lib/glucose.interfaces';
 export * from './lib/generated';

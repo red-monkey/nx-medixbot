@@ -30,6 +30,10 @@ export enum EModelNames {
   REVIEW = 'Review',
   ORDER = 'Order',
   LABTEST = 'LabTest',
+  GLUCOSE = 'Glucose',
+  OXYGEN = 'Oxygen',
+  SLEEP = 'Sleep',
+  BREATHINGRATE = 'BreathingRate',
 }
 export enum ETokenType {
   ACCESS = 'access',

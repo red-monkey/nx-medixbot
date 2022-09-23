@@ -1,5 +1,4 @@
 import { View, Text, ScrollView, TouchableOpacity,  Dimensions } from 'react-native'
-import uuid from 'react-native-uuid';
 import React, { useEffect, useState } from 'react'
 import styles from '../../styles/CardStyles'
 import marketPlaceStyles from '../../styles/MarketPlaceStyles'
@@ -9,24 +8,26 @@ import SelectedIcon from '../icons/SelectedIcon.svg'
 import UnselectedIcon from '../icons/UnselectedIcon.svg'
 import { ProductProps, TDelivery, TDeliveryOptions, TPaymentOptions } from '../../utils/types'
 import { useIsUser } from '../../customHooks/useIsUser'
-import { IUser } from '../../apollo/GraphQL/types'
 import Edit from '../../icons/Edit'
-import { Shadow } from 'react-native-shadow-2';
 import { useNavigation } from '@react-navigation/native'
 import { useDispatch } from 'react-redux'
 import { setLocation } from '../../redux/actions/location'
 import { clearCart, resetShippingAddress } from '../../redux/actions/marketplace'
 import OrderCompleted from './components/checkout/OrderCompleted'
-import { addOrder } from '../../redux/actions/orders'
+import { useCreateOrder, useGetOrders } from '../../apollo/GraphQL/Actions/useGetOrders';
+import { IOrderItem } from '@medixbot/types';
+import loginStyles from '../../styles/LoginPageStyles'
 
 const Checkout = ({route}) => {
   const [orderCompleted, setOrderCompleted ] = useState(false);
   const navigation = useNavigation<ProductProps>()
+  const [missingFields,setMissingFileds] = useState<boolean>(false)
   const dispatch = useDispatch()
   const marketPlace = useAppSelector((state) => state.marketplaceReducer);
+  const shippingAddrFields = useAppSelector(state => state.locationReducer)
   const [, getUser,] = useIsUser();
-  const [userInf,setUserInf] = useState<IUser | null>();
-  getUser().then(user => setUserInf(JSON.parse(user)));
+  const[createOrder] = useCreateOrder()
+  const userInf = getUser()
   useEffect(()=>{
     dispatch(setLocation({country: userInf?.country, city: userInf?.city, state: userInf?.state, postCode: userInf?.postCode}))
   },[userInf?.country])
@@ -42,19 +43,23 @@ const Checkout = ({route}) => {
   const {totalPrice} = route.params;
 
 
-  const createOrder = () => {
-    const orderId = uuid.v4().toString();
-    const trackingNo = uuid.v1().toString().slice(0,8)
-    const date = new Date().toISOString().slice(0,10)
-    const estimation = new Date().setMonth(new Date().getMonth()).toString()
+  const postOrder = () => {
     const shipping = DeliveryOptions.find(item => item.type === deliveryOption).address
-    let amount = 0;
-    marketPlace.cart.forEach((item)=> {
-      amount += item.qty
+    if(!shippingAddrFields.city || !shippingAddrFields.city || !shippingAddrFields.city) {
+      setMissingFileds(true)
+      return;
+    }
+    const orderItems :IOrderItem[]= []
+    marketPlace.cart.forEach((item)=>{orderItems.push({product: item.product.id, quantity: item.qty, price: item.qty*item.product.price, image: item.product.image, name: item.product.name})})
+    createOrder({ 
+      orderItems: orderItems ,
+      paymentMethod: paymentOption,
+      shippingAddress: {address: shipping, country: shippingAddrFields.country , city: shippingAddrFields.city, postalCode: shippingAddrFields.postCode },
+      shippingPrice: 10,
+      taxPrice: 10,
+      itemsPrice: marketPlace.total,
+      totalPrice: marketPlace.total + 20
     })
-    dispatch(addOrder({orderId: orderId, TrackingNumber: trackingNo, Quantity: amount,
-       total: marketPlace.total, placementDate: date, status: 'Received', estimatedDelivery: estimation,
-      shippingAddress: deliveryOption === 'Home Address' ? userAddr : shipping}))
     setOrderCompleted(true); 
     dispatch(clearCart());
     dispatch(resetShippingAddress())
@@ -63,7 +68,7 @@ const Checkout = ({route}) => {
   return (
     <ScrollView contentContainerStyle={[marketPlaceStyles.Container]}>
         <Header title='Checkout'/>
-        <View style={[styles.screenContentCart, {minHeight: Dimensions.get('screen').height*0.75}]}>
+        <View style={[styles.screenContentCart, {minHeight: Dimensions.get('screen').height*0.80}]}>
         {orderCompleted ? <OrderCompleted /> :
         <>
           {/* first view with number o items in cart */}
@@ -74,7 +79,8 @@ const Checkout = ({route}) => {
               <Text style={styles.checkoutTotalPrice}>${totalPrice}</Text>
             </View>
           </View>
-
+          {missingFields === true && (!shippingAddrFields.city || !shippingAddrFields.city || !shippingAddrFields.city) && 
+          <Text style={[loginStyles.errorText,{marginRight: 20, marginLeft: 20, marginTop: 10}]}>Please make sure you entered country , city and postal code ! </Text>}
           {/* Delivery options component */}
           <View style={styles.optionsContainer}>
             <Text style={styles.checkoutDeliveryOptions}>Delivery options</Text>
@@ -113,7 +119,7 @@ const Checkout = ({route}) => {
           <View style={{alignItems:'center'}}>
             <TouchableOpacity
               style={styles.payCheckoutButton}
-              onPress={createOrder}
+              onPress={postOrder}
             >
               <Text style={{fontSize:19, color:'#fff', fontFamily: 'Montserrat-Bold'}}>Pay ${totalPrice}</Text>
             </TouchableOpacity>

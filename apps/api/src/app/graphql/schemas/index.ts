@@ -11,4 +11,7 @@ export { default as ProductSchema } from './product.schema';
 export { default as LabTestSchema } from './labTest.schema';
 export { default as HospitalSchema } from './hospital.schema';
 export { default as ClinicSchema } from './clinic.schema';
-
+export { default as BreathingRateSchema } from './breathingRate.schema';
+export { default as SleepSchema } from './sleep.schema';
+export { default as OxygenSaturationLevelSchema } from './oxygen.schema';
+export { default as GlucoseLevelSchema } from './glucose.schema';

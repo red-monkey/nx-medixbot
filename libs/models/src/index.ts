@@ -12,3 +12,7 @@ export * from './lib/product.model';
 export * from './lib/order.model';
 export * from './lib/labTest.model';
 export * from './lib/hospital.model';
+export * from './lib/breathingRate.model';
+export * from './lib/oxygen.model';
+export * from './lib/glucose.model';
+export * from './lib/sleep.model';

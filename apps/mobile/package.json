@@ -48,6 +48,7 @@
     "react-native-shadow-2": "*",
     "react-native-uuid": "*",
     "react-native-shapes": "*",
-    "react-native-svg-charts": "*"
+    "react-native-svg-charts": "*",
+    "victory-native": "*"
   }
 }

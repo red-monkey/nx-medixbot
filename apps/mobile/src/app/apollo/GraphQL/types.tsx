@@ -1,5 +1,5 @@
 import {FetchResult} from '@apollo/client';
-import { EGender, EMembership, EUserAccountStatus, EUserRole, IRegisterUser } from '@medixbot/types';
+import { EGender, EMembership, EUserAccountStatus, EUserRole, IRegisterUser, LoginMutation, RegisterMutation } from '@medixbot/types';
 export type TData = {
   login?: ILogin;
 };
@@ -51,15 +51,9 @@ export type TVariables = {
 
 
 
-export type IResult = (
-  username: string,
-  password: string,
-) => Promise<FetchResult<TData, Record<string, any>, Record<string, any>>>;
+export type IResult = (username: string, password: string) => Promise<FetchResult<LoginMutation, Record<string, any>, Record<string, any>>>
 
-
-export type IResultRegister = (
-  data: IRegisterUser
-) => Promise<FetchResult<TDataRegister, Record<string, any>, Record<string, any>>>;
+export type IResultRegister = (data: IRegisterUser) => Promise<FetchResult<RegisterMutation, Record<string, any>, Record<string, any>>>
 
 
 export type TokenType = 'accessToken' | 'refreshToken';

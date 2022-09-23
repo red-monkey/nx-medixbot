@@ -34,8 +34,8 @@ export default gql`
     country: String
     city: String
     district: String
-    hospital: ID!
-    clinic: ID!
+    hospital: ID
+    clinic: ID
     symptoms: [String!]
     doctor: ID!
   }
@@ -84,7 +84,6 @@ export default gql`
     getAppointment(appointmentId: ID!): TAppointment
     getAppointments(limit: Int, page: Int): TPaginatedAppointment!
     getMyAppointments: TPaginatedAppointment
-
   }
 
   # Mutations

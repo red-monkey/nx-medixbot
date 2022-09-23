@@ -94,6 +94,7 @@
     "twilio": "^3.76.1",
     "use-force-update": "^1.0.8",
     "uuid": "^8.3.2",
+    "victory-native": "^36.5.3",
     "winston": "~3.7.2",
     "xss-clean": "~0.1.1",
     "yup": "^0.32.11"

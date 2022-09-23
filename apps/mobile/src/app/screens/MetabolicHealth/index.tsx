@@ -44,7 +44,8 @@ const options: OptionProps[] = [
  {
     title: 'Health and Good Sleep',
     icon: <GluscoseIcon />,
-    color: colors.MedixBotPrimaryColor
+    color: colors.MedixBotPrimaryColor,
+    path: 'HealthAndGoodSleep'
  },
  {
     title: 'Food and Nutrition',

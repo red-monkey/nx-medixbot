@@ -10,4 +10,7 @@ export { default as orderResolver } from './order.resolver';
 export { default as labTestResolver } from './labTest.resolver';
 export { default as hospitalResolver } from './hospital.resolver';
 export { default as clinicResolver } from './clinic.resolver';
-
+export { default as oxygenResolver } from './oxygen.resolver';
+export { default as breathingRateResolver } from './breathingRate.resolver';
+export { default as sleepResolver } from './sleep.resolver';
+export { default as glucoseResolver } from './glucose.resolver';

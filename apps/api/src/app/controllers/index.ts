@@ -10,3 +10,7 @@ export { default as orderController } from './order.controller';
 export { default as labTestController } from './labTest.controller';
 export { default as hospitalController } from './hospital.controller';
 export { default as clinicController } from './clinic.controller';
+export { default as oxygenController } from './oxygen.controller';
+export { default as breathingRateController } from './breathingRate.controller';
+export { default as sleepController } from './sleep.controller';
+export { default as glucoseController } from './glucose.controller';

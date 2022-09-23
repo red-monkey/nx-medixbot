@@ -71,15 +71,22 @@ export type IAvailability = {
   times?: InputMaybe<Array<InputMaybe<ITime>>>;
 };
 
+export type IBreathingInput = {
+  date?: InputMaybe<Scalars['String']>;
+  patient: Scalars['ID'];
+  time?: InputMaybe<Scalars['String']>;
+  value?: InputMaybe<Scalars['Float']>;
+};
+
 export type ICreateAppointment = {
   city?: InputMaybe<Scalars['String']>;
-  clinic: Scalars['ID'];
+  clinic?: InputMaybe<Scalars['ID']>;
   conditions?: InputMaybe<Scalars['String']>;
   country?: InputMaybe<Scalars['String']>;
   date: Scalars['String'];
   district?: InputMaybe<Scalars['String']>;
   doctor: Scalars['ID'];
-  hospital: Scalars['ID'];
+  hospital?: InputMaybe<Scalars['ID']>;
   symptoms?: InputMaybe<Array<Scalars['String']>>;
   time: Scalars['String'];
 };
@@ -162,12 +169,26 @@ export type IDocument = {
   url?: InputMaybe<Scalars['String']>;
 };
 
+export type IGlucoseInput = {
+  date: Scalars['String'];
+  patient: Scalars['ID'];
+  time: Scalars['String'];
+  value: Scalars['Float'];
+};
+
 export type IOrderItem = {
   image?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
   price?: InputMaybe<Scalars['Float']>;
   product: Scalars['ID'];
   quantity?: InputMaybe<Scalars['Float']>;
+};
+
+export type IOxygenLevelInput = {
+  date: Scalars['String'];
+  level: Scalars['Float'];
+  patient: Scalars['ID'];
+  time: Scalars['String'];
 };
 
 export type IPaymentResult = {
@@ -198,6 +219,13 @@ export type IShippingAddress = {
   city?: InputMaybe<Scalars['String']>;
   country?: InputMaybe<Scalars['String']>;
   postalCode?: InputMaybe<Scalars['String']>;
+};
+
+export type ISleepInput = {
+  Duration?: InputMaybe<Scalars['String']>;
+  date?: InputMaybe<Scalars['String']>;
+  patient: Scalars['ID'];
+  position?: InputMaybe<Scalars['String']>;
 };
 
 export type ITime = {
@@ -312,23 +340,31 @@ export type IUpdateUser = {
 
 export type Mutation = {
   createBlog?: Maybe<TBlog>;
+  createBreathingData?: Maybe<TBreathingData>;
   createCategory?: Maybe<TCategory>;
   createClinic?: Maybe<TClinic>;
+  createGlucoseTest?: Maybe<TGlucose>;
   createHospital?: Maybe<THospital>;
   createLabTest?: Maybe<TLabTest>;
   createMedecineImage?: Maybe<TMedecineImage>;
   createOrder?: Maybe<TOrder>;
+  createOxygenSaturationLevel?: Maybe<TOxygenSaturationLevel>;
   createProduct?: Maybe<TProduct>;
   createProductReview?: Maybe<Scalars['String']>;
+  createSleepData?: Maybe<TSleep>;
   createUser?: Maybe<TUser>;
   deleteAppointment: Scalars['String'];
   deleteBlog: Scalars['String'];
+  deleteBreathingData: Scalars['String'];
   deleteCategory: Scalars['String'];
   deleteClinic: Scalars['String'];
+  deleteGlucoseTest: Scalars['String'];
   deleteHospital: Scalars['String'];
   deleteLabTest: Scalars['String'];
   deleteMedecineImage: Scalars['String'];
+  deleteOxygenSaturationLevel: Scalars['String'];
   deleteProduct: Scalars['String'];
+  deleteSleepData: Scalars['String'];
   deleteUser: Scalars['String'];
   forgotPassword: TNormalResponse;
   login: TAuthSuccess;
@@ -342,20 +378,28 @@ export type Mutation = {
   updateAppointment?: Maybe<TAppointment>;
   updateAppointmentStatus?: Maybe<TAppointment>;
   updateBlog?: Maybe<TBlog>;
+  updateBreathingData?: Maybe<TBreathingData>;
   updateCategory?: Maybe<TCategory>;
   updateClinic?: Maybe<TClinic>;
   updateDoctorInfo: Scalars['String'];
+  updateGlucoseTest?: Maybe<TGlucose>;
   updateHospital?: Maybe<THospital>;
   updateLabTest?: Maybe<TLabTest>;
   updateMedecineImage?: Maybe<TMedecineImage>;
   updateOrder?: Maybe<TOrder>;
   updateOrderToDelivered: TOrder;
   updateOrderToPaid?: Maybe<TOrder>;
+  updateOxygenSaturationLevel?: Maybe<TOxygenSaturationLevel>;
   updateProduct?: Maybe<TProduct>;
+  updateSleepData?: Maybe<TSleep>;
 };
 
 export type MutationCreateBlogArgs = {
   data: ICreateBlog;
+};
+
+export type MutationCreateBreathingDataArgs = {
+  data: IBreathingInput;
 };
 
 export type MutationCreateCategoryArgs = {
@@ -364,6 +408,10 @@ export type MutationCreateCategoryArgs = {
 
 export type MutationCreateClinicArgs = {
   data: ICreateClinic;
+};
+
+export type MutationCreateGlucoseTestArgs = {
+  data: IGlucoseInput;
 };
 
 export type MutationCreateHospitalArgs = {
@@ -382,6 +430,10 @@ export type MutationCreateOrderArgs = {
   data: ICreateOrder;
 };
 
+export type MutationCreateOxygenSaturationLevelArgs = {
+  data: IOxygenLevelInput;
+};
+
 export type MutationCreateProductArgs = {
   data: ICreateProduct;
 };
@@ -389,6 +441,10 @@ export type MutationCreateProductArgs = {
 export type MutationCreateProductReviewArgs = {
   data: ICreateReview;
   productId: Scalars['ID'];
+};
+
+export type MutationCreateSleepDataArgs = {
+  data: ISleepInput;
 };
 
 export type MutationCreateUserArgs = {
@@ -407,12 +463,20 @@ export type MutationDeleteBlogArgs = {
   blogId: Scalars['ID'];
 };
 
+export type MutationDeleteBreathingDataArgs = {
+  breathingId: Scalars['ID'];
+};
+
 export type MutationDeleteCategoryArgs = {
   categoryId: Scalars['ID'];
 };
 
 export type MutationDeleteClinicArgs = {
   clinicId: Scalars['ID'];
+};
+
+export type MutationDeleteGlucoseTestArgs = {
+  glucoseId: Scalars['ID'];
 };
 
 export type MutationDeleteHospitalArgs = {
@@ -427,8 +491,16 @@ export type MutationDeleteMedecineImageArgs = {
   medecineImageId: Scalars['ID'];
 };
 
+export type MutationDeleteOxygenSaturationLevelArgs = {
+  levelId: Scalars['ID'];
+};
+
 export type MutationDeleteProductArgs = {
   productId: Scalars['ID'];
+};
+
+export type MutationDeleteSleepDataArgs = {
+  sleepId: Scalars['ID'];
 };
 
 export type MutationDeleteUserArgs = {
@@ -483,6 +555,11 @@ export type MutationUpdateBlogArgs = {
   data: IUpdateBlog;
 };
 
+export type MutationUpdateBreathingDataArgs = {
+  breathingId: Scalars['ID'];
+  data: IBreathingInput;
+};
+
 export type MutationUpdateCategoryArgs = {
   categoryId: Scalars['ID'];
   data: IUpdateCategory;
@@ -495,6 +572,11 @@ export type MutationUpdateClinicArgs = {
 
 export type MutationUpdateDoctorInfoArgs = {
   data: IUpdateDoctor;
+};
+
+export type MutationUpdateGlucoseTestArgs = {
+  data: IGlucoseInput;
+  glucoseId: Scalars['ID'];
 };
 
 export type MutationUpdateHospitalArgs = {
@@ -525,9 +607,19 @@ export type MutationUpdateOrderToPaidArgs = {
   orderId: Scalars['ID'];
 };
 
+export type MutationUpdateOxygenSaturationLevelArgs = {
+  data: IOxygenLevelInput;
+  levelId: Scalars['ID'];
+};
+
 export type MutationUpdateProductArgs = {
   data: IUpdateProduct;
   productId: Scalars['ID'];
+};
+
+export type MutationUpdateSleepDataArgs = {
+  data: ISleepInput;
+  sleepId: Scalars['ID'];
 };
 
 export type Query = {
@@ -537,10 +629,12 @@ export type Query = {
   getAppointments: TPaginatedAppointment;
   getBlog?: Maybe<TBlog>;
   getBlogs: TPaginatedBlogs;
+  getBreathingData?: Maybe<TBreathingData>;
   getCategories: TPaginatedCategories;
   getCategory?: Maybe<TCategory>;
   getClinic?: Maybe<TClinic>;
   getClinics: TPaginatedClinics;
+  getGlucoseTest?: Maybe<TGlucose>;
   getHospital?: Maybe<THospital>;
   getHospitals: TPaginatedHospital;
   getLabTest?: Maybe<TLabTest>;
@@ -548,11 +642,17 @@ export type Query = {
   getMedecineImage?: Maybe<TMedecineImage>;
   getMedecineImages: TPaginatedMedecineImage;
   getMyAppointments?: Maybe<TPaginatedAppointment>;
+  getMyBreathingData: TPaginatedBreathingData;
+  getMyGlucoseTests: TPaginatedGlucose;
   getMyOrders: TPaginatedOrders;
+  getMyOxygenSaturationLevels: TPaginatedOxygenSaturationLevel;
+  getMySleepsData: TPaginatedSleep;
   getOrder?: Maybe<TOrder>;
   getOrders: TPaginatedOrders;
+  getOxygenSaturationLevel?: Maybe<TOxygenSaturationLevel>;
   getProduct?: Maybe<TProduct>;
   getProducts: TPaginatedProducts;
+  getSleepData?: Maybe<TSleep>;
   getTopProducts: TPaginatedProducts;
   me?: Maybe<TUser>;
   patient?: Maybe<TPatient>;
@@ -588,6 +688,10 @@ export type QueryGetBlogsArgs = {
   page?: InputMaybe<Scalars['Int']>;
 };
 
+export type QueryGetBreathingDataArgs = {
+  breathingId: Scalars['ID'];
+};
+
 export type QueryGetCategoriesArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   page?: InputMaybe<Scalars['Int']>;
@@ -604,6 +708,10 @@ export type QueryGetClinicArgs = {
 export type QueryGetClinicsArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   page?: InputMaybe<Scalars['Int']>;
+};
+
+export type QueryGetGlucoseTestArgs = {
+  glucoseId: Scalars['ID'];
 };
 
 export type QueryGetHospitalArgs = {
@@ -633,6 +741,26 @@ export type QueryGetMedecineImagesArgs = {
   page?: InputMaybe<Scalars['Int']>;
 };
 
+export type QueryGetMyBreathingDataArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+};
+
+export type QueryGetMyGlucoseTestsArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+};
+
+export type QueryGetMyOxygenSaturationLevelsArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+};
+
+export type QueryGetMySleepsDataArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+};
+
 export type QueryGetOrderArgs = {
   orderId: Scalars['ID'];
 };
@@ -642,6 +770,10 @@ export type QueryGetOrdersArgs = {
   page?: InputMaybe<Scalars['Int']>;
 };
 
+export type QueryGetOxygenSaturationLevelArgs = {
+  levelId: Scalars['ID'];
+};
+
 export type QueryGetProductArgs = {
   productId: Scalars['ID'];
 };
@@ -649,6 +781,10 @@ export type QueryGetProductArgs = {
 export type QueryGetProductsArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   page?: InputMaybe<Scalars['Int']>;
+};
+
+export type QueryGetSleepDataArgs = {
+  sleepId: Scalars['ID'];
 };
 
 export type QueryGetTopProductsArgs = {
@@ -711,6 +847,14 @@ export type TBlog = {
   name?: Maybe<Scalars['String']>;
 };
 
+export type TBreathingData = {
+  date?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['ID']>;
+  patient?: Maybe<TUser>;
+  time?: Maybe<Scalars['String']>;
+  value?: Maybe<Scalars['Float']>;
+};
+
 export type TCategory = {
   description?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['ID']>;
@@ -751,6 +895,14 @@ export type TDoctorList = {
 export type TDocument = {
   type?: Maybe<Scalars['String']>;
   url?: Maybe<Scalars['String']>;
+};
+
+export type TGlucose = {
+  date?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['ID']>;
+  patient?: Maybe<TUser>;
+  time?: Maybe<Scalars['String']>;
+  value?: Maybe<Scalars['Float']>;
 };
 
 export type THospital = {
@@ -820,6 +972,14 @@ export type TOrderItem = {
   quantity?: Maybe<Scalars['Float']>;
 };
 
+export type TOxygenSaturationLevel = {
+  date?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['ID']>;
+  level?: Maybe<Scalars['Float']>;
+  patient?: Maybe<TUser>;
+  time?: Maybe<Scalars['String']>;
+};
+
 export type TPaginatedAppointment = {
   limit: Scalars['Int'];
   page: Scalars['Int'];
@@ -836,6 +996,14 @@ export type TPaginatedBlogs = {
   totalResults: Scalars['Int'];
 };
 
+export type TPaginatedBreathingData = {
+  limit: Scalars['Int'];
+  page: Scalars['Int'];
+  results: Array<Maybe<TBreathingData>>;
+  totalPages: Scalars['Int'];
+  totalResults: Scalars['Int'];
+};
+
 export type TPaginatedCategories = {
   limit: Scalars['Int'];
   page: Scalars['Int'];
@@ -848,6 +1016,14 @@ export type TPaginatedClinics = {
   limit: Scalars['Int'];
   page: Scalars['Int'];
   results: Array<Maybe<TClinic>>;
+  totalPages: Scalars['Int'];
+  totalResults: Scalars['Int'];
+};
+
+export type TPaginatedGlucose = {
+  limit: Scalars['Int'];
+  page: Scalars['Int'];
+  results: Array<Maybe<TGlucose>>;
   totalPages: Scalars['Int'];
   totalResults: Scalars['Int'];
 };
@@ -884,10 +1060,26 @@ export type TPaginatedOrders = {
   totalResults: Scalars['Int'];
 };
 
+export type TPaginatedOxygenSaturationLevel = {
+  limit: Scalars['Int'];
+  page: Scalars['Int'];
+  results: Array<Maybe<TOxygenSaturationLevel>>;
+  totalPages: Scalars['Int'];
+  totalResults: Scalars['Int'];
+};
+
 export type TPaginatedProducts = {
   limit: Scalars['Int'];
   page: Scalars['Int'];
   results: Array<Maybe<TProduct>>;
+  totalPages: Scalars['Int'];
+  totalResults: Scalars['Int'];
+};
+
+export type TPaginatedSleep = {
+  limit: Scalars['Int'];
+  page: Scalars['Int'];
+  results: Array<Maybe<TSleep>>;
   totalPages: Scalars['Int'];
   totalResults: Scalars['Int'];
 };
@@ -938,6 +1130,14 @@ export type TShippingAddress = {
   city?: Maybe<Scalars['String']>;
   country?: Maybe<Scalars['String']>;
   postalCode?: Maybe<Scalars['String']>;
+};
+
+export type TSleep = {
+  Duration?: Maybe<Scalars['String']>;
+  date?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['ID']>;
+  patient?: Maybe<TUser>;
+  position?: Maybe<Scalars['String']>;
 };
 
 export type TTime = {
