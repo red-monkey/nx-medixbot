@@ -32,4 +32,4 @@ jobs:
           script: |
             docker stop medixbot-container || true
             docker pull ${{secrets.DOCKER_HUB_USERNAME}}/medixbot
-            docker run -d --rm --name medixbot-container -p 4000:5000 ${{secrets.DOCKER_HUB_USERNAME}}/medixbot
+            docker run -d --rm --name medixbot-container -p 4000:4000 ${{secrets.DOCKER_HUB_USERNAME}}/medixbot
