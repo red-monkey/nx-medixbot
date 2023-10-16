@@ -20,7 +20,7 @@ setupExpress()
       });
     });
 
-    server.on('error', logger.error);
+    server.on('error', console.log);
   })
   .catch((error) => {
     logger.error(error);
